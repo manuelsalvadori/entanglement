@@ -1,4 +1,3 @@
 #Entanglement
 
-##Nome del team
-__wolFlow Games__
+##Nome del team : _wolFlow Games_
