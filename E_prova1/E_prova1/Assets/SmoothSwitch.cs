@@ -27,7 +27,7 @@ public class SmoothSwitch : MonoBehaviour {
         l3d1.z = m_l1z;
         l3df = m_l1.position;
         l3df.z = m_l1z;
-        l3df.y = m_l2.position.y;
+        l3df.y = -5.0f;
         ltarget = m_l1.position;
 
     }
@@ -74,7 +74,7 @@ public class SmoothSwitch : MonoBehaviour {
             {
                 target.y = m_y3D;
                 target.z = 0f;
-                rot = new Vector3(90f, 0f, 0f);
+                rot = new Vector3(30f, 90f, 0f);
                 ltarget = l3d1;
                 t = true;
             }
