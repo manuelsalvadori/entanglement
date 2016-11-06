@@ -17,7 +17,8 @@ public class SmoothSwitch : MonoBehaviour {
     public float m_l1z = 10.5f;
     public float m_l1y = -5f;
     public Transform m_l1, m_l2;
-    bool t = true, s = false;
+    bool s = true;
+    bool t = true;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class SmoothSwitch : MonoBehaviour {
         l3d1.z = m_l1z;
         l3df = m_l1.position;
         l3df.z = m_l1z;
-        l3df.y = m_l2.position.y;
+        l3df.y = -5.0f;
         ltarget = m_l1.position;
 
     }
@@ -69,13 +70,13 @@ public class SmoothSwitch : MonoBehaviour {
 
         if (Input.GetKeyDown("z"))
         {
-            s = true;
             if (!tred_mode)
             {
                 target.y = m_y3D;
                 target.z = 0f;
-                rot = new Vector3(90f, 0f, 0f);
+                rot = new Vector3(30f, 90f, 0f);
                 ltarget = l3d1;
+                s = true;
                 t = true;
             }
             else
@@ -83,7 +84,9 @@ public class SmoothSwitch : MonoBehaviour {
                 target.y = 0f;
                 target.z = m_zDouble;
                 rot = Vector3.zero;
-                ltarget = l2d;
+                ltarget = l3d1;
+                t = false;
+                s = false;
             }
             s1 = true;
             tred_mode = !tred_mode;
@@ -91,15 +94,21 @@ public class SmoothSwitch : MonoBehaviour {
               
         if (s1)
         {
-            if (Mathf.Approximately(m_l1.position.z , ltarget.z) && t && s)
+            if (Mathf.Approximately(m_l1.position.z , l3d1.z) && s)
             {
+                Debug.Log("da l3d1 a l3df");
                 ltarget = l3df;
-                t = false;
                 s = false;
+            }
+            if (Mathf.Approximately(m_l1.position.y , l3d1.y) && !t)
+            {
+                Debug.Log("da l3d1 a l2d");
+                ltarget = l2d;
+                t = true;
             }
             transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime); 
             transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, rot, ref velocity2, smoothTime));
-            m_l1.position = Vector3.SmoothDamp(m_l1.position, ltarget, ref velocity3, (smoothTime/2f));
+            m_l1.position = Vector3.SmoothDamp(m_l1.position, ltarget, ref velocity3, (smoothTime/4f));
 
             s1 = !transform.position.Equals(target);
         }
