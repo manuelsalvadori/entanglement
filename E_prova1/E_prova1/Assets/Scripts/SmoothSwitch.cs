@@ -18,6 +18,7 @@ public class SmoothSwitch : MonoBehaviour {
     public float m_l1z = 10.5f;
     public float m_l1y = -5f;
     public Transform m_l1, m_l2;
+    public Transform m_p1, m_p2;
 
     bool s = true;
     bool t = true;
@@ -126,5 +127,11 @@ public class SmoothSwitch : MonoBehaviour {
 
             s1 = !transform.position.Equals(target);
         }
+    }
+
+    void FixedUpdate()
+    {
+        if(!GameManager.Instance.m_3D_mode)
+            transform.position = new Vector3(m_p1.position.x, transform.position.y, transform.position.z);
     }
 }
