@@ -11,12 +11,14 @@ public class SmoothSwitch : MonoBehaviour {
     private Vector3 rot = Vector3.zero;
     private Vector3 l3d1, l3df, l2d, ltarget;
     private bool s1 = false, l = true, x = true, tred_mode = false;
+
     public float m_zDouble = -29f;
     public float m_zSingle = -20f;
     public float m_y3D = 20f;
     public float m_l1z = 10.5f;
     public float m_l1y = -5f;
     public Transform m_l1, m_l2;
+
     bool s = true;
     bool t = true;
 
@@ -30,21 +32,24 @@ public class SmoothSwitch : MonoBehaviour {
         l3df.z = m_l1z;
         l3df.y = -5.0f;
         ltarget = m_l1.position;
-
     }
 
     void Update()
     {
-        if(Input.GetKeyDown("x") && !tred_mode)
+        if(Input.GetKeyDown("x") && !tred_mode) //double_view
         {
             if (x)
             {
+                GameManager.Instance.m_double_mode = true;
+                GameManager.Instance.m_single_mode = false;
                 target.y = 0f;
                 target.z = m_zDouble;
                 x = false;
             }
             else
             {
+                GameManager.Instance.m_double_mode = false;
+                GameManager.Instance.m_single_mode = true;
                 target.z = m_zSingle;
                 target.y = l ? m_l1.position.y : m_l2.position.y;
                 x = true;
@@ -52,8 +57,11 @@ public class SmoothSwitch : MonoBehaviour {
             s1 = true;
         }
 
-        if (Input.GetKeyDown("c") && !tred_mode)
+        if (Input.GetKeyDown("c") && !tred_mode) //single_view
         {
+            GameManager.Instance.m_single_mode = true;
+            GameManager.Instance.m_double_mode = false;
+
             if (l)
             {
                 target.y = m_l2.position.y;
@@ -68,7 +76,7 @@ public class SmoothSwitch : MonoBehaviour {
             s1 = true;
         }
 
-        if (Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("z")) //3D_view
         {
             if (!tred_mode)
             {
@@ -78,6 +86,9 @@ public class SmoothSwitch : MonoBehaviour {
                 ltarget = l3d1;
                 s = true;
                 t = true;
+                GameManager.Instance.m_3D_mode = true;
+                GameManager.Instance.m_double_mode = false;
+                GameManager.Instance.m_single_mode = false;
             }
             else
             {
@@ -87,6 +98,9 @@ public class SmoothSwitch : MonoBehaviour {
                 ltarget = l3d1;
                 t = false;
                 s = false;
+                GameManager.Instance.m_3D_mode = false;
+                GameManager.Instance.m_double_mode = true;
+
             }
             s1 = true;
             tred_mode = !tred_mode;
