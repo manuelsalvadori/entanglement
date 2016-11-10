@@ -125,11 +125,12 @@ public class SmoothSwitch : MonoBehaviour {
             transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, rot, ref velocity2, smoothTime));
             m_l1.position = Vector3.SmoothDamp(m_l1.position, ltarget, ref velocity3, (smoothTime/4f));
 
-            s1 = !transform.position.Equals(target);
+            s1 = !(Mathf.Approximately(transform.position.y, target.y) && Mathf.Approximately(transform.position.z, target.z));
+            Debug.Log(s1.ToString());
         }
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if(!GameManager.Instance.m_3D_mode)
             transform.position = new Vector3(m_p1.position.x, transform.position.y, transform.position.z);
