@@ -12,10 +12,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
+        Rigidbody m_rb;
         
         private void Start()
         {
+
+            m_rb = GetComponent<Rigidbody>();
             // get the transform of the main camera
             if (Camera.main != null)
             {
@@ -35,6 +37,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+
+            if (!GameManager.Instance.m_3D_mode)
+                m_rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+            else
+            {
+                m_rb.constraints = RigidbodyConstraints.FreezeRotation;
+            }
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");

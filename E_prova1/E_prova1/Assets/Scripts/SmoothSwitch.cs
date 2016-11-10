@@ -133,6 +133,7 @@ public class SmoothSwitch : MonoBehaviour {
     void LateUpdate()
     {
         if(!GameManager.Instance.m_3D_mode)
+            
             transform.position = new Vector3(m_p1.position.x, transform.position.y, transform.position.z);
     }
 }
