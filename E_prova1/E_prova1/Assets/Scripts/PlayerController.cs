@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
        
         }
 
-        if (Input.GetKeyDown("b") && m_grounded)
+        if ((Input.GetKeyDown("b") || Input.GetButtonDown("Jump!")) && m_grounded)
         {
             m_rb.velocity = new Vector3(m_rb.velocity.x, m_jump, m_rb.velocity.z);
         }
