@@ -37,7 +37,9 @@ public class PlayerController : MonoBehaviour
             cam_rot = (cam_rot < 0f) ? 360f + cam_rot : cam_rot;
 
             Debug.Log("cam_rot: " + cam_rot);
-            m_rb.AddForce(cam.transform.TransformDirection(new Vector3(m_v * m_force, 0f, m_h * m_force)));
+            Vector3 force = cam.transform.TransformDirection(new Vector3(m_v * m_force, 0f, m_h * m_force));
+            force.y = 0f;
+            m_rb.AddForce(force);
        
         }
 
