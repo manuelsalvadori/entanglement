@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        m_grounded = m_rb.velocity.y == 0;
+        m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.001f);
+        Debug.Log("y velocity: "+m_rb.velocity.y);
 
         m_v = Input.GetAxis("Horizontal");
         m_h = Input.GetAxis("Vertical");
