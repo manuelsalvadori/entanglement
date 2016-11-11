@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float m_v, m_h, m_force = 10f, m_jump = 10f, m_GravityMultiplier = 3f;
+    public float m_Zfixed = -4.6f;
     Rigidbody m_rb;
     bool m_grounded = true;
     Camera cam;
@@ -19,18 +20,10 @@ public class PlayerController : MonoBehaviour
 	void FixedUpdate ()
     {
         m_grounded = m_rb.velocity.y == 0;
-       /*
-        if (GameManager.Instance.m_3D_mode)
-        {*/
-            m_v = Input.GetAxis("Horizontal");
-            m_h = Input.GetAxis("Vertical");/*
-        }
-        else
-        {
-            m_h = Input.GetAxis("Horizontal");
-            m_v = 0f;
-        }*/
-            
+
+        m_v = Input.GetAxis("Horizontal");
+        m_h = Input.GetAxis("Vertical");
+           
         if (Mathf.Abs(m_rb.velocity.x) < 10f && Mathf.Abs(m_rb.velocity.y) < 10f)
         {
             float cam_rot = cam.transform.rotation.eulerAngles.y;
@@ -55,4 +48,12 @@ public class PlayerController : MonoBehaviour
         }
         Debug.Log(m_rb.velocity.x.ToString());
 	}
+
+    void LateUpdate()
+    {
+        if (!GameManager.Instance.m_3D_mode)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, m_Zfixed);
+        }
+    }
 }
