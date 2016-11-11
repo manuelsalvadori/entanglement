@@ -3,11 +3,11 @@ using System.Collections;
 
 public class SwitchCamera : MonoBehaviour
 {
-    public GameObject m_l1;
-    public GameObject m_l2;
+    public GameObject m_l1; //livello 1
+    public GameObject m_l2; //livello 2
     bool m_selLevel= true;
-    private bool s1 = false;
-    private bool s2 = false;
+    private bool s1 = false; //
+    private bool s2 = false; //
     Vector3 end;
     Vector3 start;
     public float m_speed = 5f;
