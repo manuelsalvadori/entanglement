@@ -25,6 +25,9 @@ public class SplineInterpolator : MonoBehaviour
 	string mState = "";
 	bool mRotations;
 
+    public GameObject m_player;
+
+
 	OnEndCallback mOnEndCallback;
 
 
@@ -44,14 +47,15 @@ public class SplineInterpolator : MonoBehaviour
 		mOnEndCallback = endCallback;
 
 		SetInput();
-	}
+        //mCurrentTime = (m_player.transform.position - mNodes[1].Point).magnitude / (mNodes[mNodes.Count - 1].Point - mNodes[1].Point).magnitude;
+    }
 
 	public void Reset()
 	{
 		mNodes.Clear();
 		mState = "Reset";
 		mCurrentIdx = 1;
-		mCurrentTime = 0;
+        mCurrentTime = 0;
 		mRotations = false;
 		mEndPointsMode = eEndPointsMode.AUTO;
 	}
@@ -138,10 +142,14 @@ public class SplineInterpolator : MonoBehaviour
 		if (mState == "Reset" || mState == "Stopped" || mNodes.Count < 4)
 			return;
 
+        
 		mCurrentTime += Time.deltaTime;
+        
 
-		// We advance to next point in the path
-		if (mCurrentTime >= mNodes[mCurrentIdx + 1].Time)
+        //mCurrentTime += ((m_player.transform.position - mNodes[1].Point).magnitude / (mNodes[mNodes.Count - 1].Point - mNodes[1].Point).magnitude) * ((mNodes[mNodes.Count - 1].Point - mNodes[1].Point).magnitude) - mCurrentTime;
+
+        // We advance to next point in the path
+        if (mCurrentTime >= mNodes[mCurrentIdx + 1].Time)
 		{
 			if (mCurrentIdx < mNodes.Count - 3)
 			{
