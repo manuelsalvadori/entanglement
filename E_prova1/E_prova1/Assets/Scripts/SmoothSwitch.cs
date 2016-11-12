@@ -10,12 +10,15 @@ public class SmoothSwitch : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;                            
     private Vector3 velocity2 = Vector3.zero;
     private Vector3 velocity3 = Vector3.zero;
+    private Vector3 velocity4 = Vector3.zero;
+
 
     //Camera Set
     private Vector3 rotation = Vector3.zero;
     private Vector3 level3D_init_position, level3D_final_position, level2D_position, level_target;
     private bool mode_Transition = false, current_level = true, previous_level = true, treD_Mode = false;
 
+    public float followingSpeed = 1.5f;
     public float m_zDouble = -29f;
     public float m_zSingle = -20f;
     public float m_y3D = 20f;
@@ -45,6 +48,12 @@ public class SmoothSwitch : MonoBehaviour {
         //Take player position
         m_p1_init_position = m_p1.position;
         m_p2_init_position = m_p2.position;
+
+        //Initial position of the camera
+        Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
+        player_pos.x += 0.25f;
+        player_pos = Camera.main.ViewportToWorldPoint(player_pos);
+        camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z); 
 
     }
 
@@ -173,9 +182,19 @@ public class SmoothSwitch : MonoBehaviour {
 
         if (!GameManager.Instance.m_3D_mode)
         {
-            if (m_p1.position.x >= m_p1_init_position.x)
+            if (m_p1.gameObject.GetComponent<Rigidbody>().velocity.x > 0)
             {
-                camera_Target = new Vector3(Camera.main.ViewportToScreenPoint(m_p1.position).x / 2, transform.position.y, transform.position.z); 
+                Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
+                player_pos.x += 0.35f;
+                player_pos = Camera.main.ViewportToWorldPoint(player_pos);
+                camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z); 
+            }
+            if (m_p1.gameObject.GetComponent<Rigidbody>().velocity.x < 0)
+            {
+                Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
+                player_pos.x -= 0.35f;
+                player_pos = Camera.main.ViewportToWorldPoint(player_pos);
+                camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z); 
             }
         }
     }
@@ -186,6 +205,6 @@ public class SmoothSwitch : MonoBehaviour {
         if (!GameManager.Instance.m_3D_mode)
             transform.position = new Vector3(m_p1.position.x, transform.position.y, transform.position.z);
         */
-        transform.position = camera_Target;
+        transform.position = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed); 
     }
 }
