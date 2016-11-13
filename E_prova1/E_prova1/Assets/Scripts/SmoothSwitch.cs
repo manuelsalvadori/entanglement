@@ -28,7 +28,7 @@ public class SmoothSwitch : MonoBehaviour {
     public Transform m_p1, m_p2;
 
     private Vector3 camera_Target = Vector3.zero;
-
+    private Vector3 camera_final = Vector3.zero;
     private Vector3 m_p1_init_position, m_p2_init_position;
 
     bool s = true;
@@ -187,24 +187,24 @@ public class SmoothSwitch : MonoBehaviour {
                 Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
                 player_pos.x += 0.35f;
                 player_pos = Camera.main.ViewportToWorldPoint(player_pos);
-                camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z); 
+                camera_Target = new Vector3(player_pos.x, target.y, target.z); 
             }
             if (m_p1.gameObject.GetComponent<Rigidbody>().velocity.x < 0)
             {
                 Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
                 player_pos.x -= 0.35f;
                 player_pos = Camera.main.ViewportToWorldPoint(player_pos);
-                camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z); 
+                camera_Target = new Vector3(player_pos.x, target.y, target.z); 
             }
         }
+        camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
+        Debug.Log("target: " + target.ToString());
+        Debug.Log("c_targ: " + camera_Target.ToString());
     }
 
     void LateUpdate()
     {
-        /*
         if (!GameManager.Instance.m_3D_mode)
-            transform.position = new Vector3(m_p1.position.x, transform.position.y, transform.position.z);
-        */
-        transform.position = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed); 
+            transform.position = new Vector3(camera_final.x, transform.position.y, transform.position.z);
     }
 }

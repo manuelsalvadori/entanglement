@@ -20,17 +20,11 @@ public class PlayerController : MonoBehaviour
 	void FixedUpdate ()
     {
         m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.001f);
-        Debug.Log("y velocity: "+m_rb.velocity.y);
-
         m_v = Input.GetAxis("Horizontal");
         m_h = Input.GetAxis("Vertical");
            
         if (Mathf.Abs(m_rb.velocity.x) < 10f && Mathf.Abs(m_rb.velocity.y) < 10f)
         {
-            float cam_rot = cam.transform.rotation.eulerAngles.y;
-            cam_rot = (cam_rot < 0f) ? 360f + cam_rot : cam_rot;
-
-            Debug.Log("cam_rot: " + cam_rot);
             Vector3 force = cam.transform.TransformDirection(new Vector3(m_v * m_force, 0f, m_h * m_force));
             force.y = 0f;
             m_rb.AddForce(force);
@@ -47,7 +41,6 @@ public class PlayerController : MonoBehaviour
             Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
             m_rb.AddForce(extraGravityForce);
         }
-        Debug.Log(m_rb.velocity.x.ToString());
 	}
 
     void LateUpdate()
