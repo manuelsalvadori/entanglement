@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SmoothSwitch : MonoBehaviour {
 
     Vector3 target;                                                     //Posizione di Arrivo
-    public float smoothTime = 0.3F;                                     //Amount of smooth
+    private Vector3 camera_Target = Vector3.zero;
+    private Vector3 camera_final = Vector3.zero;
 
-    //Puntators for SmoothDump function
+    //SmoothDump setting function
     private Vector3 velocity = Vector3.zero;                            
     private Vector3 velocity2 = Vector3.zero;
     private Vector3 velocity3 = Vector3.zero;
     private Vector3 velocity4 = Vector3.zero;
+    public float smoothTime = 0.3F;                                     //Amount of smooth
+
+    //~
 
 
     //Camera Set
@@ -24,12 +29,29 @@ public class SmoothSwitch : MonoBehaviour {
     public float m_y3D = 20f;
     public float m_l1z = 10.5f;
     public float m_l1y = -5f;
+
+    //~
+
+    //Players infos
     public Transform m_l1, m_l2;
     public Transform m_p1, m_p2;
-
-    private Vector3 camera_Target = Vector3.zero;
-    private Vector3 camera_final = Vector3.zero;
     private Vector3 m_p1_init_position, m_p2_init_position;
+
+    //~    
+
+    //Variables for buffering selected player's velocity
+    private float buffer;
+    private bool select = true;
+
+    public float m_Turn_Tolerance = 100f;
+
+    private Dictionary<int, float> amount = new Dictionary<int, float>(){
+        {0, 0.35f},
+        {1, -0.15f},
+    };
+
+    //~
+
 
     bool s = true;
     bool t = true;
@@ -53,7 +75,9 @@ public class SmoothSwitch : MonoBehaviour {
         Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
         player_pos.x += 0.25f;
         player_pos = Camera.main.ViewportToWorldPoint(player_pos);
-        camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z); 
+        camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z);
+        buffer = 0f;
+        
 
     }
 
@@ -182,25 +206,29 @@ public class SmoothSwitch : MonoBehaviour {
 
         if (!GameManager.Instance.m_3D_mode)
         {
-            //va aggiunto un filtro passabasso alla velocity per evitare che la camera faccia ping pong
-            if (m_p1.gameObject.GetComponent<Rigidbody>().velocity.x > 0)
+            //Bufferize player's velocity in order to decide when to move the camera.      
+            buffer += m_p1.gameObject.GetComponent<Rigidbody>().velocity.x;
+
+            if (buffer > m_Turn_Tolerance)
             {
-                Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
-                player_pos.x += 0.35f;
-                player_pos = Camera.main.ViewportToWorldPoint(player_pos);
-                camera_Target = new Vector3(player_pos.x, target.y, target.z); 
+                select = true;
+                buffer = 0;
             }
-            if (m_p1.gameObject.GetComponent<Rigidbody>().velocity.x < 0)
+            else if (buffer < -m_Turn_Tolerance)
             {
-                Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
-                player_pos.x -= 0.15f;
-                player_pos = Camera.main.ViewportToWorldPoint(player_pos);
-                camera_Target = new Vector3(player_pos.x, target.y, target.z); 
+                select = false;
+                buffer = 0;
             }
+
+            Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
+            player_pos.x += amount[(select)? 0 : 1];
+            player_pos = Camera.main.ViewportToWorldPoint(player_pos);
+            camera_Target = new Vector3(player_pos.x, target.y, target.z);
+            Debug.Log("Velocity = " + m_p1.gameObject.GetComponent<Rigidbody>().velocity.x + " buffer: " + buffer );
         }
         camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
-        Debug.Log("target: " + target.ToString());
-        Debug.Log("c_targ: " + camera_Target.ToString());
+        //Debug.Log("target: " + target.ToString());
+        //Debug.Log("c_targ: " + camera_Target.ToString());
     }
 
     void LateUpdate()
@@ -208,4 +236,5 @@ public class SmoothSwitch : MonoBehaviour {
         if (!GameManager.Instance.m_3D_mode)
             transform.position = new Vector3(camera_final.x, transform.position.y, transform.position.z);
     }
+
 }
