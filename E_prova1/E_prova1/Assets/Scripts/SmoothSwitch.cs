@@ -132,21 +132,21 @@ public class SmoothSwitch : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetKeyDown("x") && !treD_Mode) //double_view
-        {
-            select_doubleView();
-        }
-
-        if (Input.GetKeyDown("c") && !treD_Mode) //single_view
+        
+        if ((Input.GetKeyDown("1") || (Input.GetButton("L2") && Input.GetButtonDown("Square"))) && !treD_Mode) //single_view
         {
             select_singleView();
         }
 
-        if (Input.GetKeyDown("z")) //3D_view
+        if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode) //double_view
+        {
+            select_doubleView();
+        }
+
+        if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O")))) //3D_view
         {
             select_treD_View();
-        }
-              
+        }           
 
         //Move the view
         if (mode_Transition)
