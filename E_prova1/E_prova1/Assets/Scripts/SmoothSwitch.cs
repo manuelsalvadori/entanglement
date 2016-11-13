@@ -182,6 +182,7 @@ public class SmoothSwitch : MonoBehaviour {
 
         if (!GameManager.Instance.m_3D_mode)
         {
+            //va aggiunto un filtro passabasso alla velocity per evitare che la camera faccia ping pong
             if (m_p1.gameObject.GetComponent<Rigidbody>().velocity.x > 0)
             {
                 Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
@@ -192,7 +193,7 @@ public class SmoothSwitch : MonoBehaviour {
             if (m_p1.gameObject.GetComponent<Rigidbody>().velocity.x < 0)
             {
                 Vector3 player_pos = Camera.main.WorldToViewportPoint(m_p1.position);
-                player_pos.x -= 0.35f;
+                player_pos.x -= 0.15f;
                 player_pos = Camera.main.ViewportToWorldPoint(player_pos);
                 camera_Target = new Vector3(player_pos.x, target.y, target.z); 
             }
