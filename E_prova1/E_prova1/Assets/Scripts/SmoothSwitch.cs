@@ -147,7 +147,7 @@ public class SmoothSwitch : MonoBehaviour {
         {
             target.y = m_y3D;
             target.z = 0f;
-            target.x = transform.position.x - 10f;
+            target.x = m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].position.x - 10f;
             rotation = new Vector3(30f, 90f, 0f);
             level_target = level3D_init_position;
             s = true;
@@ -155,7 +155,7 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_3D_mode = true;
             GameManager.Instance.m_double_mode = false;
             GameManager.Instance.m_single_mode = false;
-            m_offset_from_players = target - new Vector3((m_player[0].position.x - m_player[1].position.x) / 2, m_player[0].position.y, (m_player[0].position.z - m_player[1].position.z) / 2);
+            m_offset_from_players = target - new Vector3(m_player[0].position.x , m_player[0].position.y, 0f);
         }
         else
         {
@@ -240,11 +240,13 @@ public class SmoothSwitch : MonoBehaviour {
             //Check if the camera and levels are stil moving [TO FIX]
             //mode_Transition = !(Mathf.Approximately(transform.position.y, target.y) && Mathf.Approximately(transform.position.z, target.z));
             mode_Transition = !(Mathf.Abs(transform.position.y - target.y) < 0.05f && Mathf.Abs(transform.position.z - target.z) < 0.05f && Mathf.Abs(m_l1.position.y - level_target.y) < 0.05f);
+
             if (!mode_Transition && GameManager.Instance.m_3D_mode)
             {
                 transform.position = target;
                 m_l1.position = level_target;
             }
+
             Debug.Log(mode_Transition.ToString());
         }
 
@@ -272,9 +274,9 @@ public class SmoothSwitch : MonoBehaviour {
         }
         else
         {
-            camera_Target = m_offset_from_players + new Vector3((m_player[0].position.x - m_player[1].position.x) / 2, m_player[0].position.y, (m_player[0].position.z - m_player[1].position.z) / 2);
+            camera_Target = m_offset_from_players + new Vector3(m_player[0].position.x, m_player[0].position.y, 0f);
         }
-        camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/((!GameManager.Instance.m_3D_mode)? followingSpeed : followingSpeed*10));
+        camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
         //Debug.Log("target: " + target.ToString());
         //Debug.Log("c_targ: " + camera_Target.ToString());
     }
