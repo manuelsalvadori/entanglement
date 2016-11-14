@@ -199,6 +199,7 @@ public class SmoothSwitch : MonoBehaviour {
         if ((Input.GetKeyDown("1") || (Input.GetButton("L2") && Input.GetButtonDown("Square"))) && !treD_Mode) //single_view
         {
             select_singleView();
+            GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
         }
 
         if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode) //double_view

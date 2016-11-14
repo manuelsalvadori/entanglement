@@ -19,8 +19,11 @@ public class GameManager : MonoBehaviour
         }
 	}
 	
-	// Update is called once per frame
-	void Update ()
+    void Update()
     {
-	}
+        if (Input.GetButton("L2") && Input.GetButtonDown("X") && m_double_mode)
+        {
+            GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+        }
+    }
 }

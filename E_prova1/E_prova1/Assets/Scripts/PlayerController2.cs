@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
     public float m_v, m_h, m_force = 10f, m_jump = 10f, m_GravityMultiplier = 3f;
     public float m_Zfixed = -4.6f;
@@ -15,10 +15,11 @@ public class PlayerController : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
+	
 
     void FixedUpdate ()
     {
-        if (GameManager.Instance.m_sel_pg)
+        if (!GameManager.Instance.m_sel_pg)
         {
             m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.001f);
             m_v = Input.GetAxis("Horizontal");
