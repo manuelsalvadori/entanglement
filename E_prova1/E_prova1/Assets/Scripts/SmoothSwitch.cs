@@ -66,6 +66,10 @@ public class SmoothSwitch : MonoBehaviour {
     //~
 
 
+    //Pop-up massage for players alignement
+    public GameObject m_popup_message;
+
+
     bool s = true;
     bool t = true;
 
@@ -169,6 +173,23 @@ public class SmoothSwitch : MonoBehaviour {
         treD_Mode = !treD_Mode;
     }
 
+    //Check if the two players are in the "same" X
+    private bool isPlayersInline()
+    {
+        return (Mathf.Abs(m_player[0].position.x - m_player[1].position.x) < 5f);
+    }
+
+    //Display a popup message
+    private void displayMessage()
+    {
+        if(!m_popup_message.activeSelf) Instantiate(m_popup_message, Vector3.zero, m_popup_message.transform.rotation);
+        else
+        {
+            //Fade out last popup then show the next.
+            m_popup_message =  Instantiate(m_popup_message, Vector3.zero, m_popup_message.transform.rotation) as GameObject;
+        }
+    }
+
 
 
     void Update()
@@ -186,7 +207,7 @@ public class SmoothSwitch : MonoBehaviour {
 
         if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O")))) //3D_view
         {
-            select_treD_View();
+            if (isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else displayMessage();
         }           
 
         //Move the view
@@ -218,7 +239,12 @@ public class SmoothSwitch : MonoBehaviour {
 
             //Check if the camera and levels are stil moving [TO FIX]
             //mode_Transition = !(Mathf.Approximately(transform.position.y, target.y) && Mathf.Approximately(transform.position.z, target.z));
-            mode_Transition = !(Mathf.Abs(transform.position.y - target.y) < 0.01f && Mathf.Abs(transform.position.z - target.z) < 0.01f);
+            mode_Transition = !(Mathf.Abs(transform.position.y - target.y) < 0.05f && Mathf.Abs(transform.position.z - target.z) < 0.05f && Mathf.Abs(m_l1.position.y - level_target.y) < 0.05f);
+            if (!mode_Transition && GameManager.Instance.m_3D_mode)
+            {
+                transform.position = target;
+                m_l1.position = level_target;
+            }
             Debug.Log(mode_Transition.ToString());
         }
 
@@ -248,7 +274,7 @@ public class SmoothSwitch : MonoBehaviour {
         {
             camera_Target = m_offset_from_players + new Vector3((m_player[0].position.x - m_player[1].position.x) / 2, m_player[0].position.y, (m_player[0].position.z - m_player[1].position.z) / 2);
         }
-        camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
+        camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/((!GameManager.Instance.m_3D_mode)? followingSpeed : followingSpeed*10));
         //Debug.Log("target: " + target.ToString());
         //Debug.Log("c_targ: " + camera_Target.ToString());
     }
@@ -259,6 +285,7 @@ public class SmoothSwitch : MonoBehaviour {
             transform.position = new Vector3(camera_final.x, transform.position.y, transform.position.z);
         else
             transform.position = new Vector3(camera_final.x, transform.position.y, camera_final.z);
+        
     }
 
 }
