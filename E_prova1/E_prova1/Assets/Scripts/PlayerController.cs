@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate ()
     {
-        if (GameManager.Instance.m_sel_pg)
+        if (GameManager.Instance.m_sel_pg || GameManager.Instance.m_3D_mode || GameManager.Instance.m_double_mode)
         {
             m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.001f);
             m_v = Input.GetAxis("Horizontal");

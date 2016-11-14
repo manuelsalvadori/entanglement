@@ -36,7 +36,6 @@ public class SmoothSwitch : MonoBehaviour {
     //Players and Levels infos
     //Editor view
     public Transform m_l1, m_l2;
-    public Transform m_p1, m_p2;
 
     //Internal representation
     private Dictionary<int, Transform> m_player = new Dictionary<int, Transform>()  //easy way to select current player
@@ -75,7 +74,8 @@ public class SmoothSwitch : MonoBehaviour {
 
     void Start()
     {
-
+        m_l1 = GameManager.Instance.m_level1.transform;
+        m_l2 = GameManager.Instance.m_level2.transform;
         target = transform.position;
         level2D_position = m_l1.transform.position;
         level3D_init_position = m_l1.position;
@@ -86,8 +86,8 @@ public class SmoothSwitch : MonoBehaviour {
         level_target = m_l1.position;
 
         //Take player position
-        m_player[0] = m_p1;
-        m_player[1] = m_p2;
+        m_player[0] = GameManager.Instance.m_player1.transform;
+        m_player[1] = GameManager.Instance.m_player2.transform;
         m_player_position[0] = m_player[0].position;
         m_player_position[1] = m_player[1].position;
 
@@ -174,11 +174,7 @@ public class SmoothSwitch : MonoBehaviour {
         treD_Mode = !treD_Mode;
     }
 
-    //Check if the two players are in the "same" X
-    private bool isPlayersInline()
-    {
-        return (Mathf.Abs(m_player[0].position.x - m_player[1].position.x) < 5f);
-    }
+    
 
     //Display a popup message
     private void displayMessage()
@@ -209,7 +205,7 @@ public class SmoothSwitch : MonoBehaviour {
 
         if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O")))) //3D_view
         {
-            if (isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else displayMessage();
+            if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else displayMessage();
         }           
 
         //Move the view
