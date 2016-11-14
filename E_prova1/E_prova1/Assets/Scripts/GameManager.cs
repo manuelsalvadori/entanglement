@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance = null;
+    public bool m_camIsMoving = false;
     public bool m_3D_mode = false;
     public bool m_double_mode = false;
     public bool m_single_mode = true;

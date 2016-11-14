@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SmoothSwitch : MonoBehaviour {
 
-    Vector3 target;                                                     //Posizione di Arrivo
+    private Vector3 target;                                                     //Posizione di Arrivo
     private Vector3 camera_Target = Vector3.zero;
     private Vector3 camera_final = Vector3.zero;
 
@@ -21,7 +21,7 @@ public class SmoothSwitch : MonoBehaviour {
     //Camera Set
     private Vector3 rotation = Vector3.zero;
     private Vector3 level3D_init_position, level3D_final_position, level2D_position, level_target;
-    private bool mode_Transition = false, current_level = true, previous_level = true, treD_Mode = false;
+    private bool current_level = true, previous_level = true, treD_Mode = false;
 
     public float followingSpeed = 1.5f;
     public float m_zDouble = -29f;
@@ -75,6 +75,7 @@ public class SmoothSwitch : MonoBehaviour {
 
     void Start()
     {
+
         target = transform.position;
         level2D_position = m_l1.transform.position;
         level3D_init_position = m_l1.position;
@@ -119,7 +120,7 @@ public class SmoothSwitch : MonoBehaviour {
             target.y = current_level ? m_l1.position.y : m_l2.position.y;
             previous_level = true;
         }
-        mode_Transition = true;
+        GameManager.Instance.m_camIsMoving = true;
     }
 
     private void select_singleView()
@@ -138,7 +139,7 @@ public class SmoothSwitch : MonoBehaviour {
             current_level = true;
         }
         target.z = m_zSingle;
-        mode_Transition = true;
+        GameManager.Instance.m_camIsMoving = true;
     }
 
     private void select_treD_View()
@@ -169,7 +170,7 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_double_mode = true;
 
         }
-        mode_Transition = true;
+        GameManager.Instance.m_camIsMoving = true;
         treD_Mode = !treD_Mode;
     }
 
@@ -211,7 +212,7 @@ public class SmoothSwitch : MonoBehaviour {
         }           
 
         //Move the view
-        if (mode_Transition)
+        if (GameManager.Instance.m_camIsMoving)
         {
 
             //Move the level (select the target for 3 point movement)
@@ -239,15 +240,15 @@ public class SmoothSwitch : MonoBehaviour {
 
             //Check if the camera and levels are stil moving [TO FIX]
             //mode_Transition = !(Mathf.Approximately(transform.position.y, target.y) && Mathf.Approximately(transform.position.z, target.z));
-            mode_Transition = !(Mathf.Abs(transform.position.y - target.y) < 0.05f && Mathf.Abs(transform.position.z - target.z) < 0.05f && Mathf.Abs(m_l1.position.y - level_target.y) < 0.05f);
+            GameManager.Instance.m_camIsMoving = !(Mathf.Abs(transform.position.y - target.y) < 0.05f && Mathf.Abs(transform.position.z - target.z) < 0.05f && Mathf.Abs(m_l1.position.y - level_target.y) < 0.05f);
 
-            if (!mode_Transition && GameManager.Instance.m_3D_mode)
+            if (!GameManager.Instance.m_camIsMoving && GameManager.Instance.m_3D_mode)
             {
                 transform.position = target;
                 m_l1.position = level_target;
             }
 
-            Debug.Log(mode_Transition.ToString());
+            //Debug.Log(GameManager.Instance.m_camIsMoving.ToString());
         }
 
         if (!GameManager.Instance.m_3D_mode)
@@ -270,7 +271,7 @@ public class SmoothSwitch : MonoBehaviour {
             player_pos.x += amount[(select)? 0 : 1];
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
             camera_Target = new Vector3(player_pos.x, target.y, target.z);
-            Debug.Log("Velocity = " + m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].gameObject.GetComponent<Rigidbody>().velocity.x + " buffer: " + buffer );
+            //Debug.Log("Velocity = " + m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].gameObject.GetComponent<Rigidbody>().velocity.x + " buffer: " + buffer );
         }
         else
         {
