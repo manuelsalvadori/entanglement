@@ -37,12 +37,6 @@ public class SmoothSwitch : MonoBehaviour {
     //Editor view
     public Transform m_l1, m_l2;
 
-    //Internal representation
-    private Dictionary<int, Transform> m_player = new Dictionary<int, Transform>()  //easy way to select current player
-    {
-        {0, null},
-        {1, null},
-    };
 
     private Dictionary<int, Vector3> m_player_position = new Dictionary<int, Vector3>() //easy way to select player initial infos.
     {
@@ -83,13 +77,12 @@ public class SmoothSwitch : MonoBehaviour {
         level_target = m_l1.position;
 
         //Take player position
-        m_player[0] = GameManager.Instance.m_player1.transform;
-        m_player[1] = GameManager.Instance.m_player2.transform;
-        m_player_position[0] = m_player[0].position;
-        m_player_position[1] = m_player[1].position;
+
+        m_player_position[0] = GameManager.Instance.m_players[0].transform.position;
+        m_player_position[1] = GameManager.Instance.m_players[1].transform.position;
 
         //Initial position of the camera
-        Vector3 player_pos = Camera.main.WorldToViewportPoint(m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].position);
+        Vector3 player_pos = Camera.main.WorldToViewportPoint(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         player_pos.x += 0.25f;
         player_pos = Camera.main.ViewportToWorldPoint(player_pos);
         camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z);
@@ -145,7 +138,7 @@ public class SmoothSwitch : MonoBehaviour {
         {
             target.y = m_y3D;
             target.z = 0f;
-            target.x = m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].position.x - 10f;
+            target.x = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.x - 10f;
             rotation = new Vector3(30f, 90f, 0f);
             level_target = level3D_init_position;
             s = true;
@@ -153,7 +146,7 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_3D_mode = true;
             GameManager.Instance.m_double_mode = false;
             GameManager.Instance.m_single_mode = false;
-            m_offset_from_players = target - new Vector3(m_player[0].position.x , m_player[0].position.y, 0f);
+            m_offset_from_players = target - new Vector3(GameManager.Instance.m_players[0].transform.position.x , GameManager.Instance.m_players[0].transform.position.y, 0f);
         }
         else
         {
@@ -248,7 +241,7 @@ public class SmoothSwitch : MonoBehaviour {
         if (!GameManager.Instance.m_3D_mode)
         {
             //Bufferize player's velocity in order to decide when to move the camera.      
-            buffer += m_player[(GameManager.Instance.m_sel_pg)? 0 : 1].gameObject.GetComponent<Rigidbody>().velocity.x;
+            buffer += GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg)? 0 : 1].GetComponent<Rigidbody>().velocity.x;
 
             if (buffer > m_Turn_Tolerance)
             {
@@ -261,8 +254,8 @@ public class SmoothSwitch : MonoBehaviour {
                 buffer = 0;
             }
 
-            
-            Vector3 player_pos = Camera.main.WorldToViewportPoint(m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].position);
+
+            Vector3 player_pos = Camera.main.WorldToViewportPoint(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
             player_pos.x += amount[(select)? 0 : 1];
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
             camera_Target = new Vector3(player_pos.x, target.y, target.z);
@@ -270,7 +263,7 @@ public class SmoothSwitch : MonoBehaviour {
         }
         else
         {
-            camera_Target = m_offset_from_players + new Vector3(m_player[0].position.x, m_player[0].position.y, 0f);
+            camera_Target = m_offset_from_players + new Vector3(GameManager.Instance.m_players[0].transform.position.x, GameManager.Instance.m_players[0].transform.position.y, 0f);
         }
 
         camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);

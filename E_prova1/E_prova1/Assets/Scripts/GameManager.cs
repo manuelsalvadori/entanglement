@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public bool m_double_mode = false;
     public bool m_single_mode = true;
     public bool m_sel_pg = true;
-    public GameObject m_player1;
-    public GameObject m_player2;
+
+
+    public GameObject[] m_players;
+
     public GameObject m_level1;
     public GameObject m_level2;
 
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
 	
     void Update()
     {
-        if (Input.GetButton("L2") && Input.GetButtonDown("X") && m_double_mode)
+        if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetButton("L2") && Input.GetButtonDown("X"))) && m_double_mode)
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
         }
@@ -56,6 +58,6 @@ public class GameManager : MonoBehaviour
     //Check if the two players are in the "same" X
     public bool isPlayersInline()
     {
-        return (Mathf.Abs(m_player1.transform.position.x - m_player2.transform.position.x) < 5f);
+        return (Mathf.Abs(m_players[0].transform.position.x - m_players[1].transform.position.x) < 5f);
     }
 }
