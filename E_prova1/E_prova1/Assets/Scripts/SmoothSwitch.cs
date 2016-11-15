@@ -62,18 +62,15 @@ public class SmoothSwitch : MonoBehaviour {
         {1, -0.15f},
     };
 
-    //~
-
-
     //Pop-up massage for players alignement
     public GameObject m_popup_message;
-
 
     bool s = true;
     bool t = true;
 
     void Start()
     {
+        
         m_l1 = GameManager.Instance.m_level1.transform;
         m_l2 = GameManager.Instance.m_level2.transform;
         target = transform.position;
@@ -274,9 +271,10 @@ public class SmoothSwitch : MonoBehaviour {
         {
             camera_Target = m_offset_from_players + new Vector3(m_player[0].position.x, m_player[0].position.y, 0f);
         }
+
         camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
         //Debug.Log("target: " + target.ToString());
-        //Debug.Log("c_targ: " + camera_Target.ToString());
+        Debug.Log("c_targ: " + camera_Target.ToString());
     }
 
     void LateUpdate()
