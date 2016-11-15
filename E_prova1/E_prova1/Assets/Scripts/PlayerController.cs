@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public float m_Zfixed = -4.6f;
     public float smoothTime = 0.3F;                                     //Amount of smooth
     Rigidbody m_rb;
+
+    public float m_velocity_boundary = 10f;
+
     bool m_grounded = true;
     Camera cam;
 
@@ -41,11 +44,11 @@ public class PlayerController : MonoBehaviour
             
             StartCoroutine(rotatePlayer(m_look, 0.1f));
             
-            if (Mathf.Abs(m_rb.velocity.z) > 10f)
-                m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -10f, 10f));
+            if (Mathf.Abs(m_rb.velocity.z) > m_velocity_boundary)
+                m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -(m_velocity_boundary), m_velocity_boundary));
 
-            if (Mathf.Abs(m_rb.velocity.x) > 10f)
-                m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -10f, 10f), m_rb.velocity.y, m_rb.velocity.z);
+            if (Mathf.Abs(m_rb.velocity.x) > m_velocity_boundary)
+                m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(m_velocity_boundary), m_velocity_boundary), m_rb.velocity.y, m_rb.velocity.z);
 
             if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded)
             {

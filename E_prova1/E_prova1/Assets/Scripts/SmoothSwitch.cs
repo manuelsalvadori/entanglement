@@ -261,6 +261,7 @@ public class SmoothSwitch : MonoBehaviour {
                 buffer = 0;
             }
 
+            
             Vector3 player_pos = Camera.main.WorldToViewportPoint(m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].position);
             player_pos.x += amount[(select)? 0 : 1];
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
