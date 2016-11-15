@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
             Vector3 force = cam.transform.TransformDirection(move * m_force);
             force.y = 0f;
             m_rb.AddForce(force);
-            //m_rb.MovePosition(force);
 
             if (force.magnitude != 0)
                 m_look = Quaternion.LookRotation(force.normalized);
