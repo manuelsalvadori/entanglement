@@ -26,22 +26,25 @@ public class PlayerController : MonoBehaviour
 
             if (GameManager.Instance.m_camIsMoving) //Durante la transizione da una modalità di camera all'altra, i movimenti sono disabilitati
             m_h = m_v = 0f;
-        
-            if (Mathf.Abs(m_rb.velocity.x) < 10f && Mathf.Abs(m_rb.velocity.y) < 10f) //se la velocity è troppo alta smettiamo di aggiungere forza
-            {
-                Quaternion m_look = transform.rotation;
-                Vector3 move = new Vector3(m_v, 0f, m_h);
-                if (move.magnitude > 1)
-                    move = move.normalized;
-                Vector3 force = cam.transform.TransformDirection(move * m_force);
-                force.y = 0f;
-                m_rb.AddForce(force);
 
-                if (force.magnitude != 0)
-                    m_look = Quaternion.LookRotation(force.normalized);
+            Quaternion m_look = transform.rotation;
+            Vector3 move = new Vector3(m_v, 0f, m_h);
+            if (move.magnitude > 1)
+                move = move.normalized;
+            Vector3 force = cam.transform.TransformDirection(move * m_force);
+            force.y = 0f;
+            m_rb.AddForce(force);
+
+            if (force.magnitude != 0)
+                m_look = Quaternion.LookRotation(force.normalized);
             
-                StartCoroutine(rotatePlayer(m_look, 0.1f));
-            }
+            StartCoroutine(rotatePlayer(m_look, 0.1f));
+            
+            if (Mathf.Abs(m_rb.velocity.z) > 10f)
+                m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -10f, 10f));
+
+            if (Mathf.Abs(m_rb.velocity.x) > 10f)
+                m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -10f, 10f), m_rb.velocity.y, m_rb.velocity.z);
 
             if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded)
             {
