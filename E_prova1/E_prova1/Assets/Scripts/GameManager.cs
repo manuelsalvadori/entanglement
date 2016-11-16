@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
 
 
     public GameObject[] m_players;
-
     public GameObject m_level1;
     public GameObject m_level2;
 
@@ -53,11 +52,49 @@ public class GameManager : MonoBehaviour
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
         }
     }
-
-
-    //Check if the two players are in the "same" X
+        
+    //Check if the two players are in the "same" x
     public bool isPlayersInline()
     {
         return (Mathf.Abs(m_players[0].transform.position.x - m_players[1].transform.position.x) < 5f);
+    }
+
+    public static void joinPlayers()
+    {
+        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].AddComponent<FixedJoint>();
+        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<FixedJoint>().connectedBody = GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<Rigidbody>();
+    }
+
+    public static void breakPlayer()
+    {
+        Destroy(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<FixedJoint>());
+    }
+
+    public static void setScript(bool s)
+    {
+        GameManager.Instance.m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<PlayerController>().enabled = s;
+    }
+
+    public void copyRotation()
+    {
+        m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation = m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation;
+    }
+
+    public static IEnumerator imparentPlayers()
+    {
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitUntil(() => !GameManager.Instance.m_camIsMoving);
+        GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_players[0].transform);
+        GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
+    }
+
+    public static IEnumerator deparentPlayers()
+    {
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitUntil(() => !GameManager.Instance.m_camIsMoving);
+        GameManager.Instance.m_players[0].transform.SetParent(GameManager.Instance.m_level1.transform);
+        GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_level2.transform);
+        GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = true;
+
     }
 }

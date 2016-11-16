@@ -18,17 +18,19 @@ public class PlayerController : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
+        
 
     void FixedUpdate ()
     {
-        if ((GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg)? 0 : 1].name.Equals(this.gameObject.name)) || GameManager.Instance.m_3D_mode)
+        
+        if ((GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name)) || GameManager.Instance.m_3D_mode)
         {
-            m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.001f);
+            m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.005f);
             m_v = Input.GetAxis("Horizontal");
             m_h = Input.GetAxis("Vertical");
 
             if (GameManager.Instance.m_camIsMoving) //Durante la transizione da una modalità di camera all'altra, i movimenti sono disabilitati
-            m_h = m_v = 0f;
+                    m_h = m_v = 0f;
 
             Quaternion m_look = transform.rotation;
             Vector3 move = new Vector3(m_v, 0f, m_h);
@@ -36,20 +38,24 @@ public class PlayerController : MonoBehaviour
                 move = move.normalized;
             Vector3 force = cam.transform.TransformDirection(move * m_force);
             force.y = 0f;
-            m_rb.AddForce(force);
+           
+            Debug.Log("forza su: " + GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name);
 
+                m_rb.AddForce(force);
+
+        
+                if (Mathf.Abs(m_rb.velocity.z) > m_velocity_boundary)
+                    m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -(m_velocity_boundary), m_velocity_boundary));
+
+                if (Mathf.Abs(m_rb.velocity.x) > m_velocity_boundary)
+                    m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(m_velocity_boundary), m_velocity_boundary), m_rb.velocity.y, m_rb.velocity.z);
+          
             if (force.magnitude != 0)
                 m_look = Quaternion.LookRotation(force.normalized);
-            
+
             StartCoroutine(rotatePlayer(m_look, 0.1f));
-            
-            if (Mathf.Abs(m_rb.velocity.z) > m_velocity_boundary)
-                m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -(m_velocity_boundary), m_velocity_boundary));
-
-            if (Mathf.Abs(m_rb.velocity.x) > m_velocity_boundary)
-                m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(m_velocity_boundary), m_velocity_boundary), m_rb.velocity.y, m_rb.velocity.z);
-
-            if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded)
+        
+            if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded && !GameManager.Instance.m_3D_mode)
             {
                 m_rb.velocity = new Vector3(m_rb.velocity.x, m_jump, m_rb.velocity.z);
             }
@@ -60,6 +66,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
+
 	}
 
     void LateUpdate()

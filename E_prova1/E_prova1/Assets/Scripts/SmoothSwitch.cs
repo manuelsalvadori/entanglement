@@ -147,6 +147,12 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_double_mode = false;
             GameManager.Instance.m_single_mode = false;
             m_offset_from_players = target - new Vector3(GameManager.Instance.m_players[0].transform.position.x , GameManager.Instance.m_players[0].transform.position.y, 0f);
+
+            GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].GetComponent<Rigidbody>().MovePosition(new Vector3(
+                GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.x,
+                GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.y,
+                GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.z));
+            StartCoroutine(GameManager.imparentPlayers());
         }
         else
         {
@@ -158,6 +164,7 @@ public class SmoothSwitch : MonoBehaviour {
             s = false;
             GameManager.Instance.m_3D_mode = false;
             GameManager.Instance.m_double_mode = true;
+            StartCoroutine(GameManager.deparentPlayers());
 
         }
         GameManager.Instance.m_camIsMoving = true;
@@ -279,5 +286,4 @@ public class SmoothSwitch : MonoBehaviour {
             transform.position = new Vector3(camera_final.x, transform.position.y, camera_final.z);
         
     }
-
 }
