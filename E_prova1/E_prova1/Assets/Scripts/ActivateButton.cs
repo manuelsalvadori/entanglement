@@ -7,6 +7,7 @@ public class ActivateButton : MonoBehaviour {
     public bool m_isActive = false;
     public bool m_isSwitch = false;
     public GameObject square;
+    public GameObject tastoi;
 
 	void Update ()
     {
@@ -42,7 +43,7 @@ public class ActivateButton : MonoBehaviour {
         }
         else
         {
-            Debug.Log("keyboard");
+            tastoi.SetActive(true);
         }
     }
 
@@ -54,7 +55,7 @@ public class ActivateButton : MonoBehaviour {
         }
         else
         {
-            Debug.Log("keyboard");
+            tastoi.SetActive(false);
         }
     }
 }
