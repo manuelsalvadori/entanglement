@@ -5,6 +5,7 @@ public class ActivateButton : MonoBehaviour {
 
 
     public bool m_isActive = false;
+    public bool m_isSwitch = false;
 
 	void Update ()
     {
@@ -14,13 +15,26 @@ public class ActivateButton : MonoBehaviour {
 
             if (Input.GetButtonDown("Interact"))
             {
-                m_isActive = true;
+                if (m_isSwitch)
+                    m_isActive = !m_isActive;
+                else
+                    m_isActive = true;
             }
         }
 	}
 
     void displayActive()
     {
-        //facciamo apparire una UI
+        if (Input.GetJoystickNames()[0].Equals("Sony PLAYSTATION(R)3 Controller"))
+        {
+            Debug.Log("ps3");
+        }
+        else
+        {
+            Debug.Log("keyboard");
+
+        }
+
+
     }
 }
