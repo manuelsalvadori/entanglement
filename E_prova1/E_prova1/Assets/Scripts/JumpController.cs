@@ -8,14 +8,11 @@ public class JumpController : MonoBehaviour
     Rigidbody m_rb;
 
     public float m_velocity_boundary = 10f;
-
-    bool m_grounded = true;
-    Camera cam;
+    private bool m_grounded = true;
 
     void Start ()
     {
         m_rb = GetComponent<Rigidbody>();
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
         
     void FixedUpdate ()

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject m_gameplay_UI_Canvas;
 
-    //Struct to collect in GameManager elements of the GUI...trick to visualize it in the Inspector 
+    //Struct to collect in GameManager elements of the GUI...trick to visualize it in the Inspector
     [System.Serializable]
     public struct NamedElements
     {
@@ -32,19 +32,19 @@ public class GameManager : MonoBehaviour
     //Real implementation
     public Dictionary<string, GameObject> m_UI = new Dictionary<string, GameObject>();
 
-	void Awake ()
+    void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
         //Filling the pool
-        foreach(NamedElements ne in m_UI_Elements)
+        foreach (NamedElements ne in m_UI_Elements)
         {
             m_UI.Add(ne.name, ne.element);
         }
-	}
-	
+    }
+
     void Update()
     {
         //Change player selected on Double Mode
@@ -52,46 +52,42 @@ public class GameManager : MonoBehaviour
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
         }
+        if (!m_3D_mode)
+            GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
+
     }
         
     //Check if the two players are in the "same" x
     public bool isPlayersInline()
     {
-        return (Mathf.Abs(m_players[0].transform.position.x - m_players[1].transform.position.x) < 5f);
+        return (Mathf.Abs(m_players[0].transform.position.x - m_players[1].transform.position.x) < 2f);
     }
 
     //Function to start the syncronized movement of players
     //Create the configurable Joint between players and set the other gameobject properties in order to follow player 1 movement
-    public static IEnumerator activateChild()
+    public static IEnumerator activateChildMode()
     {
         yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => !GameManager.Instance.m_camIsMoving);
-        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].AddComponent<ConfigurableJoint>();
-        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().connectedBody = GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<Rigidbody>();
+        GameManager.Instance.m_players[0].AddComponent<ConfigurableJoint>();
+        GameManager.Instance.m_players[0].GetComponent<ConfigurableJoint>().connectedBody = GameManager.Instance.m_players[1].GetComponent<Rigidbody>();
         //Leave the player free to move in Y Motion
-        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().xMotion = ConfigurableJointMotion.Locked;
-        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().zMotion = ConfigurableJointMotion.Locked;
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<MeshRenderer>().enabled = false;
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().enabled = false;
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<JumpController>().enabled = true;
-
-
-        //GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_players[0].transform);
-       // GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
+        GameManager.Instance.m_players[0].GetComponent<ConfigurableJoint>().xMotion = ConfigurableJointMotion.Locked;
+        GameManager.Instance.m_players[0].GetComponent<ConfigurableJoint>().zMotion = ConfigurableJointMotion.Locked;
+        GameManager.Instance.m_players[1].GetComponent<MeshRenderer>().enabled = false;
+        GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
+        GameManager.Instance.m_players[1].GetComponent<JumpController>().enabled = true;
     }
 
     //Function to end the syncronized movement of players
-    public static void deactivateChild()
+    public static void deactivateChildMode()
     {
-        Destroy(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>());
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<MeshRenderer>().enabled = true;
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().enabled = true;
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<JumpController>().enabled = false;
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.rotation = GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.GetChild(0).localRotation;
-        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
-        Debug.Log(GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.GetChild(0).localRotation.eulerAngles);
-        //GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_players[0].transform);
-        // GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
+        Destroy(GameManager.Instance.m_players[0].GetComponent<ConfigurableJoint>());
+        GameManager.Instance.m_players[1].GetComponent<MeshRenderer>().enabled = true;
+        GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = true;
+        GameManager.Instance.m_players[1].GetComponent<JumpController>().enabled = false;
+        GameManager.Instance.m_players[1].transform.rotation = GameManager.Instance.m_players[1].transform.GetChild(0).localRotation;
+        GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
+        Debug.Log(GameManager.Instance.m_players[1].transform.GetChild(0).localRotation.eulerAngles);
     }
-       
 }

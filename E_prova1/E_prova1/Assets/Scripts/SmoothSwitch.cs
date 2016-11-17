@@ -51,7 +51,8 @@ public class SmoothSwitch : MonoBehaviour {
 
     public float m_Turn_Tolerance = 100f;
 
-    private Dictionary<int, float> amount = new Dictionary<int, float>(){
+    private Dictionary<int, float> amount = new Dictionary<int, float>()
+    {
         {0, 0.35f},
         {1, -0.15f},
     };
@@ -152,8 +153,8 @@ public class SmoothSwitch : MonoBehaviour {
                 GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.x,
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.y,
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.z));
-            StartCoroutine(GameManager.activateChild());
 
+            StartCoroutine(GameManager.activateChildMode());
         }
         else
         {
@@ -165,14 +166,12 @@ public class SmoothSwitch : MonoBehaviour {
             s = false;
             GameManager.Instance.m_3D_mode = false;
             GameManager.Instance.m_double_mode = true;
-            GameManager.deactivateChild();
+            GameManager.deactivateChildMode();
         }
         GameManager.Instance.m_camIsMoving = true;
         treD_Mode = !treD_Mode;
     }
-
-    
-
+        
     //Display a popup message
     private void displayMessage()
     {
@@ -183,9 +182,7 @@ public class SmoothSwitch : MonoBehaviour {
             m_popup_message =  Instantiate(m_popup_message, Vector3.zero, m_popup_message.transform.rotation) as GameObject;
         }
     }
-
-
-
+        
     void Update()
     {
         
@@ -223,10 +220,11 @@ public class SmoothSwitch : MonoBehaviour {
                 t = true;
             }
 
-
             //Move the camera (SmoothDamp version)
             transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime); 
             transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, rotation, ref velocity2, smoothTime));
+            if (transform.rotation.eulerAngles.y > 88f)
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, 90f, transform.rotation.eulerAngles.z));
 
             //Move the level - in Action
             m_l1.position = Vector3.SmoothDamp(m_l1.position, level_target, ref velocity3, (smoothTime/4f));
@@ -241,8 +239,6 @@ public class SmoothSwitch : MonoBehaviour {
                 transform.position = target;
                 m_l1.position = level_target;
             }
-
-            //Debug.Log(GameManager.Instance.m_camIsMoving.ToString());
         }
 
         if (!GameManager.Instance.m_3D_mode)
@@ -260,7 +256,6 @@ public class SmoothSwitch : MonoBehaviour {
                 select = false;
                 buffer = 0;
             }
-
 
             Vector3 player_pos = Camera.main.WorldToViewportPoint(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
             player_pos.x += amount[(select)? 0 : 1];
