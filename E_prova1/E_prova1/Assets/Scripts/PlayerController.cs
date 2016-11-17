@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(rotatePlayer(m_look, 0.1f));
         
-            if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded && !GameManager.Instance.m_3D_mode)
+            if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded)
             {
                 m_rb.velocity = new Vector3(m_rb.velocity.x, m_jump, m_rb.velocity.z);
             }

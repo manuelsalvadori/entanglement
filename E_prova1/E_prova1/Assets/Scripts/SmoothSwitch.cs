@@ -152,7 +152,8 @@ public class SmoothSwitch : MonoBehaviour {
                 GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.x,
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.y,
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.z));
-            StartCoroutine(GameManager.imparentPlayers());
+            StartCoroutine(GameManager.activateChild());
+
         }
         else
         {
@@ -164,8 +165,7 @@ public class SmoothSwitch : MonoBehaviour {
             s = false;
             GameManager.Instance.m_3D_mode = false;
             GameManager.Instance.m_double_mode = true;
-            StartCoroutine(GameManager.deparentPlayers());
-
+            GameManager.deactivateChild();
         }
         GameManager.Instance.m_camIsMoving = true;
         treD_Mode = !treD_Mode;
@@ -266,7 +266,6 @@ public class SmoothSwitch : MonoBehaviour {
             player_pos.x += amount[(select)? 0 : 1];
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
             camera_Target = new Vector3(player_pos.x, target.y, target.z);
-            //Debug.Log("Velocity = " + m_player[(GameManager.Instance.m_sel_pg) ? 0 : 1].gameObject.GetComponent<Rigidbody>().velocity.x + " buffer: " + buffer );
         }
         else
         {
@@ -274,8 +273,7 @@ public class SmoothSwitch : MonoBehaviour {
         }
 
         camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
-        //Debug.Log("target: " + target.ToString());
-        Debug.Log("c_targ: " + camera_Target.ToString());
+
     }
 
     void LateUpdate()

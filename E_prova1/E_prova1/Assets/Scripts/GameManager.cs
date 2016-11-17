@@ -59,12 +59,6 @@ public class GameManager : MonoBehaviour
         return (Mathf.Abs(m_players[0].transform.position.x - m_players[1].transform.position.x) < 5f);
     }
 
-    public static void joinPlayers()
-    {
-        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].AddComponent<FixedJoint>();
-        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<FixedJoint>().connectedBody = GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<Rigidbody>();
-    }
-
     public static void breakPlayer()
     {
         Destroy(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<FixedJoint>());
@@ -75,26 +69,33 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<PlayerController>().enabled = s;
     }
 
-    public void copyRotation()
-    {
-        m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation = m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation;
-    }
-
-    public static IEnumerator imparentPlayers()
+    public static IEnumerator activateChild()
     {
         yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => !GameManager.Instance.m_camIsMoving);
-        GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_players[0].transform);
-        GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
+        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].AddComponent<ConfigurableJoint>();
+        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().connectedBody = GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<Rigidbody>();
+        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().xMotion = ConfigurableJointMotion.Locked;
+        GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().zMotion = ConfigurableJointMotion.Locked;
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<MeshRenderer>().enabled = false;
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().enabled = false;
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<JumpController>().enabled = true;
+
+
+        //GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_players[0].transform);
+       // GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
     }
 
-    public static IEnumerator deparentPlayers()
+    public static void deactivateChild()
     {
-        yield return new WaitForSeconds(0.1f);
-        yield return new WaitUntil(() => !GameManager.Instance.m_camIsMoving);
-        GameManager.Instance.m_players[0].transform.SetParent(GameManager.Instance.m_level1.transform);
-        GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_level2.transform);
-        GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = true;
+        Destroy(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>());
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<MeshRenderer>().enabled = true;
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().enabled = true;
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<JumpController>().enabled = false;
 
+
+        //GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_players[0].transform);
+        // GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
     }
+       
 }
