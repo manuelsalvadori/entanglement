@@ -87,8 +87,9 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<MeshRenderer>().enabled = true;
         GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().enabled = true;
         GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<JumpController>().enabled = false;
-
-
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.rotation = GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.GetChild(0).localRotation;
+        GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
+        Debug.Log(GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.GetChild(0).localRotation.eulerAngles);
         //GameManager.Instance.m_players[1].transform.SetParent(GameManager.Instance.m_players[0].transform);
         // GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
     }
