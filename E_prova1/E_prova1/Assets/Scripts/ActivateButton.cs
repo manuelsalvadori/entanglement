@@ -30,7 +30,7 @@ public class ActivateButton : MonoBehaviour {
         }
         else
         {
-            square.SetActive(false);
+            displayDeactive();
         }
 
 	}
