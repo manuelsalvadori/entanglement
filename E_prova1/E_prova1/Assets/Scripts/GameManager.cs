@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 	
     void Update()
     {
+        //Change player selected on Double Mode
         if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetButton("L2") && Input.GetButtonDown("X"))) && m_double_mode)
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
@@ -59,22 +60,15 @@ public class GameManager : MonoBehaviour
         return (Mathf.Abs(m_players[0].transform.position.x - m_players[1].transform.position.x) < 5f);
     }
 
-    public static void breakPlayer()
-    {
-        Destroy(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<FixedJoint>());
-    }
-
-    public static void setScript(bool s)
-    {
-        GameManager.Instance.m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<PlayerController>().enabled = s;
-    }
-
+    //Function to start the syncronized movement of players
+    //Create the configurable Joint between players and set the other gameobject properties in order to follow player 1 movement
     public static IEnumerator activateChild()
     {
         yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => !GameManager.Instance.m_camIsMoving);
         GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].AddComponent<ConfigurableJoint>();
         GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().connectedBody = GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<Rigidbody>();
+        //Leave the player free to move in Y Motion
         GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().xMotion = ConfigurableJointMotion.Locked;
         GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>().zMotion = ConfigurableJointMotion.Locked;
         GameManager.Instance.m_players[!(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<MeshRenderer>().enabled = false;
@@ -86,6 +80,7 @@ public class GameManager : MonoBehaviour
        // GameManager.Instance.m_players[1].GetComponent<PlayerController>().enabled = false;
     }
 
+    //Function to end the syncronized movement of players
     public static void deactivateChild()
     {
         Destroy(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<ConfigurableJoint>());

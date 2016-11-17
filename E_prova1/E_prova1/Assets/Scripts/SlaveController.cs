@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+//This script controls the rotation of a gameobject that is controlled by another one by a Joint.
 public class SlaveController : MonoBehaviour
 {
-    public float m_v, m_h, m_force = 10f, m_jump = 10f, m_GravityMultiplier = 3f;
+    public float m_v, m_h, m_force = 40f, m_jump = 20f, m_GravityMultiplier = 3f;
     public float m_Zfixed = -4.6f;
-    public float smoothTime = 0.3F;                                     //Amount of smooth
 
-    public float m_velocity_boundary = 10f;
-
-    bool m_grounded = true;
     Camera cam;
 
     void Start ()
@@ -21,9 +19,11 @@ public class SlaveController : MonoBehaviour
     void FixedUpdate ()
     {
 
+        //Get 3D movement
         m_v = Input.GetAxis("Horizontal");
         m_h = Input.GetAxis("Vertical");
 
+        //Convert movement in rotation behaviour: when a player says to go in one direction the gameobject have to rotate in this direction and move forward!
         Quaternion m_look = transform.rotation;
         Vector3 move = new Vector3(m_v, 0f, m_h);
         if (move.magnitude > 1)
@@ -37,6 +37,7 @@ public class SlaveController : MonoBehaviour
             StartCoroutine(rotatePlayer(m_look, 0.1f));
   	}
 
+    //Coroutine to rotate the player
     private bool rotating = false;
     IEnumerator rotatePlayer(Quaternion newRot, float duration)
     {
@@ -52,7 +53,7 @@ public class SlaveController : MonoBehaviour
         while (counter < duration)
         {
             counter += Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(currentRot, newRot, counter / duration);
+            transform.rotation = Quaternion.Lerp(currentRot, newRot, counter / duration); //Linear interpolation between angles
             yield return null;
         }
         rotating = false;
