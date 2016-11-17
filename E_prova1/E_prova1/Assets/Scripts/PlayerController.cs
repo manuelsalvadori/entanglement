@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         
         if ((GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name)) || GameManager.Instance.m_3D_mode)
         {
-            m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.005f);
+            //m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.005f);
             m_v = Input.GetAxis("Horizontal");
             m_h = Input.GetAxis("Vertical");
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
             Vector3 force = cam.transform.TransformDirection(move * m_force);
             force.y = 0f;
            
-            Debug.Log("forza su: " + GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name);
+            //Debug.Log("forza su: " + GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name);
 
                 m_rb.AddForce(force);
 
@@ -76,6 +76,22 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, m_Zfixed);
         }
     }
+
+    public void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag.Equals("Ground"))
+            m_grounded = true;
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag.Equals("Ground"))
+            m_grounded = false;
+    }
+
+
+
+
 
     private bool rotating = false;
     IEnumerator rotatePlayer(Quaternion newRot, float duration)

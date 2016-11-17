@@ -30,4 +30,16 @@ public class JumpController : MonoBehaviour
             m_rb.AddForce(extraGravityForce);
         }
     }
+
+    public void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag.Equals("Ground"))
+            m_grounded = true;
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag.Equals("Ground"))
+            m_grounded = false;
+    }
 }
