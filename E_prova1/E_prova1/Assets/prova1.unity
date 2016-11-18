@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692534, g: 0.49678725, b: 0.57508564, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1291,6 +1291,7 @@ GameObject:
   - 23: {fileID: 1076114166}
   - 114: {fileID: 1076114169}
   - 54: {fileID: 1076114165}
+  - 114: {fileID: 1076114170}
   m_Layer: 0
   m_Name: platform
   m_TagString: Ground
@@ -1380,7 +1381,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1076114163}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb553dedb4cfe4276be9d8059c71c6b5, type: 3}
   m_Name: 
@@ -1389,6 +1390,21 @@ MonoBehaviour:
   m_initPosition: {fileID: 1538794825}
   m_button: {fileID: 455781072}
   smoothTime: 1.5
+--- !u!114 &1076114170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076114163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68071542542c0474fb2f3c300b1ccc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_endPosition: {fileID: 741156627}
+  m_initPosition: {fileID: 1538794825}
+  m_button: {fileID: 455781072}
+  lerpTime: 3
 --- !u!1 &1341272779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1923,7 +1939,7 @@ GameObject:
   - 114: {fileID: 1600495763}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2275,7 +2291,7 @@ GameObject:
   - 114: {fileID: 1776648523}
   m_Layer: 0
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
