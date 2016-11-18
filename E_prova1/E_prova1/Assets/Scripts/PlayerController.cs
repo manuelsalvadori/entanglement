@@ -84,6 +84,26 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (GameManager.isPickble(other.gameObject))
+        {
+            other.gameObject.SetActive(false);
+            if (other.gameObject.GetComponent<PickableObject>().isCollectable)
+            {
+                GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().score();
+                Debug.Log("Score: " + GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getScore());
+            }
+            else
+            {
+                Item pk = other.gameObject.GetComponent<PickableObject>().getItem();
+                Debug.Log("Pk: " + pk.ToString());
+                GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().addItem(pk);
+                Debug.Log("Item: " + GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getItems());
+            }
+        }
+    }
+
     public void OnCollisionStay(Collision other)
     {
         //If this gameobject is touching the "Ground" it can jump

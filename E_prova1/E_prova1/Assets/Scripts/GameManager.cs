@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
 
 
     public GameObject[] m_players;
+    public Inventory[] m_inventory;
     public GameObject m_level1;
     public GameObject m_level2;
 
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         {
             m_UI.Add(ne.name, ne.element);
         }
+
     }
 
     void Update()
@@ -52,6 +55,16 @@ public class GameManager : MonoBehaviour
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
         }
+
+        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")){
+            if(!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf)
+                displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
+            else
+            {
+                hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
+            }
+        }
+
         if (!m_3D_mode)
             GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
 
@@ -90,4 +103,34 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
         Debug.Log(GameManager.Instance.m_players[1].transform.GetChild(0).localRotation.eulerAngles);
     }
+
+    public static bool isPickble(GameObject go)
+    {
+        return go.GetComponent<PickableObject>() != null;
+    }
+
+    public int whoAmI(string name)
+    {
+        return m_players[0].gameObject.name.Equals(name) ? 0 : m_players[1].gameObject.name.Equals(name) ? 1 : 3;
+    }
+
+
+    public void displayInventory(int which)
+    {
+        m_inventory[which].gameObject.SetActive(true);
+        m_inventory[which].gameObject.GetComponent<Animation>().Play("FadeIn" + ((which == 0)? "0" : ""));
+    }
+
+    public void hideInventory(int which)
+    {
+        m_inventory[which].gameObject.GetComponent<Animation>().Play("FadeOut" + ((which == 0) ? "0" : ""));
+        StartCoroutine(shutdown_thisWin(m_inventory[which].gameObject));
+    }
+
+    IEnumerator shutdown_thisWin(GameObject go)
+    {
+        yield return new WaitUntil(() => !go.GetComponent<Animation>().isPlaying);
+        go.SetActive(false);
+    }
+
 }

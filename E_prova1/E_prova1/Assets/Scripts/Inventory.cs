@@ -4,28 +4,27 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
-    private bool[] m_upgrades;
-    private List<Item> m_items;
+    private bool[] m_upgrades = new bool[4] { false, false, false, false };
+    private List<Item> m_items = new List<Item>();
     private int m_ncollectables = 0;
 
     void Awake()
     {
-        m_upgrades = new bool[4] { false, false, false, false };
-        m_items = new List<Item>();
-        m_ncollectables = 0;
+        
     }
 
-	void addItem(Item i)
+	public void addItem(Item i)
     {
-        m_items.Add(i);
+        if(typeof(Item) == i.GetType() )
+            m_items.Add(i);
     }
 
-    List<Item> getItems()
+    public List<Item> getItems()
     {
         return m_items;
     }
 
-    Item takeItem(int n)
+    public Item takeItem(int n)
     {
         if (n < m_items.Count)
         {
@@ -36,17 +35,17 @@ public class Inventory : MonoBehaviour {
         return null;
     }
 
-    void score()
+    public void score()
     {
         m_ncollectables++;
     }
 
-    int getScore()
+    public int getScore()
     {
         return m_ncollectables;
     }
 
-    bool hasUpgrade(int n)
+    public bool hasUpgrade(int n)
     {
         if(n < 4)
         {
@@ -55,7 +54,7 @@ public class Inventory : MonoBehaviour {
         return false;
     }
 
-    bool[] getUpgrades() { return m_upgrades; }
+    public bool[] getUpgrades() { return m_upgrades; }
 
 
 
