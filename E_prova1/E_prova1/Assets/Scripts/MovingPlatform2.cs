@@ -48,30 +48,8 @@ public class MovingPlatform2 : MonoBehaviour {
             //lerp!
             float perc = currentLerpTime / lerpTime;
             perc = perc * perc * perc * (perc * (6f * perc - 15f) + 10f);
-            transform.position = Vector3.Lerp(startPos, endPos, perc);
+            GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(startPos, endPos, perc));
         }
     }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if(other.gameObject.tag.Equals("Player"))
-        {
-            m_parent = other.transform.parent;
-        }
-    }
-    void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.tag.Equals("Player"))
-        {
-            other.transform.parent = transform;
-        }
-    }
-    void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.tag.Equals("Player"))
-        {
-            Debug.Log(other.transform.name);
-            other.transform.parent = m_parent;
-        }
-    }
+    
 }
