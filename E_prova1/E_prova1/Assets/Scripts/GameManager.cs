@@ -118,12 +118,32 @@ public class GameManager : MonoBehaviour
     public void displayInventory(int which)
     {
         m_inventory[which].gameObject.SetActive(true);
-        m_inventory[which].gameObject.GetComponent<Animation>().Play("FadeIn" + ((which == 0)? "0" : ""));
+        m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeIn");
+        
+        foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
+        {
+            if (a.gameObject.GetComponent<Text>())
+                a.Play("General_Text_FadeIn");
+            else
+            {
+                a.Play("General_FadeIn");
+            }
+        }
     }
 
     public void hideInventory(int which)
     {
-        m_inventory[which].gameObject.GetComponent<Animation>().Play("FadeOut" + ((which == 0) ? "0" : ""));
+        m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeOut");
+        
+        foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
+        {
+            if (a.gameObject.GetComponent<Text>())
+                a.Play("General_Text_FadeOut");
+            else
+            {
+                a.Play("General_FadeOut");
+            }
+        }
         StartCoroutine(shutdown_thisWin(m_inventory[which].gameObject));
     }
 

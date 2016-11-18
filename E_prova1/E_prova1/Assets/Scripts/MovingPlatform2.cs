@@ -34,7 +34,7 @@ public class MovingPlatform2 : MonoBehaviour {
                     currentLerpTime = lerpTime;
                     avanti = false;
                 }
-            }
+            }   
             else
             {
                 currentLerpTime -= Time.deltaTime;
