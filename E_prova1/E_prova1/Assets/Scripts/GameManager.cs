@@ -54,6 +54,9 @@ public class GameManager : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetButton("L2") && Input.GetButtonDown("X"))) && m_double_mode)
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+            GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
+            GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+
         }
 
         if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")){
@@ -152,5 +155,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => !go.GetComponent<Animation>().isPlaying);
         go.SetActive(false);
     }
+
+
 
 }

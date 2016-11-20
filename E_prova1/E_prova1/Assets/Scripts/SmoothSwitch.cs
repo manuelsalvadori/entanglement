@@ -190,6 +190,8 @@ public class SmoothSwitch : MonoBehaviour {
         {
             select_singleView();
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+            GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
+            GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
         }
 
         if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode) //double_view

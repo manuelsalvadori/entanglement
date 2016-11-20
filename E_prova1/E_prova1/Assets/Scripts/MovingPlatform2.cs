@@ -9,7 +9,6 @@ public class MovingPlatform2 : MonoBehaviour {
     private Vector3 endPos = Vector3.zero;
     private Vector3 startPos = Vector3.zero;
     private Vector3 velocity;
-    private bool active = true, switched = true;
     public float lerpTime = 1f;
     float currentLerpTime= 0f;
     bool avanti = true;
@@ -24,7 +23,7 @@ public class MovingPlatform2 : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (active = m_button.m_isActive)
+        if (m_button.m_isActive)
         { 
             if (avanti)
             {
