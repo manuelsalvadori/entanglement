@@ -56,7 +56,4 @@ public class Inventory : MonoBehaviour {
 
     public bool[] getUpgrades() { return m_upgrades; }
 
-
-
-
 }

@@ -166,6 +166,4 @@ public class GameManager : MonoBehaviour
         go.SetActive(false);
     }
 
-
-
 }

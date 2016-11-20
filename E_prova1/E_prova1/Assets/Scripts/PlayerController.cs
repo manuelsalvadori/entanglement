@@ -138,5 +138,35 @@ public class PlayerController : MonoBehaviour
     public void useGadget(int n)
     {
         Debug.Log(gameObject.name + " usa gadget "+n);
+        switch (n)
+        {
+            case 0:
+                moveObject();
+                break;
+            case 1:
+                teleport();
+                break;
+            case 2:
+                dashGate();
+                break;
+            default:
+                return;
+        }
+
+    }
+
+    void moveObject()
+    {
+        Debug.Log(" usa gadget muovi oggetto tra i livelli");
+    }
+
+    void teleport()
+    {
+        Debug.Log(" usa gadget teletrasporto");
+    }
+
+    void dashGate()
+    {
+        Debug.Log(" usa gadget passa attraverso cancelli elettrici");
     }
 }
