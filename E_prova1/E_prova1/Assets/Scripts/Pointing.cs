@@ -23,6 +23,7 @@ public class Pointing : MonoBehaviour
             transform.position = new Vector3(transform.position.x, hit.collider.bounds.max.y,transform.position.z);
         }
         transform.position += (new Vector3(ha, 0f, va).normalized * Time.deltaTime * speed);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -4.6f);
 
 	
 	}

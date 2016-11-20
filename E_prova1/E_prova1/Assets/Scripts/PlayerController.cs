@@ -163,6 +163,7 @@ public class PlayerController : MonoBehaviour
     void teleport()
     {
         Debug.Log(" usa gadget teletrasporto");
+        transform.position = GameObject.Find("Mirino").transform.position + new Vector3(0f,gameObject.GetComponent<CapsuleCollider>().bounds.extents.y,0f);
     }
 
     void dashGate()
