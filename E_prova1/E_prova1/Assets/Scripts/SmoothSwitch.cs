@@ -53,7 +53,7 @@ public class SmoothSwitch : MonoBehaviour {
 
     private Dictionary<int, float> amount = new Dictionary<int, float>()
     {
-        {0, 0.35f},
+        {0, 0.25f},
         {1, -0.15f},
     };
 
@@ -154,6 +154,7 @@ public class SmoothSwitch : MonoBehaviour {
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.y,
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.z));
 
+            GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].hideSelectionUI();
             StartCoroutine(GameManager.activateChildMode());
         }
         else
@@ -167,6 +168,8 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_3D_mode = false;
             GameManager.Instance.m_double_mode = true;
             GameManager.deactivateChildMode();
+            GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].unhideSelectionUI();
+
         }
         GameManager.Instance.m_camIsMoving = true;
         treD_Mode = !treD_Mode;
@@ -189,9 +192,17 @@ public class SmoothSwitch : MonoBehaviour {
         if ((Input.GetKeyDown("1") || (Input.GetButton("L2") && Input.GetButtonDown("Square"))) && !treD_Mode) //single_view
         {
             select_singleView();
-            GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
-            GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
-            GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+            if (!GameManager.Instance.m_playerswicth)
+            {
+                GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+                GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
+                GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+            }
+            else
+            {
+                GameManager.Instance.m_playerswicth = false;
+            }
+
         }
 
         if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode) //double_view

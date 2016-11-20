@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool m_double_mode = false;
     public bool m_single_mode = true;
     public bool m_sel_pg = true;
+    public bool m_playerswicth = false;
     public SwitchGadget[] m_gadgetSelection;
 
     public GameObject[] m_players;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetButton("L2") && Input.GetButtonDown("X"))) && m_double_mode)
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+            m_playerswicth = !m_playerswicth;
             GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
             GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
         }

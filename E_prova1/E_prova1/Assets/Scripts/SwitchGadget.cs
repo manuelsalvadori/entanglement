@@ -122,4 +122,26 @@ public class SwitchGadget : MonoBehaviour
         }
         m_in = !m_in;
     }
+
+    public void hideSelectionUI()
+    {
+        if (m_in)
+        {
+            if (gameObject.name.Equals("GadgetSelection_1"))
+                GetComponent<Animation>().Play("gs1_out");
+            else
+                GetComponent<Animation>().Play("gs2_out");
+        }
+    }
+
+    public void unhideSelectionUI()
+    {
+        if (m_in)
+        {
+            if (gameObject.name.Equals("GadgetSelection_1"))
+                GetComponent<Animation>().Play("gs1_in");
+            else
+                GetComponent<Animation>().Play("gs2_in");
+        }
+    }
 }
