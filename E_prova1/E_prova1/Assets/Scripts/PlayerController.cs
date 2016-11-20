@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
-        
+
 
     void FixedUpdate ()
     {
-        
+
         if ((GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name)) || GameManager.Instance.m_3D_mode)
         {
             //m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.005f); <-- Deprecated
@@ -39,25 +39,25 @@ public class PlayerController : MonoBehaviour
                 move = move.normalized;
             Vector3 force = cam.transform.TransformDirection(move * m_force);
             force.y = 0f;
-           
-            
+
+
             //Move
             m_rb.AddForce(force);
 
-        
+
             //Constraint velocity
             if (Mathf.Abs(m_rb.velocity.z) > m_velocity_boundary)
                 m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -(m_velocity_boundary), m_velocity_boundary));
 
             if (Mathf.Abs(m_rb.velocity.x) > m_velocity_boundary)
                 m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(m_velocity_boundary), m_velocity_boundary), m_rb.velocity.y, m_rb.velocity.z);
-            
+
             //
             if (force.magnitude != 0)
                 m_look = Quaternion.LookRotation(force.normalized);
 
             StartCoroutine(rotatePlayer(m_look, 0.1f));
-        
+
             //Jump if is touching the "Ground"
             if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded)
             {
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, m_Zfixed);
         }
-        
+
     }
 
     public void OnTriggerEnter(Collider other)
@@ -91,16 +91,21 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             if (other.gameObject.GetComponent<PickableObject>().isCollectable)
             {
-                GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().score();
-                Debug.Log("Score: " + GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getScore());
+                GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().score(GameManager.Instance.whichLevelItIs());
+                Debug.Log("Score: " + GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getScore(GameManager.Instance.whichLevelItIs()));
             }
-            else
+            else if(!other.gameObject.GetComponent<PickableObject>().isUpgrade)
             {
                 Item pk = other.gameObject.GetComponent<PickableObject>().getItem();
                 Debug.Log("Pk: " + pk.ToString());
                 GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().addItem(pk);
-                Debug.Log("Item: " + GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getItems());
+                Debug.Log("Item: " + GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getItems().ToArray()[0]);
             }
+            else
+            {
+                GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().gainUpgrade((int)other.gameObject.GetComponent<PickableObject>().m_gadget);
+            }
+            GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().updateView();
         }
     }
 

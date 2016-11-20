@@ -13,11 +13,17 @@ public class GameManager : MonoBehaviour
     public bool m_single_mode = true;
     public bool m_sel_pg = true;
 
+    enum Levels { Zero, One, Two, Three, Four, Final};
+
 
     public GameObject[] m_players;
     public Inventory[] m_inventory;
     public GameObject m_level1;
     public GameObject m_level2;
+    public int m_currentLevel;
+
+    public Sprite[] m_itemInvetoryView;
+
 
     public GameObject m_gameplay_UI_Canvas;
 
@@ -46,6 +52,8 @@ public class GameManager : MonoBehaviour
             m_UI.Add(ne.name, ne.element);
         }
 
+        m_currentLevel = (int)Levels.Zero;
+
     }
 
     void Update()
@@ -69,7 +77,7 @@ public class GameManager : MonoBehaviour
             GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
 
     }
-        
+
     //Check if the two players are in the "same" x
     public bool isPlayersInline()
     {
@@ -119,38 +127,53 @@ public class GameManager : MonoBehaviour
     {
         m_inventory[which].gameObject.SetActive(true);
         m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeIn");
-        
+
         foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
         {
             if (a.gameObject.GetComponent<Text>())
                 a.Play("General_Text_FadeIn");
             else
             {
-                a.Play("General_FadeIn");
+                if(a.gameObject.GetComponent<Image>().sprite != null)
+                    a.Play("General_FadeIn");
             }
         }
     }
 
     public void hideInventory(int which)
     {
-        m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeOut");
-        
-        foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
+        if (!m_inventory[which].gameObject.GetComponent<Animation>().isPlaying)
         {
-            if (a.gameObject.GetComponent<Text>())
-                a.Play("General_Text_FadeOut");
-            else
+            m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeOut");
+
+            foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
             {
-                a.Play("General_FadeOut");
+                if (a.gameObject.GetComponent<Text>())
+                    a.Play("General_Text_FadeOut");
+                else
+                {
+                    if (a.gameObject.GetComponent<Image>().sprite != null)
+                        a.Play("General_FadeOut");
+                }
             }
+            StartCoroutine(shutdown_thisWin(m_inventory[which].gameObject));
         }
-        StartCoroutine(shutdown_thisWin(m_inventory[which].gameObject));
     }
 
     IEnumerator shutdown_thisWin(GameObject go)
     {
         yield return new WaitUntil(() => !go.GetComponent<Animation>().isPlaying);
         go.SetActive(false);
+    }
+
+    public int whichLevelItIs()
+    {
+        return m_currentLevel;
+    }
+
+    public Sprite getSprite(int n)
+    {
+        return m_itemInvetoryView[n];
     }
 
 }
