@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool m_double_mode = false;
     public bool m_single_mode = true;
     public bool m_sel_pg = true;
-
+    public SwitchGadget[] m_gadgetSelection;
 
     public GameObject[] m_players;
     public Inventory[] m_inventory;
@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
         {
             m_UI.Add(ne.name, ne.element);
         }
-
     }
 
     void Update()
@@ -56,7 +55,18 @@ public class GameManager : MonoBehaviour
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
             GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
             GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+        }
 
+        if (Input.GetButtonDown("Use"))
+        {
+            if (m_inventory[(m_sel_pg) ? 0 : 1].hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state))
+            {
+                m_players[(m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().useGadget(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state);
+            }
+            else
+            {
+                Debug.Log("NO UPGRADE ");
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")){

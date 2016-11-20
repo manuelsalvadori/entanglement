@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
-    private bool[] m_upgrades = new bool[4] { false, false, false, false };
+    private bool[] m_upgrades = new bool[4] /*{ false, false, false, false }*/{true, true, true, true};
     private List<Item> m_items = new List<Item>();
     private int m_ncollectables = 0;
 

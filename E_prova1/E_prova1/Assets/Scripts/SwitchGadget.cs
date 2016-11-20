@@ -4,8 +4,8 @@ using System.Collections;
 public class SwitchGadget : MonoBehaviour
 {
 
-    int m_state = 1;
-    public bool m_in;
+    public int m_state = 1;
+    bool m_in;
 
     void Start()
     {

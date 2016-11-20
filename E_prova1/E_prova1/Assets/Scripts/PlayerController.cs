@@ -18,11 +18,9 @@ public class PlayerController : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
-        
 
     void FixedUpdate ()
     {
-        
         if ((GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name)) || GameManager.Instance.m_3D_mode)
         {
             //m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.005f); <-- Deprecated
@@ -71,7 +69,6 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
-
 	}
 
     void LateUpdate()
@@ -80,8 +77,7 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.Instance.m_3D_mode && !GameManager.Instance.m_camIsMoving)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, m_Zfixed);
-        }
-        
+        } 
     }
 
     public void OnTriggerEnter(Collider other)
@@ -117,11 +113,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag.Equals("Ground"))
             m_grounded = false;
     }
-
-
-
-
-
+        
     private bool rotating = false;
     IEnumerator rotatePlayer(Quaternion newRot, float duration)
     {
@@ -141,5 +133,10 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         rotating = false;
+    }
+
+    public void useGadget(int n)
+    {
+        Debug.Log(gameObject.name + " usa gadget "+n);
     }
 }
