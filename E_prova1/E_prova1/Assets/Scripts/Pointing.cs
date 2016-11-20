@@ -4,12 +4,7 @@ using System.Collections;
 public class Pointing : MonoBehaviour
 {
     public float speed = 8f;
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
 	void Update ()
     {
         float va = Input.GetAxis("R_Vertical");
@@ -19,12 +14,9 @@ public class Pointing : MonoBehaviour
         Physics.Raycast(raggio, out hit);
         if (hit.collider != null)
         {
-            Debug.Log("hit"); 
             transform.position = new Vector3(transform.position.x, hit.collider.bounds.max.y,transform.position.z);
         }
         transform.position += (new Vector3(ha, 0f, va).normalized * Time.deltaTime * speed);
         transform.position = new Vector3(transform.position.x, transform.position.y, -4.6f);
-
-	
 	}
 }
