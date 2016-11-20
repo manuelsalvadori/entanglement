@@ -9,7 +9,7 @@ public class SmoothSwitch : MonoBehaviour {
     private Vector3 camera_final = Vector3.zero;
 
     //SmoothDump setting function
-    private Vector3 velocity = Vector3.zero;                            
+    private Vector3 velocity = Vector3.zero;
     private Vector3 velocity2 = Vector3.zero;
     private Vector3 velocity3 = Vector3.zero;
     private Vector3 velocity4 = Vector3.zero;
@@ -43,7 +43,7 @@ public class SmoothSwitch : MonoBehaviour {
         {0, Vector3.zero},
         {1, Vector3.zero},
     };
-    //~    
+    //~
 
     //Variables for buffering selected player's velocity
     private float buffer;
@@ -53,7 +53,7 @@ public class SmoothSwitch : MonoBehaviour {
 
     private Dictionary<int, float> amount = new Dictionary<int, float>()
     {
-        {0, 0.35f},
+        {0, 0.25f},
         {1, -0.15f},
     };
 
@@ -65,7 +65,7 @@ public class SmoothSwitch : MonoBehaviour {
 
     void Start()
     {
-        
+
         m_l1 = GameManager.Instance.m_level1.transform;
         m_l2 = GameManager.Instance.m_level2.transform;
         target = transform.position;
@@ -88,7 +88,7 @@ public class SmoothSwitch : MonoBehaviour {
         player_pos = Camera.main.ViewportToWorldPoint(player_pos);
         camera_Target = new Vector3(player_pos.x, transform.position.y, transform.position.z);
         buffer = 0f;
-        
+
 
     }
 
@@ -154,6 +154,7 @@ public class SmoothSwitch : MonoBehaviour {
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.y,
                 GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg)? 0 : 1].transform.position.z));
 
+            GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].hideSelectionUI();
             StartCoroutine(GameManager.activateChildMode());
         }
         else
@@ -167,11 +168,13 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_3D_mode = false;
             GameManager.Instance.m_double_mode = true;
             GameManager.deactivateChildMode();
+            GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].unhideSelectionUI();
+
         }
         GameManager.Instance.m_camIsMoving = true;
         treD_Mode = !treD_Mode;
     }
-        
+
     //Display a popup message
     private void displayMessage()
     {
@@ -182,14 +185,24 @@ public class SmoothSwitch : MonoBehaviour {
             m_popup_message =  Instantiate(m_popup_message, Vector3.zero, m_popup_message.transform.rotation) as GameObject;
         }
     }
-        
+
     void Update()
     {
-        
+
         if ((Input.GetKeyDown("1") || (Input.GetButton("L2") && Input.GetButtonDown("Square"))) && !treD_Mode) //single_view
         {
             select_singleView();
-            GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+            if (!GameManager.Instance.m_playerswicth)
+            {
+                GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+                GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
+                GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+            }
+            else
+            {
+                GameManager.Instance.m_playerswicth = false;
+            }
+
         }
 
         if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode) //double_view
@@ -200,7 +213,7 @@ public class SmoothSwitch : MonoBehaviour {
         if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O")))) //3D_view
         {
             if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else displayMessage();
-        }           
+        }
 
         //Move the view
         if (GameManager.Instance.m_camIsMoving)
@@ -221,7 +234,7 @@ public class SmoothSwitch : MonoBehaviour {
             }
 
             //Move the camera (SmoothDamp version)
-            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime); 
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
             transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, rotation, ref velocity2, smoothTime));
             if (transform.rotation.eulerAngles.y > 88f)
                 transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, 90f, transform.rotation.eulerAngles.z));
@@ -243,7 +256,7 @@ public class SmoothSwitch : MonoBehaviour {
 
         if (!GameManager.Instance.m_3D_mode)
         {
-            //Bufferize player's velocity in order to decide when to move the camera.      
+            //Bufferize player's velocity in order to decide when to move the camera.
             buffer += GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg)? 0 : 1].GetComponent<Rigidbody>().velocity.x;
 
             if (buffer > m_Turn_Tolerance)
@@ -277,6 +290,6 @@ public class SmoothSwitch : MonoBehaviour {
             transform.position = new Vector3(camera_final.x, transform.position.y, transform.position.z);
         else
             transform.position = new Vector3(camera_final.x, transform.position.y, camera_final.z);
-        
+
     }
 }

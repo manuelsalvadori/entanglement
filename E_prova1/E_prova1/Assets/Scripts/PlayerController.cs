@@ -19,10 +19,8 @@ public class PlayerController : MonoBehaviour
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
-
     void FixedUpdate ()
     {
-
         if ((GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name)) || GameManager.Instance.m_3D_mode)
         {
             //m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.005f); <-- Deprecated
@@ -71,7 +69,6 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
-
 	}
 
     void LateUpdate()
@@ -123,10 +120,6 @@ public class PlayerController : MonoBehaviour
             m_grounded = false;
     }
 
-
-
-
-
     private bool rotating = false;
     IEnumerator rotatePlayer(Quaternion newRot, float duration)
     {
@@ -146,5 +139,40 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         rotating = false;
+    }
+
+    public void useGadget(int n)
+    {
+        Debug.Log(gameObject.name + " usa gadget "+n);
+        switch (n)
+        {
+            case 0:
+                moveObject();
+                break;
+            case 1:
+                teleport();
+                break;
+            case 2:
+                dashGate();
+                break;
+            default:
+                return;
+        }
+
+    }
+
+    void moveObject()
+    {
+        Debug.Log(" usa gadget muovi oggetto tra i livelli");
+    }
+
+    void teleport()
+    {
+        Debug.Log(" usa gadget teletrasporto");
+    }
+
+    void dashGate()
+    {
+        Debug.Log(" usa gadget passa attraverso cancelli elettrici");
     }
 }

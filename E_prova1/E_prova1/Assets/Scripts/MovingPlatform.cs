@@ -16,7 +16,7 @@ public class MovingPlatform : MonoBehaviour
     {
         target = m_endPosition.position;
 	}
-	
+
 	void FixedUpdate ()
     {
         active = m_button.m_isActive;
@@ -35,6 +35,6 @@ public class MovingPlatform : MonoBehaviour
         }
 
         if(active)
-            this.gameObject.GetComponent<Rigidbody>().MovePosition(Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime)); 
+            this.gameObject.GetComponent<Rigidbody>().MovePosition(Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime));
 	}
 }

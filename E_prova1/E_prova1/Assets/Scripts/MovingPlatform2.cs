@@ -10,6 +10,7 @@ public class MovingPlatform2 : MonoBehaviour {
     private Vector3 startPos = Vector3.zero;
     private Vector3 velocity;
     //private bool active = true, switched = true;
+
     public float lerpTime = 1f;
     float currentLerpTime= 0f;
     bool avanti = true;
@@ -25,7 +26,7 @@ public class MovingPlatform2 : MonoBehaviour {
     void FixedUpdate()
     {
         if (m_button.m_isActive)
-        { 
+        {
             if (avanti)
             {
                 currentLerpTime += Time.deltaTime;
@@ -34,7 +35,7 @@ public class MovingPlatform2 : MonoBehaviour {
                     currentLerpTime = lerpTime;
                     avanti = false;
                 }
-            }   
+            }
             else
             {
                 currentLerpTime -= Time.deltaTime;
@@ -51,5 +52,5 @@ public class MovingPlatform2 : MonoBehaviour {
             GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(startPos, endPos, perc));
         }
     }
-    
+
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
-    private bool[] m_upgrades = new bool[4] { false, false, false, false };
+    private bool[] m_upgrades = new bool[4] /*{ false, false, false, false }*/{true, true, true, true};
     private List<Item> m_items = new List<Item>();
     private int[] m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
 
@@ -72,6 +72,7 @@ public class Inventory : MonoBehaviour {
 
     public bool[] getUpgrades() { return m_upgrades; }
 
+
     public void gainUpgrade(int n)
     {
         m_upgrades[n] = true;
@@ -93,5 +94,4 @@ public class Inventory : MonoBehaviour {
             m_Cells[j].color = new Color(1, 1, 1, 1);
         }
     }
-
 }
