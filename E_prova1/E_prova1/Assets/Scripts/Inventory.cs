@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour {
 
     void Awake()
     {
-
+        updateView();
     }
 
 	public void addItem(Item i)
