@@ -6,11 +6,12 @@ public class Pointing : MonoBehaviour
     public float speed = 8f;
     public float[] pos_y = {10f, -2f};
     LineRenderer lr;
+    public Material[] mat;
 	
     void Start()
     {
-        resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         lr = GetComponent<LineRenderer>();
+        resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         lr.SetPosition(0, transform.position);
     }
 
@@ -44,5 +45,7 @@ public class Pointing : MonoBehaviour
     public void resetPosition(Vector3 pos)
     {
         transform.position = pos + new Vector3(3f,0f,0f);
+        lr.material = mat[GameManager.Instance.m_sel_pg ? 0:1];
+        GetComponent<Renderer>().material = mat[GameManager.Instance.m_sel_pg ? 0:1];
     }
 }

@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
             m_playerswicth = !m_playerswicth;
             GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
             GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+            mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+
         }
 
         if (Input.GetButtonDown("Use") && !m_inventoryIsOpen)

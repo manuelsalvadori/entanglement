@@ -199,6 +199,7 @@ public class SmoothSwitch : MonoBehaviour {
             {
                 GameManager.Instance.m_playerswicth = false;
             }
+            GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
 
         }
 
