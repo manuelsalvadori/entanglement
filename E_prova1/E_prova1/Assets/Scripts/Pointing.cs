@@ -9,6 +9,7 @@ public class Pointing : MonoBehaviour
 	
     void Start()
     {
+        resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         lr = GetComponent<LineRenderer>();
         lr.SetPosition(0, transform.position);
     }
@@ -39,4 +40,9 @@ public class Pointing : MonoBehaviour
 
         transform.position = new Vector3(pos.x, transform.position.y, -4.6f);
 	}
+
+    public void resetPosition(Vector3 pos)
+    {
+        transform.position = pos + new Vector3(3f,0f,0f);
+    }
 }
