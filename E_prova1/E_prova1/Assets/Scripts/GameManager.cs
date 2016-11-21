@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public bool m_playerswicth = false;
     public SwitchGadget[] m_gadgetSelection;
 
+    public GameObject mirino;
     public GameObject[] m_players;
     public Inventory[] m_inventory;
     public GameObject m_level1;

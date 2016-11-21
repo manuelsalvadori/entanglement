@@ -19,6 +19,8 @@ public class SwitchGadget : MonoBehaviour
         {
             m_state++;
             m_state = (m_state > 2) ? 0 : m_state;
+            switchMirino(m_state == 1);
+
 
             transform.GetChild(m_state).GetComponent<Animation>()["RigthToCenter"].speed = 1f;
             transform.GetChild(m_state).GetComponent<Animation>()["RigthToCenter"].time = 0f;
@@ -37,6 +39,8 @@ public class SwitchGadget : MonoBehaviour
         {
             m_state--;
             m_state = (m_state < 0) ? 2 : m_state;
+            switchMirino(m_state == 1);
+
             int m_state1 = (m_state - 1 < 0) ? m_state + 2 : m_state -1;
             int m_state2 = (m_state - 2 < 0) ? ((m_state - 2 == -1)? 2 : 1) : m_state - 2;
 
@@ -51,7 +55,8 @@ public class SwitchGadget : MonoBehaviour
             transform.GetChild(m_state1).GetComponent<Animation>()["LeftToRigth"].speed = -1f;
             transform.GetChild(m_state1).GetComponent<Animation>()["LeftToRigth"].time = transform.GetChild(2).GetComponent<Animation>()["LeftToRigth"].length;
             transform.GetChild(m_state1).GetComponent<Animation>().Play("LeftToRigth");
-        }      
+        } 
+
 	}
 
     private void resetState()
@@ -143,5 +148,10 @@ public class SwitchGadget : MonoBehaviour
             else
                 GetComponent<Animation>().Play("gs2_in");
         }
+    }
+
+    void switchMirino(bool enabled)
+    {
+        GameManager.Instance.mirino.SetActive(enabled);
     }
 }
