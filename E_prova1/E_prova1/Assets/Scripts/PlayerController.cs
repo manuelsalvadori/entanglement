@@ -83,22 +83,30 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        bool pick_item = true;
         if (GameManager.isPickble(other.gameObject))
         {
-            other.gameObject.SetActive(false);
-            if (other.gameObject.GetComponent<PickableObject>().isCollectable && GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getItems().Count < Inventory.MAX_CAPACITY)
+
+            if (other.gameObject.GetComponent<PickableObject>().isCollectable)
             {
                 Inventory.score(GameManager.Instance.whichLevelItIs());
             }
             else if(!other.gameObject.GetComponent<PickableObject>().isUpgrade)
             {
-                Item pk = other.gameObject.GetComponent<PickableObject>().getItem();
-                GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().addItem(pk);
+                if (GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().getItems().Count < Inventory.MAX_CAPACITY)
+                {
+                    Item pk = other.gameObject.GetComponent<PickableObject>().getItem();
+                    GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().addItem(pk);
+                }
+                else
+                    pick_item = false;
             }
             else
             {
                 Inventory.gainUpgrade((int)other.gameObject.GetComponent<PickableObject>().m_gadget);
             }
+            if (pick_item)
+                other.gameObject.SetActive(false);
             GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().updateView();
         }
     }
