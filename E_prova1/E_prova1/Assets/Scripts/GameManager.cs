@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance = null;
     public bool m_camIsMoving = false;
+    public bool m_levelIsMoving = false;
     public bool m_3D_mode = false;
     public bool m_double_mode = false;
     public bool m_single_mode = true;
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if ((Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")) && !m_3D_mode && !m_double_mode) {
+        if ((!Input.GetButton("L2") && Input.GetButtonDown("Inventory")) && !m_3D_mode) {
             if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
             {
                 displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
@@ -102,6 +103,17 @@ public class GameManager : MonoBehaviour
     public bool isPlayersInline()
     {
         return (Mathf.Abs(m_players[0].transform.position.x - m_players[1].transform.position.x) < 2f);
+    }
+
+
+    public static IEnumerator alinePlayers()
+    {
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitUntil(() => !GameManager.Instance.m_levelIsMoving);
+        GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position = (new Vector3(
+                GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.x,
+                GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y,
+                GameManager.Instance.m_players[(!GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.z));
     }
 
     //Function to start the syncronized movement of players
