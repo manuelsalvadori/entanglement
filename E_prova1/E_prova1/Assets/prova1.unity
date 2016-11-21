@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692534, g: 0.49678725, b: 0.57508564, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1319,7 +1319,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &421335544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3087,7 +3087,7 @@ Transform:
   - {fileID: 1575230576}
   - {fileID: 1600495768}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &1015007613
 GameObject:
   m_ObjectHideFlags: 0
@@ -4952,7 +4952,7 @@ Transform:
   - {fileID: 1776648522}
   - {fileID: 1023815318}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1692026329
 GameObject:
   m_ObjectHideFlags: 0
@@ -5015,7 +5015,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1694097282
 GameObject:
   m_ObjectHideFlags: 0
@@ -5557,10 +5557,12 @@ MonoBehaviour:
   m_double_mode: 0
   m_single_mode: 1
   m_sel_pg: 1
+  m_inventoryIsOpen: 0
   m_playerswicth: 0
   m_gadgetSelection:
   - {fileID: 831557843}
   - {fileID: 956644959}
+  mirino: {fileID: 1967998480}
   m_players:
   - {fileID: 1600495762}
   - {fileID: 1776648516}
@@ -5591,7 +5593,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
 --- !u!1 &1857411884
 GameObject:
   m_ObjectHideFlags: 0

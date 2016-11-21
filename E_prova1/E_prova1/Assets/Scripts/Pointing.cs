@@ -4,6 +4,7 @@ using System.Collections;
 public class Pointing : MonoBehaviour
 {
     public float speed = 8f;
+    public float[] pos_y = {10f, -2f};
 	
 	void Update ()
     {
@@ -11,7 +12,8 @@ public class Pointing : MonoBehaviour
         float ha = Input.GetAxis("R_Horizontal");
 
         RaycastHit hit;
-        Ray raggio = new Ray(transform.position + new Vector3(0f,10f,0f), Vector3.down);
+        Vector3 start = new Vector3(transform.position.x, pos_y[(GameManager.Instance.m_sel_pg) ? 0 : 1], transform.position.z);
+        Ray raggio = new Ray(start, Vector3.down);
         Physics.Raycast(raggio, out hit);
 
         if (hit.collider != null)
