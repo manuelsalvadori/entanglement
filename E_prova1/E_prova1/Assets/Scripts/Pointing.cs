@@ -5,9 +5,20 @@ public class Pointing : MonoBehaviour
 {
     public float speed = 8f;
     public float[] pos_y = {10f, -2f};
+    LineRenderer lr;
 	
+    void Start()
+    {
+        lr = GetComponent<LineRenderer>();
+        lr.SetPosition(0, transform.position);
+    }
+
 	void Update ()
     {
+        lr.SetPosition(0, transform.position);
+        lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
+
+
         float va = Input.GetAxis("R_Vertical");
         float ha = Input.GetAxis("R_Horizontal");
 
