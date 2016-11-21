@@ -236,8 +236,7 @@ public class SmoothSwitch : MonoBehaviour {
             //Move the camera (SmoothDamp version)
             transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
             transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, rotation, ref velocity2, smoothTime));
-            if (transform.rotation.eulerAngles.y > 88f)
-                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, 90f, transform.rotation.eulerAngles.z));
+
 
             //Move the level - in Action
             m_l1.position = Vector3.SmoothDamp(m_l1.position, level_target, ref velocity3, (smoothTime/4f));
@@ -286,6 +285,12 @@ public class SmoothSwitch : MonoBehaviour {
 
     void LateUpdate()
     {
+        if (transform.rotation.eulerAngles.y > 88f && transform.rotation.eulerAngles.y < 90f)
+        {
+            Debug.Log(transform.rotation.eulerAngles.y);
+            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 0.02f, transform.rotation.eulerAngles.z));
+        }
+
         if (!GameManager.Instance.m_3D_mode)
             transform.position = new Vector3(camera_final.x, transform.position.y, transform.position.z);
         else
