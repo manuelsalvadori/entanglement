@@ -5,9 +5,11 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
-    private bool[] m_upgrades = new bool[4] /*{ false, false, false, false }*/{true, true, true, true};
+    private static bool[] m_upgrades = new bool[4] /*{ false, false, false, false }*/{true, true, true, true};
     private List<Item> m_items = new List<Item>();
-    private int[] m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
+    private static int[] m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
+
+    public static readonly int MAX_CAPACITY = 8;
 
 
     public enum Gadgets {Gadget1, Gadget2, Gadget3, Gadget4 };
@@ -44,17 +46,17 @@ public class Inventory : MonoBehaviour {
         return null;
     }
 
-    public void score(int level)
+    public static void score(int level)
     {
         m_ncollectables[level]++;
     }
 
-    public int getScore(int level)
+    public static int getScore(int level)
     {
         return m_ncollectables[level];
     }
 
-    public int getGlobalScore()
+    public static int getGlobalScore()
     {
         int sum = 0;
         foreach (int i in m_ncollectables) sum += i;
@@ -70,19 +72,20 @@ public class Inventory : MonoBehaviour {
         return false;
     }
 
-    public bool[] getUpgrades() { return m_upgrades; }
+    public static bool[] getUpgrades() { return m_upgrades; }
 
 
-    public void gainUpgrade(int n)
+    public static void gainUpgrade(int n)
     {
-        m_upgrades[n] = true;
+        if(n < m_upgrades.Length && !m_upgrades[n])
+            m_upgrades[n] = true;
     }
 
 
     public void updateView()
     {
         m_currentScore.text = m_ncollectables[GameManager.Instance.whichLevelItIs()].ToString();
-        m_globalScore.text = getGlobalScore().ToString();
+        m_globalScore.text = Inventory.getGlobalScore().ToString();
         for(int i=0; i < m_upgrades.Length; i++)
         {
             if (m_upgrades[i]) m_Upgrades[i].sprite = GameManager.Instance.getSprite(i);
