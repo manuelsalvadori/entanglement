@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
                 teleport();
                 break;
             case 2:
+                transform.GetChild(0).gameObject.SetActive(true);
                 if(transform.rotation.eulerAngles.y >= 0f && transform.rotation.eulerAngles.y < 180f)
                     StartCoroutine(dashGate(1.0f));
                 else
@@ -181,7 +182,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool isdashing = false;
-    private float durations = 0.2f;
+    private float durations = 0.15f;
     IEnumerator dashGate(float direction)
     {
         Debug.Log(" usa gadget passa attraverso cancelli elettrici");
@@ -200,6 +201,9 @@ public class PlayerController : MonoBehaviour
             transform.position = Vector3.Lerp(currentpos, currentpos + new Vector3(6f*direction,0f,0f), counter / durations);
             yield return null;
         }
+        yield return new WaitForSeconds(0.15f);
+        transform.GetChild(0).gameObject.SetActive(false);
+
         isdashing = false;
     }
 }
