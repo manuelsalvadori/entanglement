@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")) {
+        if ((Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")) && !m_3D_mode && !m_double_mode) {
             if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
             {
                 displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
