@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public bool m_single_mode = true;
     public bool m_sel_pg = true;
 
+    public bool m_inventoryIsOpen = false;
+
+
     enum Levels { Zero, One, Two, Three, Four, Final};
     public bool m_playerswicth = false;
     public SwitchGadget[] m_gadgetSelection;
@@ -66,7 +69,7 @@ public class GameManager : MonoBehaviour
             GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
         }
 
-        if (Input.GetButtonDown("Use"))
+        if (Input.GetButtonDown("Use") && !m_inventoryIsOpen)
         {
             if (m_inventory[(m_sel_pg) ? 0 : 1].hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state))
             {
@@ -78,9 +81,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")){
-            if(!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Triangle")) {
+            if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
+            {
                 displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
+                m_inventoryIsOpen = true;
+            }
             else
             {
                 hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
@@ -179,6 +185,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(() => !go.GetComponent<Animation>().isPlaying);
         go.SetActive(false);
+        if (go.tag.Equals("Inventory"))
+            m_inventoryIsOpen = false;
     }
 
     public int whichLevelItIs()

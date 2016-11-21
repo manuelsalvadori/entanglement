@@ -189,7 +189,7 @@ public class SmoothSwitch : MonoBehaviour {
     void Update()
     {
 
-        if ((Input.GetKeyDown("1") || (Input.GetButton("L2") && Input.GetButtonDown("Square"))) && !treD_Mode) //single_view
+        if ((Input.GetKeyDown("1") || (Input.GetButton("L2") && Input.GetButtonDown("Square"))) && !treD_Mode && !GameManager.Instance.m_inventoryIsOpen) //single_view
         {
             select_singleView();
             if (!GameManager.Instance.m_playerswicth)
@@ -205,12 +205,12 @@ public class SmoothSwitch : MonoBehaviour {
 
         }
 
-        if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode) //double_view
+        if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode && !GameManager.Instance.m_inventoryIsOpen) //double_view
         {
             select_doubleView();
         }
 
-        if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O")))) //3D_view
+        if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O"))) && !GameManager.Instance.m_inventoryIsOpen) //3D_view
         {
             if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else displayMessage();
         }
