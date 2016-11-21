@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
                 teleport();
                 break;
             case 2:
-                dashGate();
+                StartCoroutine(dashGate());
                 break;
             default:
                 return;
@@ -177,8 +177,26 @@ public class PlayerController : MonoBehaviour
         transform.position = GameObject.Find("Mirino").transform.position + new Vector3(0f,gameObject.GetComponent<CapsuleCollider>().bounds.extents.y,0f);
     }
 
-    void dashGate()
+    private bool isdashing = false;
+    private float durations = 0.2f;
+    IEnumerator dashGate()
     {
         Debug.Log(" usa gadget passa attraverso cancelli elettrici");
+        if (isdashing)
+        {
+            yield break;
+        }
+        isdashing = true;
+
+        Vector3 currentpos = transform.position;
+
+        float counter = 0;
+        while (counter < durations)
+        {
+            counter += Time.deltaTime;
+            transform.position = Vector3.Lerp(currentpos, currentpos + new Vector3(6f,0f,0f), counter / durations);
+            yield return null;
+        }
+        isdashing = false;
     }
 }
