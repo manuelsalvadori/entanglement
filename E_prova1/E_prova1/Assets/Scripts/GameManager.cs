@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -85,6 +86,11 @@ public class GameManager : MonoBehaviour
         if (!m_3D_mode)
             GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
 
+        if(m_inventory[0].gameObject.activeSelf || m_inventory[1].gameObject.activeSelf)
+        {
+            m_inventoryIsOpen = true;
+        }
+
     }
 
     //Check if the two players are in the "same" x
@@ -143,22 +149,40 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void displayInventory(int which)
+    public void displayInventory(int which, float delay = 0f)
     {
-        m_inventory[which].gameObject.SetActive(true);
-        m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeIn");
-
-        foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
+        if (delay > 0)
         {
-            if (a.gameObject.GetComponent<Text>())
-                a.Play("General_Text_FadeIn");
-            else
-            {
-                if(a.gameObject.GetComponent<Image>().sprite != null && !a.gameObject.name.Equals("Inventory_Pointer"))
-                    a.Play("General_FadeIn");
-
-            }
+            StartCoroutine(delayedDisplay(which, delay));
         }
+        else
+        {
+
+            m_inventory[which].gameObject.SetActive(true);
+            m_inventory[which].gameObject.GetComponent<Inventory>().updateView();
+            m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeIn");
+
+            foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
+            {
+                if (a.gameObject.GetComponent<Text>())
+                    a.Play("General_Text_FadeIn");
+                else
+                {
+                    if (a.gameObject.GetComponent<Image>().sprite != null && !a.gameObject.name.Equals("Inventory_Pointer"))
+                        a.Play("General_FadeIn");
+
+                }
+            }
+            m_inventoryIsOpen = true;
+        }
+    }
+
+    IEnumerator delayedDisplay(int which, float time)
+    {
+
+        yield return new WaitForSeconds(time);
+        displayInventory(which, 0f);
+
     }
 
     public void hideInventory(int which)

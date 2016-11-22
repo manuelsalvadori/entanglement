@@ -11,7 +11,13 @@ public class Inventory : MonoBehaviour {
 
     public static readonly int MAX_CAPACITY = 8;
 
-
+    /*
+     * Gadget 1: Exchange object between players
+     * Gadget 2: Teleport
+     * Gadget 3: Make object movable between
+     * Gadget 4: Dash
+     *
+     */
     public enum Gadgets {Gadget1, Gadget2, Gadget3, Gadget4 };
 
     public Text m_currentScore;
@@ -30,12 +36,12 @@ public class Inventory : MonoBehaviour {
 
     void Update()
     {
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && m_pointTo < m_items.ToArray().Length)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length)
         {
             m_items.ToArray()[m_pointTo].use();
         }
 
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_upgrades[(int)Gadgets.Gadget2] && m_pointTo < m_items.ToArray().Length)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && m_upgrades[(int)Gadgets.Gadget1] && m_pointTo < m_items.ToArray().Length)
         {
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
             m_items.RemoveAt(m_pointTo);
@@ -64,6 +70,28 @@ public class Inventory : MonoBehaviour {
     {
         yield return new WaitUntil(() => !im.GetComponent<Animation>().isPlaying);
         im.sprite = null;
+        GameManager.Instance.hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
+
+        Camera.main.GetComponent<SmoothSwitch>().select_singleView();
+        if (!GameManager.Instance.m_playerswicth)
+        {
+            GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+            GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
+            GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+        }
+        else
+        {
+            GameManager.Instance.m_playerswicth = false;
+        }
+        GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+        GameManager.Instance.displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1, 0.5f);
+    }
+
+    IEnumerator openOtherInventory()
+    {
+        yield return new WaitUntil(() => !(GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Animation>().isPlaying));
+        Debug.Log("Reach!");
+
     }
 
     IEnumerator OneStep()
