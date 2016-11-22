@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         rotating = false;
     }
 
-    private bool teleportAllowed = false;
+    public bool teleportAllowed = false;
     public void useGadget(int n)
     {
         Debug.Log(gameObject.name + " usa gadget "+n);
