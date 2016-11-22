@@ -8,18 +8,25 @@ public class Pointing : MonoBehaviour
     LineRenderer lr;
     public Material[] mat;
 
-    void Start()
+    void Awake()
     {
         lr = GetComponent<LineRenderer>();
         resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         lr.SetPosition(0, transform.position);
+        lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
+    }
+
+    void OnEnable()
+    {
+        resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+        lr.SetPosition(0, transform.position);
+        lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
+        GetComponent<Renderer>().enabled = true;
+        lr.enabled = true;
     }
 
 	void Update ()
     {
-        lr.SetPosition(0, transform.position);
-        lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
-
 
         float va = (GameManager.Instance.m_inventoryIsOpen) ? 0 : Input.GetAxis("R_Vertical");
         float ha = (GameManager.Instance.m_inventoryIsOpen) ? 0 : Input.GetAxis("R_Horizontal");
@@ -40,12 +47,21 @@ public class Pointing : MonoBehaviour
         pos = Camera.main.ViewportToWorldPoint(new Vector3(Mathf.Clamp(pos.x, 0.03f, 0.97f), pos.y, pos.z));
 
         transform.position = new Vector3(pos.x, transform.position.y, -4.6f);
+        lr.SetPosition(0, transform.position);
+        lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
 	}
 
-    public void resetPosition(Vector3 pos)
+    public void resetPosition(Vector3 posplayer)
     {
-        transform.position = pos + new Vector3(3f,0f,0f);
+        transform.position = posplayer + new Vector3(3f,0f,0f);
         lr.material = mat[GameManager.Instance.m_sel_pg ? 0:1];
         GetComponent<Renderer>().material = mat[GameManager.Instance.m_sel_pg ? 0:1];
     }
+
+    void OnDisable()
+    {
+        GetComponent<Renderer>().enabled = false;
+        lr.enabled = false;
+    }
+       
 }

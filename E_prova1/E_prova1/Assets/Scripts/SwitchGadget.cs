@@ -19,8 +19,8 @@ public class SwitchGadget : MonoBehaviour
         {
             m_state++;
             m_state = (m_state > 2) ? 0 : m_state;
-            switchMirino(m_state == 1);
-
+            if(m_state != 1)
+                switchMirino(false);
 
             transform.GetChild(m_state).GetComponent<Animation>()["RigthToCenter"].speed = 1f;
             transform.GetChild(m_state).GetComponent<Animation>()["RigthToCenter"].time = 0f;
@@ -39,8 +39,9 @@ public class SwitchGadget : MonoBehaviour
         {
             m_state--;
             m_state = (m_state < 0) ? 2 : m_state;
-            switchMirino(m_state == 1);
-
+            if(m_state != 1)
+                switchMirino(false);
+            
             int m_state1 = (m_state - 1 < 0) ? m_state + 2 : m_state -1;
             int m_state2 = (m_state - 2 < 0) ? ((m_state - 2 == -1)? 2 : 1) : m_state - 2;
 
