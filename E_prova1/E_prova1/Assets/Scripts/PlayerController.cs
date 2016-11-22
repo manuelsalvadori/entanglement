@@ -202,7 +202,10 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider.tag.Equals("Barriera"))
         {
-            transform.position = new Vector3(hit.collider.bounds.min.x, transform.position.y, transform.position.z) + new Vector3(0f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y, 0f);
+            float diff = (transform.position.x > GameManager.Instance.mirino.transform.position.x) ? hit.collider.bounds.max.x : hit.collider.bounds.min.x;
+            float meno = (transform.position.x > GameManager.Instance.mirino.transform.position.x) ? -1.0f : 1.0f;
+
+            transform.position = new Vector3(diff, transform.position.y, transform.position.z) + new Vector3(0f, meno * gameObject.GetComponent<CapsuleCollider>().bounds.extents.y, 0f);
         }
         else
         {
@@ -263,7 +266,7 @@ public class PlayerController : MonoBehaviour
         Vector3 start = Camera.main.transform.position;
         Vector3 direction = (transform.position - Camera.main.transform.position);
         Ray raggio = new Ray(start, direction);
-        Physics.Raycast(raggio, out hit, 1 << 8);
+        Physics.Raycast(raggio, out hit);
 
         if (!hit.collider.tag.Equals("Player"))
         {
