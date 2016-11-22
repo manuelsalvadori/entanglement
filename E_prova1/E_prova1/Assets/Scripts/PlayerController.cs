@@ -193,8 +193,21 @@ public class PlayerController : MonoBehaviour
 
     private void teleport()
     {
-        Debug.Log(" usa gadget teletrasporto");
-        transform.position = GameManager.Instance.mirino.transform.position + new Vector3(0f,gameObject.GetComponent<CapsuleCollider>().bounds.extents.y,0f);
+
+        RaycastHit hit;
+        Vector3 start = transform.position;
+        Vector3 direction = GameManager.Instance.mirino.transform.position - transform.position;
+        Ray raggio = new Ray(start, direction);
+        Physics.Raycast(raggio, out hit);
+
+        if (hit.collider.tag.Equals("Barriera"))
+        {
+            transform.position = new Vector3(hit.collider.bounds.min.x, transform.position.y, transform.position.z) + new Vector3(0f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y, 0f);
+        }
+        else
+        {
+            transform.position = GameManager.Instance.mirino.transform.position + new Vector3(0f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y, 0f);
+        }
         GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(transform.position);
         switchMirino(false);
         teleportAllowed = false;
@@ -250,7 +263,7 @@ public class PlayerController : MonoBehaviour
         Vector3 start = Camera.main.transform.position;
         Vector3 direction = (transform.position - Camera.main.transform.position);
         Ray raggio = new Ray(start, direction);
-        Physics.Raycast(raggio, out hit);
+        Physics.Raycast(raggio, out hit, 1 << 8);
 
         if (!hit.collider.tag.Equals("Player"))
         {
@@ -270,8 +283,6 @@ public class PlayerController : MonoBehaviour
         {
             if (culled)
             {
-                Debug.Log("non più trasparente :D");
-
                 culledObject.GetComponent<Renderer>().material.SetFloat("_Mode", 0f);
                 culledObject.GetComponent<Renderer>().material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
                 culledObject.GetComponent<Renderer>().material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
@@ -280,7 +291,6 @@ public class PlayerController : MonoBehaviour
                 culledObject.GetComponent<Renderer>().material.DisableKeyword("_ALPHABLEND_ON");
                 culledObject.GetComponent<Renderer>().material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                 culledObject.GetComponent<Renderer>().material.renderQueue = -1;
-
                 culled = false;
             }
         }

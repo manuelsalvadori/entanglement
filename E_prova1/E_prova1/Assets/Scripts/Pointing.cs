@@ -49,19 +49,15 @@ public class Pointing : MonoBehaviour
         RaycastHit hit;
         Vector3 start = new Vector3(transform.position.x, start_ray_y[(GameManager.Instance.m_sel_pg) ? 0 : 1], transform.position.z);
         Ray raggio = new Ray(start, Vector3.down);
-        Physics.Raycast(raggio, out hit);
+        int layermask = 1 << 8;
+        layermask = ~layermask;
+        Physics.Raycast(raggio, out hit, Mathf.Infinity, layermask);
 
         transform.position += (new Vector3(ha, 0f, va).normalized * Time.deltaTime * speed);
-        if (!hit.collider.tag.Equals("Barriera"))
+        if (hit.collider != null)
         {
-            Debug.Log(hit.collider.tag);
 
             transform.position = new Vector3(transform.position.x, (hit.collider.bounds.max.y + gameObject.GetComponent<MeshRenderer>().bounds.extents.y), transform.position.z);
-        }
-        else
-        {
-            Debug.Log(hit.collider.tag);
-            transform.position = new Vector3(hit.collider.bounds.min.x - gameObject.GetComponent<MeshRenderer>().bounds.extents.x, transform.position.y, transform.position.z);
         }
 
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
