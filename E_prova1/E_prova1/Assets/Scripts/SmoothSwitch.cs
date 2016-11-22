@@ -172,16 +172,6 @@ public class SmoothSwitch : MonoBehaviour {
         treD_Mode = !treD_Mode;
     }
 
-    //Display a popup message
-    private void displayMessage()
-    {
-        if(!m_popup_message.activeSelf) Instantiate(m_popup_message, Vector3.zero, m_popup_message.transform.rotation);
-        else
-        {
-            //Fade out last popup then show the next.
-            m_popup_message =  Instantiate(m_popup_message, Vector3.zero, m_popup_message.transform.rotation) as GameObject;
-        }
-    }
 
     void Update()
     {
@@ -210,7 +200,7 @@ public class SmoothSwitch : MonoBehaviour {
 
         if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O"))) && !GameManager.Instance.m_inventoryIsOpen) //3D_view
         {
-            if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else displayMessage();
+            if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
         }
 
         //Move the view

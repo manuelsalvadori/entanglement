@@ -18,11 +18,60 @@ public class Inventory : MonoBehaviour {
     public Text m_globalScore;
     public Image[] m_Upgrades;
     public Image[] m_Cells;
+    public GameObject m_Puntator;
+    private int m_pointTo = 0;
+    private bool m_pointerIsMoving = false;
 
-    void Awake()
+    void Start()
     {
         updateView();
+        m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[0].gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
+
+    void Update()
+    {
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && m_pointTo < m_items.ToArray().Length)
+        {
+            m_items.ToArray()[m_pointTo].use();
+        }
+
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_upgrades[(int)Gadgets.Gadget2] && m_pointTo < m_items.ToArray().Length)
+        {
+            GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
+            m_items.RemoveAt(m_pointTo);
+            m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
+            StartCoroutine(detachSprite(m_Cells[m_pointTo]));
+
+        }
+
+        if (Input.GetAxis("R_Horizontal") > 0 && !m_pointerIsMoving)
+        {
+            m_pointerIsMoving = true;
+            m_pointTo = (m_pointTo + 1) % Inventory.MAX_CAPACITY;
+            StartCoroutine(OneStep());
+        }
+        else if (Input.GetAxis("R_Horizontal") < 0 && !m_pointerIsMoving)
+        {
+            m_pointerIsMoving = true;
+            m_pointTo = ((--m_pointTo) < 0 ? 8 + m_pointTo : m_pointTo) % Inventory.MAX_CAPACITY;
+            StartCoroutine(OneStep());
+        }
+
+        m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[m_pointTo].gameObject.GetComponent<RectTransform>().anchoredPosition;
+    }
+
+    IEnumerator detachSprite(Image im)
+    {
+        yield return new WaitUntil(() => !im.GetComponent<Animation>().isPlaying);
+        im.sprite = null;
+    }
+
+    IEnumerator OneStep()
+    {
+        yield return new WaitForSeconds(0.15f);
+        m_pointerIsMoving = false;
+    }
+
 
 	public void addItem(Item i)
     {

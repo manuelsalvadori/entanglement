@@ -9,7 +9,7 @@ public class PickableObject : MonoBehaviour{
     private string m_name;
     public GameObject m_target;
 
-    private Item m_this = new Item();
+    private Item m_this;
 
     public Sprite m_spriteTmp;
 
@@ -20,14 +20,16 @@ public class PickableObject : MonoBehaviour{
 
     void Awake()
     {
-        m_this.m_this = m_spriteTmp;
+        m_this = new Item(gameObject.name);
     }
 
-
-    public bool testTarget(GameObject other)
+    void Start()
     {
-        return m_target == other;
+        m_this.m_this = m_spriteTmp;
+        m_this.m_target = m_target;
     }
+
+
     // Update is called once per frame
     void Update()
     {

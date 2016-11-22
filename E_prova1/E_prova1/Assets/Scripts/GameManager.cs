@@ -33,18 +33,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject m_gameplay_UI_Canvas;
 
-    //Struct to collect in GameManager elements of the GUI...trick to visualize it in the Inspector
-    [System.Serializable]
-    public struct NamedElements
-    {
-        public string name;
-        public GameObject element;
-    }
-
-    public NamedElements[] m_UI_Elements;
-
-    //Real implementation
-    public Dictionary<string, GameObject> m_UI = new Dictionary<string, GameObject>();
 
     void Awake()
     {
@@ -52,11 +40,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        //Filling the pool
-        foreach (NamedElements ne in m_UI_Elements)
-        {
-            m_UI.Add(ne.name, ne.element);
-        }
+
         m_currentLevel = (int)Levels.Zero;
     }
 
@@ -88,6 +72,7 @@ public class GameManager : MonoBehaviour
         if ((!Input.GetButton("L2") && Input.GetButtonDown("Inventory")) && !m_3D_mode) {
             if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
             {
+                m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().updateView();
                 displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
                 m_inventoryIsOpen = true;
             }
@@ -169,7 +154,7 @@ public class GameManager : MonoBehaviour
                 a.Play("General_Text_FadeIn");
             else
             {
-                if(a.gameObject.GetComponent<Image>().sprite != null)
+                if(a.gameObject.GetComponent<Image>().sprite != null && !a.gameObject.name.Equals("Inventory_Pointer"))
                     a.Play("General_FadeIn");
 
             }
@@ -188,7 +173,7 @@ public class GameManager : MonoBehaviour
                     a.Play("General_Text_FadeOut");
                 else
                 {
-                    if (a.gameObject.GetComponent<Image>().sprite != null)
+                    if (a.gameObject.GetComponent<Image>().sprite != null && !a.gameObject.name.Equals("Inventory_Pointer"))
                         a.Play("General_FadeOut");
                 }
             }

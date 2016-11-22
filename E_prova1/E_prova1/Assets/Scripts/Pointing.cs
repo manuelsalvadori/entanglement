@@ -7,7 +7,7 @@ public class Pointing : MonoBehaviour
     public float[] pos_y = {10f, -2f};
     LineRenderer lr;
     public Material[] mat;
-	
+
     void Start()
     {
         lr = GetComponent<LineRenderer>();
@@ -21,8 +21,8 @@ public class Pointing : MonoBehaviour
         lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
 
 
-        float va = Input.GetAxis("R_Vertical");
-        float ha = Input.GetAxis("R_Horizontal");
+        float va = (GameManager.Instance.m_inventoryIsOpen) ? 0 : Input.GetAxis("R_Vertical");
+        float ha = (GameManager.Instance.m_inventoryIsOpen) ? 0 : Input.GetAxis("R_Horizontal");
 
         RaycastHit hit;
         Vector3 start = new Vector3(transform.position.x, pos_y[(GameManager.Instance.m_sel_pg) ? 0 : 1], transform.position.z);
