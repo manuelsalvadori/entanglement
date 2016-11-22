@@ -114,7 +114,7 @@ public class SmoothSwitch : MonoBehaviour {
         GameManager.Instance.m_camIsMoving = true;
     }
 
-    private void select_singleView()
+    public void select_singleView()
     {
         GameManager.Instance.m_single_mode = true;
         GameManager.Instance.m_double_mode = false;
