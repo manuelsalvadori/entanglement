@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour {
         else if (Input.GetAxis("R_Horizontal") < 0 && !m_pointerIsMoving)
         {
             m_pointerIsMoving = true;
-            m_pointTo = ((--m_pointTo) < 0 ? 8 + m_pointTo : m_pointTo) % Inventory.MAX_CAPACITY;
+            m_pointTo = ((--m_pointTo) < 0 ? Inventory.MAX_CAPACITY + m_pointTo : m_pointTo) % Inventory.MAX_CAPACITY;
             StartCoroutine(OneStep());
         }
 
