@@ -18,11 +18,27 @@ public class Pointing : MonoBehaviour
 
     void OnEnable()
     {
+        
         resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         lr.SetPosition(0, transform.position);
         lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
-        GetComponent<Renderer>().enabled = true;
-        lr.enabled = true;
+        RaycastHit hit;
+        Vector3 start = new Vector3(transform.position.x, pos_y[(GameManager.Instance.m_sel_pg) ? 0 : 1], transform.position.z);
+        Ray raggio = new Ray(start, Vector3.down);
+        Physics.Raycast(raggio, out hit);
+
+        if (hit.collider != null)
+        {
+            Debug.Log("collido");
+            transform.position = new Vector3(transform.position.x, (hit.collider.bounds.max.y + gameObject.GetComponent<MeshRenderer>().bounds.extents.y),transform.position.z);
+        }
+           
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        pos = Camera.main.ViewportToWorldPoint(new Vector3(Mathf.Clamp(pos.x, 0.03f, 0.97f), pos.y, pos.z));
+
+        transform.position = new Vector3(pos.x, transform.position.y, -4.6f);
+
+        StartCoroutine(enableRenderer());
     }
 
 	void Update ()
@@ -63,5 +79,11 @@ public class Pointing : MonoBehaviour
         GetComponent<Renderer>().enabled = false;
         lr.enabled = false;
     }
-       
+
+    IEnumerator enableRenderer()
+    {
+        yield return new WaitForSeconds(0.01f);
+        GetComponent<Renderer>().enabled = true;
+        lr.enabled = true;
+    }
 }
