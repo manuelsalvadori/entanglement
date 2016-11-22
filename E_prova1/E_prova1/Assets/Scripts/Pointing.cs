@@ -16,11 +16,13 @@ public class Pointing : MonoBehaviour
         lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
     }
 
-    void OnEnabled()
+    void OnEnable()
     {
         resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         lr.SetPosition(0, transform.position);
         lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
+        GetComponent<Renderer>().enabled = true;
+        lr.enabled = true;
     }
 
 	void Update ()
@@ -54,6 +56,12 @@ public class Pointing : MonoBehaviour
         transform.position = posplayer + new Vector3(3f,0f,0f);
         lr.material = mat[GameManager.Instance.m_sel_pg ? 0:1];
         GetComponent<Renderer>().material = mat[GameManager.Instance.m_sel_pg ? 0:1];
+    }
+
+    void OnDisable()
+    {
+        GetComponent<Renderer>().enabled = false;
+        lr.enabled = false;
     }
        
 }
