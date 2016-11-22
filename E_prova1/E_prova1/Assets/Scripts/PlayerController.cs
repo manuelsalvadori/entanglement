@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float m_Zfixed = -4.6f;
     public float smoothTime = 0.3F;                                     //Amount of smooth
     Rigidbody m_rb;
-
+    private bool firstDash = true;
     public float m_velocity_boundary = 10f;
 
     bool m_grounded = true;
@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
+            
 	}
 
     void LateUpdate()
@@ -115,7 +116,10 @@ public class PlayerController : MonoBehaviour
     {
         //If this gameobject is touching the "Ground" it can jump
         if (other.gameObject.tag.Equals("Ground"))
+        {
             m_grounded = true;
+            firstDash = true;
+        }
     }
 
     public void OnCollisionExit(Collision other)
@@ -146,6 +150,7 @@ public class PlayerController : MonoBehaviour
         rotating = false;
     }
 
+    private bool teleportAllowed = false;
     public void useGadget(int n)
     {
         Debug.Log(gameObject.name + " usa gadget "+n);
@@ -155,14 +160,25 @@ public class PlayerController : MonoBehaviour
                 moveObject();
                 break;
             case 1:
-                teleport();
+                if (teleportAllowed)
+                    teleport();
+                else
+                {
+                    switchMirino(true);
+                    teleportAllowed = true;
+                }
                 break;
             case 2:
-                transform.GetChild(0).gameObject.SetActive(true);
-                if(transform.rotation.eulerAngles.y >= 0f && transform.rotation.eulerAngles.y < 180f)
-                    StartCoroutine(dashGate(1.0f));
+                if (m_grounded)
+                    dash();
                 else
-                    StartCoroutine(dashGate(-1.0f));
+                {
+                    if (firstDash)
+                    {
+                        dash();
+                        firstDash = false;
+                    }
+                }
                 break;
             default:
                 return;
@@ -170,16 +186,27 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void moveObject()
+    private void moveObject()
     {
         Debug.Log(" usa gadget muovi oggetto tra i livelli");
     }
 
-    void teleport()
+    private void teleport()
     {
         Debug.Log(" usa gadget teletrasporto");
         transform.position = GameManager.Instance.mirino.transform.position + new Vector3(0f,gameObject.GetComponent<CapsuleCollider>().bounds.extents.y,0f);
         GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(transform.position);
+        switchMirino(false);
+        teleportAllowed = false;
+    }
+
+    private void dash()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        if(transform.rotation.eulerAngles.y >= 0f && transform.rotation.eulerAngles.y < 180f)
+            StartCoroutine(dashGate(1.0f));
+        else
+            StartCoroutine(dashGate(-1.0f));
     }
 
     private bool isdashing = false;
@@ -206,5 +233,12 @@ public class PlayerController : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
 
         isdashing = false;
+    }
+
+    void switchMirino(bool enabled)
+    {
+        GameManager.Instance.mirino.SetActive(enabled);
+        if(enabled)
+            GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
     }
 }

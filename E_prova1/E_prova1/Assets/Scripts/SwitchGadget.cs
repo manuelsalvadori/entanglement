@@ -151,9 +151,9 @@ public class SwitchGadget : MonoBehaviour
     }
 
     void switchMirino(bool enabled)
-    {
+    {/*
         GameManager.Instance.mirino.SetActive(enabled);
         if(enabled)
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
-    }
+  */  }
 }
