@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
-            
+        playerCulled();  
 	}
 
     void LateUpdate()
@@ -240,5 +240,50 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.mirino.SetActive(enabled);
         if(enabled)
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+    }
+
+    GameObject culledObject = null;
+    bool culled = false;
+    void playerCulled()
+    {
+        RaycastHit hit;
+        Vector3 start = Camera.main.transform.position;
+        Vector3 direction = (transform.position - Camera.main.transform.position);
+        Ray raggio = new Ray(start, direction);
+        Physics.Raycast(raggio, out hit);
+
+        if (!hit.collider.tag.Equals("Player"))
+        {
+            Material m = hit.collider.gameObject.GetComponent<Renderer>().material;
+            m.SetFloat("_Mode", 3f);
+            m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            m.SetInt("_ZWrite", 0);
+            m.DisableKeyword("_ALPHATEST_ON");
+            m.EnableKeyword("_ALPHABLEND_ON");
+            m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            m.renderQueue = 3000;
+            culledObject = hit.collider.gameObject;
+            culled = true;
+        }
+        else
+        {
+            if (culled)
+            {
+                Debug.Log("non più trasparente :D");
+
+                culledObject.GetComponent<Renderer>().material.SetFloat("_Mode", 0f);
+                culledObject.GetComponent<Renderer>().material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                culledObject.GetComponent<Renderer>().material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                culledObject.GetComponent<Renderer>().material.SetInt("_ZWrite", 1);
+                culledObject.GetComponent<Renderer>().material.DisableKeyword("_ALPHATEST_ON");
+                culledObject.GetComponent<Renderer>().material.DisableKeyword("_ALPHABLEND_ON");
+                culledObject.GetComponent<Renderer>().material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                culledObject.GetComponent<Renderer>().material.renderQueue = -1;
+
+                culled = false;
+            }
+        }
+        
     }
 }
