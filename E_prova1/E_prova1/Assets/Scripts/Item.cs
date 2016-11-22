@@ -31,4 +31,9 @@ public class Item{
         return this.m_target == other;
     }
 
+    public override string ToString()
+    {
+        return m_name;
+    }
+
 }
