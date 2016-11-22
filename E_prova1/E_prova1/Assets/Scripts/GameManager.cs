@@ -222,5 +222,4 @@ public class GameManager : MonoBehaviour
     {
         return m_itemInvetoryView[n];
     }
-
 }
