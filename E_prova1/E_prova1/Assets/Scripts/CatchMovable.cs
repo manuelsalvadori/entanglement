@@ -27,6 +27,7 @@ public class CatchMovable : MonoBehaviour
             initColor = movable.gameObject.GetComponent<Renderer>().material.color;
             movable.gameObject.layer = 9;
             movable.gameObject.GetComponent<Renderer>().material.color = changedColor;
+            movable.gameObject.GetComponent<Renderer>().material.SetColor ("_EmissionColor", changedColor);
         }
     }
 
@@ -50,14 +51,13 @@ public class CatchMovable : MonoBehaviour
             movable.transform.position = Vector3.Lerp(currentpos, endPos, counter / durations);
             yield return null;
         }
-
+        movable.layer = 0;
         yield return new WaitForSeconds(0.15f);
         Physics.IgnoreCollision(GetComponent<BoxCollider>(), movable.GetComponent<Collider>(), false);
         StartCoroutine(smoothColor(movable));
-        movable.layer = 0;
         isMoving = false;
     }
-    private float duration = 0.2f;
+    private float duration = 0.3f;
 
     IEnumerator smoothColor(GameObject movable)
     {
@@ -66,6 +66,8 @@ public class CatchMovable : MonoBehaviour
         {
             counter += Time.deltaTime;
             movable.GetComponent<Renderer>().material.color = Color.Lerp(changedColor, initColor, counter / duration);
+            movable.gameObject.GetComponent<Renderer>().material.SetColor ("_EmissionColor", Color.Lerp(changedColor, Color.black, counter / duration));
+
             yield return null;
         }
 
