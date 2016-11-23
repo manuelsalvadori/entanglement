@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
     public void OnCollisionStay(Collision other)
     {
         //If this gameobject is touching the "Ground" it can jump
-        if (other.gameObject.tag.Equals("Ground"))
+        if (other.gameObject.tag.Equals("Ground") || other.gameObject.tag.Equals("Spostabile"))
         {
             m_grounded = true;
             firstDash = true;
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     public void OnCollisionExit(Collision other)
     {
         //If this gameobject is not touching anymore the "Ground" it can't jump
-        if (other.gameObject.tag.Equals("Ground"))
+        if (other.gameObject.tag.Equals("Ground") || other.gameObject.tag.Equals("Spostabile"))
             m_grounded = false;
     }
 

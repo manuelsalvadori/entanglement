@@ -70,7 +70,8 @@ public class Pointing : MonoBehaviour
 
     public void resetPosition(Vector3 posplayer)
     {
-        transform.position = posplayer + new Vector3(3f,0f,0f);
+        float dir = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f) ? 3.0f : -3.0f;
+        transform.position = posplayer + new Vector3(dir,0f,0f);
         lr.material = mat[GameManager.Instance.m_sel_pg ? 0:1];
         GetComponent<Renderer>().material = mat[GameManager.Instance.m_sel_pg ? 0:1];
     }
