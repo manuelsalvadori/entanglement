@@ -25,6 +25,7 @@ public class CatchMovable : MonoBehaviour
             StartCoroutine(moveMovable(endPos, movable.gameObject));
             Physics.IgnoreCollision(GetComponent<BoxCollider>(), movable.collider);
             initColor = movable.gameObject.GetComponent<Renderer>().material.color;
+            movable.gameObject.layer = 9;
             movable.gameObject.GetComponent<Renderer>().material.color = changedColor;
         }
     }
@@ -53,6 +54,7 @@ public class CatchMovable : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         Physics.IgnoreCollision(GetComponent<BoxCollider>(), movable.GetComponent<Collider>(), false);
         StartCoroutine(smoothColor(movable));
+        movable.layer = 0;
         isMoving = false;
     }
     private float duration = 0.2f;
