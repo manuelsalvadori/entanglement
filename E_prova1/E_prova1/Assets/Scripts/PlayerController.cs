@@ -54,6 +54,14 @@ public class PlayerController : MonoBehaviour
             if (force.magnitude != 0)
                 m_look = Quaternion.LookRotation(force.normalized);
 
+            if (!GameManager.Instance.m_3D_mode)
+            {
+                if (m_look.eulerAngles.y >= 0f && m_look.eulerAngles.y < 180f)
+                    m_look = Quaternion.Euler(new Vector3(m_look.eulerAngles.x, 90f, m_look.eulerAngles.z));
+                else
+                    m_look = Quaternion.Euler(new Vector3(m_look.eulerAngles.x, 270f, m_look.eulerAngles.z));
+                
+            }
             StartCoroutine(rotatePlayer(m_look, 0.1f));
 
             //Jump if is touching the "Ground"
@@ -202,10 +210,7 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider.tag.Equals("Barriera"))
         {
-            float diff = (transform.position.x > GameManager.Instance.mirino.transform.position.x) ? hit.collider.bounds.max.x : hit.collider.bounds.min.x;
-            float meno = (transform.position.x > GameManager.Instance.mirino.transform.position.x) ? -1.0f : 1.0f;
-
-            transform.position = new Vector3(diff, transform.position.y, transform.position.z) + new Vector3(0f, meno * gameObject.GetComponent<CapsuleCollider>().bounds.extents.y, 0f);
+            StartCoroutine(stoppedTeleport(hit));
         }
         else
         {
@@ -298,5 +303,15 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+    }
+
+    IEnumerator stoppedTeleport(RaycastHit hit)
+    {
+        yield return new WaitForSeconds(0.05f);
+        float diff = (transform.position.x > hit.collider.gameObject.transform.position.x) ? hit.collider.bounds.max.x : hit.collider.bounds.min.x;
+        float meno = (transform.position.x > hit.collider.gameObject.transform.position.x) ? 1.0f : -1.0f;
+
+        transform.position = new Vector3(diff, transform.position.y, transform.position.z) + new Vector3(meno * gameObject.GetComponent<CapsuleCollider>().bounds.extents.x +0.01f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y+0.01f, 0f);
+
     }
 }
