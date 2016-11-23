@@ -277,7 +277,6 @@ public class SmoothSwitch : MonoBehaviour {
     {
         if (transform.rotation.eulerAngles.y > 88f && transform.rotation.eulerAngles.y < 90f)
         {
-            Debug.Log(transform.rotation.eulerAngles.y);
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 0.02f, transform.rotation.eulerAngles.z));
         }
 

@@ -4,6 +4,8 @@ using System.Collections;
 public class CatchMovable : MonoBehaviour
 {
     public float deltaMove = 5.0f;
+    private Color initColor;
+    public Color changedColor;
     void OnCollisionEnter(Collision movable)
     {
         if (movable.gameObject.tag.Equals("Spostabile"))
@@ -22,6 +24,8 @@ public class CatchMovable : MonoBehaviour
             }
             StartCoroutine(moveMovable(endPos, movable.gameObject));
             Physics.IgnoreCollision(GetComponent<BoxCollider>(), movable.collider);
+            initColor = movable.gameObject.GetComponent<Renderer>().material.color;
+            movable.gameObject.GetComponent<Renderer>().material.color = changedColor;
         }
     }
 
@@ -45,9 +49,24 @@ public class CatchMovable : MonoBehaviour
             movable.transform.position = Vector3.Lerp(currentpos, endPos, counter / durations);
             yield return null;
         }
+
         yield return new WaitForSeconds(0.15f);
         Physics.IgnoreCollision(GetComponent<BoxCollider>(), movable.GetComponent<Collider>(), false);
-
+        StartCoroutine(smoothColor(movable));
         isMoving = false;
     }
+    private float duration = 0.2f;
+
+    IEnumerator smoothColor(GameObject movable)
+    {
+        float counter = 0;
+        while (counter < durations)
+        {
+            counter += Time.deltaTime;
+            movable.GetComponent<Renderer>().material.color = Color.Lerp(changedColor, initColor, counter / duration);
+            yield return null;
+        }
+
+    }
 }
+
