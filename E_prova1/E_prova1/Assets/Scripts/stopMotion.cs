@@ -10,17 +10,13 @@ public class stopMotion : MonoBehaviour {
 
     void Update ()
     {
-
+        //da togliere quando la pistola sarà funzionante
         if ((transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < 4f)
-        {
-            
+        {  
             if (Input.GetButtonDown("Interact"))
             {
-                Debug.Log(transform.GetChild(0).gameObject.name);
                 transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeInHierarchy);
             }
-
         }
-
     }
 }

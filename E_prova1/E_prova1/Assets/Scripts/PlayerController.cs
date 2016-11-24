@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody m_rb;
     private bool firstDash = true;
     public float m_velocity_boundary = 10f;
-    Vector3 end;
 
     bool m_grounded = true;
     Camera cam;
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
     {
         m_rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        end = transform.position;
 	}
 
     void FixedUpdate ()
@@ -167,7 +165,7 @@ public class PlayerController : MonoBehaviour
         switch (n)
         {
             case 0:
-                moveObject(end);
+                moveObject();
                 break;
             case 1:
                 if (teleportAllowed)
@@ -312,17 +310,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void moveObject(Vector3 end)
+    private void moveObject()
     {
         Debug.Log(" usa gadget muovi oggetto tra i livelli");
-        RaycastHit hit;
-        Vector3 start = transform.position;
-        Vector3 direction = end - start;
-        Ray raggio = new Ray(start, direction);
     }
 
-    void Update()
-    {
-        //end = transform.position + Vector3();
-    }
 }
