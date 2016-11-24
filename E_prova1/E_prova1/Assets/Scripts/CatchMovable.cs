@@ -71,6 +71,7 @@ public class CatchMovable : MonoBehaviour
             yield return null;
         }
         movable.gameObject.GetComponent<Renderer>().material.SetColor ("_EmissionColor", Color.black);
+        movable.GetComponent<Renderer>().material.color = initColor;
 
     }
 }
