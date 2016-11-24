@@ -194,11 +194,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void moveObject()
-    {
-        Debug.Log(" usa gadget muovi oggetto tra i livelli");
-    }
-
     private void teleport()
     {
 
@@ -312,6 +307,12 @@ public class PlayerController : MonoBehaviour
         float meno = (transform.position.x > hit.collider.gameObject.transform.position.x) ? 1.0f : -1.0f;
 
         transform.position = new Vector3(diff, transform.position.y, transform.position.z) + new Vector3(meno * gameObject.GetComponent<CapsuleCollider>().bounds.extents.x +0.01f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y+0.01f, 0f);
+
+    }
+
+    private void moveObject()
+    {
+        Debug.Log(" usa gadget muovi oggetto tra i livelli");
 
     }
 }
