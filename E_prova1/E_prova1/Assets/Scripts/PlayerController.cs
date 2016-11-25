@@ -161,7 +161,6 @@ public class PlayerController : MonoBehaviour
     public bool teleportAllowed = false;
     public void useGadget(int n)
     {
-        Debug.Log(gameObject.name + " usa gadget "+n);
         switch (n)
         {
             case 0:
@@ -312,7 +311,11 @@ public class PlayerController : MonoBehaviour
 
     private void moveObject()
     {
-        Debug.Log(" usa gadget muovi oggetto tra i livelli");
+        Debug.Log(GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag);
+        if (GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag.Equals("Spostabile"))
+        {
+            GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.gameObject.GetComponent<MovableObject>().setActive();
+        }
     }
 
 }

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public SwitchGadget[] m_gadgetSelection;
 
     public GameObject mirino;
+    public GameObject pistola;
     public GameObject[] m_players;
     public Inventory[] m_inventory;
     public GameObject m_level1;
