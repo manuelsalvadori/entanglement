@@ -190,7 +190,7 @@ public class SmoothSwitch : MonoBehaviour {
                 GameManager.Instance.m_playerswicth = false;
             }
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
-
+            GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         }
 
         if((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !treD_Mode && !GameManager.Instance.m_inventoryIsOpen) //double_view
