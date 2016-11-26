@@ -21,6 +21,7 @@ public class shoot : MonoBehaviour
             lr.enabled = true;
             if (GameManager.Instance.m_3D_mode)
             {
+                Debug.Log(Input.GetAxis("R_Vertical"));
                 transform.position = transform.position + new Vector3(0f, Input.GetAxis("R_Vertical") * Time.deltaTime * m_speed, -Input.GetAxis("R_Horizontal") * Time.deltaTime * m_speed);
             }
             else
@@ -28,8 +29,7 @@ public class shoot : MonoBehaviour
                 transform.position = transform.position + new Vector3(0f, Input.GetAxis("R_Vertical") * Time.deltaTime * m_speed, 0f);
             }
             float clamped_y = Mathf.Clamp(transform.position.y, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y - 0.5f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y + 5f);
-            float dir = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f
-                && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f) ? GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x + 1.0f : GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x - 1.0f;
+            float dir = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f  && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f) ? GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x + 1.0f : GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x - 1.0f;
            
 
             transform.position = new Vector3(dir, clamped_y, transform.position.z);

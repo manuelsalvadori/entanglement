@@ -200,7 +200,8 @@ public class PlayerController : MonoBehaviour
         Vector3 start = transform.position;
         Vector3 direction = GameManager.Instance.mirino.transform.position - transform.position;
         Ray raggio = new Ray(start, direction);
-        Physics.Raycast(raggio, out hit);
+        int layermask = 1 << 8;
+        Physics.Raycast(raggio, out hit, Mathf.Infinity, layermask);
 
         if (hit.collider.tag.Equals("Barriera"))
         {
