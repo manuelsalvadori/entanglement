@@ -19,13 +19,20 @@ public class shoot : MonoBehaviour
         if (SwitchGadget.Instance.m_state == 0)
         {
             lr.enabled = true;
-            transform.position = transform.position + new Vector3(0f, Input.GetAxis("R_Vertical") * Time.deltaTime * m_speed, 0f);
+            if (GameManager.Instance.m_3D_mode)
+            {
+                transform.position = transform.position + new Vector3(0f, Input.GetAxis("R_Vertical") * Time.deltaTime * m_speed, -Input.GetAxis("R_Horizontal") * Time.deltaTime * m_speed);
+            }
+            else
+            {
+                transform.position = transform.position + new Vector3(0f, Input.GetAxis("R_Vertical") * Time.deltaTime * m_speed, 0f);
+            }
             float clamped_y = Mathf.Clamp(transform.position.y, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y - 0.5f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y + 5f);
             float dir = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f
                 && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f) ? GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x + 1.0f : GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x - 1.0f;
            
 
-            transform.position = new Vector3(dir, clamped_y, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.z);
+            transform.position = new Vector3(dir, clamped_y, transform.position.z);
 
             Vector3 start = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position;
             Vector3 diff = transform.position - start;

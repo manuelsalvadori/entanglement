@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         Ray raggio = new Ray(start, direction);
         Physics.Raycast(raggio, out hit);
 
-        if (!hit.collider.tag.Equals("Player"))
+        if (!hit.collider.tag.Equals("Player") && !hit.collider.tag.Equals("Spostabile"))
         {
             Material m = hit.collider.gameObject.GetComponent<Renderer>().material;
             m.SetFloat("_Mode", 3f);

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CatchMovable : MonoBehaviour
 {
-    public float deltaMove = 5.0f;
+    public float deltaMove = 6.0f;
     private Color initColor;
     public Color changedColor;
     void OnCollisionEnter(Collision movable)
