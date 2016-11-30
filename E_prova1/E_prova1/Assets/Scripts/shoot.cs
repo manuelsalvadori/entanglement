@@ -27,11 +27,11 @@ public class shoot : MonoBehaviour
             lr.enabled = true;
             if (GameManager.Instance.m_3D_mode)
             {
-                transform.Rotate(new Vector3(0f,m_h, m_v));
+                transform.Rotate(new Vector3(0f,m_h, m_v), Space.World);
             }
             else
             {
-                transform.Rotate(new Vector3(0f, 0f, m_v));
+                transform.Rotate(new Vector3(0f, 0f, m_v), Space.World);
             }
             float rotation_z = transform.rotation.eulerAngles.z; 
             float dir = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f  && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f)
