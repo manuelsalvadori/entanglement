@@ -3,10 +3,14 @@ using System.Collections;
 
 public class SwitchGadget : MonoBehaviour
 {
-
+    public static SwitchGadget Instance;
     public int m_state = 1;
     bool m_in;
 
+    void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         resetState();
@@ -23,6 +27,11 @@ public class SwitchGadget : MonoBehaviour
             {
                 GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<PlayerController>().teleportAllowed = false;
                 switchMirino(false);
+            }
+
+            if (m_state == 0)
+            {
+                resetPistola();
             }
 
             transform.GetChild(m_state).GetComponent<Animation>()["RigthToCenter"].speed = 1f;
@@ -42,6 +51,12 @@ public class SwitchGadget : MonoBehaviour
         {
             m_state--;
             m_state = (m_state < 0) ? 2 : m_state;
+
+            if (m_state == 0)
+            {
+                resetPistola();
+            }
+
             if(m_state != 1)
             {
                 GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<PlayerController>().teleportAllowed = false;
@@ -161,5 +176,10 @@ public class SwitchGadget : MonoBehaviour
         GameManager.Instance.mirino.SetActive(enabled);
         if(enabled)
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+    }
+
+    void resetPistola()
+    {
+        GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
     }
 }

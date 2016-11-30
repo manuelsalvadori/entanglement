@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody m_rb;
     private bool firstDash = true;
     public float m_velocity_boundary = 10f;
-    Vector3 end;
 
     bool m_grounded = true;
     Camera cam;
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
     {
         m_rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        end = transform.position;
 	}
 
     void FixedUpdate ()
@@ -163,11 +161,10 @@ public class PlayerController : MonoBehaviour
     public bool teleportAllowed = false;
     public void useGadget(int n)
     {
-        Debug.Log(gameObject.name + " usa gadget "+n);
         switch (n)
         {
             case 0:
-                moveObject(end);
+                moveObject();
                 break;
             case 1:
                 if (teleportAllowed)
@@ -198,14 +195,13 @@ public class PlayerController : MonoBehaviour
 
     private void teleport()
     {
-
         RaycastHit hit;
         Vector3 start = transform.position;
         Vector3 direction = GameManager.Instance.mirino.transform.position - transform.position;
         Ray raggio = new Ray(start, direction);
-        Physics.Raycast(raggio, out hit);
+        int layermask = 1 << 8;
 
-        if (hit.collider.tag.Equals("Barriera"))
+        if (Physics.Raycast(raggio, out hit, Mathf.Infinity, layermask))
         {
             StartCoroutine(stoppedTeleport(hit));
         }
@@ -231,7 +227,6 @@ public class PlayerController : MonoBehaviour
     private float durations = 0.15f;
     IEnumerator dashGate(float direction)
     {
-        Debug.Log(" usa gadget passa attraverso cancelli elettrici");
         if (isdashing)
         {
             yield break;
@@ -270,7 +265,7 @@ public class PlayerController : MonoBehaviour
         Ray raggio = new Ray(start, direction);
         Physics.Raycast(raggio, out hit);
 
-        if (!hit.collider.tag.Equals("Player"))
+        if (!hit.collider.tag.Equals("Player") && !hit.collider.tag.Equals("Spostabile"))
         {
             Material m = hit.collider.gameObject.GetComponent<Renderer>().material;
             m.SetFloat("_Mode", 3f);
@@ -312,17 +307,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void moveObject(Vector3 end)
+    private void moveObject()
     {
-        Debug.Log(" usa gadget muovi oggetto tra i livelli");
-        RaycastHit hit;
-        Vector3 start = transform.position;
-        Vector3 direction = end - start;
-        Ray raggio = new Ray(start, direction);
+        if (GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag.Equals("Spostabile"))
+        {
+            GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.gameObject.GetComponent<MovableObject>().setActive();
+        }
     }
 
-    void Update()
-    {
-        //end = transform.position + Vector3();
-    }
 }

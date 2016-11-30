@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CatchMovable : MonoBehaviour
 {
-    public float deltaMove = 5.0f;
+    public float deltaMove = 6.0f;
     private Color initColor;
     public Color changedColor;
     void OnCollisionEnter(Collision movable)
@@ -71,6 +71,7 @@ public class CatchMovable : MonoBehaviour
             yield return null;
         }
         movable.gameObject.GetComponent<Renderer>().material.SetColor ("_EmissionColor", Color.black);
+        movable.GetComponent<Renderer>().material.color = initColor;
 
     }
 }

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public SwitchGadget[] m_gadgetSelection;
 
     public GameObject mirino;
+    public GameObject pistola;
     public GameObject[] m_players;
     public Inventory[] m_inventory;
     public GameObject m_level1;
@@ -54,7 +55,8 @@ public class GameManager : MonoBehaviour
             m_playerswicth = !m_playerswicth;
             GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
             GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
-            mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+            mirino.GetComponent<Pointing>().resetPosition(m_players[(m_sel_pg) ? 0 : 1].transform.position);
+            pistola.GetComponent<shoot>().resetShootPosition(m_players[(m_sel_pg) ? 0 : 1].transform.position);
 
         }
 
