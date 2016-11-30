@@ -88,10 +88,12 @@ public class GameManager : MonoBehaviour
         if (!m_3D_mode)
             GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
 
+        /*
         if(m_inventory[0].gameObject.activeSelf || m_inventory[1].gameObject.activeSelf)
         {
             m_inventoryIsOpen = true;
         }
+        */
 
     }
 
@@ -203,6 +205,7 @@ public class GameManager : MonoBehaviour
                         a.Play("General_FadeOut");
                 }
             }
+            m_inventoryIsOpen = false;
             StartCoroutine(shutdown_thisWin(m_inventory[which].gameObject));
         }
     }
@@ -211,8 +214,10 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(() => !go.GetComponent<Animation>().isPlaying);
         go.SetActive(false);
-        if (go.tag.Equals("Inventory"))
+        /*
+        if(go.tag.Equals("Inventory"))
             m_inventoryIsOpen = false;
+            */
     }
 
     public int whichLevelItIs()
