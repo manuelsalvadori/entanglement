@@ -50,7 +50,7 @@ public class shoot : MonoBehaviour
             float clamped_z = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f  && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f)
                 ?  Mathf.Clamp(rotation_z, 65f, 170f): Mathf.Clamp(rotation_z, 190f, 295f);
 
-            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, clamped_z));
+            transform.rotation = Quaternion.Euler(new Vector3(0f, transform.rotation.eulerAngles.y, clamped_z));
 
 
             Vector3 start = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position;
