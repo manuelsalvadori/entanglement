@@ -195,7 +195,6 @@ public class PlayerController : MonoBehaviour
 
     private void teleport()
     {
-
         RaycastHit hit;
         Vector3 start = transform.position;
         Vector3 direction = GameManager.Instance.mirino.transform.position - transform.position;
@@ -228,7 +227,6 @@ public class PlayerController : MonoBehaviour
     private float durations = 0.15f;
     IEnumerator dashGate(float direction)
     {
-        Debug.Log(" usa gadget passa attraverso cancelli elettrici");
         if (isdashing)
         {
             yield break;
@@ -311,7 +309,6 @@ public class PlayerController : MonoBehaviour
 
     private void moveObject()
     {
-        Debug.Log(GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag);
         if (GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag.Equals("Spostabile"))
         {
             GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.gameObject.GetComponent<MovableObject>().setActive();

@@ -210,13 +210,11 @@ public class SmoothSwitch : MonoBehaviour {
             //Move the level (select the target for 3 point movement)
             if (Mathf.Approximately(m_l1.position.z , level3D_init_position.z) && s)
             {
-                //Debug.Log("da l3d1 a l3df");
                 level_target = level3D_final_position;
                 s = false;
             }
             if (Mathf.Approximately(m_l1.position.y , level3D_init_position.y) && !t)
             {
-                //Debug.Log("da l3d1 a l2d");
                 level_target = level2D_position;
                 t = true;
             }
