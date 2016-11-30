@@ -36,6 +36,7 @@ public class shoot : MonoBehaviour
             float rotation_z = transform.rotation.eulerAngles.z; 
             float dir = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f  && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f)
                 ?  1: -1f;
+            
             if (curr_dir * dir < 0)
             {
                 curr_dir = dir;
