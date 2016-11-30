@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour
                     a.Play("General_Text_FadeIn");
                 else
                 {
-                    if (a.gameObject.GetComponent<Image>().sprite != null && !a.gameObject.name.Equals("Inventory_Pointer"))
+                    if (a.gameObject.GetComponent<Image>().sprite != null)
                         a.Play("General_FadeIn");
 
                 }
@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
                     a.Play("General_Text_FadeOut");
                 else
                 {
-                    if (a.gameObject.GetComponent<Image>().sprite != null && !a.gameObject.name.Equals("Inventory_Pointer"))
+                    if (a.gameObject.GetComponent<Image>().sprite != null)
                         a.Play("General_FadeOut");
                 }
             }

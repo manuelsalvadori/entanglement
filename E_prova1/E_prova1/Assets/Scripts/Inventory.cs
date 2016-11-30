@@ -34,6 +34,11 @@ public class Inventory : MonoBehaviour {
         m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[0].gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
 
+    void OnEnable()
+    {
+        m_pointTo = 0;
+    }
+
     void Update()
     {
         if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length)
