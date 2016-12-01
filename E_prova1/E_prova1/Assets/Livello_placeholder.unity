@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1542,11 +1542,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4056159702656636, guid: cabf11e4d984f0745a36fdf47458ab3c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.447
+      value: -2.57
       objectReference: {fileID: 0}
     - target: {fileID: 4056159702656636, guid: cabf11e4d984f0745a36fdf47458ab3c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.104
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4056159702656636, guid: cabf11e4d984f0745a36fdf47458ab3c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2031,8 +2031,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 396764322}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.401, y: -0.43000004, z: -0.521}
-  m_LocalScale: {x: 3.0244613, y: 0.1, z: 1.0451931}
+  m_LocalPosition: {x: 0.11, y: -0.43000004, z: -0.521}
+  m_LocalScale: {x: 2.877964, y: 0.1, z: 1.0451931}
   m_Children: []
   m_Father: {fileID: 1685322404}
   m_RootOrder: 2
@@ -9746,8 +9746,8 @@ MonoBehaviour:
   m_GravityMultiplier: 3
   m_Zfixed: -4.6
   smoothTime: 0.3
-  m_velocity_boundary: 5
-  m_velocity_bound_onAir: 2.5
+  m_velocity_boundary: 10
+  m_velocity_bound_onAir: 3
   teleportAllowed: 0
 --- !u!54 &1600495764
 Rigidbody:
@@ -11444,7 +11444,7 @@ MonoBehaviour:
   m_Zfixed: -4.6
   smoothTime: 0.3
   m_velocity_boundary: 10
-  m_velocity_bound_onAir: 2.5
+  m_velocity_bound_onAir: 3
   teleportAllowed: 0
 --- !u!54 &1776648518
 Rigidbody:
