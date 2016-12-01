@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody m_rb;
     private bool firstDash = true;
     public float m_velocity_boundary = 10f;
+    public float m_velocity_bound_onAir = 5f;
+
 
     bool m_grounded = true;
     Camera cam;
@@ -44,12 +46,13 @@ public class PlayerController : MonoBehaviour
 
 
             //Constraint velocity
-            if (Mathf.Abs(m_rb.velocity.z) > m_velocity_boundary)
-                m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -(m_velocity_boundary), m_velocity_boundary));
+            float velocity_cap = (m_grounded) ? m_velocity_boundary : m_velocity_bound_onAir;
+            if (Mathf.Abs(m_rb.velocity.z) > velocity_cap)
+                m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -(velocity_cap), velocity_cap));
 
             if (Mathf.Abs(m_rb.velocity.x) > m_velocity_boundary)
-                m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(m_velocity_boundary), m_velocity_boundary), m_rb.velocity.y, m_rb.velocity.z);
-
+                m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(velocity_cap), velocity_cap), m_rb.velocity.y, m_rb.velocity.z);
+            Debug.Log("cap: "+ velocity_cap + " " + m_grounded);
             //
             if (force.magnitude != 0)
                 m_look = Quaternion.LookRotation(force.normalized);
