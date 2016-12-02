@@ -19,20 +19,12 @@ public class MovingPlatform : MonoBehaviour
 
 	void FixedUpdate ()
     {
-<<<<<<< HEAD
         active = m_button.m_isActive;
 		if (m_button == null)
             active = true;
 	    else
 			active = m_button.m_isActive;
 		
-=======
-        if (m_button == null)
-            active = m_button.m_isActive;
-        else
-            active = true;
-        
->>>>>>> f0e9785139520979caa8b155468c6707127d9808
         if ((transform.position - target).magnitude < 0.3f)
         {
             if (switched)
