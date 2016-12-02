@@ -14,8 +14,8 @@ public class ActivateButton : MonoBehaviour {
         
         if ((transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < 1f)
         {
-            if(!(!m_isSwitch && m_isActive))
-                displayActive();
+            //if(!(!m_isSwitch && m_isActive))
+                //displayActive();
 
             if (Input.GetButtonDown("Interact"))
             {
@@ -24,13 +24,13 @@ public class ActivateButton : MonoBehaviour {
                 else
                 {
                     m_isActive = true;
-                    displayDeactive();
+                    //displayDeactive();
                 }
             }
         }
         else
         {
-            displayDeactive();
+            //displayDeactive();
         }
 
 	}
