@@ -101,6 +101,7 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_single_mode = false;
             target.y = 0f;
             target.z = m_zDouble;
+            //target.x = GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x;
             previous_level = false;
         }
         else
@@ -109,6 +110,7 @@ public class SmoothSwitch : MonoBehaviour {
             GameManager.Instance.m_single_mode = true;
             target.z = m_zSingle;
             target.y = current_level ? m_l1.position.y : m_l2.position.y;
+            //target.x = GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x;
             previous_level = true;
         }
         GameManager.Instance.m_camIsMoving = true;
@@ -267,8 +269,8 @@ public class SmoothSwitch : MonoBehaviour {
             camera_Target = m_offset_from_players + new Vector3(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.x, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y, 0f);
         }
 
-        camera_final = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
-
+        transform.position = Vector3.SmoothDamp(transform.position, camera_Target, ref velocity4, smoothTime/followingSpeed);
+        camera_final = transform.position;
     }
 
     void LateUpdate()
