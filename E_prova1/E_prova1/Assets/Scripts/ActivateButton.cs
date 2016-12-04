@@ -12,7 +12,7 @@ public class ActivateButton : MonoBehaviour {
 	void Update ()
     {
         
-        if ((transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < 1f)
+        if ((transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < 2f)
         {
             //if(!(!m_isSwitch && m_isActive))
                 //displayActive();

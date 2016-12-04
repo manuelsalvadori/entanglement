@@ -24,22 +24,22 @@ public class DoorOpening : MonoBehaviour
         switch (m_door_number)
         {
             case 1:
-                active = m_button[0].m_isActive || m_button[2].m_isActive;
+                active = m_button[0].m_isActive ^ m_button[2].m_isActive;
                 break;
             case 2:
-                active = m_button[1].m_isActive || m_button[2].m_isActive || m_button[5].m_isActive;
+                active = m_button[1].m_isActive ^ m_button[2].m_isActive ^ m_button[5].m_isActive;
                 break;
             case 3:
-                active = m_button[3].m_isActive || m_button[4].m_isActive;
+                active = m_button[3].m_isActive ^ m_button[4].m_isActive;
                 break;
             case 4:
-                active = m_button[1].m_isActive || m_button[3].m_isActive;
+                active = m_button[1].m_isActive ^ m_button[3].m_isActive;
                 break;
             case 5:
-                active = m_button[0].m_isActive || m_button[4].m_isActive;
+                active = m_button[0].m_isActive ^ m_button[4].m_isActive;
                 break;
             case 6:
-                active = m_button[0].m_isActive || m_button[1].m_isActive || m_button[2].m_isActive || m_button[5].m_isActive;
+                active = m_button[0].m_isActive ^ m_button[1].m_isActive ^ m_button[2].m_isActive ^ m_button[5].m_isActive;
                 break;
             default:
                 return;
