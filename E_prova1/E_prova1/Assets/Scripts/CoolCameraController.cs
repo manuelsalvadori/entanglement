@@ -6,20 +6,23 @@ public class CoolCameraController : MonoBehaviour {
 
     //Constant Level and Cam Geometry
     public Vector3[] m_Level_Position;
+    public Vector3[] m_Wall_Position;
     public Vector3[] m_View;
     public float m_BackOffset = 2.5f;
+    public float m_WallOffset = -0.44f;
     //~
 
 
     private Vector3 m_CameraTarget;                                     //Posizione di Arrivo
     private Vector3 m_CameraRotation;                                   //Rotazione di Arrivo
     private Vector3 m_LevelTarget;                                      //Posizione di Arrivo del livello
+    private Vector3 m_WallTarget;
 
     public enum Stato { First_Player, Second_Player, Doppia, TreD};
     private int m_oldState;
 
     //SmoothDump setting function
-    private Vector3 velocity = Vector3.zero;
+    //private Vector3 velocity = Vector3.zero;
     private Vector3 velocity2 = Vector3.zero;
     private Vector3 velocity3 = Vector3.zero;
     private Vector3 velocity4 = Vector3.zero;
@@ -27,12 +30,13 @@ public class CoolCameraController : MonoBehaviour {
     public float followingSpeed = 1.5f;
     //~
 
-    //Lerp setting function
-    public float m_Level_speed = 1F;
+    //Lerp Level1 setting function
+    public float m_Level_speed = 10F;
     private float startTime;
     private float journeyLength;
     private float distCovered = 0;
     private float fracJourney = 0;
+
     private bool m_levelIsMoving = false;
 
     //Players and Levels infos
@@ -63,11 +67,18 @@ public class CoolCameraController : MonoBehaviour {
         m_player_position[0] = GameManager.Instance.m_players[0].transform.position;
         m_player_position[1] = GameManager.Instance.m_players[1].transform.position;
 
+        m_l1 = GameManager.Instance.m_level1.transform;
+        m_l2 = GameManager.Instance.m_level2.transform;
+
 
         m_Level_Position = new Vector3[3];
         m_Level_Position[0] = m_Level_Position[1] = m_Level_Position[2] = GameManager.Instance.m_level1.transform.position;
         m_Level_Position[1].z = m_Level_Position[2].z = 10.5f;
         m_Level_Position[2].y = -5f;
+
+        m_Wall_Position = new Vector3[2];
+        m_Wall_Position[0] = GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition;
+        m_Wall_Position[1] = new Vector3(GameObject.FindGameObjectsWithTag("Wall")[1].transform.localPosition.x, m_WallOffset, GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition.z);
 
         m_View = new Vector3[4];
         m_View[0] = new Vector3(0f, GameManager.Instance.m_level1.transform.position.y, -20f);
@@ -76,9 +87,6 @@ public class CoolCameraController : MonoBehaviour {
         m_View[3] = new Vector3(m_player_position[1].x, -2f, 0f);
 
 
-        m_l1 = GameManager.Instance.m_level1.transform;
-        m_l2 = GameManager.Instance.m_level2.transform;
-
         Vector3 player_pos = Camera.main.WorldToViewportPoint(m_player_position[0]);
         player_pos.x += 0.15f;
         player_pos = Camera.main.ViewportToWorldPoint(player_pos);
@@ -86,6 +94,7 @@ public class CoolCameraController : MonoBehaviour {
         m_offset_from_players = m_View[3] - new Vector3(m_player_position[0].x, 0f, 0f) ;
 
         m_LevelTarget = m_l1.position;
+        m_WallTarget = m_Wall_Position[0];
 
         m_CameraTarget = m_View[GameManager.Instance.m_Current_State];
         m_CameraTarget.x = player_pos.x;
@@ -126,10 +135,11 @@ public class CoolCameraController : MonoBehaviour {
 
             distCovered = (Time.time - startTime) * m_Level_speed;
             fracJourney = distCovered / journeyLength;
+            fracJourney = (m_LevelTarget == m_Level_Position[1]) ? 1f - Mathf.Cos(fracJourney * Mathf.PI * 0.5f) : Mathf.Sin(fracJourney * Mathf.PI * 0.5f);
             m_l1.position = Vector3.Lerp(m_l1.position, m_LevelTarget, fracJourney);
-            //Debug.Log(fracJourney);
+            //Debug.Log("Level :" + fracJourney + " distance " + journeyLength);
 
-            if (fracJourney >= 1f)
+            if (fracJourney >= 0.5f)
             {
                 startTime = Time.time;
                 m_LevelTarget = (m_oldState == (int)Stato.TreD) ? m_Level_Position[0] : m_Level_Position[2];
@@ -137,7 +147,8 @@ public class CoolCameraController : MonoBehaviour {
 
             m_levelIsMoving = !(Mathf.Abs((m_l1.position - (m_oldState == (int)Stato.TreD ? m_Level_Position[0] : m_Level_Position[2])).magnitude) < 0.05f) ;
             GameManager.Instance.m_camIsMoving = m_levelIsMoving;
-            //m_l1.position = Vector3.SmoothDamp(m_l1.position, m_LevelTarget, ref velocity3, (smoothTime));
+
+            GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition = Vector3.SmoothDamp(GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition, m_WallTarget, ref velocity3, (smoothTime));
         }
         //Debug.Log(m_levelIsMoving);
     }
@@ -233,6 +244,10 @@ public class CoolCameraController : MonoBehaviour {
             journeyLength = Vector3.Distance(m_l1.position, m_LevelTarget);
             m_levelIsMoving = true;
 
+
+            m_WallTarget = m_Wall_Position[1];
+
+
             GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].hideSelectionUI();
             StartCoroutine(GameManager.activateChildMode());
             StartCoroutine(GameManager.alinePlayers());
@@ -251,6 +266,10 @@ public class CoolCameraController : MonoBehaviour {
             m_LevelTarget = m_Level_Position[1];
             journeyLength = Vector3.Distance(m_l1.position, m_LevelTarget);
             m_levelIsMoving = true;
+
+
+            m_WallTarget = m_Wall_Position[0];
+
 
             GameManager.deactivateChildMode();
             GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].unhideSelectionUI();
