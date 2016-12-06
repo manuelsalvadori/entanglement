@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (Input.GetButtonDown("Use") && !m_inventoryIsOpen)
+        if ((Input.GetButtonDown("Use") && !Input.GetButton("L2"))&& !m_inventoryIsOpen)
         {
             if (m_inventory[(m_sel_pg) ? 0 : 1].hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state))
             {
