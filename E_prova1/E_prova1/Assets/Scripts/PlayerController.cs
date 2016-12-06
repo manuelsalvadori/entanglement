@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public float m_Zfixed = -4.6f;
     public float smoothTime = 0.3F;                                     //Amount of smooth
     Rigidbody m_rb;
+    Animator m_anim;
+
+
     private bool firstDash = true;
     public float m_velocity_boundary = 10f;
     public float m_velocity_bound_onAir = 5f;
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start ()
     {
         m_rb = GetComponent<Rigidbody>();
+        m_anim = GetComponentInChildren<Animator>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour
             m_rb.AddForce(force);
 
 
+
             //Constraint velocity
             float velocity_cap = (m_grounded) ? m_velocity_boundary : m_velocity_bound_onAir;
             if (Mathf.Abs(m_rb.velocity.z) > velocity_cap)
@@ -66,6 +71,23 @@ public class PlayerController : MonoBehaviour
 
             }
             StartCoroutine(rotatePlayer(m_look, 0.1f));
+
+            if (m_grounded)
+            {
+                m_anim.SetBool("OnGround", true);
+                float forward_amount = Mathf.Abs(m_rb.velocity.magnitude / m_velocity_boundary);
+                m_anim.SetFloat("Forward", forward_amount);
+                Debug.Log("Forward: " + forward_amount);
+            }
+            else
+            {
+
+                m_anim.SetFloat("Forward", 0);
+                m_anim.SetBool("OnGround", false);
+                float jumpAmount = (Mathf.Abs(m_rb.velocity.y) / 14f) - 9f;
+                m_anim.SetFloat("Jump", m_rb.velocity.y);
+                Debug.Log("Jump: " + jumpAmount + " Velocity: " + m_rb.velocity.y );
+            }
 
             //Jump if is touching the "Ground"
             if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded)

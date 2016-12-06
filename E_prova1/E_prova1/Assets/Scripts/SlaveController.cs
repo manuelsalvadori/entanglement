@@ -10,11 +10,14 @@ public class SlaveController : MonoBehaviour
 
     Camera cam;
 
+    Animator m_anim;
+
     void Start ()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        m_anim = GetComponent<Animator>();
 	}
-        
+
 
     void FixedUpdate ()
     {
@@ -30,7 +33,12 @@ public class SlaveController : MonoBehaviour
             move = move.normalized;
         Vector3 force = cam.transform.TransformDirection(move * m_force);
         force.y = 0f;
-                  
+
+        Animator o_anim = GameManager.Instance.m_players[0].GetComponentInChildren<Animator>();
+        m_anim.SetFloat("Forward", o_anim.GetFloat("Forward"));
+        m_anim.SetBool("OnGround", o_anim.GetBool("OnGround"));
+        m_anim.SetFloat("Jump", o_anim.GetFloat("Jump"));
+
         if (force.magnitude != 0)
             m_look = Quaternion.LookRotation(force.normalized);
         if(GameManager.Instance.m_3D_mode)

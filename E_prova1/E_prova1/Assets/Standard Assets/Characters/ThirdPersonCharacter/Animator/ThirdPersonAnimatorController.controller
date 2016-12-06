@@ -13,43 +13,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Turn
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Crouch
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: OnGround
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Jump
     m_Type: 1
-    m_DefaultFloat: 0
+    m_DefaultFloat: -9
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: JumpLeg
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Death
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -483,7 +477,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400004, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
     m_Threshold: 5
-    m_Position: {x: 5, y: -1}
+    m_Position: {x: 10, y: -1}
     m_TimeScale: 0.1
     m_CycleOffset: 0
     m_DirectBlendParameter: 
@@ -491,7 +485,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 51dd2e4c869794f75a0df7d54b210214, type: 3}
     m_Threshold: 15
-    m_Position: {x: 5, y: 1}
+    m_Position: {x: 10, y: 1}
     m_TimeScale: 0.1
     m_CycleOffset: 0
     m_DirectBlendParameter: 
@@ -499,7 +493,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400004, guid: 0d9d26e2162aa4d11ab075b34c029673, type: 3}
     m_Threshold: 20
-    m_Position: {x: -9, y: 0}
+    m_Position: {x: -10, y: 0}
     m_TimeScale: 0.1
     m_CycleOffset: 0
     m_DirectBlendParameter: 
@@ -515,7 +509,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400006, guid: 0d9d26e2162aa4d11ab075b34c029673, type: 3}
     m_Threshold: 35
-    m_Position: {x: 5, y: 0}
+    m_Position: {x: 10, y: 0}
     m_TimeScale: 0.1
     m_CycleOffset: 0
     m_DirectBlendParameter: 
@@ -633,9 +627,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.4419869
+  m_TransitionDuration: 0.080123246
   m_TransitionOffset: 0
-  m_ExitTime: 0.22796744
+  m_ExitTime: 0.9
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -650,9 +644,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: Crouch
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Death
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110298501}
@@ -814,7 +805,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400002, guid: d89ea37480b6d75458aa38843e9688dc, type: 3}
+  m_Motion: {fileID: 20610505}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -858,13 +849,13 @@ AnimatorState:
   - {fileID: 110135218}
   m_StateMachineBehaviours: []
   m_Position: {x: 588, y: 96, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: dffa50cfe77e0434bbfa71245b3dd529, type: 3}
+  m_Motion: {fileID: 20600000}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -879,7 +870,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 110298501}
-    m_Position: {x: 588, y: 84, z: 0}
+    m_Position: {x: 588, y: 96, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110200000}
     m_Position: {x: 444, y: 240, z: 0}
@@ -896,6 +887,6 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 36, y: 108, z: 0}
-  m_ExitPosition: {x: 864, y: 96, z: 0}
+  m_ExitPosition: {x: 792, y: 96, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 110298501}
