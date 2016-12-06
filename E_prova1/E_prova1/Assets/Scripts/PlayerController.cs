@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour
                 m_anim.SetBool("OnGround", true);
                 float forward_amount = Mathf.Abs(m_rb.velocity.magnitude / m_velocity_boundary);
                 m_anim.SetFloat("Forward", forward_amount);
-                Debug.Log("Forward: " + forward_amount);
             }
             else
             {
@@ -86,7 +85,6 @@ public class PlayerController : MonoBehaviour
                 m_anim.SetBool("OnGround", false);
                 float jumpAmount = (Mathf.Abs(m_rb.velocity.y) / 14f) - 9f;
                 m_anim.SetFloat("Jump", m_rb.velocity.y);
-                Debug.Log("Jump: " + jumpAmount + " Velocity: " + m_rb.velocity.y );
             }
 
             //Jump if is touching the "Ground"
@@ -143,11 +141,33 @@ public class PlayerController : MonoBehaviour
                 other.gameObject.SetActive(false);
             GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().updateView();
         }
-        //If this gameobject is touching the "Ground" it can jump
-        if (other.gameObject.tag.Equals("Ground") || other.gameObject.tag.Equals("Spostabile"))
+
+        Debug.Log(other.tag.Equals("LaMuerte"));
+        if (other.tag.Equals("LaMuerte") && GameManager.Instance.m_sel_pg)
         {
-            m_grounded = true;
-            firstDash = true;
+            foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+            {
+                if (!j.gameObject.name.Equals("trail"))
+                {
+                    j.enabled = false;
+                }
+            }
+            Debug.Log("pg1 muore");
+            StartCoroutine(waitForDeath());
+        }
+
+        if (other.tag.Equals("LaMuerte2") && !GameManager.Instance.m_sel_pg)
+        {
+            foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+            {
+                if (!j.gameObject.name.Equals("trail"))
+                {
+                    j.enabled = false;
+                }
+            }
+            Debug.Log("pg2 muore");
+
+            StartCoroutine(waitForDeath());
         }
     }
 
@@ -296,7 +316,7 @@ public class PlayerController : MonoBehaviour
         Ray raggio = new Ray(start, direction);
         Physics.Raycast(raggio, out hit);
 
-        if (!hit.collider.tag.Equals("Player") && !hit.collider.tag.Equals("Spostabile"))
+        if (!hit.collider.tag.Equals("Player") && !hit.collider.tag.Equals("Spostabile") && !hit.collider.tag.Equals("LaMuerte") && !hit.collider.tag.Equals("LaMuerte2"))
         {
             Material m = hit.collider.gameObject.GetComponent<Renderer>().material;
             m.SetFloat("_Mode", 3f);
@@ -346,4 +366,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator waitForDeath()
+    {
+        yield return new WaitForSeconds(1f);
+
+        GameManager.Instance.onDeathPlayer(GameManager.Instance.whoAmI(gameObject.name));
+        foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+        {
+            if (!j.gameObject.name.Equals("trail"))
+            {
+                j.enabled = true;
+            }
+        }
+    }
 }
