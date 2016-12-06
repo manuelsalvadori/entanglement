@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
     public bool m_camIsMoving = false;
     public bool m_levelIsMoving = false;
+
+    public int m_Current_State = (int)CoolCameraController.Stato.First_Player;
+
+
     public bool m_3D_mode = false;
     public bool m_double_mode = false;
     public bool m_single_mode = true;
@@ -48,10 +52,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        m_3D_mode = m_Current_State == (int)CoolCameraController.Stato.TreD;
+
         //Change player selected on Double Mode
-        if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetButton("L2") && Input.GetButtonDown("X"))) && m_double_mode)
+        if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetButton("L2") && Input.GetButtonDown("X"))) && m_Current_State == (int)CoolCameraController.Stato.Doppia)
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
+            Camera.main.GetComponent<CoolCameraController>().changeOldState(GameManager.Instance.m_sel_pg ? 0 : 1);
             m_playerswicth = !m_playerswicth;
             GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
             GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
@@ -139,7 +146,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.m_players[1].GetComponent<JumpController>().enabled = false;
         GameManager.Instance.m_players[1].transform.rotation = GameManager.Instance.m_players[1].transform.GetChild(0).localRotation;
         GameManager.Instance.m_players[1].transform.GetChild(0).localRotation = Quaternion.Euler(Vector3.zero);
-        Debug.Log(GameManager.Instance.m_players[1].transform.GetChild(0).localRotation.eulerAngles);
+        //Debug.Log(GameManager.Instance.m_players[1].transform.GetChild(0).localRotation.eulerAngles);
     }
 
     public static bool isPickble(GameObject go)

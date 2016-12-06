@@ -52,18 +52,18 @@ public class PlayerController : MonoBehaviour
 
             if (Mathf.Abs(m_rb.velocity.x) > m_velocity_boundary)
                 m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(velocity_cap), velocity_cap), m_rb.velocity.y, m_rb.velocity.z);
-            Debug.Log("cap: "+ velocity_cap + " " + m_grounded);
+            //Debug.Log("cap: "+ velocity_cap + " " + m_grounded);
             //
             if (force.magnitude != 0)
                 m_look = Quaternion.LookRotation(force.normalized);
 
             if (!GameManager.Instance.m_3D_mode)
             {
-                if (m_look.eulerAngles.y >= 0f && m_look.eulerAngles.y < 180f)
+                if (m_look.eulerAngles.y >= 0f && m_look.eulerAngles.y <= 180f)
                     m_look = Quaternion.Euler(new Vector3(m_look.eulerAngles.x, 90f, m_look.eulerAngles.z));
                 else
                     m_look = Quaternion.Euler(new Vector3(m_look.eulerAngles.x, 270f, m_look.eulerAngles.z));
-                
+
             }
             StartCoroutine(rotatePlayer(m_look, 0.1f));
 
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
-        playerCulled();  
+        playerCulled();
 	}
 
     void LateUpdate()
@@ -120,6 +120,12 @@ public class PlayerController : MonoBehaviour
             if (pick_item)
                 other.gameObject.SetActive(false);
             GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().updateView();
+        }
+        //If this gameobject is touching the "Ground" it can jump
+        if (other.gameObject.tag.Equals("Ground") || other.gameObject.tag.Equals("Spostabile"))
+        {
+            m_grounded = true;
+            firstDash = true;
         }
     }
 
@@ -297,7 +303,7 @@ public class PlayerController : MonoBehaviour
                 culled = false;
             }
         }
-        
+
     }
 
     IEnumerator stoppedTeleport(RaycastHit hit)

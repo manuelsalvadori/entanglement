@@ -22,7 +22,7 @@ public class DoorOpening : MonoBehaviour {
 	{
 		if (m_button != null)
 		{
-			Debug.Log("bottone!");
+			//Debug.Log("bottone!");
 			active = m_button.m_isActive;
 		}
 

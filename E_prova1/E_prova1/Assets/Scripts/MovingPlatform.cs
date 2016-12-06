@@ -21,10 +21,10 @@ public class MovingPlatform : MonoBehaviour
     {
         if (m_button != null)
         {
-            Debug.Log("bottone!");
+            //Debug.Log("bottone!");
             active = m_button.m_isActive;
         }
-		
+
         if ((transform.position - target).magnitude < 0.3f)
         {
             if (switched)
