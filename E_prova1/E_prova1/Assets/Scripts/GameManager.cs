@@ -11,8 +11,12 @@ public class GameManager : MonoBehaviour
     public bool m_camIsMoving = false;
     public bool m_levelIsMoving = false;
 
-    public int m_Current_State = (int)CoolCameraController.Stato.First_Player;
+    public Transform[] m_checkpoints;
+    private Transform[] m_current_checkpoint;
+    [Range (0,4)]
+    public int select_checkpoint;
 
+    public int m_Current_State = (int)CoolCameraController.Stato.First_Player;
 
     public bool m_3D_mode = false;
     public bool m_double_mode = false;
@@ -48,6 +52,14 @@ public class GameManager : MonoBehaviour
         }
 
         m_currentLevel = (int)Levels.Zero;
+        m_current_checkpoint = new Transform[2];
+    }
+
+    void Start()
+    {
+        m_current_checkpoint[0] = m_checkpoints[select_checkpoint];
+        m_current_checkpoint[1] = m_checkpoints[select_checkpoint];
+        resetPlayersPosition();
     }
 
     void Update()
@@ -235,5 +247,16 @@ public class GameManager : MonoBehaviour
     public Sprite getSprite(int n)
     {
         return m_itemInvetoryView[n];
+    }
+
+    public void resetPlayersPosition()
+    {
+        m_players[0].transform.position = m_current_checkpoint[0].position;
+        m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f,-10f,0f);
+    }
+
+    public void onDeathPlayer(int sel_pg)
+    {
+        m_players[sel_pg].transform.position = m_current_checkpoint[sel_pg].position + new Vector3(0f, -14f * sel_pg, 0f);
     }
 }
