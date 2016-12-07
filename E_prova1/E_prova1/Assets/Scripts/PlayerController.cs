@@ -170,6 +170,11 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(waitForDeath());
         }
+
+        if (other.tag.Equals("Checkpoint"))
+        {
+            GameManager.Instance.updateCheckpoint(other.transform);
+        }
     }
 
     public void OnCollisionStay(Collision other)
@@ -317,7 +322,7 @@ public class PlayerController : MonoBehaviour
         Ray raggio = new Ray(start, direction);
         Physics.Raycast(raggio, out hit);
 
-        if (!hit.collider.tag.Equals("Player") && !hit.collider.tag.Equals("Spostabile") && !hit.collider.tag.Equals("LaMuerte") && !hit.collider.tag.Equals("LaMuerte2"))
+        if (!hit.collider.tag.Equals("Player") && !hit.collider.tag.Equals("Spostabile") && !hit.collider.tag.Equals("Checkpoint") && !hit.collider.tag.Equals("LaMuerte") && !hit.collider.tag.Equals("LaMuerte2") && !hit.collider.tag.Equals("World"))
         {
             Material m = hit.collider.gameObject.GetComponent<Renderer>().material;
             m.SetFloat("_Mode", 3f);
