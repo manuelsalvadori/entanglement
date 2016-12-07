@@ -8,6 +8,14 @@ public class ActivateButton : MonoBehaviour {
     public bool m_isSwitch = false;
     public GameObject square;
     public GameObject tastoi;
+    public Material red, blue;
+    public GameObject screen;
+
+
+    void Start()
+    {
+        screen.GetComponent<Renderer>().material = red;
+    }
 
 	void Update ()
     {
@@ -23,6 +31,11 @@ public class ActivateButton : MonoBehaviour {
                     m_isActive = true;
                     //displayDeactive();
                 }
+                if (m_isActive)
+                    screen.GetComponent<Renderer>().material = blue;
+                else
+                    screen.GetComponent<Renderer>().material = red;
+                
             }
         }
         else

@@ -320,6 +320,10 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.9648247, y: 5.9580245, z: 0.7147257}
   m_Center: {x: 0.022089005, y: 0.022086084, z: 0.535471}
+--- !u!1 &81912715 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100008, guid: 4c7fd4c29f61f4a8d9a97b8e41214a08, type: 3}
+  m_PrefabInternal: {fileID: 1576823936}
 --- !u!1 &115306139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1737,6 +1741,9 @@ MonoBehaviour:
   m_isSwitch: 0
   square: {fileID: 714630635}
   tastoi: {fileID: 663315415}
+  red: {fileID: 0}
+  blue: {fileID: 0}
+  screen: {fileID: 0}
 --- !u!1 &459700163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4575,6 +4582,9 @@ MonoBehaviour:
   m_isSwitch: 0
   square: {fileID: 0}
   tastoi: {fileID: 0}
+  red: {fileID: 2100000, guid: 68b890a13bcfc4955aa373ca529bc09c, type: 2}
+  blue: {fileID: 2100000, guid: d4d4d733eea43498ba9e3b52b986391b, type: 2}
+  screen: {fileID: 1234277395}
 --- !u!1 &1024167241
 GameObject:
   m_ObjectHideFlags: 0
@@ -5260,6 +5270,10 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1226965317}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1234277395 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100008, guid: 4c7fd4c29f61f4a8d9a97b8e41214a08, type: 3}
+  m_PrefabInternal: {fileID: 1014888654}
 --- !u!1 &1237230698
 GameObject:
   m_ObjectHideFlags: 0
@@ -6660,6 +6674,22 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 867c53cfdc3c6482da0386ddac31ac8b, type: 2}
+    - target: {fileID: 400008, guid: 4c7fd4c29f61f4a8d9a97b8e41214a08, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 4c7fd4c29f61f4a8d9a97b8e41214a08, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: 4c7fd4c29f61f4a8d9a97b8e41214a08, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 4c7fd4c29f61f4a8d9a97b8e41214a08, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c7fd4c29f61f4a8d9a97b8e41214a08, type: 3}
   m_IsPrefabParent: 0
@@ -6702,6 +6732,9 @@ MonoBehaviour:
   m_isSwitch: 1
   square: {fileID: 0}
   tastoi: {fileID: 0}
+  red: {fileID: 2100000, guid: 68b890a13bcfc4955aa373ca529bc09c, type: 2}
+  blue: {fileID: 2100000, guid: d4d4d733eea43498ba9e3b52b986391b, type: 2}
+  screen: {fileID: 81912715}
 --- !u!1 &1587807380
 GameObject:
   m_ObjectHideFlags: 0
@@ -8434,7 +8467,7 @@ MonoBehaviour:
   - {fileID: 401093912}
   - {fileID: 2084151410}
   - {fileID: 1024167242}
-  select_checkpoint: 0
+  select_checkpoint: 1
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
