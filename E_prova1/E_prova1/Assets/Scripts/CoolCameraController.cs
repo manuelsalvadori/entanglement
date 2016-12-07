@@ -8,7 +8,8 @@ public class CoolCameraController : MonoBehaviour {
     public Vector3[] m_Level_Position;
     public Vector3[] m_Wall_Position;
     public Vector3[] m_View;
-    public float m_BackOffset = 2.5f;
+    public float m_BackOffset = 9f;
+    public float m_TopOffset = 6f;
     public float m_WallOffset = -0.44f;
     //~
 
@@ -84,7 +85,7 @@ public class CoolCameraController : MonoBehaviour {
         m_View[0] = new Vector3(0f, GameManager.Instance.m_level1.transform.position.y, -20f);
         m_View[1] = new Vector3(0f, GameManager.Instance.m_level2.transform.position.y, -20f);
         m_View[2] = new Vector3(0f, 0f, -29f);
-        m_View[3] = new Vector3(m_player_position[1].x, -2f, 0f);
+        m_View[3] = new Vector3(m_player_position[1].x, m_player_position[1].y, 0f);
 
 
         Vector3 player_pos = Camera.main.WorldToViewportPoint(m_player_position[0]);
@@ -233,7 +234,7 @@ public class CoolCameraController : MonoBehaviour {
             GameManager.Instance.m_3D_mode = true;
             GameManager.Instance.m_camIsMoving = true;
             m_CameraTarget = m_View[GameManager.Instance.m_Current_State];
-            //m_CameraTarget.y = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y + 2f;
+            m_CameraTarget.y = m_player_position[1].y + m_TopOffset;
             m_CameraTarget.x = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.x - m_BackOffset;
             m_CameraRotation = new Vector3(18f, 90f, 0f);
 

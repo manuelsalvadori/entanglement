@@ -100,7 +100,8 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
-        playerCulled();
+        if(!GameManager.Instance.m_camIsMoving)
+            playerCulled();
 	}
 
     void LateUpdate()
