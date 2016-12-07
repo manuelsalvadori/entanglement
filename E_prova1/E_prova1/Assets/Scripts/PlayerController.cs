@@ -142,7 +142,6 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().updateView();
         }
 
-        Debug.Log(other.tag.Equals("LaMuerte"));
         if (other.tag.Equals("LaMuerte") && GameManager.Instance.m_sel_pg)
         {
             foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
