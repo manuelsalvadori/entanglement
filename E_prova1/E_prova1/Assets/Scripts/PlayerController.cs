@@ -323,6 +323,8 @@ public class PlayerController : MonoBehaviour
 
         if (!hit.collider.tag.Equals("Player") && !hit.collider.tag.Equals("Spostabile") && !hit.collider.tag.Equals("Checkpoint") && !hit.collider.tag.Equals("LaMuerte") && !hit.collider.tag.Equals("LaMuerte2") && !hit.collider.tag.Equals("World"))
         {
+            if (!hit.collider.gameObject.GetComponent<Renderer>())
+                return;
             Material m = hit.collider.gameObject.GetComponent<Renderer>().material;
             m.SetFloat("_Mode", 3f);
             m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
