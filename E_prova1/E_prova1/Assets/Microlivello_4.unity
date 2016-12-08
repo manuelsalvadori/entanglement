@@ -888,7 +888,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 256858461}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.725534, y: 1.0357584, z: 7.4091425}
@@ -3602,6 +3602,14 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1.55772
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8a63337d9b2713a42a2e34a07460abb6, type: 3}
+      propertyPath: m_TagString
+      value: Barriera
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8a63337d9b2713a42a2e34a07460abb6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 8a63337d9b2713a42a2e34a07460abb6, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 8a63337d9b2713a42a2e34a07460abb6, type: 3}
@@ -5513,6 +5521,10 @@ Prefab:
     - target: {fileID: 100000, guid: 8a63337d9b2713a42a2e34a07460abb6, type: 3}
       propertyPath: m_TagString
       value: Barriera
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8a63337d9b2713a42a2e34a07460abb6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 8a63337d9b2713a42a2e34a07460abb6, type: 3}
