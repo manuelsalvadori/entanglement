@@ -33,9 +33,6 @@ public class PlayerController : MonoBehaviour
             m_v = Input.GetAxis("Horizontal");
             m_h = Input.GetAxis("Vertical");
 
-            if (GameManager.Instance.m_camIsMoving) //During a transition between camera's modes player can't move
-                    m_h = m_v = 0f;
-
             //Convert movement in rotation behaviour: when a player says to go in one direction the gameobject have to rotate in this direction and move forward!
             Quaternion m_look = transform.rotation;
             Vector3 move = new Vector3(m_v, 0f, m_h);

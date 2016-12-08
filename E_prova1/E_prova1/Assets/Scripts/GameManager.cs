@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator shutdown_thisWin(GameObject go)
+    public IEnumerator shutdown_thisWin(GameObject go)
     {
         yield return new WaitUntil(() => !go.GetComponent<Animation>().isPlaying);
         go.SetActive(false);

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoolCameraController : MonoBehaviour {
-
+public class CoolCameraController : MonoBehaviour
+{
+    public GameObject cameradx;
     //Constant Level and Cam Geometry
     public Vector3[] m_Level_Position;
     public Vector3[] m_Wall_Position;
-    public Vector3[] m_View;
+    private Vector3[] m_View;
+    public float m_heigthOffset = 2f;
     public float m_BackOffset = 2.5f;
     public float m_WallOffset = -0.44f;
+    public float m_z3d = 0f, m_y3d = 29f;
     //~
 
 
@@ -26,6 +29,7 @@ public class CoolCameraController : MonoBehaviour {
     private Vector3 velocity2 = Vector3.zero;
     private Vector3 velocity3 = Vector3.zero;
     private Vector3 velocity4 = Vector3.zero;
+    private float velocityfloat = 0f;
     public float smoothTime = 0.3F;                                     //Amount of smooth
     public float followingSpeed = 1.5f;
     //~
@@ -55,11 +59,6 @@ public class CoolCameraController : MonoBehaviour {
 
     private Vector3 m_offset_from_players;
 
-    private void Awake()
-    {
-
-    }
-
     // Use this for initialization
     void Start () {
         GameManager.Instance.m_Current_State = m_oldState = (int)Stato.First_Player;
@@ -84,7 +83,7 @@ public class CoolCameraController : MonoBehaviour {
         m_View[0] = new Vector3(0f, GameManager.Instance.m_level1.transform.position.y, -20f);
         m_View[1] = new Vector3(0f, GameManager.Instance.m_level2.transform.position.y, -20f);
         m_View[2] = new Vector3(0f, 0f, -29f);
-        m_View[3] = new Vector3(m_player_position[1].x, -2f, 0f);
+        m_View[3] = new Vector3(m_player_position[1].x, m_y3d, m_z3d);
 
 
         Vector3 player_pos = Camera.main.WorldToViewportPoint(m_player_position[0]);
@@ -102,17 +101,17 @@ public class CoolCameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if ((Input.GetKeyDown("1") || (Input.GetButton("L2") && Input.GetButtonDown("Square"))) && !GameManager.Instance.m_inventoryIsOpen && !m_levelIsMoving) //single_view
+        if (Input.GetButtonDown("Level1") && !GameManager.Instance.m_inventoryIsOpen) //single_view
         {
-            select_singleView();
+            select_singleView(0);
         }
 
-        if ((Input.GetKeyDown("2") || (Input.GetButton("L2") && Input.GetButtonDown("Triangle"))) && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && !m_levelIsMoving) //double_view
+        if (Input.GetButtonDown("Level2") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen) //double_view
         {
-            select_doubleView();
+            select_singleView(1);
         }
 
-        if ((Input.GetKeyDown("3") || (Input.GetButton("L2") && Input.GetButtonDown("O"))) && !GameManager.Instance.m_inventoryIsOpen) //3D_view
+        if (Input.GetButtonDown("3Dmode") && !GameManager.Instance.m_inventoryIsOpen) //3D_view
         {
             if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
         }
@@ -125,32 +124,9 @@ public class CoolCameraController : MonoBehaviour {
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
             m_CameraTarget.x = player_pos.x;
         }
+
         else
-            m_CameraTarget = m_offset_from_players + new Vector3(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.x, 0f, 0f);
-
-
-        if (m_levelIsMoving)
-        {
-            //Move Level
-
-            distCovered = (Time.time - startTime) * m_Level_speed;
-            fracJourney = distCovered / journeyLength;
-            fracJourney = (m_LevelTarget == m_Level_Position[1]) ? 1f - Mathf.Cos(fracJourney * Mathf.PI * 0.5f) : Mathf.Sin(fracJourney * Mathf.PI * 0.5f);
-            m_l1.position = Vector3.Lerp(m_l1.position, m_LevelTarget, fracJourney);
-            //Debug.Log("Level :" + fracJourney + " distance " + journeyLength);
-
-            if (fracJourney >= 0.5f)
-            {
-                startTime = Time.time;
-                m_LevelTarget = (m_oldState == (int)Stato.TreD) ? m_Level_Position[0] : m_Level_Position[2];
-            }
-
-            m_levelIsMoving = !(Mathf.Abs((m_l1.position - (m_oldState == (int)Stato.TreD ? m_Level_Position[0] : m_Level_Position[2])).magnitude) < 0.05f) ;
-            GameManager.Instance.m_camIsMoving = m_levelIsMoving;
-
-            GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition = Vector3.SmoothDamp(GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition, m_WallTarget, ref velocity3, (smoothTime));
-        }
-        //Debug.Log(m_levelIsMoving);
+            m_CameraTarget = m_offset_from_players + new Vector3(GameManager.Instance.m_players[0].transform.position.x, GameManager.Instance.m_players[0].transform.position.y, GameManager.Instance.m_players[0].transform.position.z);
     }
 
 
@@ -160,8 +136,10 @@ public class CoolCameraController : MonoBehaviour {
         //Debug.Log(m_CameraTarget + " e " + m_offset_from_players);
         //Move the camera (SmoothDamp version)
         transform.position = Vector3.SmoothDamp(transform.position, m_CameraTarget, ref velocity4, smoothTime);
-        transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, m_CameraRotation, ref velocity2, smoothTime));
+        float ydx = Mathf.SmoothDamp(cameradx.transform.position.y, GameManager.Instance.m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.y + m_heigthOffset, ref velocityfloat, smoothTime);
 
+        transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, m_CameraRotation, ref velocity2, smoothTime));
+        cameradx.transform.position = new Vector3(transform.position.x, ydx, transform.position.z);
 
         if (transform.rotation.eulerAngles.y > 88f && transform.rotation.eulerAngles.y < 90f)
         {
@@ -173,12 +151,15 @@ public class CoolCameraController : MonoBehaviour {
     }
 
 
-    private void select_singleView()
+    private void select_singleView(int player)
     {
         switch (GameManager.Instance.m_Current_State)
         {
-            case 0:
+            case 0: 
+               
             case 1:
+                if (player == GameManager.Instance.m_Current_State)
+                    return;
                 m_oldState = GameManager.Instance.m_Current_State;
                 GameManager.Instance.m_Current_State = 1 - GameManager.Instance.m_Current_State;
                 GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
@@ -228,16 +209,37 @@ public class CoolCameraController : MonoBehaviour {
     {
         if(GameManager.Instance.m_Current_State != (int)Stato.TreD)
         {
+            cameradx.SetActive(true);
+            if (GameManager.Instance.m_sel_pg)
+            {
+                cameradx.GetComponent<Animation>()["CameraDX1"].speed = 1f;
+                cameradx.GetComponent<Animation>()["CameraDX1"].time = 0f;
+                GetComponent<Animation>()["Camera3D1"].speed = 1f;
+                GetComponent<Animation>()["Camera3D1"].time = 0f;
+
+                cameradx.GetComponent<Animation>().Play("CameraDX1");
+                GetComponent<Animation>().Play("Camera3D1");
+            }
+            else
+            {
+                cameradx.GetComponent<Animation>()["CameraDX2"].speed = 1f;
+                cameradx.GetComponent<Animation>()["CameraDX2"].time = 0f;
+                GetComponent<Animation>()["Camera3D2"].speed = 1f;
+                GetComponent<Animation>()["Camera3D2"].time = 0f;
+                cameradx.GetComponent<Animation>().Play("CameraDX2");
+                GetComponent<Animation>().Play("Camera3D2");
+            }
             m_oldState =  GameManager.Instance.m_Current_State;
             GameManager.Instance.m_Current_State = (int)Stato.TreD;
             GameManager.Instance.m_3D_mode = true;
             GameManager.Instance.m_camIsMoving = true;
             m_CameraTarget = m_View[GameManager.Instance.m_Current_State];
-            //m_CameraTarget.y = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.y + 2f;
-            m_CameraTarget.x = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.x - m_BackOffset;
+            m_CameraTarget.y = GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.y + m_heigthOffset;
+            m_CameraTarget.x = GameManager.Instance.m_players[0].transform.position.x - m_BackOffset;
+            m_CameraTarget.z = GameManager.Instance.m_players[0].transform.position.z;
             m_CameraRotation = new Vector3(18f, 90f, 0f);
 
-            m_offset_from_players = m_CameraTarget - new Vector3(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position.x, 0f, 0f);
+            m_offset_from_players = m_CameraTarget - new Vector3(GameManager.Instance.m_players[0].transform.position.x, GameManager.Instance.m_players[0].transform.position.y, GameManager.Instance.m_players[0].transform.position.z);
 
             startTime = Time.time;
             m_LevelTarget = m_Level_Position[1];
@@ -249,11 +251,32 @@ public class CoolCameraController : MonoBehaviour {
 
 
             GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].hideSelectionUI();
-            StartCoroutine(GameManager.activateChildMode());
+            //StartCoroutine(GameManager.activateChildMode());
             StartCoroutine(GameManager.alinePlayers());
         }
         else
         {
+            if (GameManager.Instance.m_sel_pg)
+            {
+                cameradx.GetComponent<Animation>()["CameraDX1"].speed = -1f;
+                cameradx.GetComponent<Animation>()["CameraDX1"].time = cameradx.GetComponent<Animation>()["CameraDX1"].length;
+                GetComponent<Animation>()["Camera3D1"].speed = -1f;
+                GetComponent<Animation>()["Camera3D1"].time = GetComponent<Animation>()["Camera3D1"].length;
+
+                cameradx.GetComponent<Animation>().Play("CameraDX1");
+                GetComponent<Animation>().Play("Camera3D1");
+            }
+            else
+            {
+                cameradx.GetComponent<Animation>()["CameraDX2"].speed = -1f;
+                cameradx.GetComponent<Animation>()["CameraDX2"].time = cameradx.GetComponent<Animation>()["CameraDX1"].length;
+                GetComponent<Animation>()["Camera3D2"].speed = -1f;
+                GetComponent<Animation>()["Camera3D2"].time = GetComponent<Animation>()["Camera3D1"].length;
+
+                cameradx.GetComponent<Animation>().Play("CameraDX2");
+                GetComponent<Animation>().Play("Camera3D2");
+            }
+            StartCoroutine(GameManager.Instance.shutdown_thisWin(cameradx));
             int tmp = m_oldState;
             m_oldState = GameManager.Instance.m_Current_State;
             GameManager.Instance.m_Current_State = tmp;
@@ -271,7 +294,7 @@ public class CoolCameraController : MonoBehaviour {
             m_WallTarget = m_Wall_Position[0];
 
 
-            GameManager.deactivateChildMode();
+            //GameManager.deactivateChildMode();
             GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].unhideSelectionUI();
         }
     }
@@ -281,5 +304,4 @@ public class CoolCameraController : MonoBehaviour {
     {
         m_oldState = state;
     }
-
 }
