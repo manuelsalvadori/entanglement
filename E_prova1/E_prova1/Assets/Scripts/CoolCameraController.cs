@@ -19,7 +19,6 @@ public class CoolCameraController : MonoBehaviour
     private Vector3 m_CameraTarget;                                     //Posizione di Arrivo
     private Vector3 m_CameraRotation;                                   //Rotazione di Arrivo
     private Vector3 m_LevelTarget;                                      //Posizione di Arrivo del livello
-    private Vector3 m_WallTarget;
 
     public enum Stato { First_Player, Second_Player, Doppia, TreD};
     private int m_oldState;
@@ -27,7 +26,6 @@ public class CoolCameraController : MonoBehaviour
     //SmoothDump setting function
     //private Vector3 velocity = Vector3.zero;
     private Vector3 velocity2 = Vector3.zero;
-    private Vector3 velocity3 = Vector3.zero;
     private Vector3 velocity4 = Vector3.zero;
     private float velocityfloat = 0f;
     public float smoothTime = 0.3F;                                     //Amount of smooth
@@ -36,13 +34,6 @@ public class CoolCameraController : MonoBehaviour
 
     //Lerp Level1 setting function
     public float m_Level_speed = 10F;
-    private float startTime;
-    private float journeyLength;
-    private float distCovered = 0;
-    private float fracJourney = 0;
-
-    private bool m_levelIsMoving = false;
-
     //Players and Levels infos
     //Editor view
     public Transform m_l1, m_l2;
@@ -90,10 +81,7 @@ public class CoolCameraController : MonoBehaviour
         player_pos.x += 0.15f;
         player_pos = Camera.main.ViewportToWorldPoint(player_pos);
 
-        m_offset_from_players = m_View[3] - new Vector3(m_player_position[0].x, 0f, 0f) ;
-
-        m_LevelTarget = m_l1.position;
-        m_WallTarget = m_Wall_Position[0];
+        m_offset_from_players = m_View[3] - new Vector3(m_player_position[0].x, 0f, 0f);
 
         m_CameraTarget = m_View[GameManager.Instance.m_Current_State];
         m_CameraTarget.x = player_pos.x;
@@ -241,15 +229,6 @@ public class CoolCameraController : MonoBehaviour
 
             m_offset_from_players = m_CameraTarget - new Vector3(GameManager.Instance.m_players[0].transform.position.x, GameManager.Instance.m_players[0].transform.position.y, GameManager.Instance.m_players[0].transform.position.z);
 
-            startTime = Time.time;
-            m_LevelTarget = m_Level_Position[1];
-            journeyLength = Vector3.Distance(m_l1.position, m_LevelTarget);
-            m_levelIsMoving = true;
-
-
-            m_WallTarget = m_Wall_Position[1];
-
-
             GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].hideSelectionUI();
             //StartCoroutine(GameManager.activateChildMode());
             StartCoroutine(GameManager.alinePlayers());
@@ -284,15 +263,6 @@ public class CoolCameraController : MonoBehaviour
             GameManager.Instance.m_camIsMoving = true;
             m_CameraTarget = m_View[GameManager.Instance.m_Current_State];
             m_CameraRotation = Vector3.zero;
-
-            startTime = Time.time;
-            m_LevelTarget = m_Level_Position[1];
-            journeyLength = Vector3.Distance(m_l1.position, m_LevelTarget);
-            m_levelIsMoving = true;
-
-
-            m_WallTarget = m_Wall_Position[0];
-
 
             //GameManager.deactivateChildMode();
             GameManager.Instance.m_gadgetSelection[(GameManager.Instance.m_sel_pg) ? 0 : 1].unhideSelectionUI();
