@@ -81,6 +81,8 @@ public class ThirdPersonUserControl : MonoBehaviour
         //transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
+
+
     IEnumerator changeGround(float f, float time = 0.2f)
     {
         yield return new WaitForSeconds(time);

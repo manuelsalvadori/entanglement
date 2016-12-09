@@ -125,9 +125,11 @@ private static bool locker = false;
         */
 		// send input and other state parameters to the animator
 		UpdateAnimator(move, jump);
-        if(m_IsFalling && !m_IsJumping)
+        /*
+        if (m_IsFalling && !m_IsJumping)
             Debug.Log(currentHeight + " " + m_IsJumping);
-	}
+	    */
+    }
 
 
 	void ScaleCapsuleForCrouching(bool crouch)
@@ -234,7 +236,7 @@ private static bool locker = false;
             oscillazione = (Mathf.Cos(startJump * 2 * Mathf.PI));
             //Debug.Log(startJump);
             Vector3 salto = new Vector3(0f, jumpSpeed * oscillazione, 0f);
-            Vector3 v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * 3));
+            Vector3 v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * moveSpeed));
             v.x = -v.x;
             GetComponent<CharacterController>().Move(salto + v * Time.deltaTime);
             m_IsJumping = true;
@@ -325,6 +327,7 @@ private static bool locker = false;
             }
             else
             {
+
                 m_IsGrounded = false;
 
                 m_GroundNormal = Vector3.up;
@@ -361,6 +364,19 @@ private static bool locker = false;
 		}
         */
     }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.point.y < transform.position.y + m_GroundCheckDistance)
+        {
+            m_IsGrounded = true;
+            m_Animator.applyRootMotion = true;
+            m_IsFalling = false;
+            m_IsJumping = false;
+            startJump = 0;
+        }
+    }
+
 
     public void setGroundDistance(float distance) { m_GroundCheckDistance = distance; }
 }
