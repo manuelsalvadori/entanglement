@@ -111,6 +111,8 @@ public class CoolCameraController : MonoBehaviour
             player_pos.x += 0.15f;
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
             m_CameraTarget.x = player_pos.x;
+            m_CameraTarget.y = player_pos.y + m_heigthOffset;
+
         }
 
         else
@@ -143,8 +145,8 @@ public class CoolCameraController : MonoBehaviour
     {
         switch (GameManager.Instance.m_Current_State)
         {
-            case 0: 
-               
+            case 0:
+
             case 1:
                 if (player == GameManager.Instance.m_Current_State)
                     return;
@@ -156,6 +158,7 @@ public class CoolCameraController : MonoBehaviour
                 GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
                 GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
                 m_CameraTarget = m_View[GameManager.Instance.m_Current_State];
+                m_CameraTarget.y = m_player_position[GameManager.Instance.m_Current_State].y;
                 break;
             case 2:
                 m_oldState = GameManager.Instance.m_Current_State;

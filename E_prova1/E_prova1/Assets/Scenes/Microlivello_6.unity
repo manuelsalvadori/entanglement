@@ -1933,18 +1933,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2173f35e529fecc45aa3e3f2c09c7163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameradx: {fileID: 0}
   m_Level_Position:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Wall_Position: []
-  m_View:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  m_heigthOffset: 2
   m_BackOffset: 10
   m_WallOffset: -0.44
+  m_z3d: 0
+  m_y3d: 29
   smoothTime: 0.3
   followingSpeed: 1.5
   m_Level_speed: 12
@@ -6948,7 +6947,7 @@ Canvas:
   m_GameObject: {fileID: 1468498492}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 421335541}
   m_PlaneDistance: 5
   m_PixelPerfect: 1
