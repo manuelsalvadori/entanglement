@@ -45,6 +45,7 @@ public class ThirdPersonCharacter : MonoBehaviour
     private float startFall = 0;
     private float currentHeight = 0;
 
+    public bool anim_fall = false;
 
 private static bool locker = false;
 
@@ -180,8 +181,10 @@ private static bool locker = false;
             //Debug.Log(fallSpeed);
 
             //m_Animator.SetFloat("Jump", GetComponent<CharacterController>().velocity.y != 0 ? ((GetComponent<CharacterController>().velocity.y - 20) / 40 * 14) - 9: 0f);
-
-            m_Animator.SetFloat("Jump", (!m_IsJumping)? currentHeight : startJump);
+            if(!anim_fall)
+                m_Animator.SetFloat("Jump", (!m_IsJumping)? currentHeight/startFall : startJump);
+            else
+                m_Animator.SetFloat("Jump", currentHeight / startFall);
         }
 
 
@@ -213,14 +216,14 @@ private static bool locker = false;
 
 	void HandleAirborneMovement()
 	{
-        if (startJump > 0.7)
+        if (startJump > 0.6)
         {
             m_IsJumping = false;
         }
 
         if(!m_IsJumping)
         {
-            Vector3 caduta = (startJump > 0.7) ? new Vector3(0f, jumpSpeed * (Mathf.Cos(startJump * 2 * Mathf.PI)), 0f) : new Vector3(0f, -Time.deltaTime * m_JumpPower, 0f);
+            Vector3 caduta =  new Vector3(0f, -Time.deltaTime * m_JumpPower, 0f);
             startJump = 0;
             Vector3 v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * 3));
             v.x = -v.x;
