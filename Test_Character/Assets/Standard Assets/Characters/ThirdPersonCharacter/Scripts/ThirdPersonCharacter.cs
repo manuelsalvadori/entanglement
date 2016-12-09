@@ -25,7 +25,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	Vector3 m_GroundNormal;
 	float m_CapsuleHeight;
 	Vector3 m_CapsuleCenter;
-	CapsuleCollider m_Capsule;
+	CharacterController m_Capsule;
 	bool m_Crouching;
 
 
@@ -39,6 +39,12 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     private float oscillazione;
     private float startJump = 0;
+    private bool m_IsJumping = false;
+
+    private bool m_IsFalling = false;
+    private float startFall = 0;
+    private float currentHeight = 0;
+
 
 private static bool locker = false;
 
@@ -47,9 +53,9 @@ private static bool locker = false;
 	{
 		m_Animator = GetComponent<Animator>();
 		//m_Rigidbody = GetComponent<Rigidbody>();
-		//m_Capsule = GetComponent<CapsuleCollider>();
-		//m_CapsuleHeight = m_Capsule.height;
-		//m_CapsuleCenter = m_Capsule.center;
+		m_Capsule = GetComponent<CharacterController>();
+		m_CapsuleHeight = m_Capsule.height;
+		m_CapsuleCenter = m_Capsule.center;
 
 		//m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
@@ -118,6 +124,8 @@ private static bool locker = false;
         */
 		// send input and other state parameters to the animator
 		UpdateAnimator(move, jump);
+        if(m_IsFalling && !m_IsJumping)
+            Debug.Log(currentHeight + " " + m_IsJumping);
 	}
 
 
@@ -172,7 +180,8 @@ private static bool locker = false;
             //Debug.Log(fallSpeed);
 
             //m_Animator.SetFloat("Jump", GetComponent<CharacterController>().velocity.y != 0 ? ((GetComponent<CharacterController>().velocity.y - 20) / 40 * 14) - 9: 0f);
-            m_Animator.SetFloat("Jump", startJump);
+
+            m_Animator.SetFloat("Jump", (!m_IsJumping)? currentHeight : startJump);
         }
 
 
@@ -204,16 +213,29 @@ private static bool locker = false;
 
 	void HandleAirborneMovement()
 	{
-        if (startJump > 1)
+        if (startJump > 0.7)
         {
-            startJump = 0;
+            m_IsJumping = false;
         }
-        oscillazione = (Mathf.Cos(startJump * 2 * Mathf.PI));
-        Debug.Log(startJump);
-        Vector3 salto = new Vector3(0f, jumpSpeed * oscillazione, 0f);
-        Vector3 v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * 3));
-        v.x = -v.x;
-        GetComponent<CharacterController>().Move(salto + v*Time.deltaTime);
+
+        if(!m_IsJumping)
+        {
+            Vector3 caduta = (startJump > 0.7) ? new Vector3(0f, jumpSpeed * (Mathf.Cos(startJump * 2 * Mathf.PI)), 0f) : new Vector3(0f, -Time.deltaTime * m_JumpPower, 0f);
+            startJump = 0;
+            Vector3 v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * 3));
+            v.x = -v.x;
+            GetComponent<CharacterController>().Move(caduta + v * Time.deltaTime);
+        }
+        else
+        {
+            oscillazione = (Mathf.Cos(startJump * 2 * Mathf.PI));
+            //Debug.Log(startJump);
+            Vector3 salto = new Vector3(0f, jumpSpeed * oscillazione, 0f);
+            Vector3 v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * 3));
+            v.x = -v.x;
+            GetComponent<CharacterController>().Move(salto + v * Time.deltaTime);
+            m_IsJumping = true;
+        }
 
         //m_Rigidbody.AddForce(new Vector3(0f,0f,(m_ForwardAmount * m_MoveSpeedMultiplier) / Time.deltaTime));
         /*
@@ -243,7 +265,7 @@ private static bool locker = false;
             m_Animator.applyRootMotion = false;
             GetComponent<CharacterController>().Move(new Vector3(0f, m_OrigGroundCheckDistance,0f));
             m_GroundCheckDistance = 0.1f;
-
+            m_IsJumping = true;
 
             /* jump!
             m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
@@ -285,10 +307,40 @@ private static bool locker = false;
 	void CheckGroundStatus()
 	{
 		RaycastHit hitInfo;
+
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.2f), Vector3.down, out hitInfo, Mathf.Infinity))
+        {
+            if(hitInfo.distance < m_GroundCheckDistance)
+            {
+                m_GroundNormal = hitInfo.normal;
+                GetComponent<CharacterController>().Move(new Vector3(0f, -m_OrigGroundCheckDistance, 0f));
+                m_IsGrounded = true;
+                m_Animator.applyRootMotion = true;
+                m_IsFalling = false;
+                m_IsJumping = false;
+                startJump = 0;
+            }
+            else
+            {
+                m_IsGrounded = false;
+
+                m_GroundNormal = Vector3.up;
+                m_Animator.applyRootMotion = false;
+                if (!m_IsFalling)
+                {
+                    startFall = hitInfo.distance;
+                }
+                m_IsFalling = true;
+                currentHeight = hitInfo.distance;
+            }
+        }
+
+
 #if UNITY_EDITOR
-		// helper to visualise the ground check ray in the scene view
-		Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
+        // helper to visualise the ground check ray in the scene view
+        Debug.DrawLine(transform.position + (Vector3.up * 0.2f), transform.position + (Vector3.up * 0.2f) + (Vector3.down * hitInfo.distance));
 #endif
+        /*
 		// 0.1f is a small offset to start the ray from inside the character
 		// it is also good to note that the transform position in the sample assets is at the base of the character
 		if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
@@ -304,7 +356,8 @@ private static bool locker = false;
 			m_GroundNormal = Vector3.up;
 			m_Animator.applyRootMotion = false;
 		}
-	}
+        */
+    }
 
     public void setGroundDistance(float distance) { m_GroundCheckDistance = distance; }
 }

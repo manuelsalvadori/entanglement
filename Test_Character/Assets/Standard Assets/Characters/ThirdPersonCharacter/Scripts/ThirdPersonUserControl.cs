@@ -74,11 +74,7 @@ public class ThirdPersonUserControl : MonoBehaviour
         m_Character.Move(m_Move, crouch, m_Jump);
         //Debug.Log(GetComponent<Rigidbody>().velocity.y);
 
-        if (m_Jump && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Airborne"))
-        {
-            StartCoroutine(changeGround(10f));
-            StartCoroutine(changeGround(0.3f, 0.5f));
-        }
+
         m_Jump = false;
 
 
