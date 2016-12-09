@@ -9,7 +9,7 @@ public class DoorOpening : MonoBehaviour {
 	public ActivateButton m_button;
 	private Vector3 target = Vector3.zero;
 	private Vector3 velocity;
-	private bool active = true, switched = true;
+	private bool active = true;
 	public float smoothTime = 1f;
 
 	// Use this for initialization

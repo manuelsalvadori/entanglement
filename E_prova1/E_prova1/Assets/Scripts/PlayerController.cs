@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.m_inventory[GameManager.Instance.whoAmI(this.name)].GetComponent<Inventory>().updateView();
         }
 
-        if (other.tag.Equals("LaMuerte") && GameManager.Instance.m_sel_pg)
+        if (other.tag.Equals("LaMuerte"))
         {
             foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
             {
@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(waitForDeath());
         }
 
-        if (other.tag.Equals("LaMuerte2") && !GameManager.Instance.m_sel_pg)
+        if (other.tag.Equals("LaMuerte2"))
         {
             foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
             {

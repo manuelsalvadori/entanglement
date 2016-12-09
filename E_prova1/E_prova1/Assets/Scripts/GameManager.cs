@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     public Sprite[] m_itemInvetoryView;
 
-
     public GameObject m_gameplay_UI_Canvas;
 
 
@@ -262,7 +261,7 @@ public class GameManager : MonoBehaviour
         else
         {
             m_players[0].transform.position = m_current_checkpoint[0].position;
-            m_players[1].transform.position = m_current_checkpoint[1].position;
+            m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f, -14f, 0f);
         }
     }
 
