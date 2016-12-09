@@ -4,6 +4,7 @@ using System.Collections;
 public class Pointing : MonoBehaviour
 {
     public float speed = 8f;
+    public float zFixed = -10.5f;
     public float[] start_ray_y = {10f, -2f};
     LineRenderer lr;
     public Material[] mat;
@@ -63,7 +64,7 @@ public class Pointing : MonoBehaviour
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         pos = Camera.main.ViewportToWorldPoint(new Vector3(Mathf.Clamp(pos.x, 0.03f, 0.97f), pos.y, pos.z));
 
-        transform.position = new Vector3(pos.x, transform.position.y, -4.6f);
+        transform.position = new Vector3(pos.x, transform.position.y, zFixed);
         lr.SetPosition(0, transform.position);
         lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
 	}
