@@ -2746,7 +2746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3dff3b644114fbb815ccab6e759ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_unlocked: 0
+  m_unlocked: 1
   m_isActive: 0
   m_isSwitch: 1
   min_distance: 5
@@ -3178,7 +3178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3dff3b644114fbb815ccab6e759ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_unlocked: 1
+  m_unlocked: 0
   m_isActive: 0
   m_isSwitch: 1
   min_distance: 5
@@ -4950,7 +4950,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMaster: 0
+  isAlone: 0
   l2: {fileID: 0}
+  finished: 0
 --- !u!65 &931750503
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5849,6 +5851,7 @@ MonoBehaviour:
   m_endPosition: {fileID: 741156627}
   m_initPosition: {fileID: 1538794825}
   m_button: {fileID: 455781072}
+  active: 1
   smoothTime: 3
 --- !u!1 &1088186309
 GameObject:
@@ -7568,7 +7571,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMaster: 1
+  isAlone: 0
   l2: {fileID: 931750502}
+  finished: 0
 --- !u!65 &1490601886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8169,7 +8174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3dff3b644114fbb815ccab6e759ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_unlocked: 0
+  m_unlocked: 1
   m_isActive: 0
   m_isSwitch: 1
   min_distance: 5
@@ -10502,6 +10507,8 @@ MonoBehaviour:
   m_double_mode: 0
   m_single_mode: 1
   m_sel_pg: 1
+  m_lockedPlayer: 0
+  m_UpgradesActive: 
   m_inventoryIsOpen: 0
   m_playerswicth: 0
   m_gadgetSelection:
@@ -10518,6 +10525,7 @@ MonoBehaviour:
   m_level1: {fileID: 979958337}
   m_level2: {fileID: 1685322403}
   m_currentLevel: 0
+  m_ZLevel: 0
   m_itemInvetoryView:
   - {fileID: 21300000, guid: 68ded1042b5220c4d9165a3eeeec668e, type: 3}
   - {fileID: 21300000, guid: 0005636e55240bf479ed3499f61603ab, type: 3}
@@ -11048,6 +11056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isActive: 0
+  deltay: -14
 --- !u!1001 &1933155974
 Prefab:
   m_ObjectHideFlags: 0
