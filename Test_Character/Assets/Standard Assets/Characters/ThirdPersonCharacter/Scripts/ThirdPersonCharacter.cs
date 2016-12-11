@@ -47,6 +47,8 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     public bool anim_fall = false;
 
+    public bool isLinked = false;
+
 private static bool locker = false;
 
 
