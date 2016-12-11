@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool m_double_mode = false;
     public bool m_single_mode = true;
     public bool m_sel_pg = true;
+    public int m_lockedPlayer = 0;
 
     public bool m_inventoryIsOpen = false;
 
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     public GameObject m_level1;
     public GameObject m_level2;
     public int m_currentLevel;
+    public float m_ZLevel;
 
     public Sprite[] m_itemInvetoryView;
 
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         m_current_checkpoint[0] = m_checkpoints[select_checkpoint];
         m_current_checkpoint[1] = m_checkpoints[select_checkpoint];
         resetPlayersPosition();
+        m_ZLevel = m_current_checkpoint[0].position.z;
     }
 
     void Update()
@@ -251,7 +254,7 @@ public class GameManager : MonoBehaviour
     public void resetPlayersPosition()
     {
         m_players[0].transform.position = m_current_checkpoint[0].position;
-        m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f,-10f,0f);
+        m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f, -14f,0f);
     }
 
     public void onDeathPlayer(int sel_pg)
