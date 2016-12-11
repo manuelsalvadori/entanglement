@@ -295,6 +295,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 
         if (Physics.Raycast(transform.position + (Vector3.up * 0.2f), Vector3.down, out hitInfo, Mathf.Infinity))
         {
+
             if(hitInfo.distance < m_GroundCheckDistance)
             {
                 m_GroundNormal = hitInfo.normal;
@@ -318,6 +319,14 @@ public class ThirdPersonCharacter : MonoBehaviour
                 }
                 m_IsFalling = true;
                 currentHeight = hitInfo.distance;
+            }
+            if (hitInfo.transform.gameObject.tag.Equals("Platform") && m_IsGrounded)
+            {
+                transform.parent.parent = hitInfo.transform.gameObject.transform;
+            }
+            else
+            {
+                transform.parent.parent = GameManager.Instance.whoAmI(gameObject.name) == 0 ? GameManager.Instance.m_level1.transform : GameManager.Instance.m_level2.transform;
             }
         }
 
@@ -382,6 +391,7 @@ public class ThirdPersonCharacter : MonoBehaviour
         Debug.Log("HIT");
         if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && !ThirdPersonCharacter.locker)
             ThirdPersonCharacter.locker = true;
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -404,6 +414,7 @@ public class ThirdPersonCharacter : MonoBehaviour
     {
         if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && ThirdPersonCharacter.locker)
             ThirdPersonCharacter.locker = false;
+
     }
 
 
