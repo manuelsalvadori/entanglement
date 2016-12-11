@@ -241,7 +241,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
@@ -1449,7 +1449,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 18f1e56e9661f4838bd140f4786677f1, type: 2}
     - target: {fileID: 100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
       propertyPath: m_Name
@@ -2277,7 +2277,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
@@ -9180,15 +9180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77befacf4532343a1baf7f0bc0d6bc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_v: 0
-  m_h: 0
-  m_force: 40
-  m_jump: 15
-  m_GravityMultiplier: 3
-  m_Zfixed: -10
   smoothTime: 0.3
-  m_velocity_boundary: 7
-  m_velocity_bound_onAir: 2
   teleportAllowed: 0
 --- !u!54 &1600495764
 Rigidbody:
@@ -10661,15 +10653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77befacf4532343a1baf7f0bc0d6bc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_v: 0
-  m_h: 0
-  m_force: 40
-  m_jump: 15
-  m_GravityMultiplier: 3
-  m_Zfixed: -10
   smoothTime: 0.3
-  m_velocity_boundary: 7
-  m_velocity_bound_onAir: 3
   teleportAllowed: 0
 --- !u!54 &1776648518
 Rigidbody:
@@ -11760,7 +11744,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c8923140d684409492724439a66fbb5, type: 3}
