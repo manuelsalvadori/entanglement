@@ -7,6 +7,7 @@ public class Item{
     private string m_name;
     public Sprite m_this;
     public GameObject m_target;
+    public float min_distance = 5f;
 
     public Item(string name)
     {
@@ -15,10 +16,14 @@ public class Item{
 
     public void use()
     {
+
         Vector3 p_pos = GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position;
-        if((p_pos - m_target.transform.position).magnitude < 3f)
+        Debug.Log("use fuori "+ (p_pos - m_target.transform.position).magnitude);
+
+        if((p_pos - m_target.transform.position).magnitude < min_distance)
         {
-            //m_target.GetComponent<ActivableObject>().activate();
+            Debug.Log("use");
+            m_target.GetComponent<ActivateButton>().unlock();
         }
         else
         {

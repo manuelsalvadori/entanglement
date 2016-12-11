@@ -3,9 +3,10 @@ using System.Collections;
 
 public class ActivateButton : MonoBehaviour {
 
-
+    public bool m_unlocked = false;
     public bool m_isActive = false;
     public bool m_isSwitch = false;
+    public float min_distance = 5f;
     public GameObject square;
     public GameObject tastoi;
     public Material red, blue;
@@ -20,9 +21,9 @@ public class ActivateButton : MonoBehaviour {
 	void Update ()
     {
         
-        if ((transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < 3f)
+        if ((transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < min_distance)
         {
-            if (Input.GetButtonDown("Interact"))
+            if (Input.GetButtonDown("Interact") && m_unlocked)
             {
                 if (m_isSwitch)
                     m_isActive = !m_isActive;
@@ -67,5 +68,10 @@ public class ActivateButton : MonoBehaviour {
         {
             tastoi.SetActive(false);
         }
+    }
+
+    public void unlock()
+    {
+        m_unlocked = true;
     }
 }

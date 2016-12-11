@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool m_double_mode = false;
     public bool m_single_mode = true;
     public bool m_sel_pg = true;
+    public bool[] m_UpgradesActive = {false, false, false, false};
 
     public bool m_inventoryIsOpen = false;
 
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
 
         if ((Input.GetButtonDown("Use") && !Input.GetButton("L2"))&& !m_inventoryIsOpen)
         {
-            if (m_inventory[(m_sel_pg) ? 0 : 1].hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state))
+            if (hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state))
             {
                 m_players[(m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().useGadget(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state);
             }
@@ -268,5 +269,23 @@ public class GameManager : MonoBehaviour
     public void updateCheckpoint(Transform cp)
     {
         m_current_checkpoint[m_sel_pg ? 0 : 1] = cp;
+    }
+
+    public bool[] getUpgrades() { return m_UpgradesActive; }
+
+
+    public void gainUpgrade(int n)
+    {
+        if(n < m_UpgradesActive.Length && !m_UpgradesActive[n])
+            m_UpgradesActive[n] = true;
+    }
+
+    public bool hasUpgrade(int n)
+    {
+        if(n < m_UpgradesActive.Length)
+        {
+            return m_UpgradesActive[n];
+        }
+        return false;
     }
 }

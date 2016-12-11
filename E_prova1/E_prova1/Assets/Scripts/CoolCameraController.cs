@@ -141,7 +141,7 @@ public class CoolCameraController : MonoBehaviour
     }
 
 
-    private void select_singleView(int player)
+    public void select_singleView(int player)
     {
         switch (GameManager.Instance.m_Current_State)
         {

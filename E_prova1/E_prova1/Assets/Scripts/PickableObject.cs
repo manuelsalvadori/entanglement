@@ -5,6 +5,7 @@ public class PickableObject : MonoBehaviour{
 
     public bool isCollectable = false;
     public bool isUpgrade = false;
+    public float min_distance = 5f;
     public Inventory.Gadgets m_gadget;
     private string m_name;
     public GameObject m_target;
@@ -27,6 +28,7 @@ public class PickableObject : MonoBehaviour{
     {
         m_this.m_this = m_spriteTmp;
         m_this.m_target = m_target;
+        m_this.min_distance = min_distance;
     }
 
 

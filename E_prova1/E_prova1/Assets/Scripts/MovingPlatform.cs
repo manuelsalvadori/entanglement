@@ -8,7 +8,8 @@ public class MovingPlatform : MonoBehaviour
     public ActivateButton m_button;
     private Vector3 target = Vector3.zero;
     private Vector3 velocity;
-    private bool active = true, switched = true;
+    public bool active = true;
+    private bool switched = true;
     public float smoothTime = 1f;
 
 	// Use this for initialization
