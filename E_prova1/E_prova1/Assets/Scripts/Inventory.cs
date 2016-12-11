@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
-    private static bool[] m_upgrades = new bool[4] /*{ false, false, false, false }*/{true, true, true, true};
+    private bool[] m_upgradesActivation;
     private List<Item> m_items = new List<Item>();
     private static int[] m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
 
@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour {
      * Gadget 4: Dash
      *
      */
+
     public enum Gadgets {Gadget1, Gadget2, Gadget3, Gadget4 };
 
     public Text m_currentScore;
@@ -32,6 +33,7 @@ public class Inventory : MonoBehaviour {
     {
         updateView();
         m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[0].gameObject.GetComponent<RectTransform>().anchoredPosition;
+        m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
     }
 
     void OnEnable()
@@ -43,10 +45,11 @@ public class Inventory : MonoBehaviour {
     {
         if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length)
         {
+            Debug.Log(m_items.ToArray()[m_pointTo]);
             m_items.ToArray()[m_pointTo].use();
         }
 
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && m_upgrades[(int)Gadgets.Gadget1] && m_pointTo < m_items.ToArray().Length)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && m_upgradesActivation[(int)Gadgets.Gadget1] && m_pointTo < m_items.ToArray().Length)
         {
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
             m_items.RemoveAt(m_pointTo);
@@ -69,6 +72,7 @@ public class Inventory : MonoBehaviour {
         }
 
         m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[m_pointTo].gameObject.GetComponent<RectTransform>().anchoredPosition;
+        m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
     }
 
     IEnumerator detachSprite(Image im)
@@ -77,7 +81,7 @@ public class Inventory : MonoBehaviour {
         im.sprite = null;
         GameManager.Instance.hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
 
-        Camera.main.GetComponent<SmoothSwitch>().select_singleView();
+        Camera.main.GetComponent<CoolCameraController>().select_singleView(1-GameManager.Instance.m_Current_State);
         if (!GameManager.Instance.m_playerswicth)
         {
             GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
@@ -144,35 +148,17 @@ public class Inventory : MonoBehaviour {
         foreach (int i in m_ncollectables) sum += i;
         return sum;
     }
-
-    public bool hasUpgrade(int n)
-    {
-        if(n < m_upgrades.Length)
-        {
-            return m_upgrades[n];
-        }
-        return false;
-    }
-
-    public static bool[] getUpgrades() { return m_upgrades; }
-
-
-    public static void gainUpgrade(int n)
-    {
-        if(n < m_upgrades.Length && !m_upgrades[n])
-            m_upgrades[n] = true;
-    }
-
+        
 
     public void updateView()
     {
         m_currentScore.text = m_ncollectables[GameManager.Instance.whichLevelItIs()].ToString();
         m_globalScore.text = Inventory.getGlobalScore().ToString();
-        for(int i=0; i < m_upgrades.Length; i++)
+        /*for(int i=0; i < m_upgradesActivation.Length; i++)
         {
-            if (m_upgrades[i]) m_Upgrades[i].sprite = GameManager.Instance.getSprite(i);
+            if (m_upgradesActivation[i]) m_Upgrades[i].sprite = GameManager.Instance.getSprite(i);
             else m_Upgrades[i].sprite = null;
-        }
+        }*/
         for(int j=0; j < m_items.Count; j++)
         {
             m_Cells[j].sprite = m_items.ToArray()[j].m_this;

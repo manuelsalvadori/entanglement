@@ -23,6 +23,7 @@ public class Pointing : MonoBehaviour
         resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         lr.SetPosition(0, transform.position);
         lr.SetPosition(1, GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0:1].transform.position);
+
         RaycastHit hit;
         Vector3 start = new Vector3(transform.position.x, start_ray_y[(GameManager.Instance.m_sel_pg) ? 0 : 1], transform.position.z);
         Ray raggio = new Ray(start, Vector3.down);

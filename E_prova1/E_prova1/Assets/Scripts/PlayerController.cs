@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(extraGravityForce);
             }
         }
-        playerCulled();
+        //playerCulled();
 	}
 
     void LateUpdate()
@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour
         bool pick_item = true;
         if (GameManager.isPickble(other.gameObject))
         {
-
             if (other.gameObject.GetComponent<PickableObject>().isCollectable)
             {
                 Inventory.score(GameManager.Instance.whichLevelItIs());
@@ -132,7 +131,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Inventory.gainUpgrade((int)other.gameObject.GetComponent<PickableObject>().m_gadget);
+                GameManager.Instance.gainUpgrade((int)other.gameObject.GetComponent<PickableObject>().m_gadget);
             }
             if (pick_item)
                 other.gameObject.SetActive(false);
@@ -148,7 +147,6 @@ public class PlayerController : MonoBehaviour
                     j.enabled = false;
                 }
             }
-            Debug.Log("pg1 muore");
             StartCoroutine(waitForDeath());
         }
 
