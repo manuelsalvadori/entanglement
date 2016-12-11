@@ -3,112 +3,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public float m_v, m_h, m_force = 10f, m_jump = 10f, m_GravityMultiplier = 3f;
-    public float m_Zfixed = -4.6f;
-    public float smoothTime = 0.3F;                                     //Amount of smooth
-    Rigidbody m_rb;
-    Animator m_anim;
-
-
+    public float smoothTime = 0.3f;
     private bool firstDash = true;
-    public float m_velocity_boundary = 10f;
-    public float m_velocity_bound_onAir = 5f;
-
-
-    bool m_grounded = true;
-    Camera cam;
-
-    void Start ()
-    {
-        m_rb = GetComponent<Rigidbody>();
-        m_anim = GetComponentInChildren<Animator>();
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-	}
-
-    void FixedUpdate ()
-    {
-        if ((GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name) && !GameManager.Instance.m_inventoryIsOpen) || GameManager.Instance.m_3D_mode)
-        {
-            //m_grounded = (Mathf.Abs(m_rb.velocity.y) < 0.005f); <-- Deprecated
-            m_v = Input.GetAxis("Horizontal");
-            m_h = Input.GetAxis("Vertical");
-
-            //Convert movement in rotation behaviour: when a player says to go in one direction the gameobject have to rotate in this direction and move forward!
-            Quaternion m_look = transform.rotation;
-            Vector3 move = new Vector3(m_v, 0f, m_h);
-            if (move.magnitude > 1)
-                move = move.normalized;
-            Vector3 force = cam.transform.TransformDirection(move * m_force);
-            force.y = 0f;
-
-
-            //Move
-            m_rb.AddForce(force);
-
-
-
-            //Constraint velocity
-            float velocity_cap = (m_grounded) ? m_velocity_boundary : m_velocity_bound_onAir;
-            if (Mathf.Abs(m_rb.velocity.z) > velocity_cap)
-                m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, Mathf.Clamp(m_rb.velocity.z, -(velocity_cap), velocity_cap));
-
-            if (Mathf.Abs(m_rb.velocity.x) > m_velocity_boundary)
-                m_rb.velocity = new Vector3(Mathf.Clamp(m_rb.velocity.x, -(velocity_cap), velocity_cap), m_rb.velocity.y, m_rb.velocity.z);
-            //Debug.Log("cap: "+ velocity_cap + " " + m_grounded);
-            //
-            if (force.magnitude != 0)
-                m_look = Quaternion.LookRotation(force.normalized);
-
-            if (!GameManager.Instance.m_3D_mode)
-            {
-                if (m_look.eulerAngles.y >= 0f && m_look.eulerAngles.y <= 180f)
-                    m_look = Quaternion.Euler(new Vector3(m_look.eulerAngles.x, 90f, m_look.eulerAngles.z));
-                else
-                    m_look = Quaternion.Euler(new Vector3(m_look.eulerAngles.x, 270f, m_look.eulerAngles.z));
-
-            }
-            StartCoroutine(rotatePlayer(m_look, 0.1f));
-
-            if (m_grounded)
-            {
-                m_anim.SetBool("OnGround", true);
-                float forward_amount = Mathf.Abs(m_rb.velocity.magnitude / m_velocity_boundary);
-                m_anim.SetFloat("Forward", forward_amount);
-            }
-            else
-            {
-
-                m_anim.SetFloat("Forward", 0);
-                m_anim.SetBool("OnGround", false);
-                float jumpAmount = (Mathf.Abs(m_rb.velocity.y) / 14f) - 9f;
-                m_anim.SetFloat("Jump", m_rb.velocity.y);
-            }
-
-            //Jump if is touching the "Ground"
-            if ((!Input.GetButton("L2") && Input.GetButtonDown("Jump")) && m_grounded)
-            {
-                m_rb.velocity = new Vector3(m_rb.velocity.x, m_jump, m_rb.velocity.z);
-            }
-
-            //Increase gravity in order to fall faster
-            if (m_rb.velocity.y < 0)
-            {
-                Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
-                m_rb.AddForce(extraGravityForce);
-            }
-        }
-        //playerCulled();
-	}
-
-    void LateUpdate()
-    {
-        //Fix Z motion
-        if (!GameManager.Instance.m_3D_mode && !GameManager.Instance.m_camIsMoving)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, m_Zfixed);
-        }
-
-    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -172,40 +68,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnCollisionStay(Collision other)
     {
-        //If this gameobject is touching the "Ground" it can jump
-        if (other.gameObject.tag.Equals("Ground") || other.gameObject.tag.Equals("Spostabile"))
+        if (GetComponent<ThirdPersonCharacter>().m_IsGrounded)
         {
-            m_grounded = true;
             firstDash = true;
         }
-    }
-
-    public void OnCollisionExit(Collision other)
-    {
-        //If this gameobject is not touching anymore the "Ground" it can't jump
-        if (other.gameObject.tag.Equals("Ground") || other.gameObject.tag.Equals("Spostabile"))
-            m_grounded = false;
-    }
-
-    private bool rotating = false;
-    IEnumerator rotatePlayer(Quaternion newRot, float duration)
-    {
-        if (rotating)
-        {
-            yield break;
-        }
-        rotating = true;
-
-        Quaternion currentRot = transform.rotation;
-
-        float counter = 0;
-        while (counter < duration)
-        {
-            counter += Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(currentRot, newRot, counter / duration);
-            yield return null;
-        }
-        rotating = false;
     }
 
     public bool teleportAllowed = false;
@@ -226,7 +92,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case 2:
-                if (m_grounded)
+                if (GetComponent<ThirdPersonCharacter>().m_IsGrounded)
                     dash();
                 else
                 {
