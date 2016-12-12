@@ -45,17 +45,16 @@ public class Inventory : MonoBehaviour {
     {
         if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length)
         {
-            Debug.Log(m_items.ToArray()[m_pointTo]);
+            //Debug.Log(m_items.ToArray()[m_pointTo]);
             m_items.ToArray()[m_pointTo].use();
         }
 
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && m_upgradesActivation[(int)Gadgets.Gadget1] && m_pointTo < m_items.ToArray().Length)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && GameManager.Instance.hasUpgrade((int)Gadgets.Gadget1) && m_pointTo < m_items.ToArray().Length)
         {
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
             m_items.RemoveAt(m_pointTo);
             m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
             StartCoroutine(detachSprite(m_Cells[m_pointTo]));
-
         }
 
         if (Input.GetAxis("R_Horizontal") > 0 && !m_pointerIsMoving)
@@ -82,17 +81,6 @@ public class Inventory : MonoBehaviour {
         GameManager.Instance.hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
 
         Camera.main.GetComponent<CoolCameraController>().select_singleView(1-GameManager.Instance.m_Current_State);
-        if (!GameManager.Instance.m_playerswicth)
-        {
-            GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
-            GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
-            GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
-        }
-        else
-        {
-            GameManager.Instance.m_playerswicth = false;
-        }
-        GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
         GameManager.Instance.displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1, 0.5f);
     }
 
@@ -148,7 +136,7 @@ public class Inventory : MonoBehaviour {
         foreach (int i in m_ncollectables) sum += i;
         return sum;
     }
-        
+
 
     public void updateView()
     {
