@@ -255,17 +255,17 @@ public class GameManager : MonoBehaviour
     public void resetPlayersPosition()
     {
         m_players[0].transform.position = m_current_checkpoint[0].position;
-        m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f, -14f,0f);
+        m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f, -30f,0f);
     }
 
     public void onDeathPlayer(int sel_pg)
     {
         if (!m_3D_mode)
-            m_players[sel_pg].transform.position = m_current_checkpoint[sel_pg].position + new Vector3(0f, -14f * sel_pg, 0f);
+            m_players[sel_pg].transform.position = m_current_checkpoint[sel_pg].position + new Vector3(0f, -30f * sel_pg, 0f);
         else
         {
             m_players[0].transform.position = m_current_checkpoint[0].position;
-            m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f, -14f, 0f);
+            m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f, -30f, 0f);
         }
     }
 
