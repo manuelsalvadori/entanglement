@@ -11,6 +11,8 @@ public class Inventory : MonoBehaviour {
 
     public static readonly int MAX_CAPACITY = 10;
 
+    private bool locker = false;
+
     /*
      * Gadget 4: Exchange object between players
      * Gadget 2: Teleport
@@ -55,8 +57,9 @@ public class Inventory : MonoBehaviour {
             }
         }
 
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && GameManager.Instance.hasUpgrade((int)Gadgets.Gadget4) && m_pointTo < m_items.ToArray().Length)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButtonDown("Use") && GameManager.Instance.hasUpgrade((int)Gadgets.Gadget4) && m_pointTo < m_items.ToArray().Length && !locker)
         {
+            locker = true;
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
             m_items.RemoveAt(m_pointTo);
             m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
@@ -89,6 +92,7 @@ public class Inventory : MonoBehaviour {
 
             Camera.main.GetComponent<CoolCameraController>().select_singleView(1 - GameManager.Instance.m_Current_State);
             GameManager.Instance.displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1, 0.5f);
+            locker = false;
         }
     }
 
