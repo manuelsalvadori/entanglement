@@ -14,7 +14,7 @@ public class Item{
         this.m_name = name;
     }
 
-    public void use()
+    public bool use()
     {
 
         Vector3 p_pos = GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position;
@@ -24,10 +24,12 @@ public class Item{
         {
             Debug.Log("use");
             m_target.GetComponent<ActivateButton>().unlock();
+            return true;
         }
         else
         {
             UIGameplayManager.Instance.displayMessage("C'è luogo e momento per ogni cosa ma non ora!");
+            return false;
         }
     }
 
