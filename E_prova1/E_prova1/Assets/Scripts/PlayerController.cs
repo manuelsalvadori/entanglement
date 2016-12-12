@@ -73,12 +73,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public bool teleportAllowed = false;
+    public bool gunAllowed = false;
     public void useGadget(int n)
     {
         switch (n)
         {
             case 0:
-                moveObject();
+                if (gunAllowed)
+                    moveObject();
+                else
+                {
+                    switchGun(true);
+                    gunAllowed = true;
+                }
                 break;
             case 1:
                 if (teleportAllowed)
@@ -168,6 +175,48 @@ public class PlayerController : MonoBehaviour
         if(enabled)
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
     }
+        
+    IEnumerator stoppedTeleport(RaycastHit hit)
+    {
+        yield return new WaitForSeconds(0.05f);
+        float diff = (transform.position.x > hit.collider.gameObject.transform.position.x) ? hit.collider.bounds.max.x : hit.collider.bounds.min.x;
+        float meno = (transform.position.x > hit.collider.gameObject.transform.position.x) ? 1.0f : -1.0f;
+
+        transform.position = new Vector3(diff, transform.position.y, transform.position.z) + new Vector3(meno * gameObject.GetComponent<CapsuleCollider>().bounds.extents.x +0.01f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y+0.01f, 0f);
+
+    }
+
+    void switchGun(bool enabled)
+    {
+        GameManager.Instance.pistola.SetActive(enabled);
+        if(enabled)
+            GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f));
+    }
+
+    private void moveObject()
+    {
+        if (GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag.Equals("Spostabile"))
+        {
+            GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.gameObject.GetComponent<MovableObject>().setActive();
+        }
+        GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(transform.position);
+        switchGun(false);
+        gunAllowed = false;
+    }
+
+    IEnumerator waitForDeath()
+    {
+        yield return new WaitForSeconds(1f);
+
+        GameManager.Instance.onDeathPlayer(GameManager.Instance.whoAmI(gameObject.name));
+        foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+        {
+            if (!j.gameObject.name.Equals("trail"))
+            {
+                j.enabled = true;
+            }
+        }
+    }
 
     /*
     GameObject culledObject = null;
@@ -214,36 +263,4 @@ public class PlayerController : MonoBehaviour
 
     }
     */
-
-    IEnumerator stoppedTeleport(RaycastHit hit)
-    {
-        yield return new WaitForSeconds(0.05f);
-        float diff = (transform.position.x > hit.collider.gameObject.transform.position.x) ? hit.collider.bounds.max.x : hit.collider.bounds.min.x;
-        float meno = (transform.position.x > hit.collider.gameObject.transform.position.x) ? 1.0f : -1.0f;
-
-        transform.position = new Vector3(diff, transform.position.y, transform.position.z) + new Vector3(meno * gameObject.GetComponent<CapsuleCollider>().bounds.extents.x +0.01f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y+0.01f, 0f);
-
-    }
-
-    private void moveObject()
-    {
-        if (GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag.Equals("Spostabile"))
-        {
-            GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.gameObject.GetComponent<MovableObject>().setActive();
-        }
-    }
-
-    IEnumerator waitForDeath()
-    {
-        yield return new WaitForSeconds(1f);
-
-        GameManager.Instance.onDeathPlayer(GameManager.Instance.whoAmI(gameObject.name));
-        foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
-        {
-            if (!j.gameObject.name.Equals("trail"))
-            {
-                j.enabled = true;
-            }
-        }
-    }
 }

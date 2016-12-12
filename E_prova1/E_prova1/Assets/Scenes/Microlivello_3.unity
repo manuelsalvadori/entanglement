@@ -1917,7 +1917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &352903606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8926,6 +8926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothTime: 0.3
   teleportAllowed: 0
+  gunAllowed: 0
 --- !u!54 &1600495764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10214,6 +10215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothTime: 0.3
   teleportAllowed: 0
+  gunAllowed: 0
 --- !u!54 &1776648518
 Rigidbody:
   m_ObjectHideFlags: 0

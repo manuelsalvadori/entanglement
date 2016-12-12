@@ -29,9 +29,10 @@ public class SwitchGadget : MonoBehaviour
                 switchMirino(false);
             }
 
-            if (m_state == 0)
+            if (m_state != 0)
             {
-                resetPistola();
+                GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<PlayerController>().gunAllowed = false;
+                switchPistola(false);
             }
 
             transform.GetChild(m_state).GetComponent<Animation>()["RigthToCenter"].speed = 1f;
@@ -52,9 +53,10 @@ public class SwitchGadget : MonoBehaviour
             m_state--;
             m_state = (m_state < 0) ? 2 : m_state;
 
-            if (m_state == 0)
+            if (m_state != 0)
             {
-                resetPistola();
+                GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<PlayerController>().gunAllowed = false;
+                switchPistola(false);
             }
 
             if(m_state != 1)
@@ -178,8 +180,10 @@ public class SwitchGadget : MonoBehaviour
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f));
     }
 
-    void resetPistola()
+    void switchPistola(bool enabled)
     {
-        GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().radius, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f));
+        GameManager.Instance.pistola.SetActive(enabled);
+        if(enabled)
+            GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().radius, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f));
     }
 }
