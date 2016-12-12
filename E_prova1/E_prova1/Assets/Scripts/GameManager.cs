@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public bool m_camIsMoving = false;
     public bool m_levelIsMoving = false;
 
+    public bool m_IsWindowOver = false;
+
     public Transform[] m_checkpoints;
     private Transform[] m_current_checkpoint;
     [Range (0,4)]

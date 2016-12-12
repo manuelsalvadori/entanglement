@@ -3394,7 +3394,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 4b297b8fe17d14944b8eb32b5f5069b1, type: 3}
     m_FontSize: 26
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
@@ -7279,6 +7279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1125575383}
   - component: {fileID: 1125575382}
+  - component: {fileID: 1125575384}
   m_Layer: 0
   m_Name: MessageTrigger
   m_TagString: Untagged
@@ -7311,6 +7312,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1125575384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1125575381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a778d7fe847c47388937a13380fa832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indice: 0
 --- !u!1001 &1137945712
 Prefab:
   m_ObjectHideFlags: 0
@@ -12149,12 +12162,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_camIsMoving: 0
   m_levelIsMoving: 0
+  m_IsWindowOver: 0
   m_checkpoints:
   - {fileID: 1384314025}
   - {fileID: 401093912}
   - {fileID: 2084151410}
   - {fileID: 1024167242}
-  select_checkpoint: 1
+  select_checkpoint: 0
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
