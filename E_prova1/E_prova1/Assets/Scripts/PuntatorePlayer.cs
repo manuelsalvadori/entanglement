@@ -6,7 +6,7 @@ public class PuntatorePlayer : MonoBehaviour
 {
 
     public float speed = 50f;
-    private float[] start_ray_y = {50f, 22f};
+    private float[] start_ray_y = {40f, 22f};
     public bool p1 = true;
 	
 	// Update is called once per frame
@@ -16,7 +16,7 @@ public class PuntatorePlayer : MonoBehaviour
         transform.position = GameManager.Instance.m_players[p1 ? 1 : 0].transform.position;
 
         RaycastHit hit;
-        Vector3 start = new Vector3(transform.position.x, start_ray_y[p1 ? 1 : 0], transform.position.z);
+        Vector3 start = new Vector3(transform.position.x, start_ray_y[p1 ? 0 : 1], transform.position.z);
         Ray raggio = new Ray(start, Vector3.down);
 
         int layermask = 1 << 8;
