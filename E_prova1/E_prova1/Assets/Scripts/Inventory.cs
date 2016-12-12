@@ -12,10 +12,10 @@ public class Inventory : MonoBehaviour {
     public static readonly int MAX_CAPACITY = 8;
 
     /*
-     * Gadget 1: Exchange object between players
+     * Gadget 4: Exchange object between players
      * Gadget 2: Teleport
-     * Gadget 3: Make object movable between
-     * Gadget 4: Dash
+     * Gadget 1: Make object movable between
+     * Gadget 3: Dash
      *
      */
 
@@ -39,6 +39,7 @@ public class Inventory : MonoBehaviour {
     void OnEnable()
     {
         m_pointTo = 0;
+        m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
     }
 
     void Update()
@@ -46,15 +47,20 @@ public class Inventory : MonoBehaviour {
         if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length)
         {
             //Debug.Log(m_items.ToArray()[m_pointTo]);
-            m_items.ToArray()[m_pointTo].use();
+            if (m_items.ToArray()[m_pointTo].use())
+            {
+                m_items.RemoveAt(m_pointTo);
+                m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
+                StartCoroutine(detachSprite(m_Cells[m_pointTo]));
+            }
         }
 
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && GameManager.Instance.hasUpgrade((int)Gadgets.Gadget1) && m_pointTo < m_items.ToArray().Length)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Use") && GameManager.Instance.hasUpgrade((int)Gadgets.Gadget4) && m_pointTo < m_items.ToArray().Length)
         {
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
             m_items.RemoveAt(m_pointTo);
             m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
-            StartCoroutine(detachSprite(m_Cells[m_pointTo]));
+            StartCoroutine(detachSprite(m_Cells[m_pointTo], true));
         }
 
         if (Input.GetAxis("R_Horizontal") > 0 && !m_pointerIsMoving)
@@ -71,17 +77,19 @@ public class Inventory : MonoBehaviour {
         }
 
         m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[m_pointTo].gameObject.GetComponent<RectTransform>().anchoredPosition;
-        m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
     }
 
-    IEnumerator detachSprite(Image im)
+    IEnumerator detachSprite(Image im, bool passToOther = false)
     {
         yield return new WaitUntil(() => !im.GetComponent<Animation>().isPlaying);
         im.sprite = null;
-        GameManager.Instance.hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
+        if (passToOther)
+        {
+            GameManager.Instance.hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
 
-        Camera.main.GetComponent<CoolCameraController>().select_singleView(1-GameManager.Instance.m_Current_State);
-        GameManager.Instance.displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1, 0.5f);
+            Camera.main.GetComponent<CoolCameraController>().select_singleView(1 - GameManager.Instance.m_Current_State);
+            GameManager.Instance.displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1, 0.5f);
+        }
     }
 
     IEnumerator openOtherInventory()

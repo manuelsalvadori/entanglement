@@ -85,8 +85,8 @@ public class GameManager : MonoBehaviour
 
         if ((Input.GetButtonDown("Use") && !Input.GetButton("L2"))&& !m_inventoryIsOpen)
         {
-            if (hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state + 1)) {
-                m_players[(m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().useGadget(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state + 1);
+            if (hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state)) {
+                m_players[(m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().useGadget(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state);
             }
             else
             {
