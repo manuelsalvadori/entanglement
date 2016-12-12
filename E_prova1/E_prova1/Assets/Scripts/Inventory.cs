@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour {
     private List<Item> m_items = new List<Item>();
     private static int[] m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
 
-    public static readonly int MAX_CAPACITY = 8;
+    public static readonly int MAX_CAPACITY = 10;
 
     /*
      * Gadget 4: Exchange object between players
