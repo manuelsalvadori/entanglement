@@ -9,7 +9,7 @@ public class shoot : MonoBehaviour
 
 	void Start ()
     {
-        resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+        resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f));
         lr = GetComponent<LineRenderer>();
         lr.SetPosition(0, transform.position);
 	}
@@ -19,7 +19,7 @@ public class shoot : MonoBehaviour
 
 	void Update ()
     {
-        transform.position = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position;
+        transform.position = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f);
         float m_h = Input.GetAxis("R_Horizontal") * Time.deltaTime * m_speed;
         float m_v = (right) ? Input.GetAxis("R_Vertical") * Time.deltaTime * m_speed : -Input.GetAxis("R_Vertical") * Time.deltaTime * m_speed;
         if (SwitchGadget.Instance.m_state == 0)
@@ -54,7 +54,7 @@ public class shoot : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0f, transform.rotation.eulerAngles.y, clamped_z));
 
 
-            Vector3 start = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position;
+            Vector3 start = GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2/3, 0f); ;
             Vector3 diff = transform.GetChild(0).position - start;
             Ray raggio = new Ray(start, diff);
             Physics.Raycast(raggio, out hit);
