@@ -6,19 +6,19 @@ public class CoolCameraController : MonoBehaviour
 {
     public GameObject cameradx;
     //Constant Level and Cam Geometry
-    public Vector3[] m_Level_Position;
-    public Vector3[] m_Wall_Position;
+    //public Vector3[] m_Level_Position;
+    //public Vector3[] m_Wall_Position;
     private Vector3[] m_View;
     public float m_heigthOffset = 2f;
     public float m_BackOffset = 2.5f;
-    public float m_WallOffset = -0.44f;
+    //public float m_WallOffset = -0.44f;
     public float m_z3d = 0f, m_y3d = 29f;
     //~
 
 
     private Vector3 m_CameraTarget;                                     //Posizione di Arrivo
     private Vector3 m_CameraRotation;                                   //Rotazione di Arrivo
-    private Vector3 m_LevelTarget;                                      //Posizione di Arrivo del livello
+    //private Vector3 m_LevelTarget;                                      //Posizione di Arrivo del livello
 
     public enum Stato { First_Player, Second_Player, Doppia, TreD};
     private int m_oldState;
@@ -33,10 +33,10 @@ public class CoolCameraController : MonoBehaviour
     //~
 
     //Lerp Level1 setting function
-    public float m_Level_speed = 10F;
+    //public float m_Level_speed = 10F;
     //Players and Levels infos
     //Editor view
-    public Transform m_l1, m_l2;
+    //public Transform m_l1, m_l2;
 
 
     private Dictionary<int, Vector3> m_player_position = new Dictionary<int, Vector3>() //easy way to select player initial infos.
@@ -57,9 +57,9 @@ public class CoolCameraController : MonoBehaviour
         m_player_position[0] = GameManager.Instance.m_players[0].transform.position;
         m_player_position[1] = GameManager.Instance.m_players[1].transform.position;
 
+        /*
         m_l1 = GameManager.Instance.m_level1.transform;
         m_l2 = GameManager.Instance.m_level2.transform;
-
 
         m_Level_Position = new Vector3[3];
         m_Level_Position[0] = m_Level_Position[1] = m_Level_Position[2] = GameManager.Instance.m_level1.transform.position;
@@ -69,6 +69,7 @@ public class CoolCameraController : MonoBehaviour
         m_Wall_Position = new Vector3[2];
         m_Wall_Position[0] = GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition;
         m_Wall_Position[1] = new Vector3(GameObject.FindGameObjectsWithTag("Wall")[1].transform.localPosition.x, m_WallOffset, GameObject.FindGameObjectsWithTag("Wall")[1].GetComponent<MeshFilter>().transform.localPosition.z);
+        */
 
         m_View = new Vector3[4];
         m_View[0] = new Vector3(0f, GameManager.Instance.m_level1.transform.position.y, -20f);
