@@ -1375,6 +1375,11 @@ Prefab:
       propertyPath: m_Name
       value: Puntatore p1
       objectReference: {fileID: 0}
+    - target: {fileID: 23518906478834864, guid: 6695bcccfd4cc4cefb2dbf1ad1f07aa7,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b9db3d4e39443e9933b36c935ad4d9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6695bcccfd4cc4cefb2dbf1ad1f07aa7, type: 2}
   m_IsPrefabParent: 0
@@ -4310,6 +4315,7 @@ MonoBehaviour:
   min_distance: 5
   m_gadget: 0
   m_target: {fileID: 0}
+  m_rot: {x: 15, y: 30, z: 45}
   m_spriteTmp: {fileID: 0}
 --- !u!1 &925972995
 GameObject:
@@ -5991,6 +5997,7 @@ MonoBehaviour:
   min_distance: 5
   m_gadget: 2
   m_target: {fileID: 0}
+  m_rot: {x: 15, y: 30, z: 45}
   m_spriteTmp: {fileID: 0}
 --- !u!23 &1226965320
 MeshRenderer:
@@ -11358,6 +11365,7 @@ MonoBehaviour:
   min_distance: 5
   m_gadget: 0
   m_target: {fileID: 1076114163}
+  m_rot: {x: 15, y: 30, z: 45}
   m_spriteTmp: {fileID: 21300000, guid: 55aa299a6ee0aeb4f87b397d989c2865, type: 3}
 --- !u!23 &2044800874
 MeshRenderer:
