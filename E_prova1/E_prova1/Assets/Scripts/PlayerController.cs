@@ -117,13 +117,17 @@ public class PlayerController : MonoBehaviour
     private void teleport()
     {
         RaycastHit hit;
-        Vector3 start = transform.position;
+        Vector3 start = transform.position +  new Vector3(0f, gameObject.GetComponent<CharacterController>().height/2f, 0f);
         Vector3 direction = GameManager.Instance.mirino.transform.position - transform.position;
         Ray raggio = new Ray(start, direction);
         int layermask = 1 << 8;
 
-        if (Physics.Raycast(raggio, out hit, Mathf.Infinity, layermask))
+        if (Physics.Raycast(raggio, out hit, Mathf.Abs(direction.magnitude), layermask))
         {
+            #if UNITY_EDITOR
+            // helper to visualise the ground check ray in the scene view
+            Debug.DrawLine(start + (Vector3.up * 0.2f), hit.point);
+            #endif
             StartCoroutine(stoppedTeleport(hit));
         }
         else
@@ -179,6 +183,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator stoppedTeleport(RaycastHit hit)
     {
         yield return new WaitForSeconds(0.05f);
+        Debug.Log(hit.collider.gameObject.name);
         float diff = (transform.position.x > hit.collider.gameObject.transform.position.x) ? hit.collider.bounds.max.x : hit.collider.bounds.min.x;
         float meno = (transform.position.x > hit.collider.gameObject.transform.position.x) ? 1.0f : -1.0f;
 
