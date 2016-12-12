@@ -6,7 +6,7 @@ public class PuntatorePlayer : MonoBehaviour
 {
 
     public float speed = 50f;
-    private float[] start_ray_y = {40f, 22f};
+    private float[] start_ray_y = {40f, 20f};
     public bool p1 = true;
 	
 	// Update is called once per frame

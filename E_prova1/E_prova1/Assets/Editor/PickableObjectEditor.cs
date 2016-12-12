@@ -9,10 +9,8 @@ public class PickableObjectEditor : Editor
     override public void OnInspectorGUI()
     {
         var myScript = target as PickableObject;
-
-
         myScript.isCollectable = GUILayout.Toggle(myScript.isCollectable, "Is Collectable");
-
+        myScript.m_rot = EditorGUILayout.Vector3Field("Rotation", myScript.m_rot);
 
         if (!myScript.isCollectable)
         {

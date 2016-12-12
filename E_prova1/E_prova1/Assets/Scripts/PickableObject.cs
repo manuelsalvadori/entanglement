@@ -9,7 +9,7 @@ public class PickableObject : MonoBehaviour{
     public Inventory.Gadgets m_gadget;
     private string m_name;
     public GameObject m_target;
-
+    public Vector3 m_rot = new Vector3(15, 30, 45);
     private Item m_this;
 
     public Sprite m_spriteTmp;
@@ -35,7 +35,7 @@ public class PickableObject : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+        transform.Rotate(m_rot * Time.deltaTime, Space.World);
     }
 
 }
