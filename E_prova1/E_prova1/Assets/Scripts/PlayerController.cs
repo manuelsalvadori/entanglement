@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         switch (n)
         {
-            case 0:
+            case 2:
                 moveObject();
                 break;
             case 1:
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
                     teleportAllowed = true;
                 }
                 break;
-            case 2:
+            case 3:
                 if (GetComponent<ThirdPersonCharacter>().m_IsGrounded)
                     dash();
                 else
