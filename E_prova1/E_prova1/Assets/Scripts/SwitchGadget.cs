@@ -76,7 +76,7 @@ public class SwitchGadget : MonoBehaviour
             transform.GetChild(m_state1).GetComponent<Animation>()["LeftToRigth"].speed = -1f;
             transform.GetChild(m_state1).GetComponent<Animation>()["LeftToRigth"].time = transform.GetChild(2).GetComponent<Animation>()["LeftToRigth"].length;
             transform.GetChild(m_state1).GetComponent<Animation>().Play("LeftToRigth");
-        } 
+        }
 
 	}
 
@@ -106,7 +106,7 @@ public class SwitchGadget : MonoBehaviour
                 m_in = false;
             }
         }
-        
+
         if (gameObject.name.Equals("GadgetSelection_2"))
         {
             if (!GameManager.Instance.m_sel_pg)
@@ -175,11 +175,11 @@ public class SwitchGadget : MonoBehaviour
     {
         GameManager.Instance.mirino.SetActive(enabled);
         if(enabled)
-            GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+            GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height/2 , 0f));
     }
 
     void resetPistola()
     {
-        GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
+        GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().radius, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height / 2, 0f));
     }
 }

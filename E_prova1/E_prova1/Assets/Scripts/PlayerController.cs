@@ -6,6 +6,12 @@ public class PlayerController : MonoBehaviour
     public float smoothTime = 0.3f;
     private bool firstDash = true;
 
+    public void Update()
+    {
+        if (GetComponent<ThirdPersonCharacter>().m_IsGrounded)
+            firstDash = true;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         bool pick_item = true;
@@ -63,14 +69,6 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("Checkpoint"))
         {
             GameManager.Instance.updateCheckpoint(other.transform);
-        }
-    }
-
-    public void OnCollisionStay(Collision other)
-    {
-        if (GetComponent<ThirdPersonCharacter>().m_IsGrounded)
-        {
-            firstDash = true;
         }
     }
 
@@ -171,6 +169,7 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
     }
 
+    /*
     GameObject culledObject = null;
     bool culled = false;
     void playerCulled()
@@ -214,6 +213,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    */
 
     IEnumerator stoppedTeleport(RaycastHit hit)
     {

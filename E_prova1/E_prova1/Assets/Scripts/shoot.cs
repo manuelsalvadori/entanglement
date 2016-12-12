@@ -13,7 +13,7 @@ public class shoot : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         lr.SetPosition(0, transform.position);
 	}
-	
+
     float curr_dir = 1.0f;
     bool right = true;
 
@@ -33,10 +33,10 @@ public class shoot : MonoBehaviour
             {
                 transform.Rotate(new Vector3(0f, 0f, m_v), Space.World);
             }
-            float rotation_z = transform.rotation.eulerAngles.z; 
+            float rotation_z = transform.rotation.eulerAngles.z;
             float dir = (GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y >= 0f  && GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.rotation.eulerAngles.y < 180f)
                 ?  1: -1f;
-            
+
             if (curr_dir * dir < 0)
             {
                 curr_dir = dir;
