@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Selection : MonoBehaviour
 {
+    public void sceneselection()
+    {
+        SceneManager.LoadScene("SelectionScene");
+    }
 
     public void scene1()
     {

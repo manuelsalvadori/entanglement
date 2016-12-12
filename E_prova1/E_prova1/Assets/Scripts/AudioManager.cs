@@ -8,5 +8,4 @@ public class AudioManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
-	
 }
