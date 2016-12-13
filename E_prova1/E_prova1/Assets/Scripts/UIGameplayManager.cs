@@ -44,9 +44,9 @@ public class UIGameplayManager : MonoBehaviour {
 
 	}
 
-    public void displayMessage(string message)
+    public void displayMessage(string message, GameObject o)
     {
-        m_UI["Message"].GetComponentInChildren<Text>().text = message;
+        o.transform.GetChild(0).GetComponent<Text>().text = message;
     }
 
     public void displayThisWin(GameObject go)

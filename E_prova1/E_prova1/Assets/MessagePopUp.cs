@@ -22,11 +22,10 @@ public class MessagePopUp : MonoBehaviour
     {
         if (!triggered)
         {
-            Debug.Log(indice);
             triggered = true;
-            UIGameplayManager.Instance.m_UI["Message"].SetActive(true);
-            UIGameplayManager.Instance.displayMessage(messaggi[indice]);
-            UIGameplayManager.Instance.displayThisWin(UIGameplayManager.Instance.m_UI["Message"]);
+            UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"].SetActive(true);
+            UIGameplayManager.Instance.displayMessage(messaggi[indice], UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
+            UIGameplayManager.Instance.displayThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
             GameManager.Instance.m_IsWindowOver = true;
             StartCoroutine(spegniti());
         }
@@ -35,7 +34,7 @@ public class MessagePopUp : MonoBehaviour
     IEnumerator spegniti()
     {
         yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
-        UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI["Message"]);
+        UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
         GameManager.Instance.m_IsWindowOver = false;
 
     }

@@ -2374,7 +2374,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 4b297b8fe17d14944b8eb32b5f5069b1, type: 3}
     m_FontSize: 26
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
@@ -2429,8 +2429,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.06378796, y: 4.17164, z: 1.9380988}
-  m_Center: {x: -0.032949448, y: 1.8741668, z: -0.014767552}
+  m_Size: {x: 0.06378796, y: 8.454953, z: 1.9380988}
+  m_Center: {x: -0.032949448, y: 1.1516961, z: -0.014767552}
 --- !u!1001 &417159404
 Prefab:
   m_ObjectHideFlags: 0
@@ -7297,8 +7297,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 41.24491, z: 18.973885}
-  m_Center: {x: 0, y: 20.122454, z: -0.29345036}
+  m_Size: {x: 1, y: 58.326286, z: 18.973885}
+  m_Center: {x: 0, y: 0.46754265, z: -0.29345036}
 --- !u!4 &1125575383
 Transform:
   m_ObjectHideFlags: 0
@@ -9369,8 +9369,8 @@ MonoBehaviour:
   m_UI_Elements:
   - name: Message
     element: {fileID: 138354870}
-  - name: 3D_Mode
-    element: {fileID: 0}
+  - name: MessageRed
+    element: {fileID: 1001980270}
   - name: 
     element: {fileID: 0}
 --- !u!1 &1490601884 stripped

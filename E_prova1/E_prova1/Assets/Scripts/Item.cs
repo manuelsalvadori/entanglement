@@ -28,7 +28,7 @@ public class Item{
         }
         else
         {
-            UIGameplayManager.Instance.displayMessage("C'è luogo e momento per ogni cosa ma non ora!");
+            //UIGameplayManager.Instance.displayMessage("C'è luogo e momento per ogni cosa ma non ora!");
             return false;
         }
     }
