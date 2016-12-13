@@ -15,13 +15,16 @@ public class MessagePopUp : MonoBehaviour
             {
                 "to reach some unreachable places you can use the teleporter gadget. select using r1/r2 and press square to use it",
                 "press x to jump",
-                "press square to activate the switches"
+                "press square to activate the switches",
+                "press triangle to open the inventory. select an item with right stick and press square to use it or circle to transfer it in the other player inventory",
+                "press down to select the second dimension, up to return in this one"
             };
         messaggi = tmp;
     }
 
     void OnTriggerEnter(Collider o)
     {
+        Debug.Log("trige");
         if (!triggered)
         {
             triggered = true;
