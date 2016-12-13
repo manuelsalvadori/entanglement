@@ -1857,6 +1857,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34a0a0a99635c424e83aa1216c9c3e38, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &394731399 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114625392424961874, guid: 34a0a0a99635c424e83aa1216c9c3e38,
+    type: 2}
+  m_PrefabInternal: {fileID: 394731398}
+  m_Script: {fileID: 11500000, guid: 81b97ccb61aad40a4a8b32d9542360d8, type: 3}
 --- !u!1 &401093911
 GameObject:
   m_ObjectHideFlags: 0
@@ -3139,7 +3145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &627998945
 Transform:
   m_ObjectHideFlags: 0
@@ -6241,6 +6247,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f9d6d2403da1e7428f8141d1b149a0a, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1202699890 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114322412572025482, guid: 0f9d6d2403da1e7428f8141d1b149a0a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1202699889}
+  m_Script: {fileID: 11500000, guid: 81b97ccb61aad40a4a8b32d9542360d8, type: 3}
 --- !u!1 &1212746294
 GameObject:
   m_ObjectHideFlags: 0
@@ -9197,8 +9209,8 @@ MonoBehaviour:
   m_inventoryIsOpen: 0
   m_playerswicth: 0
   m_gadgetSelection:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1202699890}
+  - {fileID: 394731399}
   mirino: {fileID: 1967998480}
   pistola: {fileID: 352903605}
   m_players:
