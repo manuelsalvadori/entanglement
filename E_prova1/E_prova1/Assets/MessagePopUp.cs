@@ -13,7 +13,9 @@ public class MessagePopUp : MonoBehaviour
     {
         string [] tmp =
             {
-                "to reach some unreachable places you can use the teleporter gadget. select using r1/r2 and press square to use it"
+                "to reach some unreachable places you can use the teleporter gadget. select using r1/r2 and press square to use it",
+                "press x to jump",
+                "press square to activate the switches"
             };
         messaggi = tmp;
     }
