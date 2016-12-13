@@ -18,7 +18,8 @@ public class MessagePopUp : MonoBehaviour
                 "press square to activate the switches",
                 "press triangle to open the inventory. select an item with right stick and press square to use it or circle to transfer it in the other player inventory",
                 "press down to select the second dimension, up to return in this one",
-                "to cross the energy barrier, select the dash gadget with r1/r2 and press circle to use it"
+                "to cross the energy barrier, select the dash gadget with r1/r2 and press circle to use it",
+                "the red mark shows the position of your alter ego in the secon dimension. when u are over the red mark you can get entangled with the alter ego by pressing rigth"
             };
         messaggi = tmp;
     }
