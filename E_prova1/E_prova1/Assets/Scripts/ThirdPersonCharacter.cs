@@ -388,7 +388,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("HIT");
         if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && !ThirdPersonCharacter.locker)
             ThirdPersonCharacter.locker = true;
 
@@ -399,7 +398,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 
         if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && ThirdPersonCharacter.locker)
         {
-            Debug.Log("Change");
             if (gameObject.tag.Equals("Player1"))
             {
                 GameManager.Instance.m_lockedPlayer = 1;

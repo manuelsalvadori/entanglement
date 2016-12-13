@@ -102,7 +102,7 @@ public class CoolCameraController : MonoBehaviour
 
         if (Input.GetButtonDown("3Dmode") && !GameManager.Instance.m_inventoryIsOpen) //3D_view
         {
-            if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
+            if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); //else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
         }
 
 
