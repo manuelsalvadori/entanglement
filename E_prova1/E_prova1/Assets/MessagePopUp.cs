@@ -41,6 +41,7 @@ public class MessagePopUp : MonoBehaviour
 
     IEnumerator spegniti()
     {
+        yield return new WaitForSeconds(1.5f);
         yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
         UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
         GameManager.Instance.m_IsWindowOver = false;

@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour {
     public static readonly int MAX_CAPACITY = 10;
 
     private bool locker = false;
+    private bool locker2 = false;
 
     /*
      * Gadget 4: Exchange object between players
@@ -46,14 +47,16 @@ public class Inventory : MonoBehaviour {
 
     void Update()
     {
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length && !locker2)
         {
+
             //Debug.Log(m_items.ToArray()[m_pointTo]);
             if (m_items.ToArray()[m_pointTo].use())
             {
-                m_items.RemoveAt(m_pointTo);
+                locker2 = true;
+                //m_items.RemoveAt(m_pointTo);
                 m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
-                StartCoroutine(detachSprite(m_Cells[m_pointTo]));
+                StartCoroutine(detachSprite(m_pointTo));
             }
         }
 
@@ -61,9 +64,9 @@ public class Inventory : MonoBehaviour {
         {
             locker = true;
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
-            m_items.RemoveAt(m_pointTo);
+            //m_items.RemoveAt(m_pointTo);
             m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
-            StartCoroutine(detachSprite(m_Cells[m_pointTo], true));
+            StartCoroutine(detachSprite(m_pointTo, true));
         }
 
         if (Input.GetAxis("R_Horizontal") > 0 && !m_pointerIsMoving)
@@ -82,10 +85,10 @@ public class Inventory : MonoBehaviour {
         m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[m_pointTo].gameObject.GetComponent<RectTransform>().anchoredPosition;
     }
 
-    IEnumerator detachSprite(Image im, bool passToOther = false)
+    IEnumerator detachSprite(int im, bool passToOther = false)
     {
-        yield return new WaitUntil(() => !im.GetComponent<Animation>().isPlaying);
-        im.sprite = null;
+        yield return new WaitUntil(() => !m_Cells[im].GetComponent<Animation>().isPlaying);
+        m_Cells[im].sprite = null;
         if (passToOther)
         {
             GameManager.Instance.hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
@@ -94,6 +97,12 @@ public class Inventory : MonoBehaviour {
             GameManager.Instance.displayInventory(GameManager.Instance.m_sel_pg ? 0 : 1, 0.5f);
             locker = false;
         }
+        else
+        {
+            locker2 = false;
+        }
+
+        m_items.RemoveAt(im);
     }
 
     IEnumerator openOtherInventory()
@@ -159,10 +168,17 @@ public class Inventory : MonoBehaviour {
             if (m_upgradesActivation[i]) m_Upgrades[i].sprite = GameManager.Instance.getSprite(i);
             else m_Upgrades[i].sprite = null;
         }*/
-        for(int j=0; j < m_items.Count; j++)
+        int j;
+        for(j=0; j < m_items.Count; j++)
         {
             m_Cells[j].sprite = m_items.ToArray()[j].m_this;
             m_Cells[j].color = new Color(1, 1, 1, 1);
         }
+        for(j = m_items.Count; j < m_Cells.Length; j++)
+        {
+            m_Cells[j].sprite = null;
+            m_Cells[j].color = new Color(1, 1, 1, 0);
+        }
+
     }
 }
