@@ -38,7 +38,7 @@ public class ThirdPersonUserControl : MonoBehaviour
     }
 
 
-    private void LateUpdate()
+    private void Update()
     {
         if ((!GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name) || GameManager.Instance.m_inventoryIsOpen) && GameManager.Instance.m_Current_State != (int)CoolCameraController.Stato.TreD)
         {
@@ -70,7 +70,12 @@ public class ThirdPersonUserControl : MonoBehaviour
     // Fixed update is called in sync with physics
     private void FixedUpdate()
     {
-        StartCoroutine(changePlayer());
+        if (GameManager.Instance.whoAmI(gameObject.name) == GameManager.Instance.m_lockedPlayer)
+            m_Character.isLinked = true;
+        else
+        {
+            m_Character.isLinked = false;
+        }
         // read inputs
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -100,6 +105,8 @@ public class ThirdPersonUserControl : MonoBehaviour
             m_Move.z = 0f;
         }
         StartCoroutine(movePlayer(m_Move, crouch, m_Jump));
+        //m_Character.Move(m_Move, crouch, m_Jump);
+
 
         //Debug.Log(GetComponent<Rigidbody>().velocity.y);
 
@@ -119,16 +126,6 @@ public class ThirdPersonUserControl : MonoBehaviour
         m_Character.setGroundDistance(f);
     }
 
-    IEnumerator changePlayer()
-    {
-        yield return new WaitForSeconds(0.01f);
-        if (GameManager.Instance.whoAmI(gameObject.name) == GameManager.Instance.m_lockedPlayer)
-            m_Character.isLinked = true;
-        else
-        {
-            m_Character.isLinked = false;
-        }
-    }
 
     IEnumerator movePlayer(Vector3 m_Move, bool crouch, bool m_Jump)
     {
