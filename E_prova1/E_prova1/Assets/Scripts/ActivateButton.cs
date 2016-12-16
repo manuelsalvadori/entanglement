@@ -20,8 +20,8 @@ public class ActivateButton : MonoBehaviour {
 
 	void Update ()
     {
-        
-        if ((transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < min_distance)
+
+        if (GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD ? (transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < min_distance : (transform.position - (GameManager.Instance.m_players[0]).transform.position).magnitude < min_distance || (transform.position - (GameManager.Instance.m_players[1]).transform.position).magnitude < min_distance)
         {
             if (Input.GetButtonDown("Interact") && m_unlocked)
             {
@@ -36,7 +36,7 @@ public class ActivateButton : MonoBehaviour {
                     screen.GetComponent<Renderer>().material = blue;
                 else
                     screen.GetComponent<Renderer>().material = red;
-                
+
             }
         }
         else
