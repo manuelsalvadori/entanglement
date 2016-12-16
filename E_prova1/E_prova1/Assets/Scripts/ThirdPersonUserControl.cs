@@ -32,6 +32,8 @@ public class ThirdPersonUserControl : MonoBehaviour
 
         // get the third person character ( this should never be null due to require component )
         m_Character = GetComponent<ThirdPersonCharacter>();
+        m_Character.m_deltaTime = Time.time;
+        m_Character.m_passedTime = Time.time;
 
     }
 
@@ -51,21 +53,24 @@ public class ThirdPersonUserControl : MonoBehaviour
         }
     }
 
+    /*
     private void FixedUpdate()
     {
+        m_Character.m_deltaTime = Time.time - m_Character.m_passedTime;
         if (GameManager.Instance.whoAmI(gameObject.name) == GameManager.Instance.m_lockedPlayer)
             m_Character.isLinked = true;
         else
         {
             m_Character.isLinked = false;
         }
+        m_Character.m_passedTime = Time.time;
     }
-
+    */
 
     // Fixed update is called in sync with physics
-    private void Update()
+    private void FixedUpdate()
     {
-
+        StartCoroutine(changePlayer());
         // read inputs
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -94,7 +99,7 @@ public class ThirdPersonUserControl : MonoBehaviour
             m_Move.x = 0f;
             m_Move.z = 0f;
         }
-        m_Character.Move(m_Move, crouch, m_Jump);
+        StartCoroutine(movePlayer(m_Move, crouch, m_Jump));
 
         //Debug.Log(GetComponent<Rigidbody>().velocity.y);
 
@@ -112,6 +117,24 @@ public class ThirdPersonUserControl : MonoBehaviour
         yield return new WaitForSeconds(time);
         Debug.Log("Fall!");
         m_Character.setGroundDistance(f);
+    }
+
+    IEnumerator changePlayer()
+    {
+        yield return new WaitForSeconds(0.01f);
+        if (GameManager.Instance.whoAmI(gameObject.name) == GameManager.Instance.m_lockedPlayer)
+            m_Character.isLinked = true;
+        else
+        {
+            m_Character.isLinked = false;
+        }
+    }
+
+    IEnumerator movePlayer(Vector3 m_Move, bool crouch, bool m_Jump)
+    {
+        yield return new WaitForFixedUpdate();
+        m_Character.Move(m_Move, crouch, m_Jump);
+
     }
 
 }

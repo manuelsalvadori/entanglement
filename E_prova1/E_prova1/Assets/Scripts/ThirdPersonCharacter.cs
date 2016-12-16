@@ -52,6 +52,9 @@ public class ThirdPersonCharacter : MonoBehaviour
     private static bool locker = false;
     public bool isLinked = false;
 
+    public float m_deltaTime = 0f;
+    public float m_passedTime = 0f;
+
     void Start()
 	{
 		m_Animator = GetComponent<Animator>();
@@ -68,6 +71,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     public void Move(Vector3 move, bool crouch, bool jump)
 	{
+        m_deltaTime = Time.time - m_passedTime;
 
 		// convert the world relative moveInput vector into a local-relative
 		// turn amount and forward amount required to head in the desired
@@ -79,7 +83,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		m_TurnAmount = Mathf.Atan2(move.x, move.z);
 		m_ForwardAmount = move.z;
 
-
+        //Debug.Log("delta time: " + Time.deltaTime + " fixed delta time" + Time.fixedDeltaTime + " Calculated delta time: " + m_deltaTime);
 		ApplyExtraTurnRotation();
 
 		// control and velocity handling is different when grounded and airborne:
@@ -90,7 +94,7 @@ public class ThirdPersonCharacter : MonoBehaviour
         }
 		else
 		{
-            startJump += Time.deltaTime*m_JumpTiming;
+            startJump += m_deltaTime*m_JumpTiming;
             HandleAirborneMovement();
 		}
         /*
@@ -103,6 +107,7 @@ public class ThirdPersonCharacter : MonoBehaviour
         if (m_IsFalling && !m_IsJumping)
             Debug.Log(currentHeight + " " + m_IsJumping);
 	    */
+        m_passedTime = Time.time;
     }
 
 
