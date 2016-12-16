@@ -197,7 +197,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 	void HandleAirborneMovement()
 	{
-        if (startJump > 0.6)
+        if (startJump > 0.55)
         {
             m_IsJumping = false;
         }
@@ -371,7 +371,7 @@ public class ThirdPersonCharacter : MonoBehaviour
             m_Animator.applyRootMotion = true;
             m_IsFalling = false;
             m_IsJumping = false;
-            startJump = 0;
+            startJump = 0.6f;
         }
 
         if (hit.gameObject.tag.Equals("Spostabile")){

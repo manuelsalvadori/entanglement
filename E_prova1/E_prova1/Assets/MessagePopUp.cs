@@ -27,7 +27,7 @@ public class MessagePopUp : MonoBehaviour
 
     void OnTriggerEnter(Collider o)
     {
-        Debug.Log(o.gameObject.name);
+        //Debug.Log(o.gameObject.name);
         if (!triggered)
         {
             triggered = true;
