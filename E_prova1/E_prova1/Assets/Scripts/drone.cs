@@ -10,12 +10,12 @@ public class drone : MonoBehaviour
 	
     void Start()
     {
-        init_y = transform.position.y;
+        init_y = transform.localPosition.y;
         rnd = Random.Range(0.1f,0.9f);
     }
 
 	void Update ()
     {
-        transform.position = new Vector3(transform.position.x, init_y + Mathf.Sin(Time.time*speed + rnd)/3f, transform.position.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, init_y + Mathf.Sin(Time.time*speed + rnd)/3f, transform.localPosition.z);
 	}
 }
