@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class openOutdoor : MonoBehaviour
-{
-    public ActivateButton button;
+public class downplatform : MonoBehaviour {
+
+    public ActivateButton button1;
+    public ActivateButton button2;
+    public ActivateButton button3;
+
     bool isOpen = false;
     bool opened = true;
 
     void Update ()
     {
-        if (button.m_isActive == true && opened)
+        if (button1.m_isActive == true && !button2.m_isActive == true && button3.m_isActive == true && opened)
         {
             StartCoroutine(openClose());
             opened = false;
@@ -19,7 +22,7 @@ public class openOutdoor : MonoBehaviour
     }
 
     private bool isOpening = false;
-    private float durations = 0.35f;
+    private float durations = 1.75f;
     IEnumerator openClose()
     {
         if (isOpening)
@@ -27,6 +30,9 @@ public class openOutdoor : MonoBehaviour
             yield break;
         }
         isOpening = true;
+
+
+        yield return new WaitForSeconds(0.25f);
 
         Vector3 currentpos = transform.position;
 
@@ -36,11 +42,11 @@ public class openOutdoor : MonoBehaviour
             counter += Time.deltaTime;
             if (isOpen)
             {
-                transform.position = Vector3.Lerp(currentpos, currentpos + new Vector3(0f, 8.2f, 0f), counter / durations);
+                transform.position = Vector3.Lerp(currentpos, new Vector3(currentpos.x, 24.275f, currentpos.z), counter / durations);
             }
             else
             {
-                transform.position = Vector3.Lerp(currentpos, currentpos - new Vector3(0f, 8.2f, 0f), counter / durations);
+                transform.position = Vector3.Lerp(currentpos, new Vector3(currentpos.x, 24.275f, currentpos.z), counter / durations);
 
             }
             yield return null;
