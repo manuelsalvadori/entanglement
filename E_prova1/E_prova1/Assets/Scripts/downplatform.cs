@@ -13,7 +13,7 @@ public class downplatform : MonoBehaviour {
 
     void Update ()
     {
-        if (button1.m_isActive == true && !button2.m_isActive == true && button3.m_isActive == true && opened)
+        if (!button1.m_isActive == true && !button2.m_isActive == true && button3.m_isActive == true && opened)
         {
             StartCoroutine(openClose());
             opened = false;
