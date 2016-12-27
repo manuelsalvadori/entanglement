@@ -3039,8 +3039,19 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.019999996, y: 0.020000005, z: 0.019999994}
+  m_Size: {x: 0.022, y: 0.022, z: 0.019999994}
   m_Center: {x: -0.000000007450581, y: 0, z: 0.000000029802322}
+--- !u!114 &266094898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 266094892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e507da90809344f37bbf4ec9c568e637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &273243505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4098,6 +4109,14 @@ Prefab:
     - target: {fileID: 1192802936399700, guid: 57351dde2beffd647a53e8e8a9c7eab0, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872113148926236, guid: 57351dde2beffd647a53e8e8a9c7eab0, type: 2}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1192802936399700, guid: 57351dde2beffd647a53e8e8a9c7eab0, type: 2}
+      propertyPath: m_TagString
+      value: Player1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57351dde2beffd647a53e8e8a9c7eab0, type: 2}
