@@ -36,7 +36,7 @@ public class ActivateButton : MonoBehaviour {
                     screen.GetComponent<Renderer>().material = blue;
                 else
                     screen.GetComponent<Renderer>().material = red;
-
+               
             }
         }
         else

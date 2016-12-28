@@ -11,11 +11,15 @@ public class CoolCameraController : MonoBehaviour
     private Vector3[] m_View;
     public float m_heigthOffset = 2f;
     public float m_BackOffset = 2.5f;
+    public float m_LateralOffset = 2f;
+    public float m_LateralRotation = 30f;
     //public float m_WallOffset = -0.44f;
     public float m_z3d = 0f, m_y3d = 29f;
     //~
 
 
+
+    private Vector3 m_SlideAmount;
     private Vector3 m_CameraTarget;                                     //Posizione di Arrivo
     private Vector3 m_CameraRotation;                                   //Rotazione di Arrivo
     //private Vector3 m_LevelTarget;                                      //Posizione di Arrivo del livello
@@ -53,6 +57,8 @@ public class CoolCameraController : MonoBehaviour
     // Use this for initialization
     void Start () {
         GameManager.Instance.m_Current_State = m_oldState = (int)Stato.First_Player;
+
+        m_SlideAmount = new Vector3(0, 0, 0);
 
         m_player_position[0] = GameManager.Instance.m_players[0].transform.position;
         m_player_position[1] = GameManager.Instance.m_players[1].transform.position;
@@ -115,9 +121,18 @@ public class CoolCameraController : MonoBehaviour
             m_CameraTarget.y = player_pos.y + m_heigthOffset;
 
         }
-
         else
+        {
             m_CameraTarget = m_offset_from_players + new Vector3(GameManager.Instance.m_players[0].transform.position.x, GameManager.Instance.m_players[0].transform.position.y, GameManager.Instance.m_players[0].transform.position.z);
+
+            float h = Input.GetAxis("R_Horizontal");
+            m_SlideAmount = new Vector3(0, 0, -h * m_LateralOffset);
+            if (h == 1 || h == -1)
+                m_CameraRotation = new Vector3(18f, 90f + (-m_LateralRotation * h), 0);
+            else
+                m_CameraRotation = new Vector3(m_CameraRotation.x, 90, m_CameraRotation.z);
+            m_CameraTarget = m_CameraTarget + m_SlideAmount;
+        }
     }
 
 
@@ -131,6 +146,7 @@ public class CoolCameraController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, m_CameraRotation, ref velocity2, smoothTime));
         cameradx.transform.position = new Vector3(transform.position.x, ydx, transform.position.z);
+        cameradx.transform.rotation = transform.rotation;
 
         if (transform.rotation.eulerAngles.y > 88f && transform.rotation.eulerAngles.y < 90f)
         {
