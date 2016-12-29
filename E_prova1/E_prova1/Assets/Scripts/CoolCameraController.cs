@@ -259,6 +259,7 @@ public class CoolCameraController : MonoBehaviour
             {
                 cameradx.GetComponent<Animation>()["CameraDX1"].speed = -1f;
                 cameradx.GetComponent<Animation>()["CameraDX1"].time = cameradx.GetComponent<Animation>()["CameraDX1"].length;
+
                 GetComponent<Animation>()["Camera3D1"].speed = -1f;
                 GetComponent<Animation>()["Camera3D1"].time = GetComponent<Animation>()["Camera3D1"].length;
 
