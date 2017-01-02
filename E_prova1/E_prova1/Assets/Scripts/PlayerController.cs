@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        if (GetComponent<ThirdPersonCharacter>().m_IsGrounded)
+        if (GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded)
             firstDash = true;
     }
 
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case 2:
-                if (GetComponent<ThirdPersonCharacter>().m_IsGrounded)
+                if (GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded)
                     dash();
                 else
                 {

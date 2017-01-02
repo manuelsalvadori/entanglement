@@ -19,14 +19,14 @@ public class LinkingHandler : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("HIT");
-        if (transform.GetChild(0).GetComponent<ThirdPersonCharacter>().m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && !locker)
+        if (transform.GetChild(0).GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && !locker)
             locker = true;
     }
 
     private void OnCollisionStay(Collision collision)
     {
 
-        if (transform.GetChild(0).GetComponent<ThirdPersonCharacter>().m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && locker)
+        if (transform.GetChild(0).GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && locker)
         {
             Debug.Log("Change");
             if (transform.GetChild(0).gameObject.tag.Equals("Player1"))
@@ -41,7 +41,7 @@ public class LinkingHandler : MonoBehaviour {
 
     private void OnCollisionExit(Collision collision)
     {
-        if (transform.GetChild(0).GetComponent<ThirdPersonCharacter>().m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && locker)
+        if (transform.GetChild(0).GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && locker)
             locker = false;
     }
 }
