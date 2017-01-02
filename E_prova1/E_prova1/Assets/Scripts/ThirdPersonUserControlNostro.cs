@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 
-[RequireComponent(typeof (ThirdPersonCharacter))]
-public class ThirdPersonUserControl : MonoBehaviour
+[RequireComponent(typeof (ThirdPersonCharacterNostro))]
+public class ThirdPersonUserControlNostro : MonoBehaviour
 {
-    private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
+    private ThirdPersonCharacterNostro m_Character; // A reference to the ThirdPersonCharacter on the object
     public Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
@@ -21,7 +21,7 @@ public class ThirdPersonUserControl : MonoBehaviour
 
 
         // get the third person character ( this should never be null due to require component )
-        m_Character = GetComponent<ThirdPersonCharacter>();
+        m_Character = GetComponent<ThirdPersonCharacterNostro>();
         m_Character.m_deltaTime = Time.time;
         m_Character.m_passedTime = Time.time;
 

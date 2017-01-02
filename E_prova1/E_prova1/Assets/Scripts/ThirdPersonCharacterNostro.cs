@@ -4,7 +4,7 @@ using UnityEngine;
 //[RequireComponent(typeof(Rigidbody))]
 //[RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
-public class ThirdPersonCharacter : MonoBehaviour
+public class ThirdPersonCharacterNostro : MonoBehaviour
 {
 	[SerializeField] float m_MovingTurnSpeed = 360;
 	[SerializeField] float m_StationaryTurnSpeed = 180;
@@ -393,15 +393,15 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && !ThirdPersonCharacter.locker)
-            ThirdPersonCharacter.locker = true;
+        if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && !ThirdPersonCharacterNostro.locker)
+            ThirdPersonCharacterNostro.locker = true;
 
     }
 
     private void OnCollisionStay(Collision collision)
     {
 
-        if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && ThirdPersonCharacter.locker)
+        if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && ThirdPersonCharacterNostro.locker)
         {
             if (gameObject.tag.Equals("Player1"))
             {
@@ -415,8 +415,8 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && ThirdPersonCharacter.locker)
-            ThirdPersonCharacter.locker = false;
+        if (m_IsGrounded && !collision.gameObject.tag.Equals("Ground") && ThirdPersonCharacterNostro.locker)
+            ThirdPersonCharacterNostro.locker = false;
 
     }
 
