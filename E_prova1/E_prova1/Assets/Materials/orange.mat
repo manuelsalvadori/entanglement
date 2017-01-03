@@ -43,7 +43,7 @@ Material:
         name: _EmissionMap
       second:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 4, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Fresnel
@@ -54,8 +54,8 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: d47db0e91b9f8e743aa44f5614d61e38, type: 3}
+        m_Scale: {x: 4, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
@@ -157,7 +157,7 @@ Material:
       second: {r: 19, g: 9, b: -16, a: -7}
     - first:
         name: _Color
-      second: {r: 0.32943717, g: 0.056066178, b: 0.44852942, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
