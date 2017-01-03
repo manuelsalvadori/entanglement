@@ -6,14 +6,18 @@ public class AutomaticDoors : MonoBehaviour
 {
     public Transform door_left, door_right;
     public Transform player;
+    public float distance = 2f;
+    bool isclosed = true;
 
     void Update ()
     {
-        if (Mathf.Abs((player.position - transform.position).magnitude) < 4f)
+        if (Mathf.Abs((player.position - transform.position).magnitude) < distance && isclosed)
         {
             StartCoroutine(openClose(true));
+            isclosed = false;
         }
-        else
+
+        if (Mathf.Abs((player.position - transform.position).magnitude) >= distance && !isclosed)
         {
             StartCoroutine(openClose(false));
         }
@@ -30,8 +34,8 @@ public class AutomaticDoors : MonoBehaviour
         }
         isOpening = true;
 
-        Vector3 currentpos = door_right.position;
-        Vector3 currentpos2 = door_left.position;
+        Vector3 currentpos = door_right.localPosition;
+        Vector3 currentpos2 = door_left.localPosition;
 
         float counter = 0;
         while (counter < durations)
@@ -39,13 +43,13 @@ public class AutomaticDoors : MonoBehaviour
             counter += Time.deltaTime;
             if (isOpen)
             {
-                door_right.position = Vector3.Lerp(currentpos, currentpos + new Vector3(0f, 0f, 1.85f), counter / durations);
-                door_left.position = Vector3.Lerp(currentpos2, currentpos2 - new Vector3(0f, 0f, 2.15f), counter / durations);
+                door_right.localPosition = Vector3.Lerp(currentpos, currentpos + new Vector3(1.85f, 0f, 0f), counter / durations);
+                door_left.localPosition = Vector3.Lerp(currentpos2, currentpos2 - new Vector3(1.85f, 0f, 0f), counter / durations);
             }
             else
             {
-                door_right.position = Vector3.Lerp(currentpos, currentpos - new Vector3(0f, 0f, 1.85f), counter / durations);
-                door_left.position = Vector3.Lerp(currentpos2, currentpos2 + new Vector3(0f,0f, 2.15f), counter / durations);
+                door_right.localPosition = Vector3.Lerp(currentpos, currentpos - new Vector3(1.85f, 0f, 0f), counter / durations);
+                door_left.localPosition = Vector3.Lerp(currentpos2, currentpos2 + new Vector3(1.85f, 0f, 0f), counter / durations);
             }
             yield return null;
         }
@@ -53,5 +57,8 @@ public class AutomaticDoors : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
 
         isOpening = false;
+        if(isOpen)
+            isclosed = true;
+
     }
 }

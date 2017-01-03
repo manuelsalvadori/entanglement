@@ -5,7 +5,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 
 [RequireComponent(typeof (ThirdPersonCharacterFree))]
-public class ThirdPersonCharacterControlFree : MonoBehaviour
+public class ThirdPersonUserControlFree : MonoBehaviour
 {
     private ThirdPersonCharacterFree m_Character; // A reference to the ThirdPersonCharacter on the object
     public Transform m_Cam;                  // A reference to the main camera in the scenes transform
