@@ -57,6 +57,8 @@ public class ThirdPersonUserControlFree : MonoBehaviour
         // read inputs
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
+        if (v < 0)
+            v = 0;
         bool crouch = Input.GetKey(KeyCode.C);
 
         // calculate move direction to pass to character
