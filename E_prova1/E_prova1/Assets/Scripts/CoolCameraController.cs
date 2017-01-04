@@ -153,7 +153,7 @@ public class CoolCameraController : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 0.02f, transform.rotation.eulerAngles.z));
         }
 
-        if (Mathf.Abs((transform.position - m_CameraTarget).magnitude) < 0.05f)
+        if (Mathf.Abs((transform.position - m_CameraTarget).magnitude) < 0.005f)
             transform.position = m_CameraTarget;
     }
 
