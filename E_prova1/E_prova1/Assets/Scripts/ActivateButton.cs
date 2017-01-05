@@ -73,5 +73,6 @@ public class ActivateButton : MonoBehaviour {
     public void unlock()
     {
         m_unlocked = true;
+        m_isActive = true;
     }
 }
