@@ -30,7 +30,7 @@ public class ThirdPersonUserControlNostro : MonoBehaviour
 
     private void Update()
     {
-        if ((!GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name) || GameManager.Instance.m_inventoryIsOpen) && GameManager.Instance.m_Current_State != (int)CoolCameraController.Stato.TreD)
+        if ((!GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name) || GameManager.Instance.m_IsWindowOver || GameManager.Instance.m_inventoryIsOpen) && GameManager.Instance.m_Current_State != (int)CoolCameraController.Stato.TreD)
         {
             m_Jump = false;
         }
@@ -89,7 +89,7 @@ public class ThirdPersonUserControlNostro : MonoBehaviour
 #endif
 
         // pass all parameters to the character control script
-        if((!GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name) || GameManager.Instance.m_inventoryIsOpen) && GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD)
+        if((!GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name) || GameManager.Instance.m_IsWindowOver ||  GameManager.Instance.m_inventoryIsOpen) && GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD)
         {
             m_Move.x = 0f;
             m_Move.z = 0f;
