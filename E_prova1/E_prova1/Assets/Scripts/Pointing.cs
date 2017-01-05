@@ -5,7 +5,7 @@ public class Pointing : MonoBehaviour
 {
     public float speed = 8f;
     public float zFixed = -10.5f;
-    public float[] start_ray_y = {40f, 19f};
+    public float[] start_ray_y = {40f, -19f};
     LineRenderer lr;
     public Material[] mat;
 
