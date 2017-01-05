@@ -15,7 +15,8 @@ public class ActivateButton : MonoBehaviour {
 
     void Start()
     {
-        screen.GetComponent<Renderer>().material = red;
+        if (m_unlocked)
+            screen.GetComponent<Renderer>().material = red;
     }
 
 	void Update ()
@@ -73,7 +74,7 @@ public class ActivateButton : MonoBehaviour {
     public void unlock()
     {
         m_unlocked = true;
-
+        screen.GetComponent<Renderer>().material = blue;
         m_isActive = true;
     }
 }
