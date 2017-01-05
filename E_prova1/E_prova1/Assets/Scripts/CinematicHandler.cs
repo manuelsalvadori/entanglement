@@ -102,7 +102,7 @@ public class CinematicHandler : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
         imVisible = false;
-        UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
+        UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
         GameManager.Instance.m_IsWindowOver = false;
 
         foreach (SkinnedMeshRenderer mr in LeftTalker.GetComponentsInChildren<SkinnedMeshRenderer>()) mr.enabled = false;
@@ -113,7 +113,7 @@ public class CinematicHandler : MonoBehaviour {
     IEnumerator UpdateWindow()
     {
         yield return new WaitForSeconds(0.1f);
-        UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
+        UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
 
     }
 
@@ -128,9 +128,9 @@ public class CinematicHandler : MonoBehaviour {
     IEnumerator DisplayCinematic()
     {
         yield return new WaitForSeconds(1f);
-        UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"].SetActive(true);
-        UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
-        UIGameplayManager.Instance.displayThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "Message" : "MessageRed"]);
+        UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"].SetActive(true);
+        UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
+        UIGameplayManager.Instance.displayThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
 
 
 
