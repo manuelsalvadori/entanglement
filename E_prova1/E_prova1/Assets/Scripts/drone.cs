@@ -7,7 +7,9 @@ public class drone : MonoBehaviour
     public float speed = 1f;
     float init_y;
     float rnd;
-	
+
+    public float amount = 3f;
+
     void Start()
     {
         init_y = transform.localPosition.y;
@@ -16,6 +18,6 @@ public class drone : MonoBehaviour
 
 	void Update ()
     {
-        transform.localPosition = new Vector3(transform.localPosition.x, init_y + Mathf.Sin(Time.time*speed + rnd)/3f, transform.localPosition.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, init_y + Mathf.Sin(Time.time*speed + rnd)/amount, transform.localPosition.z);
 	}
 }
