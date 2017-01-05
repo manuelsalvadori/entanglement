@@ -7210,6 +7210,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3246d771502beca438ff1923d137900f, type: 2}
+    - target: {fileID: 1727232689429210, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
   m_IsPrefabParent: 0
@@ -8193,6 +8197,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c051dc485b1d81d4cace7b31b8a07229, type: 2}
+    - target: {fileID: 1727232689429210, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
   m_IsPrefabParent: 0
@@ -9002,6 +9010,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c051dc485b1d81d4cace7b31b8a07229, type: 2}
+    - target: {fileID: 1727232689429210, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
   m_IsPrefabParent: 0
@@ -21547,6 +21559,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3246d771502beca438ff1923d137900f, type: 2}
+    - target: {fileID: 1727232689429210, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
   m_IsPrefabParent: 0
@@ -22825,8 +22841,8 @@ MonoBehaviour:
   speed: 8
   zFixed: -10.5
   start_ray_y:
-  - 10
-  - -2
+  - 50.4
+  - -13.8
   mat:
   - {fileID: 2100000, guid: d4d4d733eea43498ba9e3b52b986391b, type: 2}
   - {fileID: 2100000, guid: 68b890a13bcfc4955aa373ca529bc09c, type: 2}
