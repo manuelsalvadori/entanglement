@@ -73,6 +73,7 @@ public class ActivateButton : MonoBehaviour {
     public void unlock()
     {
         m_unlocked = true;
+        screen.GetComponent<Renderer>().material = blue;
         m_isActive = true;
     }
 }
