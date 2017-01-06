@@ -13,7 +13,7 @@ public class CameraReference : MonoBehaviour {
 
         transform.position = Camera.main.transform.position;
         if (GameManager.Instance.m_Current_State == (int)CoolCameraController.Stato.TreD)
-            transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, new Vector3(18f, 90f, 0), ref velocity2, smoothTime));
+            transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, new Vector3(28f, 90f, 0), ref velocity2, smoothTime));
         else
         {
             transform.rotation = Camera.main.transform.rotation;

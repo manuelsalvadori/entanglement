@@ -17,7 +17,7 @@ public class CinematicHandler : MonoBehaviour {
     private bool imWaitingToStop = false;
 
     public GameObject EnemyToMove;
-    public GameObject NextPath;
+    public GameObject EnemyToHide;
 
     public GameObject LeftTalker;
     public GameObject RightTalker;
@@ -43,7 +43,10 @@ public class CinematicHandler : MonoBehaviour {
                 "B:stringa7",
                 "A:stringa8",
                 "B:stringa9",
-                "B:stringa10"
+                "B:stringa10",
+                "B:stringa11",
+                "B:stringa12",
+                "B:stringa13"
             };
         messaggi = tmp;
         LeftTalkerOn = LeftTalker.GetComponentInChildren<Renderer>().material;
@@ -121,8 +124,12 @@ public class CinematicHandler : MonoBehaviour {
 
     IEnumerator MoveEnemyToNextPosition()
     {
+        yield return new WaitForSeconds(0.1f);
+
+        EnemyToMove.SetActive(true);
+        if(EnemyToHide)
+            EnemyToHide.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-        EnemyToMove.GetComponent<SplineController>().SplineRoot = NextPath;
         EnemyToMove.GetComponent<SplineController>().FollowSpline();
     }
 

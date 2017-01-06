@@ -128,7 +128,7 @@ public class CoolCameraController : MonoBehaviour
             float h = Input.GetAxis("R_Horizontal");
             m_SlideAmount = new Vector3(0, 0, -h * m_LateralOffset);
             if (h == 1 || h == -1)
-                m_CameraRotation = new Vector3(18f, 90f + (-m_LateralRotation * h), 0);
+                m_CameraRotation = new Vector3(28f, 90f + (-m_LateralRotation * h), 0);
             else
                 m_CameraRotation = new Vector3(m_CameraRotation.x, 90, m_CameraRotation.z);
             m_CameraTarget = m_CameraTarget + m_SlideAmount;
@@ -141,11 +141,11 @@ public class CoolCameraController : MonoBehaviour
     {
         //Debug.Log(m_CameraTarget + " e " + m_offset_from_players);
         //Move the camera (SmoothDamp version)
-        transform.position = Vector3.SmoothDamp(transform.position, m_CameraTarget, ref velocity4, smoothTime);
-        float ydx = Mathf.SmoothDamp(cameradx.transform.position.y, GameManager.Instance.m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.y + m_heigthOffset, ref velocityfloat, smoothTime);
+        transform.position = Vector3.SmoothDamp(transform.position, m_CameraTarget + (GameManager.Instance.m_Current_State == (int)CoolCameraController.Stato.TreD ? new Vector3(-1f,3f,0f) : Vector3.zero), ref velocity4, smoothTime);
+        float ydx = Mathf.SmoothDamp(cameradx.transform.position.y, GameManager.Instance.m_players[!GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.y + m_heigthOffset + (GameManager.Instance.m_Current_State == (int) CoolCameraController.Stato.TreD ? 3 : 0) , ref velocityfloat, smoothTime);
 
         transform.rotation = Quaternion.Euler(Vector3.SmoothDamp(transform.rotation.eulerAngles, m_CameraRotation, ref velocity2, smoothTime));
-        cameradx.transform.position = new Vector3(transform.position.x, ydx, transform.position.z);
+        cameradx.transform.position = new Vector3(transform.position.x, ydx , transform.position.z);
         cameradx.transform.rotation = transform.rotation;
 
         if (transform.rotation.eulerAngles.y > 88f && transform.rotation.eulerAngles.y < 90f)
@@ -245,7 +245,7 @@ public class CoolCameraController : MonoBehaviour
             m_CameraTarget.y = GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.y + m_heigthOffset;
             m_CameraTarget.x = GameManager.Instance.m_players[0].transform.position.x - m_BackOffset;
             m_CameraTarget.z = GameManager.Instance.m_players[0].transform.position.z;
-            m_CameraRotation = new Vector3(18f, 90f, 0f);
+            m_CameraRotation = new Vector3(28f, 90f, 0f);
 
             m_offset_from_players = m_CameraTarget - new Vector3(GameManager.Instance.m_players[0].transform.position.x, GameManager.Instance.m_players[0].transform.position.y, GameManager.Instance.m_players[0].transform.position.z);
 

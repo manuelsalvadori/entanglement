@@ -13,7 +13,7 @@ public class CameraDXrotate : MonoBehaviour
         if (Input.GetButtonDown("3Dmode"))
         {
             if (GameManager.Instance.m_3D_mode)
-                m_CameraRotation = new Vector3(18f, 90f, 0f);
+                m_CameraRotation = new Vector3(28f, 90f, 0f);
             else
                 m_CameraRotation = new Vector3(0f, 0f, 0f);
         }
