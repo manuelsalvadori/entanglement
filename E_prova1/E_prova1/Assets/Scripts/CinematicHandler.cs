@@ -16,8 +16,12 @@ public class CinematicHandler : MonoBehaviour {
     private bool imVisible = false;
     private bool imWaitingToStop = false;
 
+    public GameObject EnemyToMove;
+    public GameObject NextPath;
+
     public GameObject LeftTalker;
     public GameObject RightTalker;
+
 
     public Material LeftTalkerOff;
     public Material RightTalkerOff;
@@ -108,7 +112,20 @@ public class CinematicHandler : MonoBehaviour {
         foreach (SkinnedMeshRenderer mr in LeftTalker.GetComponentsInChildren<SkinnedMeshRenderer>()) mr.enabled = false;
         foreach (MeshRenderer mr in RightTalker.GetComponentsInChildren<MeshRenderer>()) mr.enabled = false;
 
+        if (EnemyToMove)
+        {
+            StartCoroutine(MoveEnemyToNextPosition());
+        }
+
     }
+
+    IEnumerator MoveEnemyToNextPosition()
+    {
+        yield return new WaitForSeconds(0.5f);
+        EnemyToMove.GetComponent<SplineController>().SplineRoot = NextPath;
+        EnemyToMove.GetComponent<SplineController>().FollowSpline();
+    }
+
 
     IEnumerator UpdateWindow()
     {
