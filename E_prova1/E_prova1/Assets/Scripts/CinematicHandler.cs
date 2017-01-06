@@ -62,13 +62,16 @@ public class CinematicHandler : MonoBehaviour {
 
     void OnTriggerEnter(Collider o)
     {
-        //Debug.Log(o.gameObject.name);
-        if (!triggered)
+        if (o.gameObject.tag.Equals("Player1"))
         {
-            triggered = true;
-            imVisible = true;
-            StartCoroutine(DisplayCinematic());
+            //Debug.Log(o.gameObject.name);
+            if (!triggered)
+            {
+                triggered = true;
+                imVisible = true;
+                StartCoroutine(DisplayCinematic());
 
+            }
         }
     }
 
