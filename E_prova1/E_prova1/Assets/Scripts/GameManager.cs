@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public Transform[] m_checkpoints;
     private Transform[] m_current_checkpoint;
-    [Range (0,4)]
+    [Range (0,10)]
     public int select_checkpoint;
 
     public int m_Current_State = (int)CoolCameraController.Stato.First_Player;

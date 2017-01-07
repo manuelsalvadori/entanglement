@@ -162,7 +162,6 @@ public class Inventory : MonoBehaviour {
     public void updateView()
     {
         m_currentScore.text = m_ncollectables[GameManager.Instance.whichLevelItIs()].ToString();
-        m_globalScore.text = Inventory.getGlobalScore().ToString();
         /*for(int i=0; i < m_upgradesActivation.Length; i++)
         {
             if (m_upgradesActivation[i]) m_Upgrades[i].sprite = GameManager.Instance.getSprite(i);
