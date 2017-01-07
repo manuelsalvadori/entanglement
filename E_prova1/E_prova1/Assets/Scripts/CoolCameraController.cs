@@ -110,17 +110,17 @@ public class CoolCameraController : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Level1") && !GameManager.Instance.m_inventoryIsOpen) //single_view
+        if (Input.GetButtonDown("Level1") && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //single_view
         {
             select_singleView(0);
         }
 
-        if (Input.GetButtonDown("Level2") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen) //double_view
+        if (Input.GetButtonDown("Level2") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //double_view
         {
             select_singleView(1);
         }
 
-        if (Input.GetButtonDown("3Dmode") && !GameManager.Instance.m_inventoryIsOpen) //3D_view
+        if (Input.GetButtonDown("3Dmode") && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //3D_view
         {
             if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); //else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
         }

@@ -132,6 +132,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[7], 0.8f);
             transform.position = GameManager.Instance.mirino.transform.position + new Vector3(0f, gameObject.GetComponent<CapsuleCollider>().bounds.extents.y, 0f);
         }
         GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(transform.position);
@@ -142,6 +143,7 @@ public class PlayerController : MonoBehaviour
     private void dash()
     {
         transform.GetChild(0).gameObject.SetActive(true);
+
         if(transform.rotation.eulerAngles.y >= 0f && transform.rotation.eulerAngles.y < 180f)
             StartCoroutine(dashGate(1.0f));
         else
@@ -157,7 +159,7 @@ public class PlayerController : MonoBehaviour
             yield break;
         }
         isdashing = true;
-
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[9], 0.8f);
         Vector3 currentpos = transform.position;
 
         float counter = 0;
@@ -179,7 +181,7 @@ public class PlayerController : MonoBehaviour
         if(enabled)
             GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position);
     }
-        
+
     IEnumerator stoppedTeleport(RaycastHit hit)
     {
         yield return new WaitForSeconds(0.05f);
@@ -200,7 +202,9 @@ public class PlayerController : MonoBehaviour
 
     private void moveObject()
     {
-        if (GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag.Equals("Spostabile"))
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[6], 0.8f);
+
+        if (GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.tag.Equals("Pistolabile"))
         {
             GameManager.Instance.pistola.GetComponent<shoot>().hit.collider.gameObject.GetComponent<MovableObject>().setActive();
         }
