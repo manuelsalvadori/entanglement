@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         Application.targetFrameRate = m_frameRate;
-        m_currentLevel = (int)Levels.Zero;
         m_current_checkpoint = new Transform[2];
     }
 
