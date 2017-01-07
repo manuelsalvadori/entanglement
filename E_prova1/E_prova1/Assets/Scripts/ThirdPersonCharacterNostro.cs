@@ -252,16 +252,11 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 
         Vector3 v;
 
-        if (GameManager.Instance.m_Current_State == (int)CoolCameraController.Stato.TreD && isLinked)
-        {
-            v = Vector3.zero;
-        }
-        else
-        {
+
 
             v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * m_JumpForwardAmount));
             v.x = -v.x;
-        }
+
 
 
         if (!m_IsJumping)
