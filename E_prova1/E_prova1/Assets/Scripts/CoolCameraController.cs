@@ -17,7 +17,8 @@ public class CoolCameraController : MonoBehaviour
     public float m_z3d = 0f, m_y3d = 29f;
     //~
 
-
+    private bool m_followEnemy = false;
+    private GameObject m_Enemy;
 
     private Vector3 m_SlideAmount;
     private Vector3 m_CameraTarget;                                     //Posizione di Arrivo
@@ -49,6 +50,19 @@ public class CoolCameraController : MonoBehaviour
         {1, Vector3.zero},
     };
     //~
+
+
+    public void followEnemy(GameObject g)
+    {
+        m_Enemy = g;
+        m_followEnemy = true;
+    }
+
+    public void resetFollowing()
+    {
+        m_followEnemy = false;
+    }
+
 
 
 
@@ -114,7 +128,7 @@ public class CoolCameraController : MonoBehaviour
 
         if (GameManager.Instance.m_Current_State != (int)Stato.TreD)
         {
-            Vector3 player_pos = Camera.main.WorldToViewportPoint(GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position);
+            Vector3 player_pos = Camera.main.WorldToViewportPoint(m_followEnemy ? m_Enemy.transform.position : GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position);
             player_pos.x += 0.15f;
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
             m_CameraTarget.x = player_pos.x;
