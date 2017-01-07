@@ -113,7 +113,7 @@ public class CinematicHandler : MonoBehaviour {
         yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
         imVisible = false;
         UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
-        GameManager.Instance.m_IsWindowOver = false;
+        //GameManager.Instance.m_IsWindowOver = false;
 
         foreach (SkinnedMeshRenderer mr in LeftTalker.GetComponentsInChildren<SkinnedMeshRenderer>()) mr.enabled = false;
         foreach (MeshRenderer mr in RightTalker.GetComponentsInChildren<MeshRenderer>()) mr.enabled = false;
@@ -134,6 +134,8 @@ public class CinematicHandler : MonoBehaviour {
             EnemyToHide.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         EnemyToMove.GetComponent<SplineController>().FollowSpline();
+
+        Camera.main.GetComponent<CoolCameraController>().followEnemy(EnemyToMove);
     }
 
 
