@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 
 //[RequireComponent(typeof(Rigidbody))]
@@ -55,6 +56,9 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
     public float m_deltaTime = 0f;
     public float m_passedTime = 0f;
 
+    public AudioClip[] clips;
+    bool isSounding = false;
+
     void Start()
 	{
 		m_Animator = GetComponent<Animator>();
@@ -64,8 +68,22 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 		m_CapsuleHeight = m_Capsule.height;
 		m_CapsuleCenter = m_Capsule.center;
 
-		//m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-		m_OrigGroundCheckDistance = m_GroundCheckDistance;
+        clips = new AudioClip[10];
+
+        for (int i = 0; i < 4; i++)
+            clips[i] = Resources.Load("Audio/Footstep" + i.ToString("00")) as AudioClip;
+
+        clips[4] = Resources.Load("Audio/Jump") as AudioClip;
+        clips[5] = Resources.Load("Audio/Land") as AudioClip;
+        clips[9] = Resources.Load("Audio/Dash") as AudioClip;
+        clips[6] = Resources.Load("Audio/Gun") as AudioClip;
+        clips[7] = Resources.Load("Audio/Teleport") as AudioClip;
+        clips[8] = Resources.Load("Audio/Incubator") as AudioClip;
+
+
+
+        //m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        m_OrigGroundCheckDistance = m_GroundCheckDistance;
 	}
 
 
@@ -181,6 +199,8 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 			m_Animator.SetFloat("JumpLeg", jumpLeg);
 		}
 
+
+
 		// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
 		// which affects the movement speed because of the root motion.
 		if (m_IsGrounded && move.magnitude > 0)
@@ -192,7 +212,35 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 			// don't use that while airborne
 			m_Animator.speed = 1;
 		}
-	}
+    }
+
+    int c = 1;
+
+    public void Footstep()
+    {
+        //GetComponent<AudioSource>().PlayOneShot(clips[(int)Mathf.Floor(Random.Range(0f, 3.99f))], 0.2f);
+        GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.2f);
+        c++;
+    }
+
+    public void Jump()
+    {
+        if (!isSounding)
+        {
+            isSounding = true;
+            GetComponent<AudioSource>().PlayOneShot(clips[4], 0.3f);
+            StartCoroutine(shutUP());
+        }
+    }
+
+
+
+    IEnumerator shutUP()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isSounding = false;
+    }
+
 
 
 	void HandleAirborneMovement()
@@ -204,8 +252,16 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 
         Vector3 v;
 
-        v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * m_JumpForwardAmount));
-        v.x = -v.x;
+        if (GameManager.Instance.m_Current_State == (int)CoolCameraController.Stato.TreD && isLinked)
+        {
+            v = Vector3.zero;
+        }
+        else
+        {
+
+            v = transform.InverseTransformVector(new Vector3(0f, 0f, m_ForwardAmount * m_JumpForwardAmount));
+            v.x = -v.x;
+        }
 
 
         if (!m_IsJumping)
@@ -222,6 +278,13 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
             Vector3 salto = new Vector3(0f, m_JumpHeight * oscillazione, 0f);
             GetComponent<CharacterController>().Move(salto + v * Time.deltaTime);
             m_IsJumping = true;
+        }
+
+        if(currentHeight < 0.5 && !isSounding)
+        {
+            isSounding = true;
+            GetComponent<AudioSource>().PlayOneShot(clips[5], 0.25f);
+            StartCoroutine(shutUP());
         }
 
         //m_Rigidbody.AddForce(new Vector3(0f,0f,(m_ForwardAmount * m_MoveSpeedMultiplier) / Time.deltaTime));
@@ -328,6 +391,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
             if (hitInfo.transform.gameObject.tag.Equals("Platform") && m_IsGrounded)
             {
                 transform.parent.parent = hitInfo.transform.gameObject.transform;
+
             }
             else
             {
@@ -372,6 +436,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
             m_IsFalling = false;
             m_IsJumping = false;
             startJump = 0.6f;
+
         }
 
         if (hit.gameObject.tag.Equals("Spostabile")){

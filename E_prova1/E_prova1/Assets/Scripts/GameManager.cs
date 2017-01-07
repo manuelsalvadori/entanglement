@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if ((Input.GetButtonDown("Use") && !Input.GetButton("L2"))&& !m_inventoryIsOpen)
+        if ((Input.GetButtonDown("Use") && !Input.GetButton("L2")) && !m_inventoryIsOpen && !GameManager.Instance.m_IsWindowOver)
         {
             if (hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state)) {
                 m_players[(m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().useGadget(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state);
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if ((!Input.GetButton("L2") && Input.GetButtonDown("Inventory")) && !m_3D_mode) {
+        if ((!Input.GetButton("L2") && Input.GetButtonDown("Inventory")) && !m_3D_mode && !GameManager.Instance.m_IsWindowOver) {
             if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
             {
                 m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().updateView();
