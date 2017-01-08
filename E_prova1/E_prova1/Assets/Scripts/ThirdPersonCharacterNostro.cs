@@ -219,7 +219,8 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
     public void Footstep()
     {
         //GetComponent<AudioSource>().PlayOneShot(clips[(int)Mathf.Floor(Random.Range(0f, 3.99f))], 0.2f);
-        GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.2f);
+        if(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
+            GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.2f);
         c++;
     }
 
@@ -228,8 +229,12 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
         if (!isSounding)
         {
             isSounding = true;
-            GetComponent<AudioSource>().PlayOneShot(clips[4], 0.3f);
-            StartCoroutine(shutUP());
+            if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
+            {
+                GetComponent<AudioSource>().PlayOneShot(clips[4], 0.3f);
+                StartCoroutine(shutUP());
+            }
+
         }
     }
 
@@ -278,8 +283,12 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
         if(currentHeight < 0.5 && !isSounding)
         {
             isSounding = true;
-            GetComponent<AudioSource>().PlayOneShot(clips[5], 0.25f);
-            StartCoroutine(shutUP());
+            if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
+            {
+                GetComponent<AudioSource>().PlayOneShot(clips[5], 0.25f);
+                StartCoroutine(shutUP());
+            }
+
         }
 
         //m_Rigidbody.AddForce(new Vector3(0f,0f,(m_ForwardAmount * m_MoveSpeedMultiplier) / Time.deltaTime));
