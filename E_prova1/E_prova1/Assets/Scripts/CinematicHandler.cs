@@ -134,7 +134,7 @@ public class CinematicHandler : MonoBehaviour {
             EnemyToHide.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         EnemyToMove.GetComponent<SplineController>().FollowSpline();
-
+        EnemyToMove.GetComponent<AudioSource>().Play();
         Camera.main.GetComponent<CoolCameraController>().followEnemy(EnemyToMove);
     }
 
