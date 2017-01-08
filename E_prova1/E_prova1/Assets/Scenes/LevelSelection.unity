@@ -194,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door_left: {fileID: 29320832}
   door_right: {fileID: 29320831}
+  door_key: {fileID: 1173042780}
   player: {fileID: 924998299}
   distance: 2
 --- !u!1001 &30397994
@@ -495,6 +496,10 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 400008, guid: 962250e788b664d9d87ce1d3e92a73a5, type: 3}
   m_PrefabInternal: {fileID: 156739576}
+--- !u!4 &173462143 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400010, guid: 962250e788b664d9d87ce1d3e92a73a5, type: 3}
+  m_PrefabInternal: {fileID: 156739576}
 --- !u!1 &302619057
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +755,10 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.756374, y: 1.6037872, z: 1.7441522}
   m_Center: {x: -0.00000008940698, y: 0.000000029802322, z: 0.0000004172325}
+--- !u!4 &346459663 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400010, guid: 962250e788b664d9d87ce1d3e92a73a5, type: 3}
+  m_PrefabInternal: {fileID: 862423867}
 --- !u!1 &352789052 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: 962250e788b664d9d87ce1d3e92a73a5, type: 3}
@@ -1046,6 +1055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door_left: {fileID: 156739578}
   door_right: {fileID: 156739577}
+  door_key: {fileID: 173462143}
   player: {fileID: 924998299}
   distance: 2
 --- !u!1 &476895396
@@ -1894,6 +1904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door_left: {fileID: 862423870}
   door_right: {fileID: 862423869}
+  door_key: {fileID: 346459663}
   player: {fileID: 924998299}
   distance: 2
 --- !u!65 &862423873
@@ -2285,6 +2296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door_left: {fileID: 929720559}
   door_right: {fileID: 929720558}
+  door_key: {fileID: 1229948479}
   player: {fileID: 924998299}
   distance: 2
 --- !u!114 &929720562
@@ -2799,6 +2811,10 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2124208, y: 0.89188254, z: 1.0256342}
   m_Center: {x: 0.004668127, y: 0.18786049, z: 0.5551025}
+--- !u!4 &1173042780 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400010, guid: 962250e788b664d9d87ce1d3e92a73a5, type: 3}
+  m_PrefabInternal: {fileID: 29320830}
 --- !u!1001 &1220605684
 Prefab:
   m_ObjectHideFlags: 0
@@ -2894,8 +2910,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door_left: {fileID: 1402057739}
   door_right: {fileID: 1586734706}
+  door_key: {fileID: 1765386216}
   player: {fileID: 924998299}
   distance: 2
+--- !u!4 &1229948479 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400010, guid: 962250e788b664d9d87ce1d3e92a73a5, type: 3}
+  m_PrefabInternal: {fileID: 929720556}
 --- !u!1001 &1283811655
 Prefab:
   m_ObjectHideFlags: 0
@@ -3968,6 +3989,10 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.015580436, y: 0.036621355, z: 0.019999996}
   m_Center: {x: -0.0047064666, y: 0, z: 0}
+--- !u!4 &1765386216 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400010, guid: 962250e788b664d9d87ce1d3e92a73a5, type: 3}
+  m_PrefabInternal: {fileID: 1220605684}
 --- !u!1001 &1811530648
 Prefab:
   m_ObjectHideFlags: 0
