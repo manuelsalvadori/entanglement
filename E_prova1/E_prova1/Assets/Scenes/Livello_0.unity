@@ -345,7 +345,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b20ab417ba432844ca56e005c698f3ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.832
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5431,21 +5431,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 82405822833239782, guid: 57351dde2beffd647a53e8e8a9c7eab0,
-        type: 2}
-      propertyPath: spreadCustomCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 82405822833239782, guid: 57351dde2beffd647a53e8e8a9c7eab0,
-        type: 2}
-      propertyPath: MaxDistance
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 82405822833239782, guid: 57351dde2beffd647a53e8e8a9c7eab0,
-        type: 2}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57351dde2beffd647a53e8e8a9c7eab0, type: 2}
   m_IsPrefabParent: 0
@@ -8359,7 +8344,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.239
+  m_Volume: 0.399
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8993,7 +8978,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.239
+  m_Volume: 0.399
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -13421,8 +13406,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.393235, y: 17.046928, z: 0.9864935}
-  m_Center: {x: 0, y: 0.00007198917, z: -0.21880896}
+  m_Size: {x: 11.393235, y: 0.466138, z: 1.5951425}
+  m_Center: {x: 0, y: 8.440582, z: 0.08541522}
 --- !u!65 &839639224
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13451,6 +13436,18 @@ BoxCollider:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 514d976ded6fa4338a3ac48c550a91d6, type: 3}
   m_PrefabInternal: {fileID: 563836419}
+--- !u!65 &839639229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 839639222}
+  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.393235, y: 17.046928, z: 0.9864935}
+  m_Center: {x: 0, y: 0.00007198917, z: -0.21880896}
 --- !u!1 &840326821
 GameObject:
   m_ObjectHideFlags: 0
@@ -16684,7 +16681,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.239
+  m_Volume: 0.399
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -19273,7 +19270,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.239
+  m_Volume: 0.399
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -23130,7 +23127,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6aa7873f5f30a144c83a96f42adf5e47, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.832
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -24994,10 +24991,6 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -0.11041513
       objectReference: {fileID: 0}
-    - target: {fileID: 1534064772398168, guid: ac34bf0dc55cd2e43b27212eb28e2bb0, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac34bf0dc55cd2e43b27212eb28e2bb0, type: 2}
   m_IsPrefabParent: 0
@@ -26090,7 +26083,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.239
+  m_Volume: 0.399
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -28261,7 +28254,7 @@ MonoBehaviour:
   - {fileID: 2084151410}
   - {fileID: 1024167242}
   - {fileID: 1667564606}
-  select_checkpoint: 1
+  select_checkpoint: 3
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
@@ -28532,7 +28525,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.239
+  m_Volume: 0.399
   m_Pitch: 1
   Loop: 0
   Mute: 0
