@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 
 //[RequireComponent(typeof(Rigidbody))]
@@ -55,6 +56,11 @@ public class ThirdPersonCharacterFree : MonoBehaviour
     public float m_deltaTime = 0f;
     public float m_passedTime = 0f;
 
+    public AudioClip[] clips;
+
+
+    private bool isSounding = false;
+
     void Start()
 	{
 		m_Animator = GetComponent<Animator>();
@@ -64,9 +70,47 @@ public class ThirdPersonCharacterFree : MonoBehaviour
 		m_CapsuleHeight = m_Capsule.height;
 		m_CapsuleCenter = m_Capsule.center;
 
-		//m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-		m_OrigGroundCheckDistance = m_GroundCheckDistance;
+        clips = new AudioClip[10];
+
+        for (int i = 0; i < 4; i++)
+            clips[i] = Resources.Load("Audio/Footstep" + i.ToString("00")) as AudioClip;
+
+        clips[4] = Resources.Load("Audio/Jump") as AudioClip;
+        clips[5] = Resources.Load("Audio/Land") as AudioClip;
+
+
+        //m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        m_OrigGroundCheckDistance = m_GroundCheckDistance;
 	}
+
+    int c = 1;
+
+    public void Footstep()
+    {
+        //GetComponent<AudioSource>().PlayOneShot(clips[(int)Mathf.Floor(Random.Range(0f, 3.99f))], 0.2f);
+        GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.2f);
+        c++;
+    }
+
+    public void Jump()
+    {
+        if (!isSounding)
+        {
+            isSounding = true;
+            GetComponent<AudioSource>().PlayOneShot(clips[4], 0.3f);
+            StartCoroutine(shutUP());
+
+
+        }
+    }
+
+
+
+    IEnumerator shutUP()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isSounding = false;
+    }
 
 
     public void Move(Vector3 move, bool crouch, bool jump)
@@ -223,6 +267,16 @@ public class ThirdPersonCharacterFree : MonoBehaviour
             GetComponent<CharacterController>().Move(salto + v * Time.deltaTime);
             m_IsJumping = true;
         }
+
+        if (currentHeight < 0.5 && !isSounding)
+        {
+            isSounding = true;
+            GetComponent<AudioSource>().PlayOneShot(clips[5], 0.25f);
+            StartCoroutine(shutUP());
+
+
+        }
+
 
         //m_Rigidbody.AddForce(new Vector3(0f,0f,(m_ForwardAmount * m_MoveSpeedMultiplier) / Time.deltaTime));
         /*
