@@ -2,41 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Selection : MonoBehaviour
 {
+
+    public GameObject bottoni;
+    public GameObject loading;
+    public GameObject creditz;
+    public Transform loadingbar;
+    public GameObject em;
+    public Text percento;
+
     public void sceneselection()
     {
         SceneManager.LoadScene("SelectionScene");
     }
 
-    public void scene1()
+    public void start()
     {
-        SceneManager.LoadScene("Microlivello_1");
+        bottoni.SetActive(false);
+        loading.SetActive(true);
+        DestroyImmediate(em);
+        //SceneManager.LoadScene("Livello_0");
+        StartCoroutine(loadAsync("Livello_0"));
     }
 
-    public void scene2()
+    public void credits()
     {
-        SceneManager.LoadScene("Microlivello_2");
+        creditz.SetActive(!creditz.activeInHierarchy);
     }
 
-    public void scene3()
+    public void exit()
     {
-        SceneManager.LoadScene("Microlivello_3");
+        Application.Quit();
     }
 
-    public void scene4()
+    private IEnumerator loadAsync(string levelName)
     {
-        SceneManager.LoadScene("Microlivello_4");
-    }
+        AsyncOperation operation = Application.LoadLevelAdditiveAsync(levelName);
+        while(!operation.isDone) {
+            yield return operation.isDone;
+            loadingbar.GetComponent<Image>().fillAmount = operation.progress;
+            percento.text = ((int)(operation.progress * 100f)).ToString() + "%";
+            Debug.Log("loading progress: " + operation.progress);
+        }
+        loadingbar.GetComponent<Image>().fillAmount = 1f;
+        yield return new WaitForSeconds(0.2f);
+        SceneManager.UnloadScene("SelectionScene");
+        Debug.Log("load done");
 
-    public void scene5()
-    {
-        SceneManager.LoadScene("Microlivello_5");
-    }
 
-    public void scene6()
-    {
-        SceneManager.LoadScene("Microlivello_6");
     }
 }

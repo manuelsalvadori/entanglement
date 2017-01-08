@@ -34,18 +34,18 @@ public class CinematicHandler : MonoBehaviour {
     {
         string[] tmp =
             {
-                "A:stringa1",
-                "B:stringa2",
-                "A:stringa3",
-                "A:stringa4",
-                "B:stringa5",
-                "A:stringa6",
-                "B:stringa7",
-                "A:stringa8",
-                "B:stringa9",
-                "B:stringa10",
-                "B:stringa11",
-                "B:stringa12",
+                "A:Who or what are you? And what have you done?",
+                "B:I'm the one who'll destroy the two worlds, and i've entangled two worlds that are collapsing",
+                "A:You do what? I won't let you do this",
+                "A:'it could be dangerous if it go away freely'",
+                "B:You have to catch me first",
+                "A:What's happening to this world?",
+				"B:The same thing that's happening in the other one. For now there are just some time and space distortions",
+				"A:And what will happen next?",
+				"B:The two worlds will collapse and they will no longer exist in the two different universe",
+                "B:Now i have just to hide from you until the worlds end",
+                "B:As you can see, i can pass through objects and i can fly, i seriously doubt you can catch me",
+                "B:AHAHAHAHAHAH",
                 "B:stringa13"
             };
         messaggi = tmp;
