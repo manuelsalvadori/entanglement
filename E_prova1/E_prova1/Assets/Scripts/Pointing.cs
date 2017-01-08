@@ -76,7 +76,11 @@ public class Pointing : MonoBehaviour
         transform.position = new Vector3(posplayer.x + dir,posplayer.y, posplayer.z);
         if(lr != null)
             lr.material = mat[GameManager.Instance.m_sel_pg ? 0:1];
-        GetComponent<Renderer>().material = mat[GameManager.Instance.m_sel_pg ? 0:1];
+        Component[] rend = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rend)
+        {
+            r.material = mat[GameManager.Instance.m_sel_pg ? 0:1];
+        }
     }
 
     void OnDisable()
