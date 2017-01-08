@@ -144,7 +144,7 @@ public class CoolCameraController : MonoBehaviour
         {
             m_CameraTarget = m_offset_from_players + new Vector3(GameManager.Instance.m_players[0].transform.position.x, GameManager.Instance.m_players[0].transform.position.y, GameManager.Instance.m_players[0].transform.position.z);
 
-            float h = Input.GetAxis("R_Horizontal");
+            float h = Input.GetAxis("CameraPan");
             m_SlideAmount = new Vector3(0, 0, -h * m_LateralOffset);
             if (h == 1 || h == -1)
                 m_CameraRotation = new Vector3(28f, 90f + (-m_LateralRotation * h), 0);
