@@ -7,7 +7,7 @@ public class BoltHandler : MonoBehaviour {
     private GameObject Left;
     private GameObject Right;
 
-
+    bool isSounding = false;
 
 
     // Use this for initialization
@@ -49,8 +49,22 @@ public class BoltHandler : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.1f);
         foreach (GameObject g in who) g.GetComponent<LineRenderer>().enabled = true;
+        if (!isSounding)
+        {
+            isSounding = true;
+            GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.4f);
+            GetComponent<AudioSource>().Play();
+            StartCoroutine(shutUP());
+        }
+
         yield return new WaitForSeconds(Random.Range(0.2f, 0.8f));
         foreach (GameObject g in who) g.GetComponent<LineRenderer>().enabled = false;
+    }
+
+    IEnumerator shutUP()
+    {
+        yield return new WaitForSeconds(1.5f);
+        isSounding = false;
     }
 
 }

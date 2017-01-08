@@ -14,6 +14,9 @@ public class EnemyIdle : MonoBehaviour {
 
     public float amount = 3f;
 
+
+    bool isSounding = false;
+
     void Start()
     {
         init_y = transform.localPosition.y;
@@ -40,10 +43,23 @@ public class EnemyIdle : MonoBehaviour {
                 if (other.gameObject.tag.Equals("Ending"))
                     StartCoroutine(deactivateFollowing(false, 0.6f));
                 scudo.GetComponent<MeshRenderer>().enabled = true;
+                if (!isSounding)
+                {
+                    isSounding = true;
+                    GetComponent<AudioSource>().Play();
+                    StartCoroutine(shutUP());
+                }
+
                 StartCoroutine(deactivateShield());
             }
         }
 
+    }
+
+    IEnumerator shutUP()
+    {
+        yield return new WaitForSeconds(1f);
+        isSounding = false;
     }
 
     IEnumerator deactivateFollowing(bool activate = true, float time = 2.5f )

@@ -220,7 +220,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
     {
         //GetComponent<AudioSource>().PlayOneShot(clips[(int)Mathf.Floor(Random.Range(0f, 3.99f))], 0.2f);
         if(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
-            GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.2f);
+            GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.15f);
         c++;
     }
 
@@ -231,7 +231,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
             isSounding = true;
             if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
             {
-                GetComponent<AudioSource>().PlayOneShot(clips[4], 0.3f);
+                GetComponent<AudioSource>().PlayOneShot(clips[4], 0.2f);
                 StartCoroutine(shutUP());
             }
 
@@ -285,7 +285,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
             isSounding = true;
             if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
             {
-                GetComponent<AudioSource>().PlayOneShot(clips[5], 0.25f);
+                GetComponent<AudioSource>().PlayOneShot(clips[5], 0.2f);
                 StartCoroutine(shutUP());
             }
 

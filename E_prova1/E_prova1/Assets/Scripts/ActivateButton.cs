@@ -12,6 +12,10 @@ public class ActivateButton : MonoBehaviour {
     public Material red, blue;
     public GameObject screen;
 
+    public AudioClip Unlock;
+    public AudioClip Locked;
+
+
 
     void Start()
     {
@@ -24,20 +28,30 @@ public class ActivateButton : MonoBehaviour {
 
         if (GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD ? (transform.position - (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1]).transform.position).magnitude < min_distance : (transform.position - (GameManager.Instance.m_players[0]).transform.position).magnitude < min_distance || (transform.position - (GameManager.Instance.m_players[1]).transform.position).magnitude < min_distance)
         {
-            if (Input.GetButtonDown("Interact") && m_unlocked)
+            if (Input.GetButtonDown("Interact"))
             {
-                if (m_isSwitch)
-                    m_isActive = !m_isActive;
+                if (m_unlocked)
+                {
+                    if(Unlock)
+                        GetComponent<AudioSource>().PlayOneShot(Unlock);
+                    if (m_isSwitch)
+                        m_isActive = !m_isActive;
+                    else
+                    {
+                        m_isActive = true;
+                        //displayDeactive();
+                    }
+                    if (m_isActive)
+                        screen.GetComponent<Renderer>().material = blue;
+                    else
+                        screen.GetComponent<Renderer>().material = red;
+                }
                 else
                 {
-                    m_isActive = true;
-                    //displayDeactive();
+                    if(Locked)
+                        GetComponent<AudioSource>().PlayOneShot(Locked);
                 }
-                if (m_isActive)
-                    screen.GetComponent<Renderer>().material = blue;
-                else
-                    screen.GetComponent<Renderer>().material = red;
-               
+
             }
         }
         else
