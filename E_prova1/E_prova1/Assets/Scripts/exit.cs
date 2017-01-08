@@ -5,12 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class exit : MonoBehaviour
 {
+    bool p1 = false, p2 = false;
     [Range (0,5)]
     public int level_to_load;
+    public bool isSelectLevel = true;
 
     void OnTriggerEnter(Collider o)
     {
-        if (o.gameObject.tag.Equals("Player1"))
+        if(o.gameObject.tag.Equals("Player1"))
+            p1 = true;
+        
+        if(o.gameObject.tag.Equals("Player2"))
+            p2 = true;
+        
+        if ((p1 && p2) || isSelectLevel)
         {
             switch (level_to_load)
             {
