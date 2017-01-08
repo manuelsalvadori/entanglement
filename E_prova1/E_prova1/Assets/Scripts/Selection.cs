@@ -12,6 +12,7 @@ public class Selection : MonoBehaviour
     public GameObject creditz;
     public Transform loadingbar;
     public GameObject em;
+    public Text percento;
 
     public void sceneselection()
     {
@@ -43,6 +44,7 @@ public class Selection : MonoBehaviour
         while(!operation.isDone) {
             yield return operation.isDone;
             loadingbar.GetComponent<Image>().fillAmount = operation.progress;
+            percento.text = ((int)(operation.progress * 100f)).ToString() + "%";
             Debug.Log("loading progress: " + operation.progress);
         }
         loadingbar.GetComponent<Image>().fillAmount = 1f;
