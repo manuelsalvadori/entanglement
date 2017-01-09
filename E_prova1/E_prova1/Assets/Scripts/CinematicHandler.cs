@@ -62,7 +62,7 @@ public class CinematicHandler : MonoBehaviour {
 
     void OnTriggerEnter(Collider o)
     {
-        if (o.gameObject.tag.Equals("Player1"))
+        if (o.gameObject.tag.Equals("Player1") || o.gameObject.tag.Equals("Player2"))
         {
             //Debug.Log(o.gameObject.name);
             if (!triggered)
