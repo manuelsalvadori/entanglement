@@ -81,9 +81,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
         clips[8] = Resources.Load("Audio/Incubator") as AudioClip;
         clips[10] = Resources.Load("Audio/LaMuerteSuonuora") as AudioClip;
         clips[11] = Resources.Load("Audio/collectables") as AudioClip;
-
-
-
+        clips[12] = Resources.Load("Audio/box.mp3") as AudioClip;
 
         //m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;
@@ -446,8 +444,9 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 
         }
 
-        if (hit.gameObject.tag.Equals("Spostabile")){
-
+        if (hit.gameObject.tag.Equals("Spostabile"))
+        {
+            
             Rigidbody body = hit.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
@@ -463,6 +462,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 
 
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {

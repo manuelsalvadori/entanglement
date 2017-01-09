@@ -17,41 +17,44 @@ public class exit : MonoBehaviour
 
     void OnTriggerEnter(Collider o)
     {
-        if(o.gameObject.tag.Equals("Player1"))
-            p1 = true;
-        
-        if(o.gameObject.tag.Equals("Player2"))
-            p2 = true;
-        
-        if ((p1 && p2) || isSelectLevel)
+        if (!o.gameObject.tag.Equals("enemy"))
         {
-            switch (level_to_load)
+            if (o.gameObject.tag.Equals("Player1"))
+                p1 = true;
+        
+            if (o.gameObject.tag.Equals("Player2"))
+                p2 = true;
+        
+            if ((p1 && p2) || isSelectLevel)
             {
-                case 0:
-                    SceneManager.LoadScene("LevelSelection");
-                    break;
-                case 1:
+                switch (level_to_load)
+                {
+                    case 0:
+                        SceneManager.LoadScene("LevelSelection");
+                        break;
+                    case 1:
 
-                    canvas.SetActive(true);
-                    Camera.main.enabled = false;
-                    cam.enabled = true;
+                        canvas.SetActive(true);
+                        Camera.main.enabled = false;
+                        cam.enabled = true;
                     //SceneManager.LoadScene("Level_1");
-                    StartCoroutine(loadAsync("Livello_1"));
-                    break;
-                case 2:
-                    SceneManager.LoadScene("Level_2");
-                    break;
-                case 3:
-                    SceneManager.LoadScene("Level_3");
-                    break;
-                case 4:
-                    SceneManager.LoadScene("Level_4");
-                    break;
-                case 5:
-                    SceneManager.LoadScene("Level_5");
-                    break;
-                default:
-                    return;
+                        StartCoroutine(loadAsync("Livello_1"));
+                        break;
+                    case 2:
+                        SceneManager.LoadScene("Level_2");
+                        break;
+                    case 3:
+                        SceneManager.LoadScene("Level_3");
+                        break;
+                    case 4:
+                        SceneManager.LoadScene("Level_4");
+                        break;
+                    case 5:
+                        SceneManager.LoadScene("Level_5");
+                        break;
+                    default:
+                        return;
+                }
             }
         }
     }

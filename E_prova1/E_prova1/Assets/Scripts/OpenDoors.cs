@@ -23,6 +23,8 @@ public class OpenDoors : MonoBehaviour
     private float durations = 0.15f;
     IEnumerator openClose()
     {
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().Play();
         if (isOpening)
         {
             yield break;

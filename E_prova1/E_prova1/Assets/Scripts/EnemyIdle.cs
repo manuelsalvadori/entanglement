@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyIdle : MonoBehaviour {
+public class EnemyIdle : MonoBehaviour
+{
 
     public float speed = 1f;
     float init_y;
