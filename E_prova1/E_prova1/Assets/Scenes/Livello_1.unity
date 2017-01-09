@@ -21783,11 +21783,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0f577e12eec94c9b8758d718ccc1503, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &636693165 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1534064772398168, guid: ac34bf0dc55cd2e43b27212eb28e2bb0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1635015775}
 --- !u!1001 &638058448
 Prefab:
   m_ObjectHideFlags: 0
@@ -38130,6 +38125,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 161c8a54e3946462aa46c3ee18571a83, type: 3}
   m_PrefabInternal: {fileID: 1136939766}
+--- !u!1 &1139357003 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1235820230915700, guid: 57351dde2beffd647a53e8e8a9c7eab0,
+    type: 2}
+  m_PrefabInternal: {fileID: 354456081}
 --- !u!1 &1139404092
 GameObject:
   m_ObjectHideFlags: 0
@@ -40885,6 +40885,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4581892551345826, guid: f9fa700c54d8f411481605dc37569f01,
     type: 2}
   m_PrefabInternal: {fileID: 1218728584}
+--- !u!1 &1227065852 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1847439632117488, guid: ac34bf0dc55cd2e43b27212eb28e2bb0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1635015775}
 --- !u!1001 &1228284036
 Prefab:
   m_ObjectHideFlags: 0
@@ -46827,11 +46832,6 @@ Transform:
   m_Father: {fileID: 663686972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1390782419 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1231249865769286, guid: 57351dde2beffd647a53e8e8a9c7eab0,
-    type: 2}
-  m_PrefabInternal: {fileID: 354456081}
 --- !u!1001 &1390884061
 Prefab:
   m_ObjectHideFlags: 0
@@ -64603,8 +64603,8 @@ MonoBehaviour:
   mirino: {fileID: 98031043}
   pistola: {fileID: 352903605}
   m_players:
-  - {fileID: 1390782419}
-  - {fileID: 636693165}
+  - {fileID: 1139357003}
+  - {fileID: 1227065852}
   m_inventory:
   - {fileID: 2105226070}
   - {fileID: 209401387}
