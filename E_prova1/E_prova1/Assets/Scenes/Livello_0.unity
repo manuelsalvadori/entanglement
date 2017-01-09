@@ -4342,9 +4342,9 @@ MonoBehaviour:
   to: 4
   EnemyToMove: {fileID: 1541698407}
   EnemyToHide: {fileID: 0}
-  LeftTalker: {fileID: 632479178}
+  LeftTalker: {fileID: 741123176}
   RightTalker: {fileID: 1748690246}
-  LeftTalkerOff: {fileID: 2100000, guid: 69e068b913c066546b41b4e5612e83b3, type: 2}
+  LeftTalkerOff: {fileID: 2100000, guid: cb3551b13f3061a4fbd90cb58f3bfda7, type: 2}
   RightTalkerOff: {fileID: 2100000, guid: cb9cf5c5568b8004f91bf092c1117b38, type: 2}
 --- !u!65 &289368336
 BoxCollider:
@@ -8644,6 +8644,11 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -0.110415146
       objectReference: {fileID: 0}
+    - target: {fileID: 137926733699281434, guid: e0c7d58cafce3244e8a2926ebea205c3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0c7d58cafce3244e8a2926ebea205c3, type: 2}
   m_IsPrefabParent: 0
@@ -11798,6 +11803,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400010, guid: e87c366dcdb714bc89b0b3cdaa9ebbc2, type: 3}
   m_PrefabInternal: {fileID: 2047493809}
+--- !u!1 &741123176 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1139041236940084, guid: e0c7d58cafce3244e8a2926ebea205c3,
+    type: 2}
+  m_PrefabInternal: {fileID: 557362956}
 --- !u!1 &745702476
 GameObject:
   m_ObjectHideFlags: 0
@@ -16272,19 +16282,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4606189775504522, guid: 0d8176cc654b9f5499673dea6222b7f9, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.53267515
+      value: 0.5326752
       objectReference: {fileID: 0}
     - target: {fileID: 4606189775504522, guid: 0d8176cc654b9f5499673dea6222b7f9, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.07034045
+      value: 0.070340455
       objectReference: {fileID: 0}
     - target: {fileID: 4606189775504522, guid: 0d8176cc654b9f5499673dea6222b7f9, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.83613265
+      value: 0.83613276
       objectReference: {fileID: 0}
     - target: {fileID: 4606189775504522, guid: 0d8176cc654b9f5499673dea6222b7f9, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.11041513
+      value: -0.110415146
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d8176cc654b9f5499673dea6222b7f9, type: 2}
@@ -28771,7 +28781,7 @@ MonoBehaviour:
   - {fileID: 2084151410}
   - {fileID: 1024167242}
   - {fileID: 1667564606}
-  select_checkpoint: 4
+  select_checkpoint: 0
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
