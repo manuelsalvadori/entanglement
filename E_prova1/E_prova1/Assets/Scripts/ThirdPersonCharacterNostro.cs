@@ -80,6 +80,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
         clips[7] = Resources.Load("Audio/Teleport") as AudioClip;
         clips[8] = Resources.Load("Audio/Incubator") as AudioClip;
         clips[10] = Resources.Load("Audio/LaMuerteSuonuora") as AudioClip;
+        clips[11] = Resources.Load("Audio/collectables") as AudioClip;
 
 
 
