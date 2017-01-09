@@ -21,10 +21,10 @@ public class exit : MonoBehaviour
         {
             if (o.gameObject.tag.Equals("Player1"))
                 p1 = true;
-        
+
             if (o.gameObject.tag.Equals("Player2"))
                 p2 = true;
-        
+
             if ((p1 && p2) || isSelectLevel)
             {
                 switch (level_to_load)
