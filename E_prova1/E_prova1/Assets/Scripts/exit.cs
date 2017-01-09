@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class exit : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class exit : MonoBehaviour
     [Range (0,5)]
     public int level_to_load;
     public bool isSelectLevel = true;
+    public GameObject canvas;
+    public Transform loadingbar;
+    public Text percento;
+    public Camera cam;
 
     void OnTriggerEnter(Collider o)
     {
@@ -26,7 +31,12 @@ public class exit : MonoBehaviour
                     SceneManager.LoadScene("LevelSelection");
                     break;
                 case 1:
-                    SceneManager.LoadScene("Level_1");
+
+                    canvas.SetActive(true);
+                    Camera.main.enabled = false;
+                    cam.enabled = true;
+                    //SceneManager.LoadScene("Level_1");
+                    StartCoroutine(loadAsync("Livello_1"));
                     break;
                 case 2:
                     SceneManager.LoadScene("Level_2");
@@ -44,5 +54,22 @@ public class exit : MonoBehaviour
                     return;
             }
         }
+    }
+
+    private IEnumerator loadAsync(string levelName)
+    {
+        AsyncOperation operation = Application.LoadLevelAdditiveAsync(levelName);
+        while(!operation.isDone) {
+            yield return operation.isDone;
+            loadingbar.GetComponent<Image>().fillAmount = operation.progress;
+            percento.text = ((int)(operation.progress * 100f)).ToString() + "%";
+            Debug.Log("loading progress: " + operation.progress);
+        }
+        loadingbar.GetComponent<Image>().fillAmount = 1f;
+        yield return new WaitForSeconds(0.2f);
+        SceneManager.UnloadScene("LevelSelection");
+        Debug.Log("load done");
+
+
     }
 }
