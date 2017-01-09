@@ -189,8 +189,8 @@ public class CoolCameraController : MonoBehaviour
                 m_oldState = GameManager.Instance.m_Current_State;
                 GameManager.Instance.m_Current_State = 1 - GameManager.Instance.m_Current_State;
                 GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
-                GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
-                GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
+                GameManager.Instance.m_gadgetSelection[0].switchSelectionUI();
+                GameManager.Instance.m_gadgetSelection[1].GetComponent<SwitchGadget>().switchSelectionUI();
                 GameManager.Instance.mirino.GetComponent<Pointing>().resetPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f));
                 GameManager.Instance.pistola.GetComponent<shoot>().resetShootPosition(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].transform.position + new Vector3(0f, GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].GetComponent<CharacterController>().height * 2 / 3, 0f));
                 m_CameraTarget = m_View[GameManager.Instance.m_Current_State];
