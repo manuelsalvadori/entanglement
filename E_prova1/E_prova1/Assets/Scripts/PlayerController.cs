@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
                     j.enabled = false;
                 }
             }
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
             StartCoroutine(waitForDeath());
         }
 
@@ -61,8 +62,7 @@ public class PlayerController : MonoBehaviour
                     j.enabled = false;
                 }
             }
-            Debug.Log("pg2 muore");
-
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
             StartCoroutine(waitForDeath());
         }
 

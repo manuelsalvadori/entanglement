@@ -68,7 +68,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 		m_CapsuleHeight = m_Capsule.height;
 		m_CapsuleCenter = m_Capsule.center;
 
-        clips = new AudioClip[10];
+        clips = new AudioClip[15];
 
         for (int i = 0; i < 4; i++)
             clips[i] = Resources.Load("Audio/Footstep" + i.ToString("00")) as AudioClip;
@@ -79,6 +79,8 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
         clips[6] = Resources.Load("Audio/Gun") as AudioClip;
         clips[7] = Resources.Load("Audio/Teleport") as AudioClip;
         clips[8] = Resources.Load("Audio/Incubator") as AudioClip;
+        clips[10] = Resources.Load("Audio/LaMuerteSuonuora") as AudioClip;
+
 
 
 
@@ -220,7 +222,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
     {
         //GetComponent<AudioSource>().PlayOneShot(clips[(int)Mathf.Floor(Random.Range(0f, 3.99f))], 0.2f);
         if(GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
-            GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.15f);
+            GetComponent<AudioSource>().PlayOneShot(clips[(c % 2) + 1], 0.4f);
         c++;
     }
 
@@ -231,7 +233,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
             isSounding = true;
             if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
             {
-                GetComponent<AudioSource>().PlayOneShot(clips[4], 0.2f);
+                GetComponent<AudioSource>().PlayOneShot(clips[4], 0.45f);
                 StartCoroutine(shutUP());
             }
 
@@ -285,7 +287,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
             isSounding = true;
             if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
             {
-                GetComponent<AudioSource>().PlayOneShot(clips[5], 0.2f);
+                GetComponent<AudioSource>().PlayOneShot(clips[5], 0.3f);
                 StartCoroutine(shutUP());
             }
 

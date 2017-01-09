@@ -1394,10 +1394,10 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4368166920050570}
+  - {fileID: 4554976601640092}
   - {fileID: 4605968004101528}
   - {fileID: 4227198361390970}
   - {fileID: 4761802975038270}
-  - {fileID: 4554976601640092}
   m_Father: {fileID: 4540992819020380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 168.60301, z: 0}
@@ -1607,7 +1607,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4089314058858910}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4248889349189424
 Transform:
@@ -1962,7 +1962,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.50000024, z: 0.50000024}
   m_Children: []
   m_Father: {fileID: 4089314058858910}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4566059935930852
 Transform:
@@ -2052,7 +2052,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4089314058858910}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4608257775522218
 Transform:
@@ -2228,7 +2228,7 @@ Transform:
   m_Children:
   - {fileID: 4162342830845458}
   m_Father: {fileID: 4089314058858910}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4763768426942208
 Transform:
@@ -2496,7 +2496,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1876895314147748}
-  m_LocalRotation: {x: 0.501983, y: 0.11468354, z: 0.8512459, w: -0.101199165}
+  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
   m_LocalPosition: {x: 0.000022246646, y: -0.00006150933, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2579,7 +2579,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 3.5
+  MinDistance: 10
   MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
