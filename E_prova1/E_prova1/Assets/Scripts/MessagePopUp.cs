@@ -19,8 +19,12 @@ public class MessagePopUp : MonoBehaviour
                 "press triangle to open the inventory. select an item with right stick and press square to use it or circle to transfer it in the other player inventory",
                 "press down to select the second dimension, up to return in this one",
                 "to cross the energy barrier, select the dash gadget with r1/r2 and press circle to use it",
-                "the red mark shows the position of your alter ego in the secon dimension. when u are over the red mark you can get entangled with the alter ego by pressing right",
-                "to move the platforms to the other dimension select the transfer gun gadget using r1/r2 and press square to use it"
+                "The red mark shows the position of your alter ego in the secon dimension. When you are over the red mark you can get entangled with the alter ego by pressing R2",
+                "to move the platforms to the other dimension select the transfer gun gadget using r1/r2 and press square to use it",
+                "You obtain the TRANSFER gadget!\nFor transfer an item from red inventory to the blue one or viceversa, select him and press CIRCLE",
+                "You obtain the DASH gadget!\nSelect him with L1/R1 and press CIRCLE to cross energy barrier or to jump longer",
+                "You obtain the GUN gadget!\nSelect him with L1/R1 and press CIRCLE to transfer the platform  in the other dimension",
+                "You obtain the TELEPORT gadget!\nSelect him with L1/R1 and press CIRCLE to get teleported! Use right stick for change the destination"
             };
         messaggi = tmp;
     }
