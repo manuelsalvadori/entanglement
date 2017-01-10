@@ -56,6 +56,7 @@ public class Inventory : MonoBehaviour {
                 locker2 = true;
                 //m_items.RemoveAt(m_pointTo);
                 m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
+                GameManager.Instance.m_IsFading = true;
                 StartCoroutine(detachSprite(m_pointTo));
             }
         }
@@ -104,6 +105,7 @@ public class Inventory : MonoBehaviour {
         }
 
         m_items.RemoveAt(im);
+        GameManager.Instance.m_IsFading = false;
     }
 
     IEnumerator openOtherInventory()

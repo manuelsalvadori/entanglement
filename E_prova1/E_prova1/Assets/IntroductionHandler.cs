@@ -47,7 +47,7 @@ public class IntroductionHandler : MonoBehaviour {
                 "A:It seems that I have been thrown into a space-time distortion!",
                 "B:... (strange rumors)",
                 "A:Oh my God, my experiment has been a complete failure!",
-                "B:~~Ecaps Noitrorsid!~~",
+                "B:~~Ecaps Noitrotsid!~~",
                 "A:Oh No! Again!",
             };
         messaggi = tmp;

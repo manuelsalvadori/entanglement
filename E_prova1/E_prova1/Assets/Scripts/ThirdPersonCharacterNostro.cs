@@ -229,9 +229,10 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
     {
         if (!isSounding)
         {
-            isSounding = true;
+
             if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
             {
+                isSounding = true;
                 GetComponent<AudioSource>().PlayOneShot(clips[4], 0.45f);
                 StartCoroutine(shutUP());
             }
@@ -283,9 +284,10 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 
         if(currentHeight < 0.5 && !isSounding)
         {
-            isSounding = true;
+
             if (GameManager.Instance.m_players[(GameManager.Instance.m_sel_pg) ? 0 : 1].name.Equals(this.gameObject.name))
             {
+                isSounding = true;
                 GetComponent<AudioSource>().PlayOneShot(clips[5], 0.3f);
                 StartCoroutine(shutUP());
             }
@@ -446,7 +448,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 
         if (hit.gameObject.tag.Equals("Spostabile"))
         {
-            
+
             Rigidbody body = hit.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool m_levelIsMoving = false;
 
     public bool m_IsWindowOver = false;
+    public bool m_IsFading = false;
 
     public Transform[] m_checkpoints;
     private Transform[] m_current_checkpoint;
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if ((!Input.GetButton("L2") && Input.GetButtonDown("Inventory")) && !m_3D_mode && !GameManager.Instance.m_IsWindowOver) {
+        if ((!Input.GetButton("L2") && Input.GetButtonDown("Inventory")) && !m_3D_mode && !GameManager.Instance.m_IsWindowOver && !m_IsFading) {
             if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
             {
                 m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().updateView();
