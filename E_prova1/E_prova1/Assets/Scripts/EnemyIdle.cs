@@ -13,6 +13,8 @@ public class EnemyIdle : MonoBehaviour
 
     private GameObject futureEnemy;
 
+    public bool isTeleport = false;
+
     public float amount = 3f;
 
 
@@ -34,7 +36,7 @@ public class EnemyIdle : MonoBehaviour
         if (!other.gameObject.tag.Equals("Checkpoint"))
         {
 
-            if (other.gameObject.tag.Equals("Cinematic"))
+            if (!isTeleport && other.gameObject.tag.Equals("Cinematic"))
             {
                 futureEnemy = other.gameObject.GetComponent<CinematicHandler>().EnemyToMove;
                 StartCoroutine(deactivateFollowing());
@@ -57,6 +59,19 @@ public class EnemyIdle : MonoBehaviour
 
     }
 
+    public void AttivaScudo()
+    {
+        scudo.GetComponent<MeshRenderer>().enabled = true;
+        if (!isSounding)
+        {
+            isSounding = true;
+            GetComponent<AudioSource>().Play();
+            StartCoroutine(shutUP());
+        }
+
+        StartCoroutine(deactivateShield(1.5f));
+    }
+
     IEnumerator shutUP()
     {
         yield return new WaitForSeconds(1f);
@@ -72,9 +87,9 @@ public class EnemyIdle : MonoBehaviour
         GameManager.Instance.m_IsWindowOver = false;
     }
 
-    IEnumerator deactivateShield()
+    IEnumerator deactivateShield(float time = 1f)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(time);
         scudo.GetComponent<MeshRenderer>().enabled = false;
     }
 }

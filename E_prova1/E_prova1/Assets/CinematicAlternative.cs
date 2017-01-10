@@ -10,12 +10,14 @@ public class CinematicAlternative : MonoBehaviour
 
     public int from;
     public int to;
+    public int final;
 
     private int indice;
     private string currentString;
 
     private bool imVisible = false;
     private bool imWaitingToStop = false;
+    private bool imChanging = false;
 
     public GameObject EnemyToMove;
     public GameObject EnemyToHide;
@@ -24,31 +26,34 @@ public class CinematicAlternative : MonoBehaviour
     public GameObject RightTalker;
 
 
+    public GameObject LeftTalker2;
+    public GameObject RightTalker2;
+
     public Material LeftTalkerOff;
     public Material RightTalkerOff;
+
+    public Material LeftTalkerOff2;
+    public Material RightTalkerOff2;
 
     private Material LeftTalkerOn;
     private Material RightTalkerOn;
 
 
+    private bool firstpart = false;
+    private bool secondpart = false;
+
     void Awake()
     {
         string[] tmp =
             {
-                "A:Ohh, what!? I am outside!",
-                "B:... (noise)",
-                "A:Who or what are you? And what have you done?",
-                "B:I'm the one who'll destroy the two worlds, and i've entangled two worlds that are collapsing",
-                "A:You do what? I won't let you do this",
-                "A:\"it could be dangerous if it go away freely\"",
-                "B:You have to catch me first",
-                "A:What's happening to this world?",
-                "B:The same thing that's happening in the other one. For now there are just some time and space distortions",
-                "A:And what will happen next?",
-                "B:The two worlds will collapse and they will no longer exist in the two different universe",
-                "B:Now i have just to hide from you until the worlds end",
-                "B:As you can see, i can pass through objects and i can fly, i seriously doubt you can catch me",
-                "B:AHAHAHAHAHAH",
+                "A:So, are you hiding in this lab!?",
+                "B:If you are alone, you'll never get me!",
+                "B:You and your dopplegenger will be defeated!",
+                "A:Oh no, It seems that there is another world affected by this pain!",
+                "B:Muahauha, you and your world are doomed!",
+                "B:You'll never catch me!",
+                "A:I have to do something! Quickly!",
+                "You can change player with R1",
                 "B:stringa13"
             };
         messaggi = tmp;
@@ -81,7 +86,7 @@ public class CinematicAlternative : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump") && imVisible && GameManager.Instance.m_IsWindowOver)
+        if (Input.GetButtonDown("Jump") && imVisible && GameManager.Instance.m_IsWindowOver && !firstpart)
         {
             if (indice < to)
             {
@@ -105,8 +110,63 @@ public class CinematicAlternative : MonoBehaviour
             }
         }
         if (indice == to && imVisible)
+            if (!imChanging)
+                StartCoroutine(changePlayer());
+        if (secondpart && Input.GetButtonDown("Jump") && imVisible && GameManager.Instance.m_IsWindowOver)
+        {
+            if (indice < final)
+            {
+                indice++;
+                currentString = messaggi[indice].Substring(2);
+                if (messaggi[indice].ToCharArray()[0] == 'A')
+                {
+                    foreach (Renderer r in LeftTalker.GetComponentsInChildren<Renderer>()) r.material = LeftTalkerOn;
+                    RightTalker.GetComponentInChildren<Animation>().Stop();
+                    StartCoroutine(WaitForMaterials());
+
+                }
+                else
+                {
+                    RightTalker.GetComponentInChildren<Renderer>().material = RightTalkerOn;
+                    //RightTalker.GetComponentInChildren<Animation>()["Shining_robot_Scanner"].enabled = true;
+                    RightTalker.GetComponentInChildren<Animation>().Play();
+                    foreach (Renderer r in LeftTalker.GetComponentsInChildren<Renderer>()) r.material = LeftTalkerOff;
+                }
+                StartCoroutine(UpdateWindow());
+            }
+        }
+        if (indice == final && imVisible)
+        {
             if (!imWaitingToStop)
                 StartCoroutine(spegniti());
+        }
+    }
+
+    IEnumerator changePlayer()
+    {
+        firstpart = true;
+        imChanging = true;
+        yield return new WaitForSeconds(0.1f);
+        UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
+        foreach (SkinnedMeshRenderer mr in LeftTalker.GetComponentsInChildren<SkinnedMeshRenderer>()) mr.enabled = false;
+        foreach (MeshRenderer mr in RightTalker.GetComponentsInChildren<MeshRenderer>()) mr.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        EnemyToMove.GetComponent<EnemyIdle>().AttivaScudo();
+        yield return new WaitForSeconds(1.2f);
+        EnemyToMove.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        Camera.main.GetComponent<CoolCameraController>().select_singleView(1);
+        yield return new WaitForSeconds(0.7f);
+        RightTalker = RightTalker2;
+        RightTalkerOn = RightTalker.GetComponentInChildren<Renderer>().material;
+        LeftTalker = LeftTalker2;
+        LeftTalkerOn = LeftTalker.GetComponentInChildren<Renderer>().material;
+        RightTalkerOff = RightTalkerOff2;
+        LeftTalkerOff = LeftTalkerOff2;
+        StartCoroutine(DisplayCinematic());
+        yield return new WaitForSeconds(0.2f);
+        secondpart = true;
+
     }
 
     IEnumerator spegniti()
@@ -114,14 +174,22 @@ public class CinematicAlternative : MonoBehaviour
         imWaitingToStop = true;
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
-        imVisible = false;
+
         UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
         //GameManager.Instance.m_IsWindowOver = false;
 
         foreach (SkinnedMeshRenderer mr in LeftTalker.GetComponentsInChildren<SkinnedMeshRenderer>()) mr.enabled = false;
         foreach (MeshRenderer mr in RightTalker.GetComponentsInChildren<MeshRenderer>()) mr.enabled = false;
 
-
+        yield return new WaitForSeconds(0.5f);
+        UIGameplayManager.Instance.m_UI["MessageRed"].SetActive(true);
+        currentString = messaggi[7];
+        UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI["MessageRed"]);
+        UIGameplayManager.Instance.displayThisWin(UIGameplayManager.Instance.m_UI["MessageRed"]);
+        yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
+        UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI["MessageRed"]);
+        GameManager.Instance.m_IsWindowOver = false;
+        imVisible = false;
     }
 
     IEnumerator UpdateWindow()
