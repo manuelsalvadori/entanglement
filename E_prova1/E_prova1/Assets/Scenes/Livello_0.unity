@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6343,6 +6343,7 @@ MonoBehaviour:
   loadingbar: {fileID: 0}
   percento: {fileID: 0}
   cam: {fileID: 0}
+  toShut: {fileID: 0}
 --- !u!65 &420125883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13773,7 +13774,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 36508207}
-    - target: {fileID: 1654157511006964, guid: 8521eee41ab48134dacb995566d4a1b0, type: 2}
+    - target: {fileID: 1359577622060042, guid: 8521eee41ab48134dacb995566d4a1b0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587309366162442, guid: 8521eee41ab48134dacb995566d4a1b0, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
