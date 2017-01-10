@@ -34,10 +34,12 @@ public class CinematicHandler : MonoBehaviour {
     {
         string[] tmp =
             {
+                "A:Ohh, what!? I am outside!",
+                "B:... (noise)",
                 "A:Who or what are you? And what have you done?",
                 "B:I'm the one who'll destroy the two worlds, and i've entangled two worlds that are collapsing",
                 "A:You do what? I won't let you do this",
-                "A:'it could be dangerous if it go away freely'",
+                "A:\"it could be dangerous if it go away freely\"",
                 "B:You have to catch me first",
                 "A:What's happening to this world?",
 				"B:The same thing that's happening in the other one. For now there are just some time and space distortions",

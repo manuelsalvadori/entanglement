@@ -41,6 +41,7 @@ public class IntroductionHandler : MonoBehaviour {
     void Start () {
         string[] tmp =
             {
+                "This time i can't fail! This experiment will be a success!",
                 "A:WHAT HAPPENED!? And, where am I!?",
                 "B:... (strange rumors)",
                 "A:It seems that I have been thrown into a space-time distortion!",
@@ -113,6 +114,13 @@ public class IntroductionHandler : MonoBehaviour {
     IEnumerator go()
     {
         yield return new WaitForSeconds(0.1f);
+        currentString = messaggi[indice];
+        UIGameplayManager.Instance.displayMessage(currentString, Message);
+        UIGameplayManager.Instance.displayThisWin(Message);
+        yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
+        indice++;
+        UIGameplayManager.Instance.hideThisWin(Message);
+        yield return new WaitForSeconds(1f);
         Explosion.GetComponent<AudioSource>().Play();
         Explosion.GetComponent<Animation>().Play();
         yield return new WaitForSeconds(1.2f);

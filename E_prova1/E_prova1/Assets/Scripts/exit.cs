@@ -15,6 +15,8 @@ public class exit : MonoBehaviour
     public Text percento;
     public Camera cam;
 
+    public GameObject toShut;
+
     void OnTriggerEnter(Collider o)
     {
         if (!o.gameObject.tag.Equals("enemy"))
@@ -35,7 +37,9 @@ public class exit : MonoBehaviour
                     case 1:
 
                         canvas.SetActive(true);
+                        toShut.GetComponent<AudioListener>().enabled = false;
                         Camera.main.enabled = false;
+
                         cam.enabled = true;
                     //SceneManager.LoadScene("Level_1");
                         StartCoroutine(loadAsync("Livello_1"));
