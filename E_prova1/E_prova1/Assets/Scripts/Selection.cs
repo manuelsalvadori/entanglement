@@ -38,6 +38,11 @@ public class Selection : MonoBehaviour
         Application.Quit();
     }
 
+    public void livello1()
+    {
+        StartCoroutine(loadAsync("Livello_1"));
+    }
+
     private IEnumerator loadAsync(string levelName)
     {
         AsyncOperation operation = Application.LoadLevelAdditiveAsync(levelName);

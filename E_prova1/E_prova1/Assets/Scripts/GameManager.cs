@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -83,6 +84,11 @@ public class GameManager : MonoBehaviour
             mirino.GetComponent<Pointing>().resetPosition(m_players[(m_sel_pg) ? 0 : 1].transform.position);
             pistola.GetComponent<shoot>().resetShootPosition(m_players[(m_sel_pg) ? 0 : 1].transform.position);
 
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("SelectionScene");
         }
 
         if ((Input.GetButtonDown("Use") && !Input.GetButton("L2")) && !m_inventoryIsOpen && !GameManager.Instance.m_IsWindowOver && GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD)
