@@ -147,6 +147,7 @@ public class CinematicAlternative : MonoBehaviour
         firstpart = true;
         imChanging = true;
         yield return new WaitForSeconds(0.1f);
+        yield return new WaitUntil(() => Input.GetButtonDown("Jump"));
         UIGameplayManager.Instance.hideThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
         foreach (SkinnedMeshRenderer mr in LeftTalker.GetComponentsInChildren<SkinnedMeshRenderer>()) mr.enabled = false;
         foreach (MeshRenderer mr in RightTalker.GetComponentsInChildren<MeshRenderer>()) mr.enabled = false;

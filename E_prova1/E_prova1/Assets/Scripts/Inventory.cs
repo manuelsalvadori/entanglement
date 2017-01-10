@@ -65,6 +65,7 @@ public class Inventory : MonoBehaviour {
             locker = true;
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
             //m_items.RemoveAt(m_pointTo);
+            GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<AudioSource>().PlayOneShot(GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<ThirdPersonCharacterNostro>().clips[8]);
             m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
             StartCoroutine(detachSprite(m_pointTo, true));
         }

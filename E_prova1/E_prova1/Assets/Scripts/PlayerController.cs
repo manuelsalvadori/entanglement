@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
         bool pick_item = true;
         if (GameManager.isPickble(other.gameObject))
         {
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[11], 1f);
             if (other.gameObject.GetComponent<PickableObject>().isCollectable)
             {
-                GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[11], 1f);
+
                 Inventory.score(GameManager.Instance.whichLevelItIs());
             }
             else if(!other.gameObject.GetComponent<PickableObject>().isUpgrade)
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+
                 GameManager.Instance.gainUpgrade((int)other.gameObject.GetComponent<PickableObject>().m_gadget);
             }
             if (pick_item)
