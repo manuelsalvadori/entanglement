@@ -25,7 +25,7 @@ public class Selection : MonoBehaviour
         loading.SetActive(true);
         DestroyImmediate(em);
         //SceneManager.LoadScene("Livello_0");
-        StartCoroutine(loadAsync("Livello_0"));
+        StartCoroutine(loadAsync("introduction"));
     }
 
     public void credits()
