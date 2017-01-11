@@ -33,7 +33,7 @@ public class PickableObject : MonoBehaviour{
 
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.Rotate(m_rot * Time.deltaTime, Space.World);
     }

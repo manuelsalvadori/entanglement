@@ -78,10 +78,21 @@ public class CinematicAlternative : MonoBehaviour
             {
                 triggered = true;
                 imVisible = true;
+                StartCoroutine(PrepareTalkers());
                 StartCoroutine(DisplayCinematic());
 
             }
         }
+    }
+
+    IEnumerator PrepareTalkers()
+    {
+        yield return new WaitUntil(() => true);
+        LeftTalker.GetComponent<PutInPrimoPiamo>().enabled = true;
+        LeftTalker2.GetComponent<PutInPrimoPiamo>().enabled = true;
+        RightTalker.GetComponent<PutInPrimoPiamo>().enabled = true;
+        RightTalker2.GetComponent<PutInPrimoPiamo>().enabled = true;
+
     }
 
     private void Update()
@@ -183,6 +194,11 @@ public class CinematicAlternative : MonoBehaviour
         foreach (MeshRenderer mr in RightTalker.GetComponentsInChildren<MeshRenderer>()) mr.enabled = false;
 
         yield return new WaitForSeconds(0.5f);
+        LeftTalker.GetComponent<PutInPrimoPiamo>().enabled = false;
+        LeftTalker2.GetComponent<PutInPrimoPiamo>().enabled = false;
+        RightTalker.GetComponent<PutInPrimoPiamo>().enabled = false;
+        RightTalker2.GetComponent<PutInPrimoPiamo>().enabled = false;
+
         UIGameplayManager.Instance.m_UI["MessageRed"].SetActive(true);
         currentString = messaggi[7];
         UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI["MessageRed"]);
@@ -210,7 +226,7 @@ public class CinematicAlternative : MonoBehaviour
 
     IEnumerator DisplayCinematic()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"].SetActive(true);
         UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);
         UIGameplayManager.Instance.displayThisWin(UIGameplayManager.Instance.m_UI[GameManager.Instance.m_sel_pg ? "CinematicBlue" : "CinematicRed"]);

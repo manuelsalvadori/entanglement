@@ -12,11 +12,6 @@ public class RespawnIfFall : MonoBehaviour {
         birth_Position = transform.position;
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetInstanceID() == respawn.GetInstanceID())

@@ -12,14 +12,15 @@ public class PutInPrimoPiamo : MonoBehaviour {
 
     public Vector3 where;
 
-
-    // Use this for initialization
-    void Start () {
-
-	}
-
 	// Update is called once per frame
 	void Update () {
         transform.position = Vector3.SmoothDamp(transform.position, Camera.main.transform.position + where, ref velocity2, smoothTime);
 	}
+
+    public void SetPosition(Vector3 here)
+    {
+        where = here;
+    }
 }
+
+
