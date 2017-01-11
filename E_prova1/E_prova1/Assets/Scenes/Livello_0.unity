@@ -4002,6 +4002,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.022, y: 0.020722408, z: 0.019999994}
   m_Center: {x: -0.00000016212007, y: 0.000041503838, z: -0.00000028151203}
+--- !u!114 &266094895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 266094892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3532134990349446a43084e910d71ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawn: {fileID: 2026044356}
 --- !u!4 &266094897 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: f4441763b1ec30742955f77ac25517da, type: 3}
@@ -14222,18 +14234,6 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 514d976ded6fa4338a3ac48c550a91d6, type: 3}
   m_PrefabInternal: {fileID: 563836419}
---- !u!65 &839639223
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 839639222}
-  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 11.393235, y: 0.466138, z: 1.5951425}
-  m_Center: {x: 0, y: 8.440582, z: 0.08541522}
 --- !u!65 &839639224
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24119,6 +24119,18 @@ MeshFilter:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: f4441763b1ec30742955f77ac25517da, type: 3}
   m_PrefabInternal: {fileID: 770157509}
+--- !u!114 &1528926350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1528926349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3532134990349446a43084e910d71ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawn: {fileID: 2026044356}
 --- !u!65 &1528926351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29733,13 +29745,14 @@ MonoBehaviour:
   m_camIsMoving: 0
   m_levelIsMoving: 0
   m_IsWindowOver: 0
+  m_IsFading: 0
   m_checkpoints:
   - {fileID: 1384314025}
   - {fileID: 401093912}
   - {fileID: 2084151410}
   - {fileID: 1024167242}
   - {fileID: 1667564606}
-  select_checkpoint: 0
+  select_checkpoint: 3
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
