@@ -53,7 +53,7 @@ public class CinematicAlternative : MonoBehaviour
                 "B:Muahauha, you and your world are doomed!",
                 "B:You'll never catch me!",
                 "A:I have to do something! Quickly!",
-                "You can change player with R1",
+                "You can change player with L2",
                 "B:stringa13"
             };
         messaggi = tmp;
