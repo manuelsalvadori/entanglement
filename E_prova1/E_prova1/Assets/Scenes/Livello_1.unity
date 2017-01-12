@@ -6004,6 +6004,47 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0f577e12eec94c9b8758d718ccc1503, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &161853325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 161853326}
+  - component: {fileID: 161853327}
+  m_Layer: 0
+  m_Name: rampsColliders (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &161853326
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 161853325}
+  m_LocalRotation: {x: 0.10543238, y: 0.10543238, z: 0.6992025, w: 0.6992025}
+  m_LocalPosition: {x: 0.0869, y: -0.01, z: 0.0001}
+  m_LocalScale: {x: 1.0000017, y: 1.0000012, z: 1.0000014}
+  m_Children: []
+  m_Father: {fileID: 671912900}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 17.15, z: 90}
+--- !u!65 &161853327
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 161853325}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.044513464, y: 0.097967945, z: -0.0034268475}
+  m_Center: {x: 0.0000078496405, y: -0.009299287, z: -0.015373581}
 --- !u!1001 &163023823
 Prefab:
   m_ObjectHideFlags: 0
@@ -19203,6 +19244,47 @@ Transform:
   m_PrefabParentObject: {fileID: 4286887926701244, guid: 10966be2381dc4560821853f2a1652bf,
     type: 2}
   m_PrefabInternal: {fileID: 567595383}
+--- !u!1 &570576663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 570576664}
+  - component: {fileID: 570576665}
+  m_Layer: 0
+  m_Name: rampsColliders (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &570576664
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570576663}
+  m_LocalRotation: {x: -0.20107783, y: 0, z: 0, w: 0.97957534}
+  m_LocalPosition: {x: -0.111, y: 0.2218, z: -0.00906}
+  m_LocalScale: {x: 1.0000033, y: 1.0000014, z: 1.0000025}
+  m_Children: []
+  m_Father: {fileID: 671912900}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -23.2, y: 0, z: 0}
+--- !u!65 &570576665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570576663}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04451347, y: 0.1121309, z: -0.0034268466}
+  m_Center: {x: -0.00015622326, y: 0.0044894814, z: -0.015301638}
 --- !u!1 &571485717
 GameObject:
   m_ObjectHideFlags: 0
@@ -22473,6 +22555,54 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.048938945, y: 0.08539172, z: 0.0029211554}
   m_Center: {x: 0.26015052, y: 0.20818561, z: -0.002701117}
+--- !u!65 &671912905
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 671912897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.13278128, y: 0.08194368, z: 0.0029211554}
+  m_Center: {x: 0.13096899, y: 0.20997992, z: -0.002697351}
+--- !u!65 &671912906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 671912897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25648484, y: 0.15448946, z: 0.0029211554}
+  m_Center: {x: -0.0069131656, y: 0.091830194, z: -0.0026893178}
+--- !u!65 &671912907
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 671912897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06937829, y: 0.048980456, z: 0.0029211554}
+  m_Center: {x: 0.010231485, y: -0.010117206, z: -0.0026915327}
+--- !u!65 &671912908
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 671912897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.052241266, y: 0.09474069, z: 0.004143992}
+  m_Center: {x: 0.15999183, y: 0.012904402, z: -0.030837594}
 --- !u!1001 &672756413
 Prefab:
   m_ObjectHideFlags: 0
@@ -37814,6 +37944,47 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1130772856}
   m_Mesh: {fileID: 4300002, guid: 086e35619c16645d6b153323d0969025, type: 3}
+--- !u!1 &1130881089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1130881090}
+  - component: {fileID: 1130881091}
+  m_Layer: 0
+  m_Name: rampsColliders (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1130881090
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1130881089}
+  m_LocalRotation: {x: -0.22707629, y: 0, z: 0, w: 0.97387695}
+  m_LocalPosition: {x: 0.1646, y: 0.1341, z: -0.05}
+  m_LocalScale: {x: 1.000004, y: 1.0000019, z: 1.0000026}
+  m_Children: []
+  m_Father: {fileID: 671912900}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -26.25, y: 0, z: 0}
+--- !u!65 &1130881091
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1130881089}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.044513468, y: 0.16909562, z: -0.0034268475}
+  m_Center: {x: -0.00015634236, y: 0.008938186, z: -0.015332766}
 --- !u!1001 &1131967082
 Prefab:
   m_ObjectHideFlags: 0
