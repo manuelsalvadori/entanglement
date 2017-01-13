@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int m_frameRate = 60;
     public static GameManager Instance = null;
     public bool m_camIsMoving = false;
     public bool m_levelIsMoving = false;
@@ -57,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        Application.targetFrameRate = m_frameRate;
+        Cursor.visible = false;
         m_current_checkpoint = new Transform[2];
     }
 
