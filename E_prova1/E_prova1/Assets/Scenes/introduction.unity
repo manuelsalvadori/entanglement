@@ -3444,6 +3444,26 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 95137868483023564, guid: 57351dde2beffd647a53e8e8a9c7eab0,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95137868483023564, guid: 57351dde2beffd647a53e8e8a9c7eab0,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: df8ecc9652936be4dbd38e193321f2a2, type: 2}
+    - target: {fileID: 95137868483023564, guid: 57351dde2beffd647a53e8e8a9c7eab0,
+        type: 2}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some transforms are animated by both a Humanoid animation
+        clip and a Generic animation clip. Only the Humanoid clip will be applied
+        on those transforms.\n\tTransform 'RightToe'\n\tTransform 'RightArm'\n\tTransform
+        'LeftToe'\n\tTransform 'RightLeg'\n\tTransform 'RightHand'\n\tTransform 'Chest'\n\tTransform
+        'RightArm'\n\tTransform 'LeftArm'\n\tTransform 'RightFoot'\n\tTransform 'Head'\n\tand
+        more ...\n\tFrom animation clip 'Armature|ArmatureAction'"
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114196713999350290, guid: 57351dde2beffd647a53e8e8a9c7eab0, type: 2}
     - {fileID: 114931393238812638, guid: 57351dde2beffd647a53e8e8a9c7eab0, type: 2}
