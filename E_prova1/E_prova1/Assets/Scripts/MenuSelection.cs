@@ -7,6 +7,9 @@ public class MenuSelection : MonoBehaviour {
 
     public EventSystem es;
     public GameObject go;
+    public AudioSource src;
+    public Animation logoAnim;
+    public GameObject bottoni;
 
     private bool buttonSelected;
 
@@ -14,6 +17,8 @@ public class MenuSelection : MonoBehaviour {
     {
         Cursor.visible = false;
         es.SetSelectedGameObject(go);
+        src.PlayDelayed(0.5f);
+        StartCoroutine(animationMenu());
 	}
 	
 	void Update ()
@@ -28,5 +33,22 @@ public class MenuSelection : MonoBehaviour {
     private void OnDisable()
     {
         buttonSelected = false;
+    }
+
+    private IEnumerator animationMenu()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        logoAnim.Play("LogoAnimation");
+
+        yield return new WaitUntil(() => !logoAnim.isPlaying);
+        yield return new WaitForSeconds(1f);
+
+        logoAnim.Play("LogoAnimationAlpha");
+
+        yield return new WaitUntil(() => !logoAnim.isPlaying);
+
+        bottoni.SetActive(true);
+        es.SetSelectedGameObject(go);
     }
 }

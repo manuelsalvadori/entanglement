@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SplashManager : MonoBehaviour {
+public class SplashManager : MonoBehaviour
+{
 
     public GameObject wg, ps;
     private Animation wga, psa;
@@ -11,6 +12,7 @@ public class SplashManager : MonoBehaviour {
 
     void Start()
     {
+        Cursor.visible = false;
         wga = wg.GetComponent<Animation>();
         psa = ps.GetComponent<Animation>();
 
@@ -25,12 +27,11 @@ public class SplashManager : MonoBehaviour {
         yield return new WaitUntil(() => !psa.isPlaying);
         yield return new WaitForSeconds(s2);
         ps.SetActive(false);
-
+        yield return new WaitForSeconds(s1);
         wg.SetActive(true);
         wga.Play("WGSplash");
         yield return new WaitUntil(() => !wga.isPlaying);
-        yield return new WaitForSeconds(s2);
-
-        SceneManager.LoadScene("SelectionScene");
+        yield return new WaitForSeconds(s1);
+        SceneManager.LoadScene("MainMenu");
     }
 }
