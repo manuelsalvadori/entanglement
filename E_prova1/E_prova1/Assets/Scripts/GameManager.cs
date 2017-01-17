@@ -4,6 +4,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.ImageEffects;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     public Sprite[] m_itemInvetoryView;
 
     public GameObject m_gameplay_UI_Canvas;
+    public GameObject gameMenuUI;
 
 
     void Awake()
@@ -112,6 +114,14 @@ public class GameManager : MonoBehaviour
             {
                 hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
             }
+        }
+
+        if (Input.GetButton("GameMenu"))
+        {
+            m_IsWindowOver = true;
+            Camera.main.GetComponent<BlurOptimized>().enabled = true;
+            gameMenuUI.SetActive(true);
+            Time.timeScale = 0;
         }
 
         if (!m_3D_mode)

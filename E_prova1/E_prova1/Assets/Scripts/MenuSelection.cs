@@ -19,18 +19,18 @@ public class MenuSelection : MonoBehaviour {
         es.SetSelectedGameObject(go);
         src.PlayDelayed(0.5f);
         StartCoroutine(animationMenu());
+        Inventory.m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
 	}
 	
 	void Update ()
     {
         if ((Input.GetAxisRaw("Vertical") != 0) && buttonSelected == false)
         {
-            
             es.SetSelectedGameObject(go);
             buttonSelected = true;
         }
 
-        if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetButton("Menu"))
         {
             if(!GetComponents<AudioSource>()[0].isPlaying)
                 GetComponents<AudioSource>()[0].Play();
