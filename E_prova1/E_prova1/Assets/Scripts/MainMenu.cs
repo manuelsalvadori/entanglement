@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityStandardAssets.ImageEffects;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
@@ -52,10 +53,13 @@ public class MainMenu : MonoBehaviour {
 
     public void exitLevel()
     {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("LevelSelection");
     }
 
     public void quitGame()
     {
+        Application.Quit();
     }
 
     IEnumerator spettaNamen()
