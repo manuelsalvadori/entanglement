@@ -19,17 +19,17 @@ public class Selection : MonoBehaviour
         SceneManager.LoadScene("SelectionScene");
     }
 
-    public void start()
+    public void startbutton()
     {
         bottoni.SetActive(false);
         loading.SetActive(true);
         DestroyImmediate(em);
-        //SceneManager.LoadScene("Livello_0");
         StartCoroutine(loadAsync("introduction"));
     }
 
     public void credits()
     {
+        bottoni.SetActive(!bottoni.activeInHierarchy);
         creditz.SetActive(!creditz.activeInHierarchy);
     }
 
@@ -45,18 +45,14 @@ public class Selection : MonoBehaviour
 
     private IEnumerator loadAsync(string levelName)
     {
-        AsyncOperation operation = Application.LoadLevelAdditiveAsync(levelName);
-        while(!operation.isDone) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(levelName);
+        while(!operation.isDone)
+        {
             yield return operation.isDone;
             loadingbar.GetComponent<Image>().fillAmount = operation.progress;
             percento.text = ((int)(operation.progress * 100f)).ToString() + "%";
-            Debug.Log("loading progress: " + operation.progress);
         }
         loadingbar.GetComponent<Image>().fillAmount = 1f;
         yield return new WaitForSeconds(0.2f);
-        SceneManager.UnloadScene("SelectionScene");
-        Debug.Log("load done");
-
-
     }
 }

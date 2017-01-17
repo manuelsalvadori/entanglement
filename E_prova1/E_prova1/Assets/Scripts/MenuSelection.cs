@@ -25,8 +25,22 @@ public class MenuSelection : MonoBehaviour {
     {
         if ((Input.GetAxisRaw("Vertical") != 0) && buttonSelected == false)
         {
+            
             es.SetSelectedGameObject(go);
             buttonSelected = true;
+        }
+
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            if(!GetComponents<AudioSource>()[0].isPlaying)
+                GetComponents<AudioSource>()[0].Play();
+        }
+
+        if (Input.GetButton("X"))
+        {
+            if(!GetComponents<AudioSource>()[1].isPlaying)
+                GetComponents<AudioSource>()[1].Play();
+
         }
 	}
 

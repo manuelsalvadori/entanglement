@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour {
 
     private bool[] m_upgradesActivation;
     private List<Item> m_items = new List<Item>();
-    private static int[] m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
+    public static int[] m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
 
     public static readonly int MAX_CAPACITY = 10;
 
@@ -161,7 +161,6 @@ public class Inventory : MonoBehaviour {
         return sum;
     }
 
-
     public void updateView()
     {
         m_currentScore.text = m_ncollectables[GameManager.Instance.whichLevelItIs()].ToString();
@@ -181,6 +180,5 @@ public class Inventory : MonoBehaviour {
             m_Cells[j].sprite = null;
             m_Cells[j].color = new Color(1, 1, 1, 0);
         }
-
     }
 }

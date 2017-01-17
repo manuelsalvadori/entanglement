@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Escape))
         {
-            SceneManager.LoadScene("SelectionScene");
+            SceneManager.LoadScene("MainMenu");
         }
 
         if ((Input.GetButtonDown("Use") && !Input.GetButton("L2")) && !m_inventoryIsOpen && !GameManager.Instance.m_IsWindowOver && GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD)

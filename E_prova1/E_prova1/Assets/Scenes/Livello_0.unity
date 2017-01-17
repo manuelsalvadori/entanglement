@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6360,7 +6360,6 @@ MonoBehaviour:
   loadingbar: {fileID: 0}
   percento: {fileID: 0}
   cam: {fileID: 0}
-  toShut: {fileID: 0}
 --- !u!65 &420125883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7368,7 +7367,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2026044357}
-  - {fileID: 1039548434}
   - {fileID: 523743534}
   m_Father: {fileID: 979958338}
   m_RootOrder: 0
@@ -8214,7 +8212,7 @@ GameObject:
   - component: {fileID: 523743535}
   - component: {fileID: 523743539}
   m_Layer: 0
-  m_Name: LaMuerte (2)
+  m_Name: LaMuertePuiccoluina
   m_TagString: LaMuerte
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8231,7 +8229,7 @@ Transform:
   m_LocalScale: {x: 3.55, y: 20, z: 3.5}
   m_Children: []
   m_Father: {fileID: 463128534}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &523743535
 BoxCollider:
@@ -17378,74 +17376,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1038783205}
   m_Mesh: {fileID: 4300016, guid: e1cb22727233d490491956d820d42f3d, type: 3}
---- !u!1 &1039548433
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1039548434}
-  - component: {fileID: 1039548436}
-  - component: {fileID: 1039548435}
-  m_Layer: 0
-  m_Name: LaMuerte (1)
-  m_TagString: LaMuerte
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1039548434
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1039548433}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 264, y: -1.6, z: -6.6899996}
-  m_LocalScale: {x: 65.118744, y: 20, z: 3.5}
-  m_Children: []
-  m_Father: {fileID: 463128534}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &1039548435
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1039548433}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 2100000, guid: f23b5ef1292d8de41aa652c868193804, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &1039548436
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1039548433}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1044274121
 GameObject:
   m_ObjectHideFlags: 0
@@ -29741,7 +29671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7368976b27374167937d74a6dfd76a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_frameRate: 80
   m_camIsMoving: 0
   m_levelIsMoving: 0
   m_IsWindowOver: 0
@@ -32645,7 +32574,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f23b5ef1292d8de41aa652c868193804, type: 2}
+  - {fileID: 2100000, guid: a21ba05d1159c4bb5b9d52f954bc1c7f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -67,7 +67,6 @@ public class IntroductionHandler : MonoBehaviour {
 
         if(isStarted && secondPart && Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Ciao");
             if (indice < to)
             {
                 indice++;

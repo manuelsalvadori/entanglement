@@ -15,8 +15,6 @@ public class exit : MonoBehaviour
     public Text percento;
     public Camera cam;
 
-    public GameObject toShut;
-
     void OnTriggerEnter(Collider o)
     {
         if (!o.gameObject.tag.Equals("enemy"))
@@ -35,13 +33,10 @@ public class exit : MonoBehaviour
                         SceneManager.LoadScene("LevelSelection");
                         break;
                     case 1:
-
                         canvas.SetActive(true);
-                        toShut.GetComponent<AudioListener>().enabled = false;
                         Camera.main.enabled = false;
 
                         cam.enabled = true;
-                    //SceneManager.LoadScene("Level_1");
                         StartCoroutine(loadAsync("Livello_1"));
                         break;
                     case 2:
@@ -65,17 +60,15 @@ public class exit : MonoBehaviour
 
     private IEnumerator loadAsync(string levelName)
     {
-        AsyncOperation operation = Application.LoadLevelAdditiveAsync(levelName);
-        while(!operation.isDone) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(levelName);
+        while(!operation.isDone)
+        {
             yield return operation.isDone;
             loadingbar.GetComponent<Image>().fillAmount = operation.progress;
             percento.text = ((int)(operation.progress * 100f)).ToString() + "%";
-            Debug.Log("loading progress: " + operation.progress);
         }
         loadingbar.GetComponent<Image>().fillAmount = 1f;
         yield return new WaitForSeconds(0.2f);
-        SceneManager.UnloadScene("LevelSelection");
-        Debug.Log("load done");
 
 
     }
