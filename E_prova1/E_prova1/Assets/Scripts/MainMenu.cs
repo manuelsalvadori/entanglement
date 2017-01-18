@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour {
                 GetComponents<AudioSource>()[0].Play();
         }
 
-        if (Input.GetButtonDown("X"))
+        if (Input.GetButtonDown("Submit"))
         {
             GetComponents<AudioSource>()[1].Play();
         }

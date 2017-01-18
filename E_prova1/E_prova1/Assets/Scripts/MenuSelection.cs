@@ -36,7 +36,7 @@ public class MenuSelection : MonoBehaviour {
                 GetComponents<AudioSource>()[0].Play();
         }
 
-        if (Input.GetButton("X"))
+        if (Input.GetButton("Submit"))
         {
             if(!GetComponents<AudioSource>()[1].isPlaying)
                 GetComponents<AudioSource>()[1].Play();
