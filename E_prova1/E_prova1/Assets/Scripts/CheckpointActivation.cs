@@ -14,12 +14,14 @@ public class CheckpointActivation : MonoBehaviour
     {
         if (GameManager.Instance.m_sel_pg && !activeBlue)
         {
+            GetComponent<AudioSource>().Play();
             lb1.GetComponent<Renderer>().material = lightOnBlue;
             lb2.GetComponent<Renderer>().material = lightOnBlue;
             StartCoroutine(rotateActive(GameManager.Instance.m_sel_pg));
         }
         if (!GameManager.Instance.m_sel_pg && !activeRed)
         {
+            GetComponent<AudioSource>().Play();
             lr1.GetComponent<Renderer>().material = lightOnRed;
             lr2.GetComponent<Renderer>().material = lightOnRed;
             StartCoroutine(rotateActive(GameManager.Instance.m_sel_pg));
