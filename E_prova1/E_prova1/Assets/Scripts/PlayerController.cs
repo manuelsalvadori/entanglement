@@ -168,7 +168,8 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(currentpos+Vector3.up*0.2f, Vector3.right * direction, out hit, 7f))
         {
-            dist = hit.distance - 0.01f;
+            if(!hit.collider.tag.Equals("Barriera"))
+                dist = hit.distance - 0.01f;
         }
 
         float counter = 0;
