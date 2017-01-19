@@ -3112,7 +3112,6 @@ MonoBehaviour:
   loadingbar: {fileID: 1902456602}
   percento: {fileID: 1453608000}
   cam: {fileID: 1894222522}
-  toShut: {fileID: 745046480}
 --- !u!1 &866370020
 GameObject:
   m_ObjectHideFlags: 0
@@ -3394,7 +3393,6 @@ MonoBehaviour:
   loadingbar: {fileID: 0}
   percento: {fileID: 0}
   cam: {fileID: 0}
-  toShut: {fileID: 0}
 --- !u!65 &929720563
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5758,7 +5756,7 @@ Transform:
   m_GameObject: {fileID: 1805897561}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2, y: 2.2, z: 2.2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 1358278865}
   - {fileID: 736075133}
@@ -5793,7 +5791,7 @@ MonoBehaviour:
   m_MovingTurnSpeed: 180
   m_StationaryTurnSpeed: 90
   m_RunCycleLegOffset: 0.1
-  m_MoveSpeedMultiplier: 1.4
+  m_MoveSpeedMultiplier: 4.4
   m_AnimSpeedMultiplier: 0.9
   m_GroundCheckDistance: 0.3
   m_IsGrounded: 0
