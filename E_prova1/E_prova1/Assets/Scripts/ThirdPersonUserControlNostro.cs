@@ -69,6 +69,19 @@ public class ThirdPersonUserControlNostro : MonoBehaviour
         // read inputs
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
+        if(GameManager.Instance.m_Current_State != (int)CoolCameraController.Stato.TreD)
+        {
+            v = 0;
+            if(h > 0.85)
+            {
+                h = 1;
+            }
+            else if (h < -0.85)
+            {
+                h = -1;
+            }
+        }
+
         bool crouch = Input.GetKey(KeyCode.C);
 
         // calculate move direction to pass to character
