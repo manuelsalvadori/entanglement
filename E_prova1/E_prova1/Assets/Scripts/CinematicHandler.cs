@@ -33,6 +33,8 @@ public class CinematicHandler : MonoBehaviour {
     private Material RightTalkerOn;
 
 
+    public bool hasSpline = false;
+
     void Awake()
     {
         string[] tmp =
@@ -110,7 +112,7 @@ public class CinematicHandler : MonoBehaviour {
             if(!imWaitingToStop)
                 StartCoroutine(spegniti());
 
-        Debug.Log(Camera.main.transform.position.x - GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x);
+
     }
 
     IEnumerator spegniti()
@@ -134,23 +136,44 @@ public class CinematicHandler : MonoBehaviour {
 
     IEnumerator MoveEnemyToNextPosition()
     {
-        yield return new WaitForSeconds(0.1f);
+        //Retrive Camera Info
+        CoolCameraController cameraHandler = Camera.main.GetComponent<CoolCameraController>();
+        float pastPanX = cameraHandler.playerPan;
+        float pastPanY = cameraHandler.m_heigthOffset;
 
         EnemyToMove.SetActive(true);
         if(EnemyToHide)
             EnemyToHide.SetActive(false);
+
         yield return new WaitForSeconds(0.5f);
-        //EnemyToMove.GetComponent<SplineController>().FollowSpline();
-        //EnemyToMove.GetComponent<AudioSource>().Play();
-        EnemyToMove.transform.localPosition = PosizioneFinale;
-        yield return new WaitForSeconds(0.2f);
-        Camera.main.GetComponent<CoolCameraController>().followEnemy(EnemyToMove);
-        Camera.main.GetComponent<MotionBlur>().enabled = true;
-        yield return new WaitForSeconds(3f);
-        Camera.main.GetComponent<CoolCameraController>().resetFollowing();
-        GameManager.Instance.m_IsWindowOver = false;
-        yield return new WaitUntil(() => Camera.main.transform.position.x - GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x < 3.5f);
-        Camera.main.GetComponent<MotionBlur>().enabled = false;
+
+        if (hasSpline)
+        {
+            EnemyToMove.GetComponent<SplineController>().FollowSpline();
+            cameraHandler.followEnemy(EnemyToMove);
+        }
+        else
+        {
+            //EnemyToMove.GetComponent<AudioSource>().Play();
+            EnemyToMove.transform.localPosition = PosizioneFinale;
+
+            yield return new WaitForSeconds(0.2f);
+            //Set new camera settings
+            cameraHandler.followEnemy(EnemyToMove);
+            cameraHandler.playerPan = 0f;
+            cameraHandler.m_heigthOffset = 0f;
+            Camera.main.GetComponent<MotionBlur>().enabled = true;
+
+            yield return new WaitUntil(() => Mathf.Abs(Camera.main.transform.position.x - EnemyToMove.transform.position.x) < 0.1f);
+            yield return new WaitForSeconds(2f);
+            cameraHandler.resetFollowing();
+            cameraHandler.playerPan = pastPanX;
+            cameraHandler.m_heigthOffset = pastPanY;
+            GameManager.Instance.m_IsWindowOver = false;
+
+            yield return new WaitUntil(() => Camera.main.transform.position.x - GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x < 3.5f);
+            Camera.main.GetComponent<MotionBlur>().enabled = false;
+        }
     }
 
 

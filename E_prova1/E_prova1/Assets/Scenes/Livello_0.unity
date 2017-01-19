@@ -309,7 +309,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 10646496}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d30b8f6954bb004e927cf88fd1ae47c, type: 3}
   m_Name: 
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 10646496}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 378cb3a6eb3842b42a7c31b70456f976, type: 3}
   m_Name: 
@@ -940,6 +940,7 @@ GameObject:
   - component: {fileID: 36508202}
   - component: {fileID: 36508209}
   - component: {fileID: 36508210}
+  - component: {fileID: 36508211}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -985,6 +986,7 @@ MonoBehaviour:
   m_y3d: 29
   smoothTime: 0.3
   followingSpeed: 1.5
+  playerPan: 0.15
 --- !u!81 &36508204
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1082,6 +1084,20 @@ MonoBehaviour:
   blurIterations: 1
   blurType: 0
   blurShader: {fileID: 4800000, guid: f9d5fa183cd6b45eeb1491f74863cd91, type: 3}
+--- !u!114 &36508211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36508201}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478a2083ad114a07d000fbfb8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: e9ba2083ad114a07d000fbfb8d76c639, type: 3}
+  blurAmount: 0.5
+  extraBlur: 0
 --- !u!4 &39541306 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
@@ -3085,7 +3101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &171192829
 Transform:
   m_ObjectHideFlags: 0
@@ -4642,10 +4658,12 @@ MonoBehaviour:
   to: 6
   EnemyToMove: {fileID: 1541698407}
   EnemyToHide: {fileID: 0}
+  PosizioneFinale: {x: -566.2333, y: 6.333333, z: 0}
   LeftTalker: {fileID: 741123176}
   RightTalker: {fileID: 1748690246}
   LeftTalkerOff: {fileID: 2100000, guid: cb3551b13f3061a4fbd90cb58f3bfda7, type: 2}
   RightTalkerOff: {fileID: 2100000, guid: cb9cf5c5568b8004f91bf092c1117b38, type: 2}
+  hasSpline: 0
 --- !u!65 &289368336
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5703,12 +5721,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   from: 7
   to: 10
-  EnemyToMove: {fileID: 10646496}
-  EnemyToHide: {fileID: 1541698407}
+  EnemyToMove: {fileID: 1541698407}
+  EnemyToHide: {fileID: 0}
+  PosizioneFinale: {x: -1984.333, y: 2.7, z: 0}
   LeftTalker: {fileID: 741123176}
   RightTalker: {fileID: 1748690246}
   LeftTalkerOff: {fileID: 2100000, guid: cb3551b13f3061a4fbd90cb58f3bfda7, type: 2}
   RightTalkerOff: {fileID: 2100000, guid: cb9cf5c5568b8004f91bf092c1117b38, type: 2}
+  hasSpline: 0
 --- !u!65 &352527701
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18494,11 +18514,13 @@ MonoBehaviour:
   from: 11
   to: 13
   EnemyToMove: {fileID: 96768799}
-  EnemyToHide: {fileID: 10646496}
+  EnemyToHide: {fileID: 1541698407}
+  PosizioneFinale: {x: 0, y: 0, z: 0}
   LeftTalker: {fileID: 741123176}
   RightTalker: {fileID: 1748690246}
   LeftTalkerOff: {fileID: 2100000, guid: cb3551b13f3061a4fbd90cb58f3bfda7, type: 2}
   RightTalkerOff: {fileID: 2100000, guid: cb9cf5c5568b8004f91bf092c1117b38, type: 2}
+  hasSpline: 1
 --- !u!65 &1113062821
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19476,7 +19498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1180666377
 Transform:
   m_ObjectHideFlags: 0
@@ -24983,7 +25005,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1541698407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d30b8f6954bb004e927cf88fd1ae47c, type: 3}
   m_Name: 
@@ -25002,7 +25024,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1541698407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 378cb3a6eb3842b42a7c31b70456f976, type: 3}
   m_Name: 
@@ -27689,10 +27711,12 @@ MonoBehaviour:
   to: 7
   EnemyToMove: {fileID: 0}
   EnemyToHide: {fileID: 0}
+  PosizioneFinale: {x: 0, y: 0, z: 0}
   LeftTalker: {fileID: 1930529256}
   RightTalker: {fileID: 1198143958}
   LeftTalkerOff: {fileID: 2100000, guid: 69e068b913c066546b41b4e5612e83b3, type: 2}
   RightTalkerOff: {fileID: 2100000, guid: 37b3956ffb9da6a47a45db2381d060ed, type: 2}
+  hasSpline: 0
 --- !u!65 &1686987429
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30453,7 +30477,7 @@ MonoBehaviour:
   - {fileID: 2084151410}
   - {fileID: 1024167242}
   - {fileID: 1667564606}
-  select_checkpoint: 0
+  select_checkpoint: 4
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
@@ -34754,10 +34778,12 @@ MonoBehaviour:
   to: 4
   EnemyToMove: {fileID: 0}
   EnemyToHide: {fileID: 0}
+  PosizioneFinale: {x: 0, y: 0, z: 0}
   LeftTalker: {fileID: 632479178}
   RightTalker: {fileID: 1748690246}
   LeftTalkerOff: {fileID: 2100000, guid: 69e068b913c066546b41b4e5612e83b3, type: 2}
   RightTalkerOff: {fileID: 2100000, guid: cb9cf5c5568b8004f91bf092c1117b38, type: 2}
+  hasSpline: 0
 --- !u!65 &2114301232
 BoxCollider:
   m_ObjectHideFlags: 0
