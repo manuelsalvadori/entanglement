@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class CinematicHandler : MonoBehaviour {
 
@@ -18,6 +19,8 @@ public class CinematicHandler : MonoBehaviour {
 
     public GameObject EnemyToMove;
     public GameObject EnemyToHide;
+
+    public Vector3 PosizioneFinale;
 
     public GameObject LeftTalker;
     public GameObject RightTalker;
@@ -106,6 +109,8 @@ public class CinematicHandler : MonoBehaviour {
         if (indice == to && imVisible)
             if(!imWaitingToStop)
                 StartCoroutine(spegniti());
+
+        Debug.Log(Camera.main.transform.position.x - GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x);
     }
 
     IEnumerator spegniti()
@@ -135,9 +140,17 @@ public class CinematicHandler : MonoBehaviour {
         if(EnemyToHide)
             EnemyToHide.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-        EnemyToMove.GetComponent<SplineController>().FollowSpline();
-        EnemyToMove.GetComponent<AudioSource>().Play();
+        //EnemyToMove.GetComponent<SplineController>().FollowSpline();
+        //EnemyToMove.GetComponent<AudioSource>().Play();
+        EnemyToMove.transform.localPosition = PosizioneFinale;
+        yield return new WaitForSeconds(0.2f);
         Camera.main.GetComponent<CoolCameraController>().followEnemy(EnemyToMove);
+        Camera.main.GetComponent<MotionBlur>().enabled = true;
+        yield return new WaitForSeconds(3f);
+        Camera.main.GetComponent<CoolCameraController>().resetFollowing();
+        GameManager.Instance.m_IsWindowOver = false;
+        yield return new WaitUntil(() => Camera.main.transform.position.x - GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position.x < 3.5f);
+        Camera.main.GetComponent<MotionBlur>().enabled = false;
     }
 
 

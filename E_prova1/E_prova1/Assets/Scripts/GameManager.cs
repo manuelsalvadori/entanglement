@@ -74,25 +74,14 @@ public class GameManager : MonoBehaviour
     {
         m_3D_mode = m_Current_State == (int)CoolCameraController.Stato.TreD;
 
-        //Change player selected on Double Mode
-        if ((Input.GetKeyDown(KeyCode.Tab) || (Input.GetButton("L2") && Input.GetButtonDown("X"))) && m_Current_State == (int)CoolCameraController.Stato.Doppia)
-        {
-            GameManager.Instance.m_sel_pg = !GameManager.Instance.m_sel_pg;
-            Camera.main.GetComponent<CoolCameraController>().changeOldState(GameManager.Instance.m_sel_pg ? 0 : 1);
-            m_playerswicth = !m_playerswicth;
-            GameObject.Find("GadgetSelection_1").GetComponent<SwitchGadget>().switchSelectionUI();
-            GameObject.Find("GadgetSelection_2").GetComponent<SwitchGadget>().switchSelectionUI();
-            mirino.GetComponent<Pointing>().resetPosition(m_players[(m_sel_pg) ? 0 : 1].transform.position);
-            pistola.GetComponent<shoot>().resetShootPosition(m_players[(m_sel_pg) ? 0 : 1].transform.position);
 
-        }
 
         if (Input.GetKey(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
         }
 
-        if ((Input.GetButtonDown("Use") && !Input.GetButton("L2")) && !m_inventoryIsOpen && !GameManager.Instance.m_IsWindowOver && GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD)
+        if (Input.GetButtonDown("Use") && !m_inventoryIsOpen && !GameManager.Instance.m_IsWindowOver && GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD)
         {
             if (hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state)) {
                 m_players[(m_sel_pg) ? 0 : 1].GetComponent<PlayerController>().useGadget(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state);
@@ -103,7 +92,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if ((!Input.GetButton("L2") && Input.GetButtonDown("Inventory")) && !m_3D_mode && !GameManager.Instance.m_IsWindowOver && !m_IsFading) {
+        if ((Input.GetButtonDown("Inventory")) && !m_3D_mode && !GameManager.Instance.m_IsWindowOver && !m_IsFading) {
             if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
             {
                 m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().updateView();
@@ -116,8 +105,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetButton("GameMenu"))
+        if (Input.GetButtonDown("GameMenu"))
         {
+
             m_IsWindowOver = true;
             Camera.main.GetComponent<BlurOptimized>().enabled = true;
             gameMenuUI.SetActive(true);
@@ -134,6 +124,15 @@ public class GameManager : MonoBehaviour
         }
         */
 
+    }
+
+    private void OnGUI()
+    {
+        Event e = Event.current;
+        if (e.isKey)
+        {
+            Debug.Log(e.keyCode);
+        }
     }
 
     //Check if the two players are in the "same" x
