@@ -47,12 +47,16 @@ public class Inventory : MonoBehaviour {
         m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
     }
 
+    bool usedkey = false;
+
     void Update()
     {
         if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length && !locker2)
         {
 
-            //Debug.Log(m_items.ToArray()[m_pointTo]);
+            if (m_items.ToArray()[m_pointTo].description.Substring(5, 3) == "key" || m_items.ToArray()[m_pointTo].description.Substring(4, 3) == "key")
+                usedkey = true;
+            
             if (m_items.ToArray()[m_pointTo].use())
             {
                 locker2 = true;
@@ -137,6 +141,12 @@ public class Inventory : MonoBehaviour {
 
         m_items.RemoveAt(im);
         GameManager.Instance.m_IsFading = false;
+        if (usedkey)
+        {
+            usedkey = false;
+            GameManager.Instance.hideInventory(GameManager.Instance.m_sel_pg ? 0 : 1);
+        }
+
     }
 
     IEnumerator openOtherInventory()

@@ -19,11 +19,9 @@ public class Item{
     {
 
         Vector3 p_pos = GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position;
-        Debug.Log("use fuori "+ (p_pos - m_target.transform.position).magnitude);
 
         if((p_pos - m_target.transform.position).magnitude < min_distance)
         {
-            Debug.Log("use");
             m_target.GetComponent<ActivateButton>().unlock();
             return true;
         }
