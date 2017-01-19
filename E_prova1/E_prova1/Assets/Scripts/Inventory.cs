@@ -143,7 +143,6 @@ public class Inventory : MonoBehaviour {
     {
         yield return new WaitUntil(() => !(GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Animation>().isPlaying));
         Debug.Log("Reach!");
-
     }
 
     IEnumerator OneStep()
@@ -194,6 +193,20 @@ public class Inventory : MonoBehaviour {
 
     public void updateView()
     {
+        if (m_items.ToArray().Length > m_pointTo)
+        {
+            if (GameManager.Instance.m_sel_pg)
+                descr_b.text = m_items.ToArray()[m_pointTo].description;
+            else
+                descr_r.text = m_items.ToArray()[m_pointTo].description;
+        }
+        else
+        {
+            if (GameManager.Instance.m_sel_pg)
+                descr_b.text = "Select an item to show a description";
+            else
+                descr_r.text = "Select an item to show a description";
+        }
         m_currentScore.text = m_ncollectables[GameManager.Instance.whichLevelItIs()].ToString();
         /*for(int i=0; i < m_upgradesActivation.Length; i++)
         {
