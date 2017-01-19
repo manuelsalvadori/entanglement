@@ -8,6 +8,7 @@ public class Item{
     public Sprite m_this;
     public GameObject m_target;
     public float min_distance = 5f;
+    public string description;
 
     public Item(string name)
     {

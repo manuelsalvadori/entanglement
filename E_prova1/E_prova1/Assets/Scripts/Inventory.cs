@@ -14,6 +14,8 @@ public class Inventory : MonoBehaviour {
     private bool locker = false;
     private bool locker2 = false;
 
+    public Text descr_b, descr_r;
+
     /*
      * Gadget 4: Exchange object between players
      * Gadget 2: Teleport
@@ -76,12 +78,41 @@ public class Inventory : MonoBehaviour {
             m_pointerIsMoving = true;
             m_pointTo = (m_pointTo + 1) % Inventory.MAX_CAPACITY;
             StartCoroutine(OneStep());
+            if (m_items.ToArray().Length > m_pointTo)
+            {
+                if (GameManager.Instance.m_sel_pg)
+                    descr_b.text = m_items.ToArray()[m_pointTo].description;
+                else
+                    descr_r.text = m_items.ToArray()[m_pointTo].description;
+            }
+            else
+            {
+                if (GameManager.Instance.m_sel_pg)
+                    descr_b.text = "Select an item to show a description";
+                else
+                    descr_r.text = "Select an item to show a description";
+            }
         }
         else if (Input.GetAxis("InventoryNav") < 0 && !m_pointerIsMoving)
         {
             m_pointerIsMoving = true;
             m_pointTo = ((--m_pointTo) < 0 ? Inventory.MAX_CAPACITY + m_pointTo : m_pointTo) % Inventory.MAX_CAPACITY;
             StartCoroutine(OneStep());
+
+            if (m_items.ToArray().Length > m_pointTo)
+            {
+                if (GameManager.Instance.m_sel_pg)
+                    descr_b.text = m_items.ToArray()[m_pointTo].description;
+                else
+                    descr_r.text = m_items.ToArray()[m_pointTo].description;
+            }
+            else
+            {
+                if (GameManager.Instance.m_sel_pg)
+                    descr_b.text = "Select an item to show a description";
+                else
+                    descr_r.text = "Select an item to show a description";
+            }
         }
 
         m_Puntator.GetComponent<RectTransform>().anchoredPosition = m_Cells[m_pointTo].gameObject.GetComponent<RectTransform>().anchoredPosition;
@@ -179,6 +210,24 @@ public class Inventory : MonoBehaviour {
         {
             m_Cells[j].sprite = null;
             m_Cells[j].color = new Color(1, 1, 1, 0);
+        }
+    }
+
+    public void resetDescription()
+    {
+        if (m_items.ToArray().Length > m_pointTo)
+        {
+            if (GameManager.Instance.m_sel_pg)
+                descr_b.text = m_items.ToArray()[m_pointTo].description;
+            else
+                descr_r.text = m_items.ToArray()[m_pointTo].description;
+        }
+        else
+        {
+            if (GameManager.Instance.m_sel_pg)
+                descr_b.text = "Select an item to show a description";
+            else
+                descr_r.text = "Select an item to show a description";
         }
     }
 }

@@ -13,6 +13,7 @@ public class PickableObject : MonoBehaviour{
     private Item m_this;
 
     public Sprite m_spriteTmp;
+    public string m_description;
 
     public Item getItem()
     {
@@ -29,6 +30,7 @@ public class PickableObject : MonoBehaviour{
         m_this.m_this = m_spriteTmp;
         m_this.m_target = m_target;
         m_this.min_distance = min_distance;
+        m_this.description = m_description;
     }
 
 
