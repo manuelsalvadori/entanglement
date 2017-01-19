@@ -161,15 +161,21 @@ public class PlayerController : MonoBehaviour
         {
             yield break;
         }
+        float dist = 6f;
         isdashing = true;
         GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[9], 0.8f);
         Vector3 currentpos = transform.position;
+        RaycastHit hit;
+        if (Physics.Raycast(currentpos+Vector3.up*0.2f, Vector3.right * direction, out hit, 7f))
+        {
+            dist = hit.distance - 0.01f;
+        }
 
         float counter = 0;
         while (counter < durations)
         {
             counter += Time.deltaTime;
-            transform.position = Vector3.Lerp(currentpos, currentpos + new Vector3(6f*direction,0f,0f), counter / durations);
+            transform.position = Vector3.Lerp(currentpos, currentpos + new Vector3(dist*direction,0f,0f), counter / durations);
             yield return null;
         }
         yield return new WaitForSeconds(0.15f);

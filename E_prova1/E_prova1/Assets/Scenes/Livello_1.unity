@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -434,9 +434,9 @@ GameObject:
   - component: {fileID: 13968310}
   - component: {fileID: 13968309}
   - component: {fileID: 13968312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (8)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 15989510}
   - component: {fileID: 15989512}
   - component: {fileID: 15989511}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,6 +1546,7 @@ MonoBehaviour:
   m_y3d: 29
   smoothTime: 0.3
   followingSpeed: 1.5
+  playerPan: 0.15
 --- !u!81 &36508204
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1615,7 +1616,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -42.1, y: 29.9, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1407368621}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2646,11 +2648,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4350837600723900, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.00002384186
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4350837600723900, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -469.49
+      value: -469.54
       objectReference: {fileID: 0}
     - target: {fileID: 4350837600723900, guid: 163725b86b8d440dfacb8c0d39010ef2, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4400,7 +4402,7 @@ GameObject:
   - component: {fileID: 102967807}
   - component: {fileID: 102967808}
   - component: {fileID: 102967809}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_5
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -4607,7 +4609,7 @@ GameObject:
   - component: {fileID: 108956967}
   - component: {fileID: 108956968}
   - component: {fileID: 108956969}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_4
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -5806,9 +5808,9 @@ GameObject:
   - component: {fileID: 140017033}
   - component: {fileID: 140017032}
   - component: {fileID: 140017027}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5837,9 +5839,9 @@ GameObject:
   - component: {fileID: 140017035}
   - component: {fileID: 140017034}
   - component: {fileID: 140017028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5856,9 +5858,9 @@ GameObject:
   - component: {fileID: 140017031}
   - component: {fileID: 140017029}
   - component: {fileID: 140017036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (5)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9908,7 +9910,7 @@ GameObject:
   - component: {fileID: 281287258}
   - component: {fileID: 281287260}
   - component: {fileID: 281287259}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10089,7 +10091,7 @@ GameObject:
   - component: {fileID: 282711385}
   - component: {fileID: 282711384}
   - component: {fileID: 282711383}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MessageTrigger (1)
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -10532,9 +10534,9 @@ GameObject:
   - component: {fileID: 286155169}
   - component: {fileID: 286155168}
   - component: {fileID: 286155163}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10563,9 +10565,9 @@ GameObject:
   - component: {fileID: 286155171}
   - component: {fileID: 286155170}
   - component: {fileID: 286155164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10582,9 +10584,9 @@ GameObject:
   - component: {fileID: 286155167}
   - component: {fileID: 286155165}
   - component: {fileID: 286155172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (6)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11365,9 +11367,9 @@ GameObject:
   - component: {fileID: 296111995}
   - component: {fileID: 296111992}
   - component: {fileID: 296111990}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11397,9 +11399,9 @@ GameObject:
   - component: {fileID: 296111998}
   - component: {fileID: 296111997}
   - component: {fileID: 296111991}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11415,9 +11417,9 @@ GameObject:
   - component: {fileID: 296111993}
   - component: {fileID: 296111994}
   - component: {fileID: 296111999}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (2)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11787,9 +11789,9 @@ GameObject:
   - component: {fileID: 307963645}
   - component: {fileID: 307963644}
   - component: {fileID: 307963643}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12578,7 +12580,7 @@ GameObject:
   - component: {fileID: 329024540}
   - component: {fileID: 329024541}
   - component: {fileID: 329024542}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_6
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -13608,7 +13610,7 @@ GameObject:
   - component: {fileID: 346019218}
   - component: {fileID: 346019220}
   - component: {fileID: 346019219}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14257,7 +14259,7 @@ GameObject:
   - component: {fileID: 377974795}
   - component: {fileID: 377974797}
   - component: {fileID: 377974796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15135,7 +15137,7 @@ GameObject:
   - component: {fileID: 401093913}
   - component: {fileID: 401093914}
   - component: {fileID: 401093915}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_1
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -15369,7 +15371,7 @@ GameObject:
   - component: {fileID: 405103508}
   - component: {fileID: 405103510}
   - component: {fileID: 405103509}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18936,6 +18938,38 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.6935199
       objectReference: {fileID: 0}
+    - target: {fileID: 1735069310931468, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349127369671644, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1835125394084748, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484009684174512, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349127369671644, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1639058662903426, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1735069310931468, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1835125394084748, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 600362884cd8f4abcb3c87a9101f770e, type: 2}
   m_IsPrefabParent: 0
@@ -19400,7 +19434,7 @@ GameObject:
   - component: {fileID: 526630458}
   - component: {fileID: 526630460}
   - component: {fileID: 526630459}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20623,7 +20657,7 @@ GameObject:
   - component: {fileID: 571485718}
   - component: {fileID: 571485720}
   - component: {fileID: 571485719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25632,7 +25666,7 @@ GameObject:
   - component: {fileID: 724497364}
   - component: {fileID: 724497366}
   - component: {fileID: 724497365}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25733,9 +25767,9 @@ GameObject:
   - component: {fileID: 726647130}
   - component: {fileID: 726647129}
   - component: {fileID: 726647124}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25764,9 +25798,9 @@ GameObject:
   - component: {fileID: 726647132}
   - component: {fileID: 726647131}
   - component: {fileID: 726647125}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25783,9 +25817,9 @@ GameObject:
   - component: {fileID: 726647128}
   - component: {fileID: 726647126}
   - component: {fileID: 726647133}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (5)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26158,7 +26192,7 @@ GameObject:
   - component: {fileID: 731563509}
   - component: {fileID: 731563508}
   - component: {fileID: 731563507}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MessageTrigger (3)
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -26279,9 +26313,9 @@ GameObject:
   - component: {fileID: 734959684}
   - component: {fileID: 734959683}
   - component: {fileID: 734959682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29101,9 +29135,9 @@ GameObject:
   - component: {fileID: 835464976}
   - component: {fileID: 835464975}
   - component: {fileID: 835464974}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29591,7 +29625,7 @@ GameObject:
   - component: {fileID: 850379883}
   - component: {fileID: 850379882}
   - component: {fileID: 850379881}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MessageTrigger (4)
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -29805,7 +29839,7 @@ GameObject:
   - component: {fileID: 855747830}
   - component: {fileID: 855747829}
   - component: {fileID: 855747828}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MessageTrigger
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -29863,7 +29897,7 @@ GameObject:
   - component: {fileID: 859460572}
   - component: {fileID: 859460573}
   m_Layer: 0
-  m_Name: Doubleplatform (6)
+  m_Name: pistolabile
   m_TagString: Pistolabile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29947,6 +29981,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isActive: 0
   deltay: -70
+  blue: {fileID: 2100000, guid: d4d4d733eea43498ba9e3b52b986391b, type: 2}
+  red: {fileID: 2100000, guid: 68b890a13bcfc4955aa373ca529bc09c, type: 2}
 --- !u!54 &859460573
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33018,7 +33054,7 @@ GameObject:
   - component: {fileID: 923700500}
   - component: {fileID: 923700502}
   - component: {fileID: 923700501}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35768,7 +35804,7 @@ GameObject:
   - component: {fileID: 999505547}
   - component: {fileID: 999505549}
   - component: {fileID: 999505548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36953,7 +36989,7 @@ GameObject:
   - component: {fileID: 1024167243}
   - component: {fileID: 1024167244}
   - component: {fileID: 1024167245}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_3
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -41082,9 +41118,9 @@ GameObject:
   - component: {fileID: 1143408459}
   - component: {fileID: 1143408458}
   - component: {fileID: 1143408453}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41113,9 +41149,9 @@ GameObject:
   - component: {fileID: 1143408461}
   - component: {fileID: 1143408460}
   - component: {fileID: 1143408454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41132,9 +41168,9 @@ GameObject:
   - component: {fileID: 1143408457}
   - component: {fileID: 1143408455}
   - component: {fileID: 1143408462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (4)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44742,9 +44778,9 @@ GameObject:
   - component: {fileID: 1258224803}
   - component: {fileID: 1258224802}
   - component: {fileID: 1258224797}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44773,9 +44809,9 @@ GameObject:
   - component: {fileID: 1258224805}
   - component: {fileID: 1258224804}
   - component: {fileID: 1258224798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44792,9 +44828,9 @@ GameObject:
   - component: {fileID: 1258224801}
   - component: {fileID: 1258224799}
   - component: {fileID: 1258224806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (3)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46720,7 +46756,7 @@ GameObject:
   - component: {fileID: 1306385879}
   - component: {fileID: 1306385881}
   - component: {fileID: 1306385880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46968,7 +47004,7 @@ GameObject:
   - component: {fileID: 1320489486}
   - component: {fileID: 1320489485}
   - component: {fileID: 1320489484}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MessageTrigger (2)
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -47252,7 +47288,7 @@ GameObject:
   - component: {fileID: 1325162398}
   - component: {fileID: 1325162400}
   - component: {fileID: 1325162399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47470,7 +47506,7 @@ GameObject:
   - component: {fileID: 1328571825}
   - component: {fileID: 1328571827}
   - component: {fileID: 1328571826}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49477,7 +49513,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1384314025}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_init
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -49671,7 +49707,7 @@ GameObject:
   - component: {fileID: 1396618003}
   - component: {fileID: 1396618005}
   - component: {fileID: 1396618004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50024,6 +50060,77 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &1407368620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1407368621}
+  - component: {fileID: 1407368625}
+  - component: {fileID: 1407368623}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1407368621
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1407368620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 36508208}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!92 &1407368623
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1407368620}
+  m_Enabled: 1
+--- !u!20 &1407368625
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1407368620}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 100
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!1001 &1409402471
 Prefab:
   m_ObjectHideFlags: 0
@@ -50366,7 +50473,7 @@ GameObject:
   - component: {fileID: 1414286444}
   - component: {fileID: 1414286446}
   - component: {fileID: 1414286445}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51383,9 +51490,9 @@ GameObject:
   - component: {fileID: 1425102875}
   - component: {fileID: 1425102874}
   - component: {fileID: 1425102876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51696,9 +51803,9 @@ GameObject:
   - component: {fileID: 1438034360}
   - component: {fileID: 1438034359}
   - component: {fileID: 1438034354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51727,9 +51834,9 @@ GameObject:
   - component: {fileID: 1438034362}
   - component: {fileID: 1438034361}
   - component: {fileID: 1438034355}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51746,9 +51853,9 @@ GameObject:
   - component: {fileID: 1438034358}
   - component: {fileID: 1438034356}
   - component: {fileID: 1438034363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (7)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52946,7 +53053,7 @@ GameObject:
   - component: {fileID: 1464573870}
   - component: {fileID: 1464573872}
   - component: {fileID: 1464573871}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53453,7 +53560,7 @@ GameObject:
   - component: {fileID: 1472877400}
   - component: {fileID: 1472877402}
   - component: {fileID: 1472877401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54438,9 +54545,9 @@ GameObject:
   - component: {fileID: 1499485987}
   - component: {fileID: 1499485986}
   - component: {fileID: 1499485989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (7)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54634,9 +54741,9 @@ GameObject:
   - component: {fileID: 1500993584}
   - component: {fileID: 1500993582}
   - component: {fileID: 1500993585}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (1)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58282,9 +58389,9 @@ GameObject:
   - component: {fileID: 1602684379}
   - component: {fileID: 1602684378}
   - component: {fileID: 1602684380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58931,7 +59038,7 @@ GameObject:
   - component: {fileID: 1612011809}
   - component: {fileID: 1612011811}
   - component: {fileID: 1612011810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59709,9 +59816,9 @@ GameObject:
   - component: {fileID: 1634686631}
   - component: {fileID: 1634686630}
   - component: {fileID: 1634686625}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59740,9 +59847,9 @@ GameObject:
   - component: {fileID: 1634686633}
   - component: {fileID: 1634686632}
   - component: {fileID: 1634686626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59759,9 +59866,9 @@ GameObject:
   - component: {fileID: 1634686629}
   - component: {fileID: 1634686627}
   - component: {fileID: 1634686634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (4)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60424,7 +60531,7 @@ GameObject:
   - component: {fileID: 1647073479}
   - component: {fileID: 1647073481}
   - component: {fileID: 1647073480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61523,7 +61630,7 @@ GameObject:
   - component: {fileID: 1671709845}
   - component: {fileID: 1671709846}
   - component: {fileID: 1671709847}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_7
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -62484,7 +62591,7 @@ GameObject:
   - component: {fileID: 1702853524}
   - component: {fileID: 1702853523}
   m_Layer: 0
-  m_Name: Double platform
+  m_Name: pistolabile2
   m_TagString: Pistolabile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62516,6 +62623,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isActive: 0
   deltay: 62
+  blue: {fileID: 2100000, guid: d4d4d733eea43498ba9e3b52b986391b, type: 2}
+  red: {fileID: 2100000, guid: 68b890a13bcfc4955aa373ca529bc09c, type: 2}
 --- !u!54 &1702853524
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64590,9 +64699,9 @@ GameObject:
   - component: {fileID: 1772221737}
   - component: {fileID: 1772221736}
   - component: {fileID: 1772221731}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64621,9 +64730,9 @@ GameObject:
   - component: {fileID: 1772221739}
   - component: {fileID: 1772221738}
   - component: {fileID: 1772221732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Dx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64640,9 +64749,9 @@ GameObject:
   - component: {fileID: 1772221735}
   - component: {fileID: 1772221733}
   - component: {fileID: 1772221740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door (6)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75487,9 +75596,9 @@ GameObject:
   - component: {fileID: 2043821499}
   - component: {fileID: 2043821498}
   - component: {fileID: 2043821497}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Sx
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75570,7 +75679,7 @@ GameObject:
   - component: {fileID: 2045546549}
   - component: {fileID: 2045546551}
   - component: {fileID: 2045546550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76495,7 +76604,7 @@ GameObject:
   - component: {fileID: 2062550726}
   - component: {fileID: 2062550728}
   - component: {fileID: 2062550727}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77363,7 +77472,7 @@ GameObject:
   - component: {fileID: 2084151411}
   - component: {fileID: 2084151412}
   - component: {fileID: 2084151413}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Checkpoint_2
   m_TagString: Checkpoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -78221,7 +78330,7 @@ GameObject:
   - component: {fileID: 2098726858}
   - component: {fileID: 2098726860}
   - component: {fileID: 2098726859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78291,7 +78400,7 @@ GameObject:
   - component: {fileID: 2098750163}
   - component: {fileID: 2098750165}
   - component: {fileID: 2098750164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Corpo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80097,7 +80206,7 @@ GameObject:
   - component: {fileID: 2143520449}
   - component: {fileID: 2143520451}
   - component: {fileID: 2143520450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}

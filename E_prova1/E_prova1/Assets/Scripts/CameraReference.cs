@@ -18,7 +18,5 @@ public class CameraReference : MonoBehaviour {
         {
             transform.rotation = Camera.main.transform.rotation;
         }
-
-
 	}
 }
