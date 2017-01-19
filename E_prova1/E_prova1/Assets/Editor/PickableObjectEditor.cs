@@ -21,7 +21,9 @@ public class PickableObjectEditor : Editor
             {
                 myScript.m_target = (GameObject)EditorGUILayout.ObjectField("Target", myScript.m_target, typeof(GameObject), true);
                 myScript.m_spriteTmp = (Sprite)EditorGUILayout.ObjectField("Inventory View", myScript.m_spriteTmp, typeof(Sprite), true, new GUILayoutOption[] { GUILayout.MaxHeight(15), GUILayout.MinWidth(100) });
+                myScript.m_description = (string)EditorGUILayout.TextField("Description", myScript.m_description, new GUILayoutOption[] { GUILayout.MaxHeight(15), GUILayout.MinWidth(100) });
             }
+
         }
         else
         {

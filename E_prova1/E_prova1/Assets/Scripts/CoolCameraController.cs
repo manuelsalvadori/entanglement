@@ -35,7 +35,8 @@ public class CoolCameraController : MonoBehaviour
     private float velocityfloat = 0f;
     public float smoothTime = 0.3F;                                     //Amount of smooth
     public float followingSpeed = 1.5f;
-    //~
+    public float playerPan = 0.15f;
+     //~
 
     //Lerp Level1 setting function
     //public float m_Level_speed = 10F;
@@ -99,7 +100,7 @@ public class CoolCameraController : MonoBehaviour
 
 
         Vector3 player_pos = Camera.main.WorldToViewportPoint(m_player_position[0]);
-        player_pos.x += 0.15f;
+        player_pos.x += playerPan;
         player_pos = Camera.main.ViewportToWorldPoint(player_pos);
 
         m_offset_from_players = m_View[3] - new Vector3(m_player_position[0].x, 0f, 0f);
@@ -134,7 +135,7 @@ public class CoolCameraController : MonoBehaviour
         if (GameManager.Instance.m_Current_State != (int)Stato.TreD)
         {
             Vector3 player_pos = Camera.main.WorldToViewportPoint(m_followEnemy ? m_Enemy.transform.position : GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].transform.position);
-            player_pos.x += 0.15f;
+            player_pos.x += playerPan;
             player_pos = Camera.main.ViewportToWorldPoint(player_pos);
             m_CameraTarget.x = player_pos.x;
             m_CameraTarget.y = player_pos.y + m_heigthOffset;
