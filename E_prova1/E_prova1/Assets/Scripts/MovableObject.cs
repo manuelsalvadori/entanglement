@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class MovableObject : MonoBehaviour
 {
 
-    public bool m_isActive = false;
+    private bool m_isActive = false;
     public float deltay = -14f;
     public Material blue, red;
     Material material_init;
@@ -46,7 +47,11 @@ public class MovableObject : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if (GameManager.Instance.m_sel_pg)
             GetComponent<Renderer>().material = blue;
+        else
+            GetComponent<Renderer>().material = red;
+        
         Camera.main.GetComponent<CoolCameraController>().smoothTime = 0.08f;
+        Camera.main.GetComponent<BlurOptimized>().enabled = true;
         float start_y = transform.position.y;
         float end_y = start_y + deltay;
         float t = 0.0f;
@@ -61,6 +66,7 @@ public class MovableObject : MonoBehaviour
         GetComponent<Renderer>().material = material_init;
         yield return new WaitForSeconds(1f);
         Camera.main.GetComponent<CoolCameraController>().playerPan = 0.15f;
+        Camera.main.GetComponent<BlurOptimized>().enabled = false;
         Camera.main.GetComponent<CoolCameraController>().resetFollowing();
         gameObject.layer = 0;
     }

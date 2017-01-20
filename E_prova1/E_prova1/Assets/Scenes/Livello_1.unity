@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -18241,7 +18241,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e0f577e12eec94c9b8758d718ccc1503, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: e0f577e12eec94c9b8758d718ccc1503, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -30287,7 +30287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa85e0e2e9894ccba72940b2217cae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isActive: 0
   deltay: -70
   blue: {fileID: 2100000, guid: d4d4d733eea43498ba9e3b52b986391b, type: 2}
   red: {fileID: 2100000, guid: 68b890a13bcfc4955aa373ca529bc09c, type: 2}
@@ -50476,6 +50475,11 @@ Prefab:
       propertyPath: Unlock
       value: 
       objectReference: {fileID: 8300000, guid: d0057b5d66cd4b942abe209264cc299b, type: 3}
+    - target: {fileID: 114415073018819506, guid: b977558d844ef4d329b365a60ef87374,
+        type: 2}
+      propertyPath: m_unlocked
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b977558d844ef4d329b365a60ef87374, type: 2}
   m_IsPrefabParent: 0
@@ -62706,7 +62710,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1673494558}
-  m_LocalRotation: {x: 0.53267515, y: 0.07034045, z: 0.83613265, w: -0.11041513}
+  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
   m_LocalPosition: {x: 0.000022246646, y: -0.00006150933, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -63471,7 +63475,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa85e0e2e9894ccba72940b2217cae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isActive: 0
   deltay: 62
   blue: {fileID: 2100000, guid: d4d4d733eea43498ba9e3b52b986391b, type: 2}
   red: {fileID: 2100000, guid: 68b890a13bcfc4955aa373ca529bc09c, type: 2}
@@ -68769,7 +68772,7 @@ MonoBehaviour:
   - {fileID: 102967806}
   - {fileID: 329024539}
   - {fileID: 1671709844}
-  select_checkpoint: 0
+  select_checkpoint: 5
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
