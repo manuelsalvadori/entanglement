@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         if ((Input.GetButtonDown("Inventory")) && !m_3D_mode && !GameManager.Instance.m_IsWindowOver && !m_IsFading) {
             if (!m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].gameObject.activeSelf && !m_inventoryIsOpen)
             {
-                
+
                 m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().updateView();
                 m_inventory[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().resetDescription();
 
@@ -290,7 +290,13 @@ public class GameManager : MonoBehaviour
 
     public void updateCheckpoint(Transform cp)
     {
-        m_current_checkpoint[m_sel_pg ? 0 : 1] = cp;
+        if(m_Current_State != (int) CoolCameraController.Stato.TreD)
+            m_current_checkpoint[m_sel_pg ? 0 : 1] = cp;
+        else
+        {
+            m_current_checkpoint[0] = cp;
+            m_current_checkpoint[1] = cp;
+        }
     }
 
     public bool[] getUpgrades() { return m_UpgradesActive; }
