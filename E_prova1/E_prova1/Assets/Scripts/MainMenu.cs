@@ -65,7 +65,6 @@ public class MainMenu : MonoBehaviour {
     IEnumerator spettaNamen()
     {
         yield return new WaitForSeconds(0.2f);
-        GameManager.Instance.gameMenuUI.SetActive(false);
-        GameManager.Instance.m_IsWindowOver = false;
+        gameObject.SetActive(false);
     }
 }

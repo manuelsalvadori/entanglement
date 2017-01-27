@@ -1502,6 +1502,7 @@ GameObject:
   - component: {fileID: 36508202}
   - component: {fileID: 36508209}
   - component: {fileID: 36508210}
+  - component: {fileID: 36508211}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1581,7 +1582,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.8, b: 0.8, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1717,6 +1718,27 @@ MonoBehaviour:
   blurIterations: 1
   blurType: 0
   blurShader: {fileID: 4800000, guid: f9d5fa183cd6b45eeb1491f74863cd91, type: 3}
+--- !u!114 &36508211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36508201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  excludeFarPixels: 1
+  useRadialDistance: 0
+  heightFog: 0
+  height: 1
+  heightDensity: 2
+  startDistance: 0
+  fogShader: {fileID: 4800000, guid: cd10cc5a1253c474e9006f9c5bcbaa11, type: 3}
+  shaderBlue: {fileID: 0}
+  shaderRed: {fileID: 0}
 --- !u!1 &37094198
 GameObject:
   m_ObjectHideFlags: 0
@@ -5006,7 +5028,7 @@ GameObject:
   - component: {fileID: 122698271}
   - component: {fileID: 122698270}
   m_Layer: 5
-  m_Name: text
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62522,7 +62544,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1673494558}
-  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
+  m_LocalRotation: {x: 0.53267515, y: 0.07034045, z: 0.83613265, w: -0.11041513}
   m_LocalPosition: {x: 0.000022246646, y: -0.00006150933, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -68588,7 +68610,7 @@ MonoBehaviour:
   - {fileID: 102967806}
   - {fileID: 329024539}
   - {fileID: 1671709844}
-  select_checkpoint: 7
+  select_checkpoint: 2
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
@@ -70042,7 +70064,7 @@ GameObject:
   - component: {fileID: 1884521949}
   - component: {fileID: 1884521948}
   m_Layer: 5
-  m_Name: text
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
