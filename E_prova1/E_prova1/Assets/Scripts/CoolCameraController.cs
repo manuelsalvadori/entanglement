@@ -237,6 +237,7 @@ public class CoolCameraController : MonoBehaviour
     {
         if(GameManager.Instance.m_Current_State != (int)Stato.TreD)
         {
+
             cameradx.SetActive(true);
             if (GameManager.Instance.m_sel_pg)
             {

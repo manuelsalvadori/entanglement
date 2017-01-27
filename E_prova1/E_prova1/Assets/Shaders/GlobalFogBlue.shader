@@ -1,4 +1,4 @@
-Shader "Hidden/GlobalFog" {
+Shader "Hidden/GlobalFogBlue" {
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "black" {}
 }
@@ -150,6 +150,7 @@ CGINCLUDE
 
 		// Lerp between fog color & original scene color
 		// by fog amount
+		unity_FogColor = half4(0, 0.8, 0.8, 1.0);
 		return lerp (unity_FogColor, sceneColor, fogFac);
 	}
 

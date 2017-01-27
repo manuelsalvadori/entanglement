@@ -45,6 +45,7 @@ public class Inventory : MonoBehaviour {
     {
         m_pointTo = 0;
         m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
+
     }
 
     bool usedkey = false;
@@ -56,7 +57,7 @@ public class Inventory : MonoBehaviour {
 
             if (m_items.ToArray()[m_pointTo].description.Substring(5, 3) == "key" || m_items.ToArray()[m_pointTo].description.Substring(4, 3) == "key")
                 usedkey = true;
-            
+
             if (m_items.ToArray()[m_pointTo].use())
             {
                 locker2 = true;
