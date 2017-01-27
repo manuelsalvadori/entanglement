@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityStandardAssets.ImageEffects;
 
 
 [RequireComponent(typeof (ThirdPersonCharacterFree))]
@@ -14,7 +15,7 @@ public class ThirdPersonUserControlFree : MonoBehaviour
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
 
 
-
+    public GameObject gameMenuUI;
 
     private void Start()
     {
@@ -30,6 +31,14 @@ public class ThirdPersonUserControlFree : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetButtonDown("GameMenu"))
+        {
+            Camera.main.GetComponent<BlurOptimized>().enabled = true;
+            gameMenuUI.SetActive(true);
+            Time.timeScale = 0;
+        }
+
         if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
