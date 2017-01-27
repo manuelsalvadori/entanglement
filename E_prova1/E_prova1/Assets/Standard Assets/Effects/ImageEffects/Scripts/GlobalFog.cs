@@ -24,6 +24,8 @@ namespace UnityStandardAssets.ImageEffects
         public float startDistance = 0.0f;
 
         public Shader fogShader = null;
+        public Shader shaderBlue = null;
+        public Shader shaderRed = null;
         private Material fogMaterial = null;
 
 
@@ -37,6 +39,7 @@ namespace UnityStandardAssets.ImageEffects
                 ReportAutoDisable ();
             return isSupported;
         }
+
 
         [ImageEffectOpaque]
         void OnRenderImage(RenderTexture source, RenderTexture destination)
