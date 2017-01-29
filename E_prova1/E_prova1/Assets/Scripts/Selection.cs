@@ -29,8 +29,7 @@ public class Selection : MonoBehaviour
 
     public void credits()
     {
-        bottoni.SetActive(!bottoni.activeInHierarchy);
-        creditz.SetActive(!creditz.activeInHierarchy);
+        SceneManager.LoadScene("Credits");
     }
 
     public void exit()
@@ -54,5 +53,10 @@ public class Selection : MonoBehaviour
         }
         loadingbar.GetComponent<Image>().fillAmount = 1f;
         yield return new WaitForSeconds(0.2f);
+    }
+
+    public void back()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

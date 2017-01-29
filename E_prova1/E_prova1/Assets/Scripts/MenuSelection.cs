@@ -10,6 +10,7 @@ public class MenuSelection : MonoBehaviour {
     public AudioSource src;
     public Animation logoAnim;
     public GameObject bottoni;
+    public bool isMenu = true;
 
     private bool buttonSelected;
 
@@ -18,7 +19,10 @@ public class MenuSelection : MonoBehaviour {
         Cursor.visible = false;
         es.SetSelectedGameObject(go);
         src.PlayDelayed(0.5f);
-        StartCoroutine(animationMenu());
+        if (isMenu)
+        {
+            StartCoroutine(animationMenu());
+        }
         Inventory.m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
 	}
 	
