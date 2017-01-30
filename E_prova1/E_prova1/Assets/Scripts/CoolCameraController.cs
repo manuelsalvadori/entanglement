@@ -248,14 +248,14 @@ public class CoolCameraController : MonoBehaviour
                 if (GameManager.Instance.m_sel_pg)
                 {
                     fog.fogShader = shaderBlue;
-                    foreach(GlobalFog fog_2 in cameradx.GetComponents<GlobalFog>()) fog.fogShader = shaderRed;
+                    foreach(GlobalFog fog_2 in cameradx.GetComponents<GlobalFog>()) fog_2.fogShader = shaderRed;
                     GetComponent<Skybox>().material = SkyboxBlue;
                     cameradx.GetComponent<Skybox>().material = SkyboxRed;
                 }
                 else
                 {
                     fog.fogShader = shaderRed;
-                    foreach (GlobalFog fog_2 in cameradx.GetComponents<GlobalFog>()) fog.fogShader = shaderBlue;
+                    foreach (GlobalFog fog_2 in cameradx.GetComponents<GlobalFog>()) fog_2.fogShader = shaderBlue;
                     GetComponent<Skybox>().material = SkyboxRed;
                     cameradx.GetComponent<Skybox>().material = SkyboxBlue;
                 }
@@ -321,6 +321,7 @@ public class CoolCameraController : MonoBehaviour
                 GetComponent<Animation>().Play("Camera3D2");
             }
             StartCoroutine(GameManager.Instance.shutdown_thisWin(cameradx));
+            StartCoroutine(shutFog());
             int tmp = m_oldState;
             m_oldState = GameManager.Instance.m_Current_State;
             GameManager.Instance.m_Current_State = tmp;
