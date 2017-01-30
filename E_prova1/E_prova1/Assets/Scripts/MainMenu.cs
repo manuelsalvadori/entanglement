@@ -17,12 +17,12 @@ public class MainMenu : MonoBehaviour {
         Cursor.visible = false;
         es.SetSelectedGameObject(go);
 	}
-	
+
 	void Update ()
     {
         if ((Input.GetAxisRaw("Vertical") != 0) && buttonSelected == false)
         {
-            
+
             es.SetSelectedGameObject(go);
             buttonSelected = true;
         }
@@ -66,5 +66,6 @@ public class MainMenu : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.2f);
         gameObject.SetActive(false);
+        GameManager.Instance.m_IsWindowOver = false;
     }
 }

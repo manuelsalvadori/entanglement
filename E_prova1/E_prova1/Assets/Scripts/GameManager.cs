@@ -234,6 +234,7 @@ public class GameManager : MonoBehaviour
     {
         if (!m_inventory[which].gameObject.GetComponent<Animation>().isPlaying)
         {
+            m_IsFading = true;
             m_inventory[which].gameObject.GetComponent<Animation>().Play("General_FadeOut");
 
             foreach (Animation a in m_inventory[which].gameObject.GetComponentsInChildren<Animation>())
@@ -255,6 +256,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(() => !go.GetComponent<Animation>().isPlaying);
         go.SetActive(false);
+        m_IsFading = false;
         /*
         if(go.tag.Equals("Inventory"))
             m_inventoryIsOpen = false;
