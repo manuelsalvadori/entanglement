@@ -1503,6 +1503,7 @@ GameObject:
   - component: {fileID: 36508209}
   - component: {fileID: 36508210}
   - component: {fileID: 36508211}
+  - component: {fileID: 36508212}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1590,7 +1591,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 200
+  far clip plane: 135
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1736,6 +1737,27 @@ MonoBehaviour:
   height: 1
   heightDensity: 2
   startDistance: 0
+  fogShader: {fileID: 4800000, guid: cd10cc5a1253c474e9006f9c5bcbaa11, type: 3}
+  shaderBlue: {fileID: 0}
+  shaderRed: {fileID: 0}
+--- !u!114 &36508212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36508201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  excludeFarPixels: 1
+  useRadialDistance: 0
+  heightFog: 0
+  height: 1
+  heightDensity: 2
+  startDistance: 55
   fogShader: {fileID: 4800000, guid: cd10cc5a1253c474e9006f9c5bcbaa11, type: 3}
   shaderBlue: {fileID: 0}
   shaderRed: {fileID: 0}
@@ -47592,6 +47614,8 @@ GameObject:
   - component: {fileID: 1322659582}
   - component: {fileID: 1322659581}
   - component: {fileID: 1322659586}
+  - component: {fileID: 1322659587}
+  - component: {fileID: 1322659588}
   m_Layer: 0
   m_Name: CameraDX
   m_TagString: CameraDX
@@ -47638,7 +47662,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.8, g: 0, b: 0, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 1
@@ -47646,7 +47670,7 @@ Camera:
     width: 0.5
     height: 1
   near clip plane: 0.3
-  far clip plane: 500
+  far clip plane: 135
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -47688,6 +47712,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothTime: 0.3
+--- !u!114 &1322659587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1322659580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  excludeFarPixels: 1
+  useRadialDistance: 0
+  heightFog: 0
+  height: 1
+  heightDensity: 2
+  startDistance: 0
+  fogShader: {fileID: 4800000, guid: 4b32ac8903f0f1f44a791d2c7009d2d2, type: 3}
+  shaderBlue: {fileID: 0}
+  shaderRed: {fileID: 0}
+--- !u!114 &1322659588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1322659580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  excludeFarPixels: 1
+  useRadialDistance: 0
+  heightFog: 0
+  height: 1
+  heightDensity: 2
+  startDistance: 55
+  fogShader: {fileID: 4800000, guid: 4b32ac8903f0f1f44a791d2c7009d2d2, type: 3}
+  shaderBlue: {fileID: 0}
+  shaderRed: {fileID: 0}
 --- !u!1 &1325162397
 GameObject:
   m_ObjectHideFlags: 0
@@ -62544,7 +62610,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1673494558}
-  m_LocalRotation: {x: 0.53267515, y: 0.07034045, z: 0.83613265, w: -0.11041513}
+  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
   m_LocalPosition: {x: 0.000022246646, y: -0.00006150933, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
