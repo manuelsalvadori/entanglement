@@ -52,7 +52,7 @@ public class exit : MonoBehaviour
                         SceneManager.LoadScene("Level_5");
                         break;
                     case 6:
-                        SceneManager.LoadScene("Credits");
+                        SceneManager.LoadScene("COMINGSOON");
                         break;
                     default:
                         return;
