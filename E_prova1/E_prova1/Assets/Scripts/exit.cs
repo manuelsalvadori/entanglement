@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class exit : MonoBehaviour
 {
     bool p1 = false, p2 = false;
-    [Range (0,5)]
+    [Range (0,6)]
     public int level_to_load;
     public bool isSelectLevel = true;
     public GameObject canvas;
@@ -50,6 +50,9 @@ public class exit : MonoBehaviour
                         break;
                     case 5:
                         SceneManager.LoadScene("Level_5");
+                        break;
+                    case 6:
+                        SceneManager.LoadScene("Credits");
                         break;
                     default:
                         return;
