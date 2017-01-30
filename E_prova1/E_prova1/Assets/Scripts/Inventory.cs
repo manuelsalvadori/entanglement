@@ -45,14 +45,21 @@ public class Inventory : MonoBehaviour {
     {
         m_pointTo = 0;
         m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
+        GameManager.Instance.m_IsFading = true;
+        StartCoroutine(fading());
+    }
 
+    IEnumerator fading()
+    {
+        yield return new WaitUntil(()=> !GetComponent<Animation>().isPlaying);
+        GameManager.Instance.m_IsFading = false;
     }
 
     bool usedkey = false;
 
     void Update()
     {
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length && !locker2)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButton("Interact") && m_pointTo < m_items.ToArray().Length && !locker2 && !locker)
         {
 
             if (m_items.ToArray()[m_pointTo].description.Substring(5, 3) == "key" || m_items.ToArray()[m_pointTo].description.Substring(4, 3) == "key")
@@ -68,12 +75,13 @@ public class Inventory : MonoBehaviour {
             }
         }
 
-        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButtonDown("Use") && GameManager.Instance.hasUpgrade((int)Gadgets.Gadget4) && m_pointTo < m_items.ToArray().Length && !locker)
+        if (GameManager.Instance.m_inventoryIsOpen && Input.GetButtonDown("Use") && GameManager.Instance.hasUpgrade((int)Gadgets.Gadget4) && m_pointTo < m_items.ToArray().Length && !locker && !locker2)
         {
             locker = true;
             GameManager.Instance.m_inventory[!GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<Inventory>().addItem(m_items.ToArray()[m_pointTo]);
             //m_items.RemoveAt(m_pointTo);
             GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<AudioSource>().PlayOneShot(GameManager.Instance.m_players[GameManager.Instance.m_sel_pg ? 0 : 1].GetComponent<ThirdPersonCharacterNostro>().clips[8]);
+            GameManager.Instance.m_IsFading = true;
             m_Cells[m_pointTo].gameObject.GetComponent<Animation>().Play("General_FadeOut");
             StartCoroutine(detachSprite(m_pointTo, true));
         }
