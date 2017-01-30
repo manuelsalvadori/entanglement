@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class CoolCameraController : MonoBehaviour
 {
@@ -36,13 +37,18 @@ public class CoolCameraController : MonoBehaviour
     public float smoothTime = 0.3F;                                     //Amount of smooth
     public float followingSpeed = 1.5f;
     public float playerPan = 0.15f;
-     //~
+    //~
 
     //Lerp Level1 setting function
     //public float m_Level_speed = 10F;
     //Players and Levels infos
     //Editor view
     //public Transform m_l1, m_l2;
+
+    public Shader shaderBlue;
+    public Shader shaderRed;
+    public Material SkyboxBlue;
+    public Material SkyboxRed;
 
 
     private Dictionary<int, Vector3> m_player_position = new Dictionary<int, Vector3>() //easy way to select player initial infos.
@@ -237,7 +243,24 @@ public class CoolCameraController : MonoBehaviour
     {
         if(GameManager.Instance.m_Current_State != (int)Stato.TreD)
         {
-
+            foreach(GlobalFog fog in GetComponents<GlobalFog>())
+            {
+                if (GameManager.Instance.m_sel_pg)
+                {
+                    fog.fogShader = shaderBlue;
+                    foreach(GlobalFog fog_2 in cameradx.GetComponents<GlobalFog>()) fog.fogShader = shaderRed;
+                    GetComponent<Skybox>().material = SkyboxBlue;
+                    cameradx.GetComponent<Skybox>().material = SkyboxRed;
+                }
+                else
+                {
+                    fog.fogShader = shaderRed;
+                    foreach (GlobalFog fog_2 in cameradx.GetComponents<GlobalFog>()) fog.fogShader = shaderBlue;
+                    GetComponent<Skybox>().material = SkyboxRed;
+                    cameradx.GetComponent<Skybox>().material = SkyboxBlue;
+                }
+                fog.enabled = true;
+            }
             cameradx.SetActive(true);
             if (GameManager.Instance.m_sel_pg)
             {
@@ -311,6 +334,14 @@ public class CoolCameraController : MonoBehaviour
         }
     }
 
+    IEnumerator shutFog()
+    {
+        yield return new WaitUntil(() => !cameradx.activeSelf);
+        foreach (GlobalFog fog in GetComponents<GlobalFog>())
+        {
+            fog.enabled = false;
+        }
+    }
 
     public void changeOldState(int state)
     {
