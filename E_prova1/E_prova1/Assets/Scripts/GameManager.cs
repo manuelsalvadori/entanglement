@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public bool m_IsWindowOver = false;
     public bool m_IsFading = false;
+    public bool isControlOver = false; 
 
     public Transform[] m_checkpoints;
     private Transform[] m_current_checkpoint;
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("GameMenu"))
+        if (Input.GetButtonDown("GameMenu") && !isControlOver)
         {
 
             m_IsWindowOver = true;

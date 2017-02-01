@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour {
 
     public EventSystem es;
     public GameObject go;
+    public GameObject contr;
 
     private bool buttonSelected;
 
@@ -17,6 +18,12 @@ public class MainMenu : MonoBehaviour {
         Cursor.visible = false;
         es.SetSelectedGameObject(go);
 	}
+
+    void OnEnabled()
+    {
+        es.SetSelectedGameObject(go);
+
+    }
 
 	void Update ()
     {
@@ -66,6 +73,12 @@ public class MainMenu : MonoBehaviour {
     public void quitGame()
     {
         Application.Quit();
+    }
+
+    public void controls()
+    {
+        contr.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     IEnumerator spettaNamen()
