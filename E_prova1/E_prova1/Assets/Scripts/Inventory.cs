@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour {
             StartCoroutine(detachSprite(m_pointTo, true));
         }
 
-        if (Input.GetAxis("InventoryNav") > 0 && !m_pointerIsMoving)
+        if (Input.GetAxis("InventoryNav") > 0.2 && !m_pointerIsMoving)
         {
             m_pointerIsMoving = true;
             m_pointTo = (m_pointTo + 1) % Inventory.MAX_CAPACITY;
@@ -116,7 +116,7 @@ public class Inventory : MonoBehaviour {
                     descr_r.text = "Select an item to show a description";
             }
         }
-        else if (Input.GetAxis("InventoryNav") < 0 && !m_pointerIsMoving)
+        else if (Input.GetAxis("InventoryNav") < -0.2 && !m_pointerIsMoving)
         {
             m_pointerIsMoving = true;
             m_pointTo = ((--m_pointTo) < 0 ? Inventory.MAX_CAPACITY + m_pointTo : m_pointTo) % Inventory.MAX_CAPACITY;

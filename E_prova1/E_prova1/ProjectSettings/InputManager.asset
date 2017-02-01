@@ -7,7 +7,7 @@ InputManager:
   m_Axes:
   - serializedVersion: 3
     m_Name: Horizontal
-    descriptiveName: 
+    descriptiveName: 'Keyboard: Move player forward or backward'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -23,7 +23,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical
-    descriptiveName: 
+    descriptiveName: 'Keyboard: Move player forward or backward in Vertical axis'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -39,12 +39,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Cancel
-    descriptiveName: 
+    descriptiveName: Back
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: delete
     altNegativeButton: 
-    altPositiveButton: joystick button 13
+    altPositiveButton: joystick button 0
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -55,7 +55,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Submit
-    descriptiveName: 
+    descriptiveName: Confirm
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: return
@@ -71,12 +71,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Horizontal
-    descriptiveName: 
+    descriptiveName: 'Joystick: Move player forward or backward'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    altNegativeButton: a
+    altPositiveButton: d
     gravity: 0
     dead: 0.19
     sensitivity: 1
@@ -87,12 +87,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical
-    descriptiveName: 
+    descriptiveName: 'Joystick: Move player forward or backward in Vertical axis'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
+    altNegativeButton: s
+    altPositiveButton: w
     gravity: 0
     dead: 0.19
     sensitivity: 1
@@ -103,12 +103,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Jump
-    descriptiveName: 
+    descriptiveName: Jump
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 14
+    positiveButton: space
     altNegativeButton: 
-    altPositiveButton: space
+    altPositiveButton: joystick button 14
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -119,7 +119,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Interact
-    descriptiveName: 
+    descriptiveName: Interact with game objects
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: i
@@ -135,12 +135,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Use
-    descriptiveName: 
+    descriptiveName: Use gadget
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 13
+    positiveButton: u
     altNegativeButton: 
-    altPositiveButton: u
+    altPositiveButton: joystick button 13
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -151,12 +151,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Next
-    descriptiveName: 
+    descriptiveName: 'Switch Gadget forward '
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 11
+    positiveButton: e
     altNegativeButton: 
-    altPositiveButton: e
+    altPositiveButton: joystick button 11
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -167,12 +167,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Previous
-    descriptiveName: 
+    descriptiveName: Switch Gadget backward
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 10
+    positiveButton: q
     altNegativeButton: 
-    altPositiveButton: q
+    altPositiveButton: joystick button 10
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -183,12 +183,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Inventory
-    descriptiveName: 
+    descriptiveName: Open the Inventory
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 12
+    positiveButton: o
     altNegativeButton: 
-    altPositiveButton: o
+    altPositiveButton: joystick button 12
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -199,7 +199,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: CameraPan
-    descriptiveName: 
+    descriptiveName: Move camera in 3D
     descriptiveNegativeName: 
     negativeButton: left
     positiveButton: right
@@ -215,10 +215,10 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: InventoryNav
-    descriptiveName: 
+    descriptiveName: 'Joystick: Browse inventory'
     descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -230,8 +230,24 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
+    m_Name: InventoryNav
+    descriptiveName: 'Keyboard: Browse inventory'
+    descriptiveNegativeName: 
+    negativeButton: left
+    positiveButton: right
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 5
+    joyNum: 0
+  - serializedVersion: 3
     m_Name: R_Horizontal
-    descriptiveName: 
+    descriptiveName: ' Keyboard: Move target in X axis'
     descriptiveNegativeName: 
     negativeButton: left
     positiveButton: right
@@ -247,7 +263,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: R_Vertical
-    descriptiveName: 
+    descriptiveName: ' Keyboard: Move target in Y axis'
     descriptiveNegativeName: 
     negativeButton: down
     positiveButton: up
@@ -263,7 +279,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: R_Horizontal
-    descriptiveName: 
+    descriptiveName: 'Joystick: Move target in X axis'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -279,23 +295,23 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: ChangeLevel
-    descriptiveName: 
+    descriptiveName: Switch between Worlds
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 8
+    positiveButton: tab
     altNegativeButton: 
-    altPositiveButton: l
+    altPositiveButton: joystick button 8
     gravity: 0
     dead: 0.19
     sensitivity: 1
     snap: 0
-    invert: 1
+    invert: 0
     type: 0
-    axis: 3
+    axis: 0
     joyNum: 0
   - serializedVersion: 3
     m_Name: Level1
-    descriptiveName: 
+    descriptiveName: 'Keyboard: Go to World 1'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 1
@@ -311,7 +327,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Level2
-    descriptiveName: 
+    descriptiveName: 'Keyboard: Go to World 2'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 2
@@ -327,12 +343,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: 3Dmode
-    descriptiveName: 
+    descriptiveName: Get entangled with your doppelganger (3D Mode)
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 9
+    positiveButton: 3
     altNegativeButton: 
-    altPositiveButton: 3
+    altPositiveButton: joystick button 9
     gravity: 0
     dead: 0.19
     sensitivity: 1
@@ -343,7 +359,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: R_Vertical
-    descriptiveName: 
+    descriptiveName: 'Joystick: Move target in Y axis'
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -359,12 +375,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Menu
-    descriptiveName: 
+    descriptiveName: Browse menu
     descriptiveNegativeName: 
-    negativeButton: joystick button 4
-    positiveButton: joystick button 6
-    altNegativeButton: up
-    altPositiveButton: down
+    negativeButton: up
+    positiveButton: down
+    altNegativeButton: joystick button 4
+    altPositiveButton: joystick button 6
     gravity: 0
     dead: 0.19
     sensitivity: 1
@@ -375,12 +391,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: GameMenu
-    descriptiveName: 
+    descriptiveName: Open Menu
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: p
+    positiveButton: escape
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: joystick button 3
     gravity: 0
     dead: 0.19
     sensitivity: 1

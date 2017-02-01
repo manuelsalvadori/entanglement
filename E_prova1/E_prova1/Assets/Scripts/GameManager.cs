@@ -75,12 +75,6 @@ public class GameManager : MonoBehaviour
         m_3D_mode = m_Current_State == (int)CoolCameraController.Stato.TreD;
 
 
-
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
         if (Input.GetButtonDown("Use") && !m_inventoryIsOpen && !GameManager.Instance.m_IsWindowOver && GameManager.Instance.m_Current_State != (int) CoolCameraController.Stato.TreD)
         {
             if (hasUpgrade(m_gadgetSelection[(m_sel_pg) ? 0 : 1].m_state)) {
@@ -129,14 +123,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void OnGUI()
-    {
-        Event e = Event.current;
-        if (e.isKey)
-        {
-            Debug.Log(e.keyCode);
-        }
-    }
 
     //Check if the two players are in the "same" x
     public bool isPlayersInline()
