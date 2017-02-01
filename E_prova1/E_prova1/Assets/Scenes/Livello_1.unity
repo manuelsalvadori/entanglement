@@ -13226,7 +13226,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: quit game
+  m_Text: quit
 --- !u!222 &338446585
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16068,7 +16068,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 746968533}
-        m_MethodName: quitGame
+        m_MethodName: exitToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -69253,7 +69253,7 @@ MonoBehaviour:
   - {fileID: 102967806}
   - {fileID: 329024539}
   - {fileID: 1671709844}
-  select_checkpoint: 1
+  select_checkpoint: 0
   m_Current_State: 0
   m_3D_mode: 0
   m_double_mode: 0
