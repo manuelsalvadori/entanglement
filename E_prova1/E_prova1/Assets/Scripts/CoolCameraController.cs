@@ -51,6 +51,10 @@ public class CoolCameraController : MonoBehaviour
     public Material SkyboxRed;
 
 
+#if UNITY_STANDALONE_WIN
+    public bool waitForMove = false;
+#endif
+
     private Dictionary<int, Vector3> m_player_position = new Dictionary<int, Vector3>() //easy way to select player initial infos.
     {
         {0, Vector3.zero},
@@ -69,8 +73,6 @@ public class CoolCameraController : MonoBehaviour
     {
         m_followEnemy = false;
     }
-
-
 
 
     private Vector3 m_offset_from_players;
@@ -117,6 +119,8 @@ public class CoolCameraController : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(Input.GetAxisRaw("ChangeLevel"));
+
         if (Input.GetButtonDown("Level1") && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //single_view
         {
             select_singleView(0);
@@ -127,16 +131,41 @@ public class CoolCameraController : MonoBehaviour
             select_singleView(1);
         }
 
-        if(Input.GetButtonDown("ChangeLevel") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver)
+
+        #if UNITY_STANDALONE_WIN
+
+        if((Input.GetButton("ChangeLevel") || Input.GetAxis("ChangeLevel") > 0.3) && !waitForMove && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver)
+        {
+            waitForMove = true;
+            select_singleView(GameManager.Instance.m_sel_pg ? 1 : 0);
+            StartCoroutine(waitCamera());
+        }
+
+        if ((Input.GetButtonDown("3Dmode") || Input.GetAxis("ChangeLevel") < -0.3) && !waitForMove && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //3D_view
+        {
+            if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode)
+            {
+                waitForMove = true;
+                select_treD_View(); //else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
+                StartCoroutine(waitCamera());
+            }
+        }
+
+        #endif
+
+        #if UNITY_STANDALONE_OSX
+
+        if(Input.GetButton("ChangeLevel") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver)
         {
             select_singleView(GameManager.Instance.m_sel_pg ? 1 : 0);
         }
 
-        if (Input.GetButtonDown("3Dmode") && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //3D_view
+        if(Input.GetButtonDown("3Dmode") && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //3D_view
         {
             if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); //else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
         }
 
+        #endif
 
         if (GameManager.Instance.m_Current_State != (int)Stato.TreD)
         {
@@ -161,6 +190,12 @@ public class CoolCameraController : MonoBehaviour
         }
     }
 
+
+    IEnumerator waitCamera()
+    {
+        yield return new WaitForSeconds(1f);
+        waitForMove = false;
+    }
 
 
     void LateUpdate()

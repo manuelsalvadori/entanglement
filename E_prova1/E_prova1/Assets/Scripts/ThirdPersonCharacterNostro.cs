@@ -29,7 +29,7 @@ public class ThirdPersonCharacterNostro : MonoBehaviour
 
 
 
-    public LinkedPlayer link;
+    //public LinkedPlayer link;
     private Vector3 previousPos;
     public float m_JumpTiming;
     public float m_JumpHeight;

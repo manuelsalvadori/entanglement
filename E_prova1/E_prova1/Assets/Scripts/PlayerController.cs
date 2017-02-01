@@ -6,40 +6,47 @@ public class PlayerController : MonoBehaviour
     public float smoothTime = 0.3f;
     private bool firstDash = true;
 
+    private bool imDead = false;
+
     public void Update()
     {
         if (GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded)
             firstDash = true;
     }
 
+    /*
     public void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals("LaMuerte"))
+        if (!other.CompareTag("Checkpoint"))
         {
-            foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+            if (other.tag.Equals("LaMuerte"))
             {
-                if (!j.gameObject.name.Equals("trail"))
+                foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
                 {
-                    j.enabled = false;
+                    if (!j.gameObject.name.Equals("trail"))
+                    {
+                        j.enabled = false;
+                    }
                 }
+                GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
+                StartCoroutine(waitForDeath());
             }
-            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
-            StartCoroutine(waitForDeath());
-        }
 
-        if (other.tag.Equals("LaMuerte2"))
-        {
-            foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+            if (other.tag.Equals("LaMuerte2"))
             {
-                if (!j.gameObject.name.Equals("trail"))
+                foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
                 {
-                    j.enabled = false;
+                    if (!j.gameObject.name.Equals("trail"))
+                    {
+                        j.enabled = false;
+                    }
                 }
+                GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
+                StartCoroutine(waitForDeath());
             }
-            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
-            StartCoroutine(waitForDeath());
         }
     }
+    */
 
     public void OnTriggerEnter(Collider other)
     {
@@ -74,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag.Equals("LaMuerte"))
         {
+            imDead = true;
             foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
             {
                 if (!j.gameObject.name.Equals("trail"))
@@ -87,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag.Equals("LaMuerte2"))
         {
+            imDead = true;
             foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
             {
                 if (!j.gameObject.name.Equals("trail"))
@@ -108,42 +117,46 @@ public class PlayerController : MonoBehaviour
     public bool gunAllowed = false;
     public void useGadget(int n)
     {
-        switch (n)
+        if (!imDead)
         {
-            case 0:
-                if (gunAllowed)
-                    moveObject();
-                else
-                {
-                    switchGun(true);
-                    gunAllowed = true;
-                }
-                break;
-            case 1:
-                if (teleportAllowed)
-                    teleport();
-                else
-                {
-                    switchMirino(true);
-                    teleportAllowed = true;
-                }
-                break;
-            case 2:
-                if (GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded)
-                    dash();
-                else
-                {
-                    if (firstDash)
-                    {
-                        dash();
-                        firstDash = false;
-                    }
-                }
-                break;
-            default:
-                return;
-        }
 
+            switch (n)
+            {
+                case 0:
+                    if (gunAllowed)
+                        moveObject();
+                    else
+                    {
+                        switchGun(true);
+                        gunAllowed = true;
+                    }
+                    break;
+                case 1:
+                    if (teleportAllowed)
+                        teleport();
+                    else
+                    {
+                        switchMirino(true);
+                        teleportAllowed = true;
+                    }
+                    break;
+                case 2:
+                    if (GetComponent<ThirdPersonCharacterNostro>().m_IsGrounded)
+                        dash();
+                    else
+                    {
+                        if (firstDash)
+                        {
+                            dash();
+                            firstDash = false;
+                        }
+                    }
+                    break;
+                default:
+                    return;
+            }
+
+        }
     }
 
     private void teleport()
@@ -264,6 +277,8 @@ public class PlayerController : MonoBehaviour
                 j.enabled = true;
             }
         }
+        yield return new WaitForSeconds(0.5f);
+        imDead = false;
     }
 
     /*
