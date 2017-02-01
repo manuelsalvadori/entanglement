@@ -200,7 +200,11 @@ public class CinematicAlternative : MonoBehaviour
         RightTalker2.GetComponent<PutInPrimoPiamo>().enabled = false;
 
         UIGameplayManager.Instance.m_UI["MessageRed"].SetActive(true);
-        currentString = messaggi[7];
+        foreach(string s in Input.GetJoystickNames())
+        {
+            Debug.Log(s);
+        }
+        currentString = Input.GetJoystickNames().Length > 0 ? messaggi[7] : "You can change player with TAB";
         UIGameplayManager.Instance.displayMessage(currentString, UIGameplayManager.Instance.m_UI["MessageRed"]);
         UIGameplayManager.Instance.displayThisWin(UIGameplayManager.Instance.m_UI["MessageRed"]);
         yield return new WaitUntil(() => Input.GetButtonDown("Jump"));

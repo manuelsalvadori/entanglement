@@ -12,6 +12,35 @@ public class PlayerController : MonoBehaviour
             firstDash = true;
     }
 
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals("LaMuerte"))
+        {
+            foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+            {
+                if (!j.gameObject.name.Equals("trail"))
+                {
+                    j.enabled = false;
+                }
+            }
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
+            StartCoroutine(waitForDeath());
+        }
+
+        if (other.tag.Equals("LaMuerte2"))
+        {
+            foreach (Renderer j in gameObject.GetComponentsInChildren<Renderer>())
+            {
+                if (!j.gameObject.name.Equals("trail"))
+                {
+                    j.enabled = false;
+                }
+            }
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<ThirdPersonCharacterNostro>().clips[10], 0.8f);
+            StartCoroutine(waitForDeath());
+        }
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         bool pick_item = true;
