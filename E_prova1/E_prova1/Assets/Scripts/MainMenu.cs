@@ -57,6 +57,12 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene("LevelSelection");
     }
 
+    public void exitToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void quitGame()
     {
         Application.Quit();
