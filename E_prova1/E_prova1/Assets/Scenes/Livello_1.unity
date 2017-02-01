@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -70782,7 +70782,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: press SQUARE to use an item, CIRCLE to transfer an item
+  m_Text: press SQUARE to use an item
 --- !u!222 &1884521950
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -77960,6 +77960,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 36c3132ee338a4214badcccf80dbcdae,
         type: 3}
+    - target: {fileID: 114528054276338082, guid: 8521eee41ab48134dacb995566d4a1b0,
+        type: 2}
+      propertyPath: DialogInfo
+      value: 
+      objectReference: {fileID: 1884521949}
+    - target: {fileID: 114455796170743768, guid: 8521eee41ab48134dacb995566d4a1b0,
+        type: 2}
+      propertyPath: DialogInfo
+      value: 
+      objectReference: {fileID: 122698271}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8521eee41ab48134dacb995566d4a1b0, type: 2}
   m_IsPrefabParent: 0

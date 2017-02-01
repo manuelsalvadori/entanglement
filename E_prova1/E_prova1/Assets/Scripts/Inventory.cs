@@ -34,6 +34,8 @@ public class Inventory : MonoBehaviour {
     private int m_pointTo = 0;
     private bool m_pointerIsMoving = false;
 
+    public Text DialogInfo;
+
     void Start()
     {
         updateView();
@@ -45,6 +47,14 @@ public class Inventory : MonoBehaviour {
     {
         m_pointTo = 0;
         m_upgradesActivation = GameManager.Instance.m_UpgradesActive;
+        if (m_upgradesActivation[3])
+        {
+            DialogInfo.text = "press SQUARE to use an item, CIRCLE to transfer an item";
+        }
+        else
+        {
+            DialogInfo.text = "press SQUARE to use an item";
+        }
         GameManager.Instance.m_IsFading = true;
         StartCoroutine(fading());
     }
