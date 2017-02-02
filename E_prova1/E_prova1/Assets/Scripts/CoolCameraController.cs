@@ -190,13 +190,13 @@ public class CoolCameraController : MonoBehaviour
         }
     }
 
-
+    #if UNITY_STANDALONE_WIN
     IEnumerator waitCamera()
     {
         yield return new WaitForSeconds(1f);
         waitForMove = false;
     }
-
+    #endif
 
     void LateUpdate()
     {
