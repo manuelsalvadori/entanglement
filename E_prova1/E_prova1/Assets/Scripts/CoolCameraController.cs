@@ -119,7 +119,6 @@ public class CoolCameraController : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(Input.GetAxisRaw("ChangeLevel"));
 
         if (Input.GetButtonDown("Level1") && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //single_view
         {

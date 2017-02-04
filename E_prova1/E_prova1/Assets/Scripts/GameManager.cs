@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     public bool m_IsFading = false;
     public bool isControlOver = false; 
 
+    public int m_current_checkpoint_selector_1;
+    public int m_current_checkpoint_selector_2;
     public Transform[] m_checkpoints;
     private Transform[] m_current_checkpoint;
+    public bool editor_checkpoint = false;
     [Range (0,10)]
     public int select_checkpoint;
 
@@ -51,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject m_gameplay_UI_Canvas;
     public GameObject gameMenuUI;
+    public GameObject gadgetUI_1, gadgetUI_2;
 
 
     void Awake()
@@ -65,10 +69,43 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        m_current_checkpoint[0] = m_checkpoints[select_checkpoint];
-        m_current_checkpoint[1] = m_checkpoints[select_checkpoint];
+        loadGame();
+        if (editor_checkpoint)
+        {
+            m_current_checkpoint[0] = m_checkpoints[select_checkpoint];
+            m_current_checkpoint[1] = m_checkpoints[select_checkpoint];
+            m_current_checkpoint_selector_1 = select_checkpoint;
+            m_current_checkpoint_selector_2 = select_checkpoint;
+        }
+        else
+        {
+            m_current_checkpoint[0] = m_checkpoints[m_current_checkpoint_selector_1];
+            m_current_checkpoint[1] = m_checkpoints[m_current_checkpoint_selector_2];
+        }
+
         resetPlayersPosition();
         m_ZLevel = m_current_checkpoint[0].position.z;
+    }
+
+    public void SaveGame()
+    {
+        PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.SetInt("cp1", m_current_checkpoint_selector_1);
+        PlayerPrefs.SetInt("cp2", m_current_checkpoint_selector_2);
+    }
+
+    void loadGame()
+    {
+        if (PlayerPrefs.HasKey("cp1"))
+        {
+            m_current_checkpoint_selector_1 = PlayerPrefs.GetInt("cp1");
+            m_current_checkpoint_selector_2 = PlayerPrefs.GetInt("cp2");
+        }
+        else
+        {
+            m_current_checkpoint_selector_1 = 0;
+            m_current_checkpoint_selector_2 = 0;
+        }
     }
 
     void Update()
@@ -109,6 +146,11 @@ public class GameManager : MonoBehaviour
             m_IsWindowOver = true;
             Camera.main.GetComponent<BlurOptimized>().enabled = true;
             gameMenuUI.SetActive(true);
+            if (!m_3D_mode && gadgetUI_1 != null)
+            {
+                gadgetUI_1.SetActive(false);
+                gadgetUI_2.SetActive(false);
+            }
             Time.timeScale = 0;
         }
 
@@ -263,7 +305,7 @@ public class GameManager : MonoBehaviour
     public void resetPlayersPosition()
     {
         m_players[0].transform.position = m_current_checkpoint[0].position;
-        m_players[1].transform.position = m_current_checkpoint[0].position + new Vector3(0f, -65f,0f);
+        m_players[1].transform.position = m_current_checkpoint[1].position + new Vector3(0f, -65f,0f);
     }
 
     public void onDeathPlayer(int sel_pg)
@@ -277,14 +319,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void updateCheckpoint(Transform cp)
+    public void updateCheckpoint(int cp)
     {
-        if(m_Current_State != (int) CoolCameraController.Stato.TreD)
-            m_current_checkpoint[m_sel_pg ? 0 : 1] = cp;
+        
+        if (m_Current_State != (int)CoolCameraController.Stato.TreD)
+        {
+            m_current_checkpoint[m_sel_pg ? 0 : 1] = m_checkpoints[cp];
+            if (m_sel_pg)
+                m_current_checkpoint_selector_1 = cp;
+            else
+                m_current_checkpoint_selector_2 = cp;
+        }
         else
         {
-            m_current_checkpoint[0] = cp;
-            m_current_checkpoint[1] = cp;
+            m_current_checkpoint[0] = m_checkpoints[cp];
+            m_current_checkpoint[1] = m_checkpoints[cp];
+            m_current_checkpoint_selector_1 = cp;
+            m_current_checkpoint_selector_2 = cp;
         }
     }
 

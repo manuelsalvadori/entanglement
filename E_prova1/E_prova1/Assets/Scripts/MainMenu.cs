@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour {
     public EventSystem es;
     public GameObject go;
     public GameObject contr;
+    public GameObject gUI_1, gUI_2;
+    public GameObject savedUI;
 
     private bool buttonSelected;
 
@@ -34,9 +36,9 @@ public class MainMenu : MonoBehaviour {
             buttonSelected = true;
         }
 
-        if (Input.GetButtonDown("Menu"))
+        if ((Input.GetAxisRaw("Vertical") != 0))
         {
-            //if(!GetComponents<AudioSource>()[0].isPlaying)
+            if(!GetComponents<AudioSource>()[0].isPlaying)
                 GetComponents<AudioSource>()[0].Play();
         }
 
@@ -84,7 +86,47 @@ public class MainMenu : MonoBehaviour {
     IEnumerator spettaNamen()
     {
         yield return new WaitForSeconds(0.2f);
+        if (!GameManager.Instance.m_3D_mode && gUI_1 != null)
+        {
+            gUI_1.SetActive(true);
+            gUI_2.SetActive(true);
+        }
         gameObject.SetActive(false);
         GameManager.Instance.m_IsWindowOver = false;
+    }
+
+    public void saveGame()
+    {
+        GameManager.Instance.SaveGame();
+        StartCoroutine(saved());
+        resume();
+    }
+
+    IEnumerator saved()
+    {
+        yield return new WaitForSeconds(0.2f);
+        savedUI.SetActive(true);
+        savedUI.GetComponent<Animation>().Play();
+        yield return new WaitForSeconds(2f);
+        savedUI.SetActive(false);
+    }
+
+    public void resumeLS()
+    {
+        Camera.main.GetComponent<BlurOptimized>().enabled = false;
+        Time.timeScale = 1;
+        StartCoroutine(spettaNamenLS());
+    }
+
+    IEnumerator spettaNamenLS()
+    {
+        yield return new WaitForSeconds(0.2f);
+        gameObject.SetActive(false);
+    }
+
+    public void saveLS()
+    {
+        PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
+        resumeLS();
     }
 }

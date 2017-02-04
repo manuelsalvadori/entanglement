@@ -109,7 +109,9 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag.Equals("Checkpoint"))
         {
-            GameManager.Instance.updateCheckpoint(other.transform);
+            int cpt = 0;
+            int.TryParse(other.gameObject.name.Substring(11), out cpt);
+            GameManager.Instance.updateCheckpoint(cpt);
         }
     }
 
