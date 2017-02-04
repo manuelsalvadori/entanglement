@@ -24,7 +24,7 @@ public class Selection : MonoBehaviour
         bottoni.SetActive(false);
         loading.SetActive(true);
         DestroyImmediate(em);
-        PlayerPrefs.SetInt("Level", 4);
+        PlayerPrefs.SetInt("Level", 1);
         PlayerPrefs.SetInt("cp1", 0);
         PlayerPrefs.SetInt("cp2", 0);
         StartCoroutine(loadAsync("introduction"));
@@ -81,7 +81,10 @@ public class Selection : MonoBehaviour
         if (PlayerPrefs.HasKey("Level"))
         {
             int level = PlayerPrefs.GetInt("Level");
-            StartCoroutine(loadAsyncint(level));
+            if(level == 1)
+                StartCoroutine(notLoaded());
+            else
+                StartCoroutine(loadAsyncint(level));
         }
         else
         {
