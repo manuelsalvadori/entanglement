@@ -40,11 +40,6 @@ public class Selection : MonoBehaviour
         Application.Quit();
     }
 
-    public void livello1()
-    {
-        StartCoroutine(loadAsync("Livello_1"));
-    }
-
     private IEnumerator loadAsync(string levelName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(levelName);
@@ -81,10 +76,15 @@ public class Selection : MonoBehaviour
         if (PlayerPrefs.HasKey("Level"))
         {
             int level = PlayerPrefs.GetInt("Level");
-            if(level == 1)
+            if (level == 1)
                 StartCoroutine(notLoaded());
             else
+            {
+                bottoni.SetActive(false);
+                loading.SetActive(true);
+                DestroyImmediate(em);
                 StartCoroutine(loadAsyncint(level));
+            }
         }
         else
         {
