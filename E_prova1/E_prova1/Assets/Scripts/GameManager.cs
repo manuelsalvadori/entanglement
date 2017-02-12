@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public bool m_IsWindowOver = false;
     public bool m_IsFading = false;
-    public bool isControlOver = false; 
+    public bool isControlOver = false;
 
     public int m_current_checkpoint_selector_1;
     public int m_current_checkpoint_selector_2;
@@ -321,7 +321,7 @@ public class GameManager : MonoBehaviour
 
     public void updateCheckpoint(int cp)
     {
-        
+
         if (m_Current_State != (int)CoolCameraController.Stato.TreD)
         {
             m_current_checkpoint[m_sel_pg ? 0 : 1] = m_checkpoints[cp];
