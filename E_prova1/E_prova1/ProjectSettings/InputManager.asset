@@ -390,7 +390,7 @@ InputManager:
     axis: 4
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Menu
+    m_Name: MenuVertical
     descriptiveName: 'Keyboard: Browse Menu'
     descriptiveNegativeName: 
     negativeButton: up
@@ -406,11 +406,11 @@ InputManager:
     axis: 3
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Menu
+    m_Name: MenuHorizontal
     descriptiveName: 'Keyboard: Browse Menu'
     descriptiveNegativeName: 
-    negativeButton: up
-    positiveButton: down
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
