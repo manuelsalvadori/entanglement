@@ -25,7 +25,7 @@ public class MenuSelection : MonoBehaviour {
         }
         Inventory.m_ncollectables = new int[6] { 0, 0, 0, 0, 0, 0 };
 	}
-	
+
 	void Update ()
     {
         if ((Input.GetAxisRaw("Vertical") != 0) && buttonSelected == false)
@@ -34,7 +34,7 @@ public class MenuSelection : MonoBehaviour {
             buttonSelected = true;
         }
 
-        if (Input.GetButton("Menu"))
+        if (Input.GetButtonDown("MenuHorizontal") || Input.GetButtonDown("MenuVertical"))
         {
             if(!GetComponents<AudioSource>()[0].isPlaying)
                 GetComponents<AudioSource>()[0].Play();
