@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         {
             int cpt = 0;
             int.TryParse(other.gameObject.name.Substring(11), out cpt);
-            GameManager.Instance.updateCheckpoint(cpt);
+            GameManager.Instance.updateCheckpoint(cpt, gameObject);
         }
     }
 
