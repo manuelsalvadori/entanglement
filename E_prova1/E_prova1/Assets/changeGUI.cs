@@ -15,4 +15,11 @@ public class changeGUI : MonoBehaviour
         Destroy(this);
     }
 
+    public void UpdateGadget()
+    {
+        guir.sprite = spred;
+        guib.sprite = spblue;
+        Destroy(this);
+    }
+
 }

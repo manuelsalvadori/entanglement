@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameMenuUI;
     public GameObject gadgetUI_1, gadgetUI_2;
 
+    public GameObject[] gadgetObjs;
+    public bool[] collectablesActive;
+
 
     void Awake()
     {
@@ -83,6 +86,9 @@ public class GameManager : MonoBehaviour
             m_current_checkpoint[1] = m_checkpoints[m_current_checkpoint_selector_2];
         }
 
+        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Collectables");
+        collectablesActive = new bool[tmp.Length];
+
         resetPlayersPosition();
         m_ZLevel = m_current_checkpoint[0].position.z;
     }
@@ -92,6 +98,28 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.SetInt("cp1", m_current_checkpoint_selector_1);
         PlayerPrefs.SetInt("cp2", m_current_checkpoint_selector_2);
+        int count = 0;
+        foreach (bool gadget in m_UpgradesActive)
+        {
+            if (gadget)
+            {
+                PlayerPrefs.SetInt("gdg_" + count, 1);
+            }
+            count++;
+        }
+
+        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Collectables");
+        count = 0;
+        Array.Sort<GameObject>(tmp);
+        foreach (GameObject co in tmp)
+        {
+            collectablesActive[count] = co.activeSelf;
+            if (collectablesActive[count])
+            {
+                PlayerPrefs.SetInt("collect_" + count, 1);
+            }
+            count++;
+        }
     }
 
     void loadGame()
@@ -106,6 +134,32 @@ public class GameManager : MonoBehaviour
             m_current_checkpoint_selector_1 = 0;
             m_current_checkpoint_selector_2 = 0;
         }
+
+        int count = 0;
+        foreach (bool gadget in m_UpgradesActive)
+        {
+            if (PlayerPrefs.HasKey("gdg_" + count))
+            {
+                m_UpgradesActive[count] = true;
+                gadgetObjs[count].GetComponent<changeGUI>().UpdateGadget();
+            }
+            count++;
+        }
+
+        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Collectables");
+        count = 0;
+        int inner = 0;
+        Array.Sort<GameObject>(tmp);
+        foreach (GameObject co in tmp)
+        {
+            if(PlayerPrefs.HasKey("collect_" + count))
+            {
+                co.SetActive(true);
+                inner++;
+            }
+        }
+        if (inner > 0)
+            Inventory.m_ncollectables[m_currentLevel] = inner;
     }
 
     void Update()
