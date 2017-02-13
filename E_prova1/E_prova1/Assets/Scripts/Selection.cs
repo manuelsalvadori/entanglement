@@ -24,6 +24,7 @@ public class Selection : MonoBehaviour
         bottoni.SetActive(false);
         loading.SetActive(true);
         DestroyImmediate(em);
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("Level", 1);
         PlayerPrefs.SetInt("cp1", 0);
         PlayerPrefs.SetInt("cp2", 0);
