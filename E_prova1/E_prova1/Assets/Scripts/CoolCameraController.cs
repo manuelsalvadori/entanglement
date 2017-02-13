@@ -152,11 +152,13 @@ public class CoolCameraController : MonoBehaviour
             }
         }
 
-        #endif
+#endif
 
-        #if UNITY_STANDALONE_OSX
 
-        if(Input.GetButton("ChangeLevel") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver)
+
+#if UNITY_STANDALONE_OSX
+
+        if(Input.GetButtonDown("ChangeLevel") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver)
         {
             select_singleView(GameManager.Instance.m_sel_pg ? 1 : 0);
         }
@@ -166,7 +168,21 @@ public class CoolCameraController : MonoBehaviour
             if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); //else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
         }
 
-        #endif
+#endif
+
+#if UNITY_STANDALONE_LINUX
+
+        if(Input.GetButtonDown("ChangeLevel") && !GameManager.Instance.m_3D_mode && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver)
+        {
+            select_singleView(GameManager.Instance.m_sel_pg ? 1 : 0);
+        }
+
+        if(Input.GetButtonDown("3Dmode") && !GameManager.Instance.m_inventoryIsOpen && GameManager.Instance.m_currentLevel != 0 && !GameManager.Instance.m_IsWindowOver) //3D_view
+        {
+            if (GameManager.Instance.isPlayersInline() || GameManager.Instance.m_3D_mode) select_treD_View(); //else UIGameplayManager.Instance.displayMessage("Non è stato possibile stabilire il contatto.");
+        }
+
+#endif
 
         if (GameManager.Instance.m_Current_State != (int)Stato.TreD)
         {
