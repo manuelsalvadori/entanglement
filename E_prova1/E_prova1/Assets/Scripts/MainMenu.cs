@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour {
     public GameObject gUI_1, gUI_2;
     public GameObject savedUI;
 
+
+
     private bool buttonSelected;
 
 	void Start ()
@@ -29,14 +31,15 @@ public class MainMenu : MonoBehaviour {
 
 	void Update ()
     {
-        if ((Input.GetAxisRaw("Vertical") != 0) && buttonSelected == false)
+        if ((Input.GetAxisRaw("MenuVertical") != 0) && buttonSelected == false)
         {
 
             es.SetSelectedGameObject(go);
             buttonSelected = true;
         }
 
-        if ((Input.GetAxisRaw("Vertical") != 0))
+
+        if ((Input.GetAxisRaw("MenuVertical") != 0))
         {
             if(!GetComponents<AudioSource>()[0].isPlaying)
                 GetComponents<AudioSource>()[0].Play();
