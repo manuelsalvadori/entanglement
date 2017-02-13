@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public int m_current_checkpoint_selector_1;
     public int m_current_checkpoint_selector_2;
     public Transform[] m_checkpoints;
-    private Transform[] m_current_checkpoint;
+    public Transform[] m_current_checkpoint;
     public bool editor_checkpoint = false;
     [Range (0,10)]
     public int select_checkpoint;
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
             m_current_checkpoint[1] = m_checkpoints[m_current_checkpoint_selector_2];
         }
 
+
         GameObject[] tmp = GameObject.FindGameObjectsWithTag("Collectables");
         collectablesActive = new bool[tmp.Length];
 
@@ -93,11 +94,20 @@ public class GameManager : MonoBehaviour
         m_ZLevel = m_current_checkpoint[0].position.z;
     }
 
+    private static int CompareGameobject(GameObject x, GameObject y)
+    {
+        return x.name.CompareTo(y.name);
+    }
+
     public void SaveGame()
     {
         PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.SetInt("cp1", m_current_checkpoint_selector_1);
         PlayerPrefs.SetInt("cp2", m_current_checkpoint_selector_2);
+        Debug.Log("uno " + PlayerPrefs.GetInt("cp1"));
+        Debug.Log("due " + PlayerPrefs.GetInt("cp2"));
+
+
         int count = 0;
         foreach (bool gadget in m_UpgradesActive)
         {
@@ -110,16 +120,18 @@ public class GameManager : MonoBehaviour
 
         GameObject[] tmp = GameObject.FindGameObjectsWithTag("Collectables");
         count = 0;
-        Array.Sort<GameObject>(tmp);
+        Array.Sort<GameObject>(tmp, CompareGameobject);
         foreach (GameObject co in tmp)
         {
             collectablesActive[count] = co.activeSelf;
             if (collectablesActive[count])
             {
                 PlayerPrefs.SetInt("collect_" + count, 1);
+                Debug.Log(co);
             }
             count++;
         }
+        PlayerPrefs.Save();
     }
 
     void loadGame()
@@ -149,12 +161,16 @@ public class GameManager : MonoBehaviour
         GameObject[] tmp = GameObject.FindGameObjectsWithTag("Collectables");
         count = 0;
         int inner = 0;
-        Array.Sort<GameObject>(tmp);
+        Array.Sort<GameObject>(tmp, CompareGameobject);
         foreach (GameObject co in tmp)
         {
             if(PlayerPrefs.HasKey("collect_" + count))
             {
                 co.SetActive(true);
+                Debug.Log(co);
+            }
+            else
+            {
                 inner++;
             }
         }
@@ -373,13 +389,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void updateCheckpoint(int cp)
+    public void updateCheckpoint(int cp, GameObject who)
     {
 
         if (m_Current_State != (int)CoolCameraController.Stato.TreD)
         {
-            m_current_checkpoint[m_sel_pg ? 0 : 1] = m_checkpoints[cp];
-            if (m_sel_pg)
+
+            m_current_checkpoint[whoAmI(who.name)] = m_checkpoints[cp];
+            if (whoAmI(who.name) == 1 ? false : true)
                 m_current_checkpoint_selector_1 = cp;
             else
                 m_current_checkpoint_selector_2 = cp;
