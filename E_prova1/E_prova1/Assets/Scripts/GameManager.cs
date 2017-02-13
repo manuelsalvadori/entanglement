@@ -174,64 +174,72 @@ public class GameManager : MonoBehaviour
 
     void loadGame()
     {
-        if (PlayerPrefs.HasKey("cp1"))
-        {
-            m_current_checkpoint_selector_1 = PlayerPrefs.GetInt("cp1");
-            m_current_checkpoint_selector_2 = PlayerPrefs.GetInt("cp2");
-        }
-        else
+        if (PlayerPrefs.HasKey("Level") && PlayerPrefs.GetInt("Level") != SceneManager.GetActiveScene().buildIndex)
         {
             m_current_checkpoint_selector_1 = 0;
             m_current_checkpoint_selector_2 = 0;
         }
-
-        int count = 0;
-        foreach (bool gadget in m_UpgradesActive)
+        else
         {
-            if (PlayerPrefs.HasKey("gdg_" + count))
+            if (PlayerPrefs.HasKey("cp1"))
             {
-                m_UpgradesActive[count] = true;
-                if(count != 3)
-                    gadgetObjs[count].GetComponent<changeGUI>().UpdateGadget();
+                m_current_checkpoint_selector_1 = PlayerPrefs.GetInt("cp1");
+                m_current_checkpoint_selector_2 = PlayerPrefs.GetInt("cp2");
             }
-            count++;
-        }
-
-        count = 0;
-
-        Array.Sort<GameObject>(collectablesActive, CompareGameobject);
-
-        /*
-        string lista = "";
-        foreach (GameObject co in collectablesActive)
-        {
-            lista += co + " " + co.activeSelf + "\n";
-        }
-        Debug.Log("Ordinata: " + lista);
-        */
-
-        foreach (GameObject co in collectablesActive)
-        {
-            if(PlayerPrefs.HasKey("collect_" + count))
+            else
             {
-                co.SetActive(false);
-                //Debug.Log(co);
+                m_current_checkpoint_selector_1 = 0;
+                m_current_checkpoint_selector_2 = 0;
             }
-            count++;
-        }
-        if (PlayerPrefs.HasKey("collect_current"))
-            Inventory.m_ncollectables[m_currentLevel] = PlayerPrefs.GetInt("collect_current");
 
-        Array.Sort<GameObject>(interruttoriActive, CompareGameobject);
-        foreach (GameObject co in interruttoriActive)
-        {
-            if (PlayerPrefs.HasKey("interr_" + count))
+            int count = 0;
+            foreach (bool gadget in m_UpgradesActive)
             {
-                if(co.GetComponent<ActivateButton>())
-                    co.GetComponent<ActivateButton>().m_isActive = true;
-                //Debug.Log(co);
+                if (PlayerPrefs.HasKey("gdg_" + count))
+                {
+                    m_UpgradesActive[count] = true;
+                    if (count != 3)
+                        gadgetObjs[count].GetComponent<changeGUI>().UpdateGadget();
+                }
+                count++;
             }
-            count++;
+
+            count = 0;
+
+            Array.Sort<GameObject>(collectablesActive, CompareGameobject);
+
+            /*
+            string lista = "";
+            foreach (GameObject co in collectablesActive)
+            {
+                lista += co + " " + co.activeSelf + "\n";
+            }
+            Debug.Log("Ordinata: " + lista);
+            */
+
+            foreach (GameObject co in collectablesActive)
+            {
+                if (PlayerPrefs.HasKey("collect_" + count))
+                {
+                    co.SetActive(false);
+                    //Debug.Log(co);
+                }
+                count++;
+            }
+            if (PlayerPrefs.HasKey("collect_current"))
+                Inventory.m_ncollectables[m_currentLevel] = PlayerPrefs.GetInt("collect_current");
+
+            Array.Sort<GameObject>(interruttoriActive, CompareGameobject);
+            foreach (GameObject co in interruttoriActive)
+            {
+                if (PlayerPrefs.HasKey("interr_" + count))
+                {
+                    if (co.GetComponent<ActivateButton>())
+                        co.GetComponent<ActivateButton>().m_isActive = true;
+                    //Debug.Log(co);
+                }
+                count++;
+            }
         }
     }
 
